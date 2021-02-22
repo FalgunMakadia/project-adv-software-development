@@ -1,0 +1,39 @@
+stages:
+  - build
+  - test
+  - deploy
+
+#variables:
+#  EXECUTABLE_TO_DEPLOY: "app/build/outputs/apk/debug/app-debug.apk"
+#  DESTINATION_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.apk"
+
+build:
+  stage: build
+  tags:
+    - ugrad
+  script:
+    - mvn clean compile
+
+
+test:
+  stage: test
+  tags:
+    - ugrad
+  script:
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+
+#deploy:
+#  stage: deploy
+#  tags:
+#    - ugrad
+#  artifacts:
+#    paths:
+#      - app/build/outputs
+#  script:
+#    - chmod og-rwx ${DEPLOY_SSH_KEY}
+#    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
