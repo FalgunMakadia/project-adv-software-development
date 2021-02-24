@@ -26,14 +26,17 @@ test:
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
+        - target/failfire-reports/TEST-*.xml
 
-#deploy:
-#  stage: deploy
-#  tags:
-#    - ugrad
-#  artifacts:
-#    paths:
-#      - app/build/outputs
-#  script:
-#    - chmod og-rwx ${DEPLOY_SSH_KEY}
+deploy:
+  stage: deploy
+  tags:
+    - ugrad
+
+  artifacts:
+    paths:
+      - app/build/outputs
+  script:
+    - echo "test deploy"
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
 #    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
