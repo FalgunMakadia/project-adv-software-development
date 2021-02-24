@@ -32,8 +32,8 @@ deploy:
   stage: deploy
   tags:
     - ugrad
-  only: 
-    - develop
+  #only: 
+  #  - develop
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
