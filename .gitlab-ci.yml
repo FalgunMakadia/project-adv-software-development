@@ -36,6 +36,7 @@ deploy:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+      echo "Start Deploying"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
   script:
       echo "Start Deploying"
