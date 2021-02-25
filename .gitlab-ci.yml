@@ -12,7 +12,7 @@ build:
   tags:
     - ugrad
   script:
-    - mvn clean compile
+    - mvn clean compile package
 
 
 test:
