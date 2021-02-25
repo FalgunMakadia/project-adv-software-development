@@ -12,7 +12,8 @@ build:
   tags:
     - ugrad
   script:
-    - mvn clean compile package
+    - mvn clean compile
+    - mvn package
   artifacts:
     when: on_success
     paths: 
