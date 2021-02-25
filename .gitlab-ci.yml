@@ -35,6 +35,9 @@ deploy:
   stage: deploy
   tags:
     - ugrad
+  artifacts:
+    paths:
+      - app/build/outputs
   #only:
   #  - develop
   before_script:
