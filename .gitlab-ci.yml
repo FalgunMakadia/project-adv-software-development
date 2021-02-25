@@ -43,10 +43,11 @@ deploy:
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
     - echo "Start Connecting"
-    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
-    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    # - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    # - chmod og-rwx ~/.ssh/gitlab-ci-delivery
     #- chmod og-rwx "${DEPLOY_SSH_KEY}"
-    - scp -r -i "$DEPLOY_SSH_KEY" -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
 
     #- chmod 600 ${DEPLOY_SSH_KEY}
     #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
