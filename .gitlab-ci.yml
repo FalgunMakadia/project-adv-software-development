@@ -3,9 +3,9 @@ stages:
   - test
   - deploy
 
-#variables:
-#  EXECUTABLE_TO_DEPLOY: "app/build/outputs/apk/debug/app-debug.apk"
-#  DESTINATION_FILE: "App-${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}.apk"
+variables:
+  DeploymentFileName: buildFiles
+
 
 build:
   stage: build
@@ -32,18 +32,17 @@ deploy:
   stage: deploy
   tags:
     - ugrad
-  #only: 
-  #  - develop
+  only:
+    - develop
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
     echo "Start Deployment"
-    - mvn deploy
     - chmod og-rwx ${DEPLOY_SSH_KEY}
-    - zip -r ${CI_COMMIT_SHORT_SHA}.zip target
-    - scp -r -o StrictHostKeyChecking=no ${CI_COMMIT_SHORT_SHA}.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_SHORT_SHA}.zip"
+    - zip -r ${DeploymentFileName}.zip target
+    - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DeploymentFileName}.zip"
 
 
 #    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
