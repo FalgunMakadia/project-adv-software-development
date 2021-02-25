@@ -43,7 +43,9 @@ deploy:
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
     - echo "Start Connecting"
-    - echo "$DEPLOY_SSH_KEY" > ~/.ssh/known_hosts'
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    
     #- chmod 600 ${DEPLOY_SSH_KEY}
     #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
     #- zip -r ${DeploymentFileName}.zip target
