@@ -16,8 +16,8 @@ build:
     - mvn package
   artifacts:
     when: on_success
-    paths: 
-        - target/
+    paths:
+      - target/
 
 
 
