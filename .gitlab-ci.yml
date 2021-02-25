@@ -46,7 +46,7 @@ deploy:
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
     #- chmod og-rwx "${DEPLOY_SSH_KEY}"
-    - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
+    - scp -r -i ${DEPLOY_SSH_KEY} -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
 
     #- chmod 600 ${DEPLOY_SSH_KEY}
     #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
