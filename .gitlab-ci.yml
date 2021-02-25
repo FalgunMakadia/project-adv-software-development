@@ -42,7 +42,6 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
-    echo "Start Deployment"
     - chmod og-rwx "CSCI5308builds"
     - zip -r ${DeploymentFileName}.zip target
     - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip jasnak@timberlea.cs.dal.ca:CSCI5308builds
