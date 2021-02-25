@@ -17,7 +17,7 @@ build:
   artifacts:
     when: on_success
     paths:
-      - target/
+      - target/*.jar
 
 
 
