@@ -42,7 +42,7 @@ deploy:
     echo "Start Deployment"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - zip -r ${DeploymentFileName}.zip target
-    - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DeploymentFileName}.zip"
+    - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip jasnak@timberlea.cs.dal.ca:CSCI5308builds
 
 
 #    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
