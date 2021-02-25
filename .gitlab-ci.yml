@@ -15,7 +15,8 @@ build:
     - mvn clean compile package
   artifacts:
     when: on_success
-    paths: target/
+    paths: 
+        -target/
 
 
 
