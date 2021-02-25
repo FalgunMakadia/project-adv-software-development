@@ -45,6 +45,7 @@ deploy:
     - echo "Start Connecting"
     - ssh-keyscan timberlea.cs.dal.ca
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/id_rsa.pub
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
     #- chmod og-rwx "${DEPLOY_SSH_KEY}"
     - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
