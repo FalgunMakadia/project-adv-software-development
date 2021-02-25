@@ -45,6 +45,7 @@ deploy:
     - echo "Start Connecting"
     - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
     - chmod og-rwx ~/.ssh/known_hosts
+    - scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no "target\running-unit-tests.jar" jasnak@timberlea.cs.dal.ca:CSCI5308builds
 
     #- chmod 600 ${DEPLOY_SSH_KEY}
     #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
