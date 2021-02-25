@@ -42,9 +42,10 @@ deploy:
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
-    echo "Start Connecting"
-    - chmod 600 ${DEPLOY_SSH_KEY}
-    - ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
+    - echo "Start Connecting"
+    - ssh-keyscan timberlea.cs.dal.ca >> ~/.ssh/known_hosts
+    #- chmod 600 ${DEPLOY_SSH_KEY}
+    #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
     #- zip -r ${DeploymentFileName}.zip target
     #- scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip jasnak@timberlea.cs.dal.ca:CSCI5308builds
 
