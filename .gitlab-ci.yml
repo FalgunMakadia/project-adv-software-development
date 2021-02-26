@@ -1,0 +1,84 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DeploymentFileName: buildFiles
+
+
+build:
+  stage: build
+  tags:
+    - ugrad
+  script:
+    - mvn clean compile
+    - mvn package
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
+
+
+
+test:
+  stage: test
+  tags:
+    - ugrad
+  script:
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failfire-reports/TEST-*.xml
+
+DevelopDeploy:
+  stage: deploy
+  tags:
+    - ugrad
+  only:
+    - develop
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - echo "Start Connecting"
+    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEV_DEPLOY_DIR}"
+
+ProductionDeploy:
+  stage: deploy
+  tags:
+    - ugrad
+  only:
+    - master
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - echo "Start Connecting"
+    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${MASTER_DEPLOY_DIR}"
+
+TestDeploy:
+  stage: deploy
+  tags:
+    - ugrad
+  only:
+    - release
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - echo "Start Connecting"
+    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${RELEASE_DEPLOY_DIR}"
+
