@@ -34,12 +34,12 @@ test:
         - target/surefire-reports/TEST-*.xml
         - target/failfire-reports/TEST-*.xml
 
-deploy:
+DevelopDeploy:
   stage: deploy
   tags:
     - ugrad
-  #only:
-  #  - develop
+  only:
+    - develop
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -48,13 +48,37 @@ deploy:
     - echo "Start Connecting"
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
-    # - chmod og-rwx ${DEPLOY_SSH_KEY}
-    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}"
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEV_DEPLOY_DIR}"
 
-    #- chmod 600 ${DEPLOY_SSH_KEY}
-    #- ssh -i ${DEPLOY_SSH_KEY} jasnak@timberlea.cs.dal.ca
-    #- zip -r ${DeploymentFileName}.zip target
-    #- scp -r -i "${DEPLOY_SSH_KEY}" -o StrictHostKeyChecking=no ${DeploymentFileName}.zip jasnak@timberlea.cs.dal.ca:CSCI5308builds
+ProductionDeploy:
+  stage: deploy
+  tags:
+    - ugrad
+  only:
+    - master
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - echo "Start Connecting"
+    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${MASTER_DEPLOY_DIR}"
 
+TestDeploy:
+  stage: deploy
+  tags:
+    - ugrad
+  only:
+    - release
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+  script:
+    - echo "Start Connecting"
+    - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
+    - chmod og-rwx ~/.ssh/gitlab-ci-delivery
+    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${RELEASE_DEPLOY_DIR}"
 
-#    - scp -r -o StrictHostKeyChecking=no -i "${DEPLOY_SSH_KEY}" ${EXECUTABLE_TO_DEPLOY} "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${DESTINATION_FILE}"
