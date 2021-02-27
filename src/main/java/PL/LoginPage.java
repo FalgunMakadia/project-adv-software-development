@@ -3,7 +3,7 @@ package PL;
 import java.net.SecureCacheResponse;
 import java.util.Scanner;
 
-public class Login {
+public class LoginPage {
     private String username;
     private String password;
 

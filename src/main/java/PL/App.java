@@ -1,21 +1,22 @@
 package PL;
 
-import BLL.BankAction.BankActions;
-import data.BankCentricMenu;
-
-import java.util.Scanner;
-
-public class MenuInterface {
+public class App {
     public static void main(String[] args) {
 
 //        Login Page
-        Login loginPage = new Login();
+        LoginPage loginPage = new LoginPage();
         loginPage.takeUserInput();
 
         BLL.Login login  = new BLL.Login(loginPage.getUsername(), loginPage.getPassword());
         Boolean isUserValid = login.validUser();
 
         loginPage.printUserValidityStatus(isUserValid);
+
+        BankEmployeePage bankPage = new BankEmployeePage();
+
+        if(isUserValid) {
+            bankPage.printMenu();
+        }
 //        int tmp = sc.nextInt();
 //        BankActions bankActions = BankCentricMenu.getActionFromSequence.get(tmp).getAction();
 
