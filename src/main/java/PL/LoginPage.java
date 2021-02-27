@@ -6,10 +6,13 @@ import java.util.Scanner;
 public class LoginPage {
     private String username;
     private String password;
+    private String authLevel;
 
     public String getUsername() {
         return username;
     }
+
+    public String getAuthLevel() { return authLevel; }
 
     public String getPassword() {
         return password;
@@ -21,13 +24,17 @@ public class LoginPage {
         this.username = scanner.nextLine();
         System.out.print("Password:");
         this.password = scanner.nextLine();
+        System.out.print("Authorization Level:");
+        this.authLevel = scanner.nextLine();
     }
 
-    public void printUserValidityStatus(Boolean isValid) {
-        if(isValid) {
-            System.out.println("User is valid");
+    public void printUserValidityStatus(String isValid) {
+        if(isValid == "C" ) {
+            System.out.println("Valid User : Customer");
+        } else if(isValid == "E") {
+            System.out.println("Valid User : Employee");
         } else {
-            System.out.println("User is invalid (Hint: admin)");
+            System.out.println("Invalid User");
         }
     }
 }

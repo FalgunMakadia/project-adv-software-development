@@ -42,4 +42,5 @@ public enum BankCentricMenu {
             getActionFromSequence.put(bankCentricMenu.getSequenceNumber(),bankCentricMenu);
         }
     }
+
 }
