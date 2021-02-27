@@ -30,7 +30,7 @@ public class Login {
 
         if(this.authLevel.equals("E") && this.username.equals("admin") && this.password.equals("admin")) {
             return "E";
-        } else if(this.authLevel.equals("C") && !this.username.equals("admin") && this.username.equals(this.password)) {
+        } else if(this.authLevel.equals("C") && !this.username.equals("") && !this.username.equals("admin") && this.username.equals(this.password)) {
             return "C";
         } else {
             return "";
