@@ -1,6 +1,6 @@
 package BLL.CommonAction;
 
-public class Deposit extends CommonActions {
+public class Deposit extends Action {
 
     @Override
     public void performAction() {

@@ -1,10 +1,11 @@
-package data;
+package Data;
 
 import BLL.CustomerAction.*;
 import BLL.CommonAction.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import BLL.CommonAction.Action;
 
 public enum CustomerCentricMenu {
 
@@ -18,8 +19,7 @@ public enum CustomerCentricMenu {
 
     public int sequenceNumber;
     public String description;
-    public CustomerActions customerActions;
-    public CommonActions commonActions;
+    public Action customerActions;
 
     public int getSequenceNumber() {
         return sequenceNumber;
@@ -29,25 +29,16 @@ public enum CustomerCentricMenu {
         return description;
     }
 
-    public CustomerActions getCustomerActions() {
+    public Action getCustomerActions() {
         return customerActions;
     }
 
-    public CommonActions getCommonActions() {
-        return commonActions;
-    }
-
-    CustomerCentricMenu(int number,String desc, CustomerActions a){
+    CustomerCentricMenu(int number,String desc, Action action){
         this.sequenceNumber = number;
         this.description = desc;
-        this.customerActions = a;
+        this.customerActions = action;
     }
 
-    CustomerCentricMenu(int number,String desc, CommonActions a){
-        this.sequenceNumber = number;
-        this.description = desc;
-        this.commonActions = a;
-    }
 
     public static Map<Integer,CustomerCentricMenu> getActionFromSequence = new HashMap();
 

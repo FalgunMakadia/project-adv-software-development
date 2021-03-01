@@ -1,5 +1,6 @@
 package BLL.CommonAction;
 
-public abstract class CommonActions {
+public abstract class Action {
     public abstract void performAction();
+
 }

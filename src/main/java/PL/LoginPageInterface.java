@@ -3,7 +3,7 @@ package PL;
 import java.net.SecureCacheResponse;
 import java.util.Scanner;
 
-public class LoginPage {
+public class LoginPageInterface {
     private String username;
     private String password;
     private String authLevel;
@@ -12,7 +12,9 @@ public class LoginPage {
         return username;
     }
 
-    public String getAuthLevel() { return authLevel; }
+    public String getAuthLevel() {
+        return authLevel;
+    }
 
     public String getPassword() {
         return password;
@@ -24,16 +26,19 @@ public class LoginPage {
         this.username = scanner.nextLine();
         System.out.print("Password:");
         this.password = scanner.nextLine();
-        System.out.print("Authorization Level:");
-        this.authLevel = scanner.nextLine();
     }
 
     public void printUserValidityStatus(String isValid) {
-        if(isValid == "C" ) {
+        if (isValid == "C") {
             System.out.println("Valid User : Customer");
-        } else if(isValid == "E") {
-            System.out.println("Valid User : Employee");
-        } else {
+        }
+        else if (isValid == "E") {
+            System.out.println("Valid User : Bank Employee");
+        }
+        else if (isValid == "M") {
+            System.out.println("Valid User : Bank Manager");
+        }
+        else {
             System.out.println("Invalid User");
         }
     }

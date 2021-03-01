@@ -1,6 +1,6 @@
-package BLL.BankAction;
+package BLL.CommonAction;
 
-public class Signout extends BankActions {
+public class Signout extends Action {
     @Override
     public void performAction() {
         System.out.println("Sign out");

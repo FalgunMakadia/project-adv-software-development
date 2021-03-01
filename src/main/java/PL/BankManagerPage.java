@@ -1,19 +1,18 @@
 package PL;
 
-import Data.BankEmployeeMenu;
+import Data.BankManagerMenu;
+import BLL.CommonAction.Action;
 
 import java.util.Scanner;
 
-import BLL.CommonAction.Action;
-
-public class BankEmployeePage extends BankPage {
+public class BankManagerPage extends BankPage {
     @Override
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
-        for (BankEmployeeMenu menuDetails : BankEmployeeMenu.values()) {
+        for (BankManagerMenu menuDetails : BankManagerMenu.values()) {
             System.out.println(menuDetails.getSequenceNumber() + ". " + menuDetails.getDescription());
         }
-        System.out.print("Enter any Number between 1-4 to perform appropriate action:");
+        System.out.print("Enter any Number between 1-5 to perform appropriate action:");
         String input = scanner.next();
         System.out.println("");
         int choiceNumber = 0;
@@ -23,8 +22,8 @@ public class BankEmployeePage extends BankPage {
             System.out.println("Invalid input.");
         }
         if (choiceNumber > 0) {
-            Action action = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getAction();
-            BankPage subMenu = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getSubMenu();
+            Action action = BankManagerMenu.getActionFromSequence.get(choiceNumber).getAction();
+            BankPage subMenu = BankManagerMenu.getActionFromSequence.get(choiceNumber).getSubMenu();
             System.out.print("Action of selected option: ");
             if (action != null) {
                 action.performAction();
@@ -32,6 +31,10 @@ public class BankEmployeePage extends BankPage {
                 subMenu.printMenu();
             }
         }
+        System.out.println();
         printMenu();
+
+
     }
+
 }
