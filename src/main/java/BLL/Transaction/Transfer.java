@@ -1,6 +1,8 @@
-package BLL.CommonAction;
+package BLL.Transaction;
 
-public class Transfer extends CommonActions {
+import BLL.CommonAction.Action;
+
+public class Transfer extends Action {
     @Override
     public void performAction() {
         System.out.println("Transfer");

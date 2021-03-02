@@ -1,24 +1,35 @@
 package PL;
 
+import BLL.CommonAction.Login;
+import PL.Bank.BankEmployeePage;
+import PL.Bank.BankManagerPage;
+import PL.Customer.CustomerPage;
+
 public class App {
     public static void main(String[] args) {
 
 //      Login Page
-        LoginPage loginPage = new LoginPage();
-        loginPage.takeUserInput();
+        LoginPage loginPageInterface = new LoginPage();
+        loginPageInterface.takeUserInput();
+        System.out.println("Fetching Details...");
+        Login login = new Login(loginPageInterface.getUsername(), loginPageInterface.getPassword());
+        String authLevel = login.getAuthLevel();
 
-        BLL.Login login = new BLL.Login(loginPage.getUsername(), loginPage.getPassword(), loginPage.getAuthLevel());
-        String isUserValid = login.validUser();
+        loginPageInterface.printUserValidityStatus(authLevel);
 
-        loginPage.printUserValidityStatus(isUserValid);
-
-        if (isUserValid == "E") {
-            BankEmployeePage bankPage = new BankEmployeePage();
-            bankPage.printMenu();
-        } else if (isUserValid == "C") {
+        if (authLevel == "E") {
+            BankEmployeePage bankEmployeePage = new BankEmployeePage();
+            bankEmployeePage.printMenu();
+        }
+        else if (authLevel == "C") {
             CustomerPage customerPage = new CustomerPage();
             customerPage.printMenu();
-        } else {
+        }
+        else if (authLevel == "M") {
+            BankManagerPage bankManagerPage = new BankManagerPage();
+            bankManagerPage.printMenu();
+        }
+        else {
             System.out.println("NO AUTHORIZATION");
         }
     }

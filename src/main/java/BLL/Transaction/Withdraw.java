@@ -1,6 +1,8 @@
-package BLL.CommonAction;
+package BLL.Transaction;
 
-public class Withdraw extends CommonActions {
+import BLL.CommonAction.Action;
+
+public class Withdraw extends Action {
     @Override
     public void performAction() {
         System.out.println("Withdraw");

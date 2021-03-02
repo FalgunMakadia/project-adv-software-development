@@ -1,6 +1,8 @@
-package BLL.BankAction;
+package BLL.BankManager;
 
-public class EnrollNewEmployee extends BankActions {
+import BLL.CommonAction.Action;
+
+public class EnrollNewEmployee extends Action {
     @Override
     public void performAction() {
         System.out.println("Enroll New Employee");
