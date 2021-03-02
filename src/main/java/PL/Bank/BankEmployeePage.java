@@ -1,12 +1,11 @@
-package PL;
-
-import Data.BankEmployeeMenu;
+package PL.Bank;
 
 import java.util.Scanner;
 
 import BLL.CommonAction.Action;
+import PL.Page;
 
-public class BankEmployeePage extends BankPage {
+public class BankEmployeePage extends Page {
     @Override
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -22,16 +21,15 @@ public class BankEmployeePage extends BankPage {
         } catch (Exception e) {
             System.out.println("Invalid input.");
         }
+        String actionFlag = "";
         if (choiceNumber > 0) {
-            Action action = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getAction();
-            BankPage subMenu = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getSubMenu();
+            Page page = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getAction();
             System.out.print("Action of selected option: ");
-            if (action != null) {
-                action.performAction();
-            } else {
-                subMenu.printMenu();
-            }
+            page.printMenu();
+
         }
-        printMenu();
+
+            printMenu();
+
     }
 }

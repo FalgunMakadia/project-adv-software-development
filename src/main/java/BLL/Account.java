@@ -15,7 +15,7 @@ public class Account {
         FetchAccountDetails fetchAccountDetails = new FetchAccountDetails();
         ExecuteDatabase executeDatabase = new ExecuteDatabase();
         ResultSet resultSet = executeDatabase.executeSelect(fetchAccountDetails);
-        
+
     }
 
 }

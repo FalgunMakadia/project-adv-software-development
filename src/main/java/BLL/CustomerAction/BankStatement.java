@@ -1,4 +1,6 @@
-package BLL.CommonAction;
+package BLL.CustomerAction;
+
+import BLL.CommonAction.Action;
 
 public class BankStatement extends Action {
     @Override

@@ -1,29 +1,30 @@
-package Data;
+package PL.Bank;
 
-import BLL.BankAction.*;
-import BLL.CommonAction.Signout;
+import BLL.BankEmployee.*;
+import BLL.BankManager.*;
 import BLL.CommonAction.Action;
-import PL.BankPage;
-import PL.ExistingBankAccountPage;
+import PL.Page;
 
 import java.util.*;
 
 public enum BankManagerMenu {
 
-    OPEN_NEW_BANK_ACCOUNT(1,"Open New Bank Account", new OpenNewAccount(), null),
-    OPEN_EXISTING_BANK_ACCOUNT(2,"Open Existing Bank Account", null, new ExistingBankAccountPage()),
-    WORKLIST(3,"Worklist", new Worklist(), null),
-    ENROLL_NEW_EMPLOYEE(4,"Enroll New Employee", new EnrollNewEmployee(), null),
-    SIGN_OUT(5,"Sign out", new Signout(), null);
+    OPEN_NEW_BANK_ACCOUNT(1,"Open New Bank Account", "A", new OpenNewAccount(), null),
+    OPEN_EXISTING_BANK_ACCOUNT(2,"Open Existing Bank Account", "M", null, new ExistingBankAccountPage()),
+    WORKLIST(3,"Worklist", "A", new Worklist(), null),
+    ENROLL_NEW_EMPLOYEE(4,"Enroll New Employee", "M", new EnrollNewEmployee(), null),
+    SIGN_OUT(5,"Sign out", "", null, null);
 
     private int sequenceNumber;
     private String description;
+    private String actionFlag;
     private Action bankActions;
-    private BankPage subMenu;
+    private Page subMenu;
 
-    BankManagerMenu(int number, String desc, Action action,BankPage subMenu){
+    BankManagerMenu(int number, String desc, String actionFlag, Action action, Page subMenu){
         this.sequenceNumber = number;
         this.description = desc;
+        this.actionFlag = actionFlag;
         this.bankActions = action;
         this.subMenu = subMenu;
     }
@@ -37,7 +38,11 @@ public enum BankManagerMenu {
         return bankActions;
     }
 
-    public BankPage getSubMenu() {
+    public String getActionFlag() {
+        return actionFlag;
+    }
+
+    public Page getSubMenu() {
         return subMenu;
     }
 

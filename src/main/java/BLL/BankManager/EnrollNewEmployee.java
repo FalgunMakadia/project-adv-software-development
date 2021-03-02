@@ -1,4 +1,4 @@
-package BLL.BankAction;
+package BLL.BankManager;
 
 import BLL.CommonAction.Action;
 

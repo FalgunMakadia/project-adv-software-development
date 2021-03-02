@@ -1,16 +1,20 @@
-package PL;
+package PL.Bank;
 
 import BLL.CommonAction.Action;
-import Data.ExistingBankAccountMenu;
+import PL.Page;
 
 import java.util.Scanner;
 
-public class ExistingBankAccountPage extends BankPage {
+public class ExistingBankAccountPage extends Page {
+    private String accountNumber;
+
     @Override
     public void printMenu() {
 
         Scanner scanner = new Scanner(System.in);
-        for (ExistingBankAccountMenu menuDetails : ExistingBankAccountMenu.values()) {
+        System.out.print("Enter the Account Number:");
+        accountNumber = scanner.nextLine();
+        System.out.println("");        for (ExistingBankAccountMenu menuDetails : ExistingBankAccountMenu.values()) {
             System.out.println(menuDetails.getSequenceNumber() + ". " + menuDetails.getDescription());
         }
         System.out.print("Enter any Number between 1-4 to perform appropriate action:");

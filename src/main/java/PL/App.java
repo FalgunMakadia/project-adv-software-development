@@ -1,12 +1,15 @@
 package PL;
 
 import BLL.CommonAction.Login;
+import PL.Bank.BankEmployeePage;
+import PL.Bank.BankManagerPage;
+import PL.Customer.CustomerPage;
 
 public class App {
     public static void main(String[] args) {
 
 //      Login Page
-        LoginPageInterface loginPageInterface = new LoginPageInterface();
+        LoginPage loginPageInterface = new LoginPage();
         loginPageInterface.takeUserInput();
         System.out.println("Fetching Details...");
         Login login = new Login(loginPageInterface.getUsername(), loginPageInterface.getPassword());

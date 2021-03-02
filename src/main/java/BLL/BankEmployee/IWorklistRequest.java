@@ -1,4 +1,4 @@
-package BLL.BankAction;
+package BLL.BankEmployee;
 
 public interface IWorklistRequest {
 }
