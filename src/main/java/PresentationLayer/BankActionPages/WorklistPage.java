@@ -1,9 +1,8 @@
-package PL.Bank;
+package PresentationLayer.BankActionPages;
 
-import PL.Page;
+import PresentationLayer.Page;
 
 public class WorklistPage extends Page {
-    @Override
     public void printMenu() {
 
     }

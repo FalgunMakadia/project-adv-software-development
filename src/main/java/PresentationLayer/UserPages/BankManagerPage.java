@@ -1,7 +1,7 @@
-package PL.Bank;
+package PresentationLayer.UserPages;
 
 import BLL.CommonAction.Action;
-import PL.Page;
+import PresentationLayer.Page;
 
 import java.util.Scanner;
 

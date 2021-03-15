@@ -1,9 +1,8 @@
-package PL.Bank;
+package PresentationLayer.UserPages;
+
+import PresentationLayer.Page;
 
 import java.util.Scanner;
-
-import BLL.CommonAction.Action;
-import PL.Page;
 
 public class BankEmployeePage extends Page {
     @Override
@@ -23,9 +22,9 @@ public class BankEmployeePage extends Page {
         }
         String actionFlag = "";
         if (choiceNumber > 0) {
-            Page page = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getAction();
+            Page Page = BankEmployeeMenu.getActionFromSequence.get(choiceNumber).getAction();
             System.out.print("Action of selected option: ");
-            page.printMenu();
+            Page.printMenu();
 
         }
 

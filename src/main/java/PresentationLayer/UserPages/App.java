@@ -1,9 +1,10 @@
-package PL;
+package PresentationLayer.UserPages;
 
 import BLL.CommonAction.Login;
-import PL.Bank.BankEmployeePage;
-import PL.Bank.BankManagerPage;
-import PL.Customer.CustomerPage;
+import PresentationLayer.UserPages.BankEmployeePage;
+import PresentationLayer.UserPages.BankManagerPage;
+import PresentationLayer.UserPages.CustomerPage;
+import PresentationLayer.UserPages.LoginPage;
 
 public class App {
     public static void main(String[] args) {

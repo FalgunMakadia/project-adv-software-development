@@ -1,7 +1,10 @@
-package PL.Bank;
+package PresentationLayer.UserPages;
 
 
-import PL.Page;
+import PresentationLayer.BankActionPages.ExistingBankAccountPage;
+import PresentationLayer.BankActionPages.OpenNewAccountPage;
+import PresentationLayer.Page;
+import PresentationLayer.BankActionPages.WorklistPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +19,13 @@ public enum BankEmployeeMenu {
 
     private int sequenceNumber;
     private String description;
-    private Page page;
+    private Page Page;
 
 
-    BankEmployeeMenu(int number, String desc, String actionFlag, Page page) {
+    BankEmployeeMenu(int number, String desc, String actionFlag, Page Page) {
         this.sequenceNumber = number;
         this.description = desc;
-        this.page = page;
+        this.Page = Page;
 
     }
 
@@ -31,7 +34,7 @@ public enum BankEmployeeMenu {
     }
 
     public Page getAction() {
-        return page;
+        return Page;
     }
 
     public String getDescription() {

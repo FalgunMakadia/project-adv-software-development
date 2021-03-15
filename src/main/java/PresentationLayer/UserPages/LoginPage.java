@@ -1,6 +1,5 @@
-package PL;
+package PresentationLayer.UserPages;
 
-import java.net.SecureCacheResponse;
 import java.util.Scanner;
 
 public class LoginPage {
