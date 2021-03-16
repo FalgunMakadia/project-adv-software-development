@@ -1,9 +1,8 @@
 package DataAccessLayer;
 
-import java.io.IOException;
-
-public class DatabaseFactory {
-    public ILoginDatabase createLoginDatabase() throws IOException {
-        return new LoginDatabase();
+public class DatabaseFactory implements IDatabaseFactory{
+    @Override
+    public ICustomerDatabase createCustomerDatabase() {
+        return new CustomerDatabase();
     }
 }
