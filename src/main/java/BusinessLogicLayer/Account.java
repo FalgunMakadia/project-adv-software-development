@@ -1,7 +1,7 @@
 package BusinessLogicLayer;
 
-import DAL.ExecuteDatabase;
-import DAL.FetchAccountDetails;
+import DataAccessLayer.ExecuteDatabase;
+import DataAccessLayer.FetchAccountDetails;
 
 import java.sql.ResultSet;
 

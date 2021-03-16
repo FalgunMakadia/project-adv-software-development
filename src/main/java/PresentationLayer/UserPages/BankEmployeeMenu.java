@@ -11,10 +11,10 @@ import java.util.Map;
 
 public enum BankEmployeeMenu {
 
-    OPEN_NEW_BANK_ACCOUNT(1, "Open New Bank Account", "A", new OpenNewAccountPage()),
-    OPEN_EXISTING_BANK_ACCOUNT(2, "Open Existing Bank Account", "M", new ExistingBankAccountPage()),
-    WORKLIST(3, "Worklist", "A", new WorklistPage()),
-    SIGN_OUT(4, "Sign out", "", null);
+    OPEN_NEW_BANK_ACCOUNT(1, "Open New Bank Account", new OpenNewAccountPage()),
+    OPEN_EXISTING_BANK_ACCOUNT(2, "Open Existing Bank Account", new ExistingBankAccountPage()),
+    WORKLIST(3, "Worklist", new WorklistPage()),
+    SIGN_OUT(4, "Sign out", new SignOut());
 
 
     private int sequenceNumber;
@@ -22,7 +22,7 @@ public enum BankEmployeeMenu {
     private Page Page;
 
 
-    BankEmployeeMenu(int number, String desc, String actionFlag, Page Page) {
+    BankEmployeeMenu(int number, String desc, Page Page) {
         this.sequenceNumber = number;
         this.description = desc;
         this.Page = Page;

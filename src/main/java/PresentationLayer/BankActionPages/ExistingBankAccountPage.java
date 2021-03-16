@@ -14,7 +14,8 @@ public class ExistingBankAccountPage extends Page {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the Account Number:");
         accountNumber = scanner.nextLine();
-        System.out.println("");        for (ExistingBankAccountMenu menuDetails : ExistingBankAccountMenu.values()) {
+        System.out.println("");
+        for (ExistingBankAccountMenu menuDetails : ExistingBankAccountMenu.values()) {
             System.out.println(menuDetails.getSequenceNumber() + ". " + menuDetails.getDescription());
         }
         System.out.print("Enter any Number between 1-4 to perform appropriate action:");

@@ -22,7 +22,7 @@ public enum CustomerMenu {
     CHECK_BALANCE(6, "Check Balance", "A", new CheckBalancePage()),
     UPDATE_PASSWORD(7, "Update Password", "A", new UpdatePasswordPage()),
     LOAN_ESTIMATOR(8, "Loan Estimator", "A", new UpdatePasswordPage()),
-    SIGN_OUT(9, "Sign out", "A", null);
+    SIGN_OUT(9, "Sign out", "A", new SignOut());
 
     public int sequenceNumber;
     public String description;

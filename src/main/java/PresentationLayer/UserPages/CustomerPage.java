@@ -6,9 +6,13 @@ import PresentationLayer.Page;
 
 public class CustomerPage extends Page {
 
+    public CustomerPage(){
+        super();
+    }
     public void printMenu() {
-        boolean signOut = true;
-        while (signOut) {
+        System.out.println("Welcome " + loggedInUserContext.getUserName() + "!");
+        System.out.println();
+        while (loggedInUserContext.getLoginStatus()) {
             Scanner scanner = new Scanner(System.in);
             for (CustomerMenu menuDetails : CustomerMenu.values()) {
                 System.out.println(menuDetails.sequenceNumber + ". " + menuDetails.description);
@@ -22,11 +26,8 @@ public class CustomerPage extends Page {
             } catch (Exception e) {
                 System.out.println("Invalid input.");
             }
-
-            String actionFlag = "";
             if (choiceNumber > 0) {
                 Page customerAction = CustomerMenu.getActionFromSequence.get(choiceNumber).getCustomerActions();
-                System.out.print("Action of selected option: ");
                 customerAction.printMenu();
             }
         }
