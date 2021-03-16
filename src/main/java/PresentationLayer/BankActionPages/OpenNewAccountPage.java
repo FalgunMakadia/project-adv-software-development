@@ -21,7 +21,6 @@ public class OpenNewAccountPage extends Page {
         getAccountDetails();
         System.out.println();
         System.out.println("Please verify the details.");
-        verifyDetails();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next();
         System.out.println("");
@@ -71,15 +70,8 @@ public class OpenNewAccountPage extends Page {
         System.out.println("3. Back to Main Menu");
         System.out.println("Please enter number between 1-3 to perform appropriate action");
         String input = scanner.nextLine();
-        if(input.equals("1")){
 
-        }
-        else (input.equals("2")){
 
-        }
-        else{
-
-        }
     }
 
 
