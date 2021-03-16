@@ -1,4 +1,4 @@
-package DAL;
+package DataAccessLayer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,14 +37,17 @@ public class LoginDatabase implements ILoginDatabase{
 
     }
 
-    public void validateUser (String username, String password){
-        String loginQuery = "SELECT * FROM t_User WHERE userName = " + username + " AND password = " + password;
+    public ResultSet validateUser (String username, int password){
+        ResultSet resultSet = null;
+        String loginQuery = "SELECT * FROM T_Login WHERE userName = '"+ username +"' AND userPassword = '" + password + "'";
         try {
             preparedStatement = con.prepareStatement(loginQuery);
+            resultSet = preparedStatement.executeQuery();
+
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-
+        return resultSet;
     }
     public ResultSet operateSelect() {
         // write select query to get the details from the t_user table

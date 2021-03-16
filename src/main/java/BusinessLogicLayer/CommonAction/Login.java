@@ -1,58 +1,52 @@
 package BusinessLogicLayer.CommonAction;
 
-import BusinessLogicLayer.DatabaseFactory;
-import BusinessLogicLayer.User.User;
-import DAL.ExecuteDatabase;
-import DAL.ILoginDatabase;
-import DAL.LoginDatabase;
+import DataAccessLayer.DatabaseFactory;
+import BusinessLogicLayer.User.LoggedInUserContext;
+import DataAccessLayer.ILoginDatabase;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Login {
-    private User user;
-    private String username;
-    private String password;
-    private String authLevel;
-
-    public Login(String username, String password) throws IOException {
-        this.username = username;
-        this.password = password;
+public class Login implements ILogin {
+    private ILoginDatabase loginDatabase = null;
+    private LoggedInUserContext loggedInUserContext;
+    public Login() {
         DatabaseFactory databaseFactory = new DatabaseFactory();
-        ILoginDatabase loginDatabase = databaseFactory.createLoginDatabase();
-        loginDatabase.validateUser(username, password);
-        ExecuteDatabase executeDatabase = new ExecuteDatabase();
-//        try {
-//            ResultSet resultSet = executeDatabase.executeSelect(loginDatabase);
-//            if (resultSet != null) {
-//                createUser(resultSet);
-//            }
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
+        loggedInUserContext = LoggedInUserContext.getInstance();
 
-    }
-
-    private void createUser(ResultSet rs) throws SQLException {
-        //convert extract the status and auth access from the result set
-
-        this.authLevel = rs.getString("authLevel");
-        this.authLevel = "E";
-    }
-
-    public String validUser() {
-
-        if (this.authLevel.equals("E") && this.username.equals("admin") && this.password.equals("admin")) {
-            return "E";
-        } else if (this.authLevel.equals("C") && !this.username.equals("") && !this.username.equals("admin") && this.username.equals(this.password)) {
-            return "C";
-        } else {
-            return "";
+        try {
+            loginDatabase = databaseFactory.createLoginDatabase();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public String getAuthLevel() {
-        return this.authLevel;
+    public void validateUser(String userName, String password) {
+        int hashedPassword = password.hashCode();
+        ResultSet resultSet = loginDatabase.validateUser(userName, hashedPassword);
+        createLoggedInUserContext(resultSet);
+    }
+
+    private void createLoggedInUserContext(ResultSet resultSet) {
+        try {
+            while (resultSet.next()) {
+                loggedInUserContext.setUserName(resultSet.getString("userName"));
+                loggedInUserContext.setUserRole(resultSet.getString("userRole"));
+                loggedInUserContext.setAccountNumber(resultSet.getString("accountNumber"));
+                loggedInUserContext.setActiveStatus(resultSet.getBoolean("ActiveStatus"));
+                loggedInUserContext.setLoginStatus(true);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public boolean checkStatus(){
+        return loggedInUserContext.getActiveStatus();
+    }
+
+    public String getUserRole(){
+        return loggedInUserContext.getUserRole();
     }
 }

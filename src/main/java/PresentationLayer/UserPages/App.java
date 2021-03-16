@@ -8,9 +8,6 @@ public class App {
 //      Login Page
         LoginPage loginPage = new LoginPage();
         loginPage.takeUserInput();
-        System.out.println("Logging In...");
-
-
 
     }
 }

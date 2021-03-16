@@ -1,7 +1,4 @@
-package BusinessLogicLayer;
-
-import DAL.ILoginDatabase;
-import DAL.LoginDatabase;
+package DataAccessLayer;
 
 import java.io.IOException;
 

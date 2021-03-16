@@ -1,73 +1,87 @@
 package PresentationLayer.BankActionPages;
 
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.User.Customer;
-import PresentationLayer.Factory;
+import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.Factory;
 import PresentationLayer.Page;
-import PresentationLayer.ActionFactory;
+import BusinessLogicLayer.ActionFactory;
 
 import java.util.Scanner;
 
 public class OpenNewAccountPage extends Page {
 
-    private Customer customer = null;
+    private User customer = null;
     @Override
     public void printMenu() {
-        customer = new Customer();
-        getAccountDetails();
-
-        reprintAllDetails();
-
+        System.out.println("Please enter the details of following fields:");
+        System.out.println("Note: (*) are mandatory fields.");
         Factory actionFactory = new ActionFactory();
+
+        customer = actionFactory.createCustomer();
+        getAccountDetails();
+        System.out.println();
+        System.out.println("Please verify the details.");
+        verifyDetails();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+        System.out.println("");
+        int choiceNumber = 0;
+        try {
+            choiceNumber = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println("Invalid input.");
+        }
+        if(choiceNumber > 0  && choiceNumber <14){
+
+        }
+
         Action action =  actionFactory.createNewOpenNewAccount();
         action.performAction();
 
     }
-    private void reprintAllDetails(){
-        System.out.print("1. First Name*: " + customer.getFirstname());
-        System.out.print("2. Last Name*: " + customer.getLastname());
-        System.out.print("3. Middle Name: " + customer.getMiddlename());
-        System.out.print("4. Address Line 1*: " + customer.getAddress_line_1());
-        System.out.print("5. Address Line 2: " + customer.getAddress_line_2());
-        System.out.print("6. City*: " + customer.getCity());
-        System.out.print("7. Province*: " + customer.getProvince());
-        System.out.print("8. Postal Code*: " + customer.getPostal_code());
-        System.out.print("9. Email Address*: " + customer.getEmail_address());
-        System.out.print("10. Contact Number*: " + customer.getContact());
-        System.out.print("11. Passport Number*: " + customer.getPassport());
-        System.out.print("12. SSN*: " + customer.getSsn_no());
-        System.out.print("13. Save ");
-        System.out.print("14. Back to Main Menu");
-        System.out.println("Please enter number between 1-14 to perform appropriate action");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-    }
+
     private void getAccountDetails(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("First Name*: ");
-        customer.setFirstname(scanner.nextLine());
+        customer.setFirstName(scanner.nextLine());
         System.out.print("Last Name*: ");
-        customer.setLastname(scanner.nextLine());
+        customer.setLastName(scanner.nextLine());
         System.out.print("Middle Name: ");
-        customer.setMiddlename(scanner.nextLine());
+        customer.setMiddleName(scanner.nextLine());
         System.out.print("Address Line 1*: ");
-        customer.setAddress_line_1(scanner.nextLine());
+        customer.setAddressLine1(scanner.nextLine());
         System.out.print("Address Line 2: ");
-        customer.setAddress_line_2(scanner.nextLine());
+        customer.setAddressLine2(scanner.nextLine());
         System.out.print("City*: ");
         customer.setCity(scanner.nextLine());
         System.out.print("State/ Province*: ");
         customer.setProvince(scanner.nextLine());
         System.out.print("Postal Code*: ");
-        customer.setPostal_code(scanner.nextLine());
+        customer.setPostalCode(scanner.nextLine());
         System.out.print("Email Address*: ");
-        customer.setEmail_address(scanner.nextLine());
+        customer.setEmailAddress(scanner.nextLine());
         System.out.print("Contact Number*: ");
         customer.setContact(scanner.nextLine());
         System.out.print("Passport Number*: ");
         customer.setPassport(scanner.nextLine());
         System.out.print("SSN*: ");
-        customer.setSsn_no(scanner.nextLine());
+        customer.setSsnNo(scanner.nextLine());
+        System.out.println("1. Save ");
+        System.out.println("2. Restart");
+        System.out.println("3. Back to Main Menu");
+        System.out.println("Please enter number between 1-3 to perform appropriate action");
+        String input = scanner.nextLine();
+        if(input.equals("1")){
 
+        }
+        else (input.equals("2")){
+
+        }
+        else{
+
+        }
     }
+
+
+
 }

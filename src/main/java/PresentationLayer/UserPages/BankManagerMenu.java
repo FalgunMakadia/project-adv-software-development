@@ -3,31 +3,32 @@ package PresentationLayer.UserPages;
 import BusinessLogicLayer.BankEmployee.*;
 import BusinessLogicLayer.BankManager.*;
 import BusinessLogicLayer.CommonAction.Action;
+import PresentationLayer.BankActionPages.EnrollNewEmployeePage;
 import PresentationLayer.BankActionPages.ExistingBankAccountPage;
+import PresentationLayer.BankActionPages.OpenNewAccountPage;
+import PresentationLayer.BankActionPages.WorklistPage;
 import PresentationLayer.Page;
 
 import java.util.*;
 
 public enum BankManagerMenu {
 
-    OPEN_NEW_BANK_ACCOUNT(1,"Open New Bank Account", "A", new OpenNewAccount(), null),
-    OPEN_EXISTING_BANK_ACCOUNT(2,"Open Existing Bank Account", "M", null, new ExistingBankAccountPage()),
-    WORKLIST(3,"Worklist", "A", new Worklist(), null),
-    ENROLL_NEW_EMPLOYEE(4,"Enroll New Employee", "M", new EnrollNewEmployee(), null),
-    SIGN_OUT(5,"Sign out", "", null, null);
+    OPEN_NEW_BANK_ACCOUNT(1, "Open New Bank Account",  new OpenNewAccountPage()),
+    OPEN_EXISTING_BANK_ACCOUNT(2, "Open Existing Bank Account", new ExistingBankAccountPage()),
+    WORKLIST(3, "Worklist", new WorklistPage()),
+    ENROLL_NEW_EMPLOYEE(4,"Enroll New Employee", new EnrollNewEmployeePage()),
+    SIGN_OUT(5,"Sign out", new SignOut());
+
+
 
     private int sequenceNumber;
     private String description;
-    private String actionFlag;
-    private Action bankActions;
-    private Page subMenu;
+    private Page menuPage;
 
-    BankManagerMenu(int number, String desc, String actionFlag, Action action, Page subMenu){
+    BankManagerMenu(int number, String desc, Page menuPage){
         this.sequenceNumber = number;
         this.description = desc;
-        this.actionFlag = actionFlag;
-        this.bankActions = action;
-        this.subMenu = subMenu;
+        this.menuPage = menuPage;
     }
 
 
@@ -35,16 +36,8 @@ public enum BankManagerMenu {
         return sequenceNumber;
     }
 
-    public Action getAction() {
-        return bankActions;
-    }
-
-    public String getActionFlag() {
-        return actionFlag;
-    }
-
-    public Page getSubMenu() {
-        return subMenu;
+    public Page getMenuPage() {
+        return menuPage;
     }
 
     public String getDescription() {

@@ -3,13 +3,19 @@ package BusinessLogicLayer.User;
 import java.sql.ResultSet;
 
 public abstract class User {
-    private String firstname;
-    private String lastname;
-    private String middlename;
-    private String address_line_1;
-    private String address_line_2;
-    private String date_of_birth;
-    private String email_address;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private String dateOfBirth;
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String postalCode;
+    private String province;
+    private String emailAddress;
+    private String contact;
+    private String passport;
+    private String ssnNo;
 
     public String getPassport() {
         return passport;
@@ -19,67 +25,62 @@ public abstract class User {
         this.passport = passport;
     }
 
-    private String passport;
-    private String city;
-    private String province;
-    private String postal_code;
-    private String contact;
-    private String ssn_no;
 
-    public String getFirstname() {
-        return firstname;
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public String getAddress_line_1() {
-        return address_line_1;
+    public String getAddressLine1() {
+        return addressLine1;
     }
 
-    public void setAddress_line_1(String address_line_1) {
-        this.address_line_1 = address_line_1;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
 
-    public String getAddress_line_2() {
-        return address_line_2;
+    public String getAddressLine2() {
+        return addressLine2;
     }
 
-    public void setAddress_line_2(String address_line_2) {
-        this.address_line_2 = address_line_2;
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 
-    public String getDate_of_birth() {
-        return date_of_birth;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getEmail_address() {
-        return email_address;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail_address(String email_address) {
-        this.email_address = email_address;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getCity() {
@@ -98,12 +99,12 @@ public abstract class User {
         this.province = province;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getContact() {
@@ -114,12 +115,12 @@ public abstract class User {
         this.contact = contact;
     }
 
-    public String getSsn_no() {
-        return ssn_no;
+    public String getSsnNo() {
+        return ssnNo;
     }
 
-    public void setSsn_no(String ssn_no) {
-        this.ssn_no = ssn_no;
+    public void setSsnNo(String ssnNo) {
+        this.ssnNo = ssnNo;
     }
 
     public User (){

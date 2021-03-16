@@ -1,61 +1,45 @@
 package PresentationLayer.UserPages;
 
-import BusinessLogicLayer.CommonAction.Login;
+import BusinessLogicLayer.CommonAction.ILogin;
+import BusinessLogicLayer.ActionFactory;
+import PresentationLayer.Page;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginPage {
     private String username;
     private String password;
-    private String authLevel;
-
-    public String getAuthLevel() {
-        return authLevel;
-    }
-
     public void takeUserInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Username:");
-        this.username = scanner.nextLine();
-        System.out.print("Password:");
-        this.password = scanner.nextLine();
-        try {
-            Login login = new Login(username, password);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        printUserValidityStatus(authLevel);
+        do{
+            System.out.print("Username:");
+            username = scanner.nextLine();
+            System.out.print("Password:");
+            password = scanner.nextLine();
+            System.out.println("Logging In...");
+            ActionFactory actionFactory =  new ActionFactory();
+            ILogin login = actionFactory.createLogin();
+            login.validateUser(username,password);
+            if(login.checkStatus()){
+                System.out.println("Successfully Logged In");
+                System.out.println();
+                System.out.println("********========================================********");
+                System.out.println();
+                routeToMenu(login.getUserRole());
+            }
+            else{
+                System.out.println("Login Failed!");
+                System.out.println("No Active User Found.");
+                System.out.println("Please Try Again.");
+            }
+        }while (true);
 
-        if (authLevel == "E") {
-            BankEmployeePage bankEmployeePage = new BankEmployeePage();
-            bankEmployeePage.printMenu();
-        }
-        else if (authLevel == "C") {
-            CustomerPage customerPage = new CustomerPage();
-            customerPage.printMenu();
-        }
-        else if (authLevel == "M") {
-            BankManagerPage bankManagerPage = new BankManagerPage();
-            bankManagerPage.printMenu();
-        }
-        else {
-            System.out.println("NO AUTHORIZATION");
-        }
     }
 
-    public void printUserValidityStatus(String isValid) {
-        if (isValid == "C") {
-            System.out.println("Valid User : Customer");
-        }
-        else if (isValid == "E") {
-            System.out.println("Valid User : Bank Employee");
-        }
-        else if (isValid == "M") {
-            System.out.println("Valid User : Bank Manager");
-        }
-        else {
-            System.out.println("Invalid User");
-        }
+    private void routeToMenu(String userRole){
+        Page menuPage = LoginRouting.getActionFromSequence.get(userRole).getMenuPage();
+        menuPage.printMenu();
     }
+
+
 }

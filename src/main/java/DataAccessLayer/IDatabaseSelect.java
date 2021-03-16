@@ -1,4 +1,4 @@
-package DAL;
+package DataAccessLayer;
 
 import java.sql.ResultSet;
 
