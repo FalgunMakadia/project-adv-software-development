@@ -1,4 +1,4 @@
-package BLL.User;
+package BusinessLogicLayer.User;
 
 public class Customer extends User{
 }

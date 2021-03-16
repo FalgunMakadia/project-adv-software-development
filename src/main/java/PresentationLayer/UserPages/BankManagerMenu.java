@@ -1,8 +1,8 @@
 package PresentationLayer.UserPages;
 
-import BLL.BankEmployee.*;
-import BLL.BankManager.*;
-import BLL.CommonAction.Action;
+import BusinessLogicLayer.BankEmployee.*;
+import BusinessLogicLayer.BankManager.*;
+import BusinessLogicLayer.CommonAction.Action;
 import PresentationLayer.BankActionPages.ExistingBankAccountPage;
 import PresentationLayer.Page;
 

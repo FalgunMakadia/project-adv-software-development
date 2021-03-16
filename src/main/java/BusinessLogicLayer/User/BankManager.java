@@ -1,4 +1,4 @@
-package BLL.User;
+package BusinessLogicLayer.User;
 
 public class BankManager extends User{
 }

@@ -1,6 +1,6 @@
-package BLL.BankManager;
+package BusinessLogicLayer.BankManager;
 
-import BLL.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.Action;
 
 public class EnrollNewEmployee extends Action {
     @Override

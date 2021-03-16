@@ -1,7 +1,10 @@
 package PresentationLayer.BankActionPages;
 
-import BLL.User.Customer;
+import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.User.Customer;
+import PresentationLayer.Factory;
 import PresentationLayer.Page;
+import PresentationLayer.ActionFactory;
 
 import java.util.Scanner;
 
@@ -14,6 +17,11 @@ public class OpenNewAccountPage extends Page {
         getAccountDetails();
 
         reprintAllDetails();
+
+        Factory actionFactory = new ActionFactory();
+        Action action =  actionFactory.createNewOpenNewAccount();
+        action.performAction();
+
     }
     private void reprintAllDetails(){
         System.out.print("1. First Name*: " + customer.getFirstname());

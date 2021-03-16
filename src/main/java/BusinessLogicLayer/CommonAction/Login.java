@@ -1,9 +1,12 @@
-package BLL.CommonAction;
+package BusinessLogicLayer.CommonAction;
 
-import BLL.User.User;
+import BusinessLogicLayer.DatabaseFactory;
+import BusinessLogicLayer.User.User;
 import DAL.ExecuteDatabase;
+import DAL.ILoginDatabase;
 import DAL.LoginDatabase;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,19 +16,21 @@ public class Login {
     private String password;
     private String authLevel;
 
-    public Login(String username, String password) {
+    public Login(String username, String password) throws IOException {
         this.username = username;
         this.password = password;
-        LoginDatabase loginDatabase = new LoginDatabase(this.username, this.password);
+        DatabaseFactory databaseFactory = new DatabaseFactory();
+        ILoginDatabase loginDatabase = databaseFactory.createLoginDatabase();
+        loginDatabase.validateUser(username, password);
         ExecuteDatabase executeDatabase = new ExecuteDatabase();
-        try {
-            ResultSet resultSet = executeDatabase.executeSelect(loginDatabase);
-            if (resultSet != null) {
-                createUser(resultSet);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+//        try {
+//            ResultSet resultSet = executeDatabase.executeSelect(loginDatabase);
+//            if (resultSet != null) {
+//                createUser(resultSet);
+//            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
 
     }
 

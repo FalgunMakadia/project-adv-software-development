@@ -1,5 +1,5 @@
-package BLL.BankEmployee;
-import BLL.CommonAction.Action;
+package BusinessLogicLayer.BankEmployee;
+import BusinessLogicLayer.CommonAction.Action;
 
 public class Worklist extends Action {
     @Override

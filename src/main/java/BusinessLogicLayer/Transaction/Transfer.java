@@ -1,6 +1,6 @@
-package BLL.Transaction;
+package BusinessLogicLayer.Transaction;
 
-import BLL.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.Action;
 
 public class Transfer extends Action {
     @Override

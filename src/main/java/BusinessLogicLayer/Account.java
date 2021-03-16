@@ -1,4 +1,4 @@
-package BLL;
+package BusinessLogicLayer;
 
 import DAL.ExecuteDatabase;
 import DAL.FetchAccountDetails;

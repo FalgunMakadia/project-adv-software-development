@@ -1,5 +1,8 @@
 package PresentationLayer.UserPages;
 
+import BusinessLogicLayer.CommonAction.Login;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginPage {
@@ -7,16 +10,8 @@ public class LoginPage {
     private String password;
     private String authLevel;
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getAuthLevel() {
         return authLevel;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void takeUserInput() {
@@ -25,6 +20,28 @@ public class LoginPage {
         this.username = scanner.nextLine();
         System.out.print("Password:");
         this.password = scanner.nextLine();
+        try {
+            Login login = new Login(username, password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        printUserValidityStatus(authLevel);
+
+        if (authLevel == "E") {
+            BankEmployeePage bankEmployeePage = new BankEmployeePage();
+            bankEmployeePage.printMenu();
+        }
+        else if (authLevel == "C") {
+            CustomerPage customerPage = new CustomerPage();
+            customerPage.printMenu();
+        }
+        else if (authLevel == "M") {
+            BankManagerPage bankManagerPage = new BankManagerPage();
+            bankManagerPage.printMenu();
+        }
+        else {
+            System.out.println("NO AUTHORIZATION");
+        }
     }
 
     public void printUserValidityStatus(String isValid) {

@@ -1,7 +1,7 @@
 package PresentationLayer.BankActionPages;
 
-import BLL.CommonAction.*;
-import BLL.Transaction.*;
+import BusinessLogicLayer.CommonAction.*;
+import BusinessLogicLayer.Transaction.*;
 import java.util.HashMap;
 import java.util.Map;
 
