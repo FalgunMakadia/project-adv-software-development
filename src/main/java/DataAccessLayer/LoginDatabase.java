@@ -39,7 +39,7 @@ public class LoginDatabase implements ILoginDatabase{
 
     public ResultSet validateUser (String username, int password){
         ResultSet resultSet = null;
-        String loginQuery = "SELECT * FROM T_Login WHERE userName = '"+ username +"' AND userPassword = '" + password + "'";
+        String loginQuery = "SELECT * FROM login WHERE userName = '"+ username +"' AND userPassword = '" + password + "'";
         try {
             preparedStatement = con.prepareStatement(loginQuery);
             resultSet = preparedStatement.executeQuery();
@@ -49,11 +49,5 @@ public class LoginDatabase implements ILoginDatabase{
         }
         return resultSet;
     }
-    public ResultSet operateSelect() {
-        // write select query to get the details from the t_user table
-        ResultSet resultSet = null;
-        resultSet = mock(ResultSet.class);
 
-        return resultSet;
-    }
 }

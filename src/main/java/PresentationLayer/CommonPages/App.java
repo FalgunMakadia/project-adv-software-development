@@ -1,9 +1,9 @@
-package PresentationLayer;
+package PresentationLayer.CommonPages;
+
+import PresentationLayer.CommonPages.LoginPage;
 
 public class App {
     public static void main(String[] args) {
-
-//      Login Page
         LoginPage loginPage = new LoginPage();
         loginPage.takeUserInput();
 

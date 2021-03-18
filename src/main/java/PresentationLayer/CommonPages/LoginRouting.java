@@ -1,4 +1,9 @@
-package PresentationLayer;
+package PresentationLayer.CommonPages;
+
+import PresentationLayer.MenuPages.BankEmployeePage;
+import PresentationLayer.MenuPages.BankManagerPage;
+import PresentationLayer.MenuPages.CustomerPage;
+import PresentationLayer.MenuPages.Page;
 
 import java.util.HashMap;
 import java.util.Map;

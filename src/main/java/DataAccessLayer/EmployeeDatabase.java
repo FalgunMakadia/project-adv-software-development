@@ -1,4 +1,4 @@
 package DataAccessLayer;
 
-public class EmployeeDatabase extends IEmployeeDatabase {
+public class EmployeeDatabase implements IEmployeeDatabase {
 }

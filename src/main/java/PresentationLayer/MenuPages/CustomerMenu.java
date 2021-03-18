@@ -1,11 +1,11 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.*;
-import BusinessLogicLayer.SignOut;
-import BusinessLogicLayer.Transaction.Deposit;
-import BusinessLogicLayer.Transaction.Transfer;
-import BusinessLogicLayer.Transaction.Withdraw;
+import BusinessLogicLayer.CommonAction.SignOut;
+import BusinessLogicLayer.TransactionAction.Deposit;
+import BusinessLogicLayer.TransactionAction.Transfer;
+import BusinessLogicLayer.TransactionAction.Withdraw;
 
 import java.util.HashMap;
 import java.util.Map;

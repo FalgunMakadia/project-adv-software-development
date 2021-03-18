@@ -12,11 +12,11 @@ public class Login implements ILogin {
     private ILoginDatabase loginDatabase = null;
     private LoggedInUserContext loggedInUserContext;
     public Login() {
-        DatabaseFactory databaseFactoryOLD = new DatabaseFactory();
+        DatabaseFactory databaseFactory = new DatabaseFactory();
         loggedInUserContext = LoggedInUserContext.instance();
 
         try {
-            loginDatabase = databaseFactoryOLD.createLoginDatabase();
+            loginDatabase = databaseFactory.createLoginDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }

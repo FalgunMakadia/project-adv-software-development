@@ -3,7 +3,7 @@ package BusinessLogicLayer.CommonAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import PresentationLayer.IPresentationFactory;
-import PresentationLayer.IUserInterface;
+import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.PresentationFactory;
 
 public abstract class Action {

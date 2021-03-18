@@ -1,4 +1,4 @@
 package DataAccessLayer;
 
-public class IEmployeeDatabase {
+public interface IEmployeeDatabase {
 }

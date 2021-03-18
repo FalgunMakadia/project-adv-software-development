@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CommonAction.Action;
 

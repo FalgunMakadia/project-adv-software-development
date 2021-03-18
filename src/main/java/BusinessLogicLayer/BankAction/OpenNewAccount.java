@@ -1,4 +1,4 @@
-package BusinessLogicLayer.BankEmployee;
+package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.User.Customer;
@@ -44,10 +44,11 @@ public class OpenNewAccount extends Action {
         input = userInterface.getMandatoryUserInput("SSN*: ");
         customer.setSsnNo(input);
         input = userInterface.getConfirmation("Do you want to save? ").toUpperCase();
-        if (input == "Y"){
+        if (input.equals("Y")){
 
         }
 
     }
+
 
 }

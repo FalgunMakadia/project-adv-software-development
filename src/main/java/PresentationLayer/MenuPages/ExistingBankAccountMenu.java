@@ -1,7 +1,7 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CommonAction.*;
-import BusinessLogicLayer.Transaction.*;
+import BusinessLogicLayer.TransactionAction.*;
 import java.util.HashMap;
 import java.util.Map;
 

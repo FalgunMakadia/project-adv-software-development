@@ -1,11 +1,11 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 
-import BusinessLogicLayer.BankEmployee.ExistingBankAccount;
-import BusinessLogicLayer.BankEmployee.OpenNewAccount;
-import BusinessLogicLayer.BankEmployee.WorkList;
+import BusinessLogicLayer.BankAction.ExistingBankAccount;
+import BusinessLogicLayer.BankAction.OpenNewAccount;
+import BusinessLogicLayer.BankAction.WorkList;
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.SignOut;
+import BusinessLogicLayer.CommonAction.SignOut;
 
 import java.util.HashMap;
 import java.util.Map;

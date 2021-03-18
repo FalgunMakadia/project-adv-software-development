@@ -1,7 +1,8 @@
-package PresentationLayer;
+package PresentationLayer.CommonPages;
 
 import BusinessLogicLayer.CommonAction.ILogin;
 import BusinessLogicLayer.ActionFactory;
+import PresentationLayer.MenuPages.Page;
 
 import java.util.Scanner;
 

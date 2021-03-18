@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;

@@ -1,4 +1,4 @@
-package BusinessLogicLayer.BankEmployee;
+package BusinessLogicLayer.BankAction;
 import BusinessLogicLayer.CommonAction.Action;
 
 public class WorkList extends Action {

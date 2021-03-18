@@ -1,4 +1,4 @@
-package BusinessLogicLayer.BankManager;
+package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.CommonAction.Action;
 

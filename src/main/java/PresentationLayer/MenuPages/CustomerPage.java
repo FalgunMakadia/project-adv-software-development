@@ -1,18 +1,23 @@
-package PresentationLayer;
+package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CommonAction.Action;
 
 import java.util.Scanner;
 
-public class BankManagerPage extends Page {
-    @Override
+public class CustomerPage extends Page {
+
+    public CustomerPage(){
+        super();
+    }
     public void printMenu() {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome " + loggedInUserContext.getUserName() + "!");
+        System.out.println();
         while (loggedInUserContext.getLoginStatus()) {
-            for (BankManagerMenu menuDetails : BankManagerMenu.values()) {
+            Scanner scanner = new Scanner(System.in);
+            for (CustomerMenu menuDetails : CustomerMenu.values()) {
                 System.out.println(menuDetails.getSequenceNumber() + ". " + menuDetails.getDescription());
             }
-            System.out.print("Enter any Number between 1-5 to perform appropriate action:");
+            System.out.print("Enter any Number between 1-7 to perform appropriate action:");
             String input = scanner.next();
             System.out.println("");
             int choiceNumber = 0;
@@ -21,13 +26,10 @@ public class BankManagerPage extends Page {
             } catch (Exception e) {
                 System.out.println("Invalid input.");
             }
-            String actionFlag = "";
             if (choiceNumber > 0) {
-                Action menuPage = BankManagerMenu.getActionFromSequence.get(choiceNumber).getMenuPage();
-                menuPage.performAction();
+                Action customerAction = CustomerMenu.getActionFromSequence.get(choiceNumber).getCustomerActions();
+                customerAction.performAction();
             }
         }
-
     }
-
 }

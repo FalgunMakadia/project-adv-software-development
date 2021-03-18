@@ -1,7 +1,4 @@
-package BusinessLogicLayer;
-
-import BusinessLogicLayer.CommonAction.Action;
-import PresentationLayer.Page;
+package BusinessLogicLayer.CommonAction;
 
 public class SignOut extends Action {
     public SignOut(){

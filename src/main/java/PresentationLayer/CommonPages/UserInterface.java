@@ -1,4 +1,4 @@
-package PresentationLayer;
+package PresentationLayer.CommonPages;
 
 import java.util.Scanner;
 
@@ -40,6 +40,25 @@ public class UserInterface implements IUserInterface {
 
     @Override
     public String getMandatoryIntegerUserInput(String message) {
+        String input = "";
+        int choiceNumber = 0;
+        while (input.length() < 1) {
+            System.out.print(message);
+            try {
+                input = scanner.nextLine();
+                choiceNumber = Integer.parseInt(input);
+            }
+            catch (Exception exception){
+                input = "";
+                System.out.println("Incorrect Input Format.");
+            }
+            System.out.println();
+        }
+        return input;
+    }
+
+    @Override
+    public String getMandatoryIntegerUserInput(String message,int length) {
         String input = "";
         int choiceNumber = 0;
         while (input.length() < 1) {
