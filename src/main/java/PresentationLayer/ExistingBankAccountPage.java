@@ -1,7 +1,6 @@
-package PresentationLayer.BankActionPages;
+package PresentationLayer;
 
 import BusinessLogicLayer.CommonAction.Action;
-import PresentationLayer.Page;
 
 import java.util.Scanner;
 

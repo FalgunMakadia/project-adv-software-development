@@ -1,6 +1,4 @@
-package PresentationLayer.UserPages;
-
-import BusinessLogicLayer.CommonAction.Login;
+package PresentationLayer;
 
 public class App {
     public static void main(String[] args) {

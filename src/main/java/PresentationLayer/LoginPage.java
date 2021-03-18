@@ -1,14 +1,14 @@
-package PresentationLayer.UserPages;
+package PresentationLayer;
 
 import BusinessLogicLayer.CommonAction.ILogin;
 import BusinessLogicLayer.ActionFactory;
-import PresentationLayer.Page;
 
 import java.util.Scanner;
 
 public class LoginPage {
     private String username;
     private String password;
+
     public void takeUserInput() {
         Scanner scanner = new Scanner(System.in);
         do{

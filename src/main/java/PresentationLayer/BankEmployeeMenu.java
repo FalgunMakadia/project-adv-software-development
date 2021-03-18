@@ -1,31 +1,33 @@
-package PresentationLayer.UserPages;
+package PresentationLayer;
 
 
-import PresentationLayer.BankActionPages.ExistingBankAccountPage;
-import PresentationLayer.BankActionPages.OpenNewAccountPage;
-import PresentationLayer.Page;
-import PresentationLayer.BankActionPages.WorklistPage;
+import BusinessLogicLayer.BankEmployee.ExistingBankAccount;
+import BusinessLogicLayer.BankEmployee.OpenNewAccount;
+import BusinessLogicLayer.BankEmployee.WorkList;
+import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.SignOut;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum BankEmployeeMenu {
 
-    OPEN_NEW_BANK_ACCOUNT(1, "Open New Bank Account", new OpenNewAccountPage()),
-    OPEN_EXISTING_BANK_ACCOUNT(2, "Open Existing Bank Account", new ExistingBankAccountPage()),
-    WORKLIST(3, "Worklist", new WorklistPage()),
+    OPEN_NEW_BANK_ACCOUNT(1, "Open New Bank Account", new OpenNewAccount()),
+    OPEN_EXISTING_BANK_ACCOUNT(2, "Open Existing Bank Account", new ExistingBankAccount()),
+    WORKLIST(3, "WorkList", new WorkList()),
     SIGN_OUT(4, "Sign out", new SignOut());
+
 
 
     private int sequenceNumber;
     private String description;
-    private Page Page;
+    private Action action;
 
 
-    BankEmployeeMenu(int number, String desc, Page Page) {
+    BankEmployeeMenu(int number, String desc, Action action) {
         this.sequenceNumber = number;
         this.description = desc;
-        this.Page = Page;
+        this.action = action;
 
     }
 
@@ -33,8 +35,8 @@ public enum BankEmployeeMenu {
         return sequenceNumber;
     }
 
-    public Page getAction() {
-        return Page;
+    public Action getAction() {
+        return action;
     }
 
     public String getDescription() {

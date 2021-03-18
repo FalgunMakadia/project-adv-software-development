@@ -1,4 +1,4 @@
-package PresentationLayer.BankActionPages;
+package PresentationLayer;
 
 import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.Transaction.*;

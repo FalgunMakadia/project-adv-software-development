@@ -1,6 +1,4 @@
-package PresentationLayer.UserPages;
-
-import PresentationLayer.Page;
+package PresentationLayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +8,9 @@ public enum LoginRouting {
     EMPLOYEE("E", "Withdraw", new BankEmployeePage()),
     MANGER("M", "Deposit", new BankManagerPage());
 
-    public String userRole;
-    public String description;
-    public Page menuPage;
+    private String userRole;
+    private String description;
+    private Page menuPage;
 
     public String getUserRole() {
         return userRole;
