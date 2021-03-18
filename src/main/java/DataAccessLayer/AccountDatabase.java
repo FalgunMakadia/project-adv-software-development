@@ -1,7 +1,5 @@
 package DataAccessLayer;
 
-import Models.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,5 +37,19 @@ public class AccountDatabase implements IAccountDatabase{
         statement.setString(2, accountNumber);
         int output = statement.executeUpdate();
         return output;
+    }
+
+    @Override
+    public boolean verifyAccountNumber(String accountNumber) throws SQLException {
+        String query = "SELECT * FROM accounts WHERE account_no = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setString(1, accountNumber);
+        ResultSet rs = statement.executeQuery();
+        boolean accountStatus= false;
+        if(rs.next()){
+            accountStatus = rs.getBoolean("active_status");
+        }
+        return accountStatus;
     }
 }
