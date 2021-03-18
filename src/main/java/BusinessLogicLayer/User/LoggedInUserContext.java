@@ -10,7 +10,7 @@ public class LoggedInUserContext implements ILoggedInUserContext {
 
     private LoggedInUserContext() { }
 
-    public static LoggedInUserContext getInstance() {
+    public static LoggedInUserContext instance() {
         if (null == uniqueInstance) {
             uniqueInstance = new LoggedInUserContext();
         }
