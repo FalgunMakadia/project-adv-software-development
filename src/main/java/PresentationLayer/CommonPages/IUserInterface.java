@@ -10,4 +10,5 @@ public interface IUserInterface {
     String getMandatoryIntegerUserInput(String message, int length);
 
     String getConfirmation(String message);
+    String getUserInputInMultipleOfTen(String message);
 }
