@@ -25,8 +25,6 @@ public abstract class User {
         this.passport = passport;
     }
 
-
-
     public String getFirstName() {
         return firstName;
     }
@@ -126,15 +124,9 @@ public abstract class User {
     public User (){
 
     }
-    public void CreateInstance(ResultSet rs){
 
-    }
-
-    void login(){
-
-    }
-
-    void logout(){
-
+    public boolean validateContact(){
+        contact.length();
+        return true;
     }
 }

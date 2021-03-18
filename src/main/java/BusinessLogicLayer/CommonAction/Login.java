@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CommonAction;
 
-import DataAccessLayer.DatabaseFactoryOLD;
+import DataAccessLayer.DatabaseFactory;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import DataAccessLayer.ILoginDatabase;
 
@@ -12,8 +12,8 @@ public class Login implements ILogin {
     private ILoginDatabase loginDatabase = null;
     private LoggedInUserContext loggedInUserContext;
     public Login() {
-        DatabaseFactoryOLD databaseFactoryOLD = new DatabaseFactoryOLD();
-        loggedInUserContext = LoggedInUserContext.getInstance();
+        DatabaseFactory databaseFactoryOLD = new DatabaseFactory();
+        loggedInUserContext = LoggedInUserContext.instance();
 
         try {
             loginDatabase = databaseFactoryOLD.createLoginDatabase();

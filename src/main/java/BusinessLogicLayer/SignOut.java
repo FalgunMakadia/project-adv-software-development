@@ -1,13 +1,14 @@
-package PresentationLayer.UserPages;
+package BusinessLogicLayer;
 
+import BusinessLogicLayer.CommonAction.Action;
 import PresentationLayer.Page;
 
-public class SignOut extends Page {
+public class SignOut extends Action {
     public SignOut(){
         super();
     }
     @Override
-    public void printMenu() {
+    public void performAction() {
         System.out.println("Signing Out");
         loggedInUserContext.setUserName(null);
         loggedInUserContext.setUserRole(null);
