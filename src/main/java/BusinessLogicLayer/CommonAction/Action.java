@@ -15,4 +15,5 @@ public abstract class Action {
         loggedInUserContext = LoggedInUserContext.instance();
     }
     public abstract void performAction();
+    public abstract String getMenuLabel();
 }

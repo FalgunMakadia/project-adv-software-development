@@ -1,17 +1,14 @@
 package PresentationLayer.CommonPages;
 
-import PresentationLayer.MenuPages.BankEmployeePage;
-import PresentationLayer.MenuPages.BankManagerPage;
-import PresentationLayer.MenuPages.CustomerPage;
 import PresentationLayer.MenuPages.Page;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum LoginRouting {
-    CUSTOMER("C", "Update Personal Details",  new CustomerPage()),
-    EMPLOYEE("E", "Withdraw", new BankEmployeePage()),
-    MANGER("M", "Deposit", new BankManagerPage());
+public enum LoginCommand {;
+//    CUSTOMER("C", "Update Personal Details",  new MenuPage()),
+//    EMPLOYEE("E", "Withdraw", new BankEmployeePage()),
+//    MANGER("M", "Deposit", new BankManagerPage());
 
     private String userRole;
     private String description;
@@ -28,17 +25,17 @@ public enum LoginRouting {
     public Page getMenuPage() { return menuPage; }
 
 
-    LoginRouting(String number, String desc, Page page){
+    LoginCommand(String number, String desc, Page page){
         this.userRole = number;
         this.description = desc;
         this.menuPage = page;
     }
 
 
-    public static Map<String, LoginRouting> getActionFromSequence = new HashMap();
+    public static Map<String, LoginCommand> getActionFromSequence = new HashMap();
 
     static {
-        for(LoginRouting menuPage : LoginRouting.values()) {
+        for(LoginCommand menuPage : LoginCommand.values()) {
             getActionFromSequence.put(menuPage.getUserRole(),menuPage);
         }
     }
