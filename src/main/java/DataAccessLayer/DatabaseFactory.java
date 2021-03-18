@@ -9,6 +9,11 @@ public class DatabaseFactory implements IDatabaseFactory{
     }
 
     @Override
+    public IAccountDatabase createAccountDatabase() {
+        return new AccountDatabase();
+    }
+
+    @Override
     public ILoginDatabase createLoginDatabase() throws IOException {
         return new LoginDatabase();
     }
