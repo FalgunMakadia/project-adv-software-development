@@ -24,14 +24,14 @@ public class MenuPage extends Page {
             System.out.print("Enter any Number between 1-" + menu.size() + " to perform appropriate action:");
             String input = scanner.next();
             System.out.println("");
-            if (validateInputFormat(input)) {
+            if (validateIntegerInputFormat(input)) {
                 Action action = menu.get(input);
                 action.performAction();
 
             }
         }
     }
-    private boolean validateInputFormat(String input){
+    private boolean validateIntegerInputFormat(String input){
         boolean validity = false;
         int choiceNumber = 0;
         try {
