@@ -5,19 +5,32 @@ import BusinessLogicLayer.User.Customer;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 public class OpenNewAccount extends Action {
     Customer customer = null;
     IDatabaseFactory databaseFactory;
-
-    public OpenNewAccount(){
+    private static final String menuLabel = "Open New Account";
+    @Override
+    public String getMenuLabel() {
+        return menuLabel;
+    }
+    public OpenNewAccount() {
         super();
         customer = new Customer();
         databaseFactory = new DatabaseFactory();
+
+    }
+    private  String a (){
+        return "";
     }
     public void performAction() {
         userInterface.displayMessage("Please enter the details of following fields:");
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
+
 
         String input = userInterface.getMandatoryUserInput("First Name*: ");
         customer.setFirstName(input);
@@ -44,7 +57,7 @@ public class OpenNewAccount extends Action {
         input = userInterface.getMandatoryUserInput("SSN*: ");
         customer.setSsnNo(input);
         input = userInterface.getConfirmation("Do you want to save? ").toUpperCase();
-        if (input.equals("Y")){
+        if (input.equals("Y")) {
 
         }
 

@@ -9,6 +9,11 @@ import Models.User;
 import java.sql.SQLException;
 
 public class UpdatePersonalDetails extends Action {
+    private static final String menuLabel = "Update Personal Details";
+    @Override
+    public String getMenuLabel() {
+        return menuLabel;
+    }
     @Override
     public void performAction() {
         System.out.println("Update Personal Details");
