@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerDatabase implements ICustomerDatabase {
-    static Connection connection = DatabaseConnection.instance();
+    Connection connection = null;
+
+    public CustomerDatabase(){
+         connection = DatabaseConnection.instance();
+    }
 
     @Override
     public int add(User user) {
