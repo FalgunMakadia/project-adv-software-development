@@ -25,10 +25,7 @@ public class WithdrawTest {
 
     @Test
     public void testWithdraw() {
-
         int expected = 1;
         assertEquals(expected, actual);
-
     }
-
 }
