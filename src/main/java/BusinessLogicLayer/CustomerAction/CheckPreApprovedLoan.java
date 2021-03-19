@@ -38,7 +38,7 @@ public class CheckPreApprovedLoan extends Action {
             double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);
 
             userInterface.displayMessage("You have a pre-approved loan of "+ preApprovedLoanAmount + "CAD with " +annualInterest+ "% annual interest.");
-            userInterface.addDelay();
+            //userInterface.addDelay();
             userInterface.insertEmptyLine();
 
         }
