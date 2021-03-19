@@ -8,7 +8,11 @@ import DataAccessLayer.IDatabaseFactory;
 import java.sql.SQLException;
 
 public class Deposit extends Action {
-
+    private static final String menuLabel = "Deposit";
+    @Override
+    public String getMenuLabel() {
+        return menuLabel;
+    }
     @Override
     public void performAction() {
 
