@@ -21,7 +21,7 @@ public class DepositTest {
         databaseFactory = Mockito.mock(DatabaseFactory.class);
         when(databaseFactory.createAccountDatabase()).thenReturn(new AccountDatabase());
 
-        actual = databaseFactory.createAccountDatabase().updateBalance(11000, "9800001001");
+        actual = databaseFactory.createAccountDatabase().updateBalance(10000, "9800001001");
 
     }
 
@@ -29,7 +29,7 @@ public class DepositTest {
     public void testDeposit() {
 
         int expected = 1;
-        assertEquals(1, actual);
+        assertEquals(expected, actual);
 
     }
 
