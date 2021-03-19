@@ -31,7 +31,7 @@ public class UserInterface implements IUserInterface {
     public String getMandatoryUserInput(String message) {
         String input = "";
         while (input.trim().length() < 1) {
-            System.out.print(message );
+            System.out.print(message);
             input = scanner.nextLine();
             System.out.println();
         }
@@ -47,8 +47,7 @@ public class UserInterface implements IUserInterface {
             try {
                 input = scanner.nextLine();
                 choiceNumber = Integer.parseInt(input);
-            }
-            catch (Exception exception){
+            } catch (Exception exception) {
                 input = "";
                 System.out.println("Incorrect Input Format.");
             }
@@ -58,7 +57,25 @@ public class UserInterface implements IUserInterface {
     }
 
     @Override
-    public String getMandatoryIntegerUserInput(String message,int length) {
+    public String getMandatoryLongUserInputWithMinimumRange(String message, long minimumRange) {
+        String input = "";
+        long userNumber = minimumRange;
+        do {
+            System.out.print(message);
+            try {
+                input = scanner.nextLine();
+                userNumber = Long.parseLong(input);
+            } catch (Exception exception) {
+                input = "";
+                System.out.println("Incorrect Input Format.");
+            }
+            System.out.println();
+        } while (userNumber < minimumRange);
+        return input;
+    }
+
+    @Override
+    public String getMandatoryIntegerUserInput(String message, int length) {
         String input = "";
         int choiceNumber = 0;
         while (input.length() < 1) {
@@ -66,8 +83,7 @@ public class UserInterface implements IUserInterface {
             try {
                 input = scanner.nextLine();
                 choiceNumber = Integer.parseInt(input);
-            }
-            catch (Exception exception){
+            } catch (Exception exception) {
                 input = "";
                 System.out.println("Incorrect Input Format.");
             }
@@ -85,5 +101,14 @@ public class UserInterface implements IUserInterface {
             System.out.println();
         }
         return input;
+    }
+
+    @Override
+    public void addDelay() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

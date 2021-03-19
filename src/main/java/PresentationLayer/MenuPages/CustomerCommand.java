@@ -22,7 +22,8 @@ public class CustomerCommand extends Command{
         menu.put("6", new CheckBalance());
         menu.put("7", new UpdatePassword());
         menu.put("8", new LoanEstimator());
-        menu.put("9", new SignOut());
+        menu.put("9", new CheckPreApprovedLoan());
+        menu.put("10", new SignOut());
     }
     @Override
     public void execute() {

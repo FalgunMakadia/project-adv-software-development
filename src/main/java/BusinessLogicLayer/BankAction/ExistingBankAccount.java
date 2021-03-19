@@ -30,7 +30,6 @@ public class ExistingBankAccount extends Action {
                 Command command = presentationFactory.createExistingBankAccountCommand();
                 command.execute();
             }
-
         }
         catch (SQLException exception){
             userInterface.displayMessage("Error occurred in database connection.");
