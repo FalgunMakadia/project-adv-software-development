@@ -28,6 +28,26 @@ public abstract class Action {
         return choiceNumber;
     }
 
+    protected double convertStringToDouble(String input) {
+        double choiceNumber = 0;
+        try {
+            choiceNumber = Double.parseDouble(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid input.");
+        }
+        return choiceNumber;
+    }
+
+    protected long convertStringToLong(String input) {
+        long choiceNumber = 0;
+        try {
+            choiceNumber = Long.parseLong(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid input.");
+        }
+        return choiceNumber;
+    }
+
     protected boolean validateIntegerInputFormat(String input) {
         boolean validity = true;
         int choiceNumber = 0;
