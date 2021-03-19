@@ -12,6 +12,4 @@ public class Withdraw extends Action {
     public void performAction() {
         System.out.println("Withdraw");
     }
-
-
 }

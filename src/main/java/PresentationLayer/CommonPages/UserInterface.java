@@ -86,4 +86,26 @@ public class UserInterface implements IUserInterface {
         }
         return input;
     }
+
+    @Override
+    public String getUserInputInMultipleOfTen(String message) {
+        String input = "";
+        int amount = 0;
+        while (input.length() < 1) {
+            System.out.print(message);
+            try {
+                input = scanner.nextLine();
+                amount = Integer.parseInt(input);
+                if (amount % 10 != 0) {
+                    throw new Exception();
+                }
+            }
+            catch (Exception exception){
+                input = "";
+                System.out.println("Amount should be only in multiple of 10.");
+            }
+            System.out.println();
+        }
+        return input;
+    }
 }
