@@ -19,6 +19,7 @@ public class Withdraw extends Action {
         int withdrawAmount;
         int finalBalance;
         int output;
+        String transactionType = "Dr";
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         System.out.println("Withdraw");
@@ -44,6 +45,8 @@ public class Withdraw extends Action {
                 output = accountDatabase.updateBalance(finalBalance, accountNumber);
                 if(output == 1){
                     userInterface.displayMessage("Withdraw Success!");
+                    accountDatabase.saveTransaction(accountNumber, transactionType, withdrawAmount);
+                    userInterface.displayMessage("Transaction Successfully registered!");
                     userInterface.displayMessage("Updated Balance: " + finalBalance);
                     userInterface.insertEmptyLine();
                     userInterface.insertEmptyLine();
