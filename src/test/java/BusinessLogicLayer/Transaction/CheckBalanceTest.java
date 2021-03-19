@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.sql.SQLException;
 
-public class WithdrawTest {
+public class CheckBalanceTest {
 
     IDatabaseFactory databaseFactory = null;
     int actual;
@@ -20,12 +20,17 @@ public class WithdrawTest {
 
         databaseFactory = Mockito.mock(DatabaseFactory.class);
         when(databaseFactory.createAccountDatabase()).thenReturn(new AccountDatabase());
-        actual = databaseFactory.createAccountDatabase().updateBalance(10000, "9800001001");
+
+        actual = databaseFactory.createAccountDatabase().getUserBalance("9800001001");
+
     }
 
     @Test
-    public void testWithdraw() {
-        int expected = 1;
+    public void testCheckBalance() {
+
+        int expected = 10000;
         assertEquals(expected, actual);
+
     }
+
 }
