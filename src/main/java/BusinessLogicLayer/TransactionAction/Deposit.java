@@ -24,6 +24,7 @@ public class Deposit extends Action {
         int totalDepositAmount;
         int finalBalance;
         int output;
+        String transactionType = "Cr";
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         System.out.println("Deposit");
@@ -56,6 +57,8 @@ public class Deposit extends Action {
                 output = accountDatabase.updateBalance(finalBalance, accountNumber);
                 if(output == 1){
                     userInterface.displayMessage("Deposit Success!");
+                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
+                    userInterface.displayMessage("Transaction Successfully registered!");
                     userInterface.displayMessage("Updated Balance: " + finalBalance);
                     userInterface.insertEmptyLine();
                     userInterface.insertEmptyLine();
