@@ -24,7 +24,7 @@ public class Deposit extends Action {
         int totalDepositAmount;
         int finalBalance;
         int output;
-        String transactionType = "Dr";
+        String transactionType = "Cr";
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         System.out.println("Deposit");
