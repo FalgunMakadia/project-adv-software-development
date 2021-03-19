@@ -16,6 +16,5 @@ public interface IUserInterface {
     String getMandatoryIntegerUserInput(String message, int length);
 
     String getConfirmation(String message);
-
-    void addDelay();
+    String getUserInputInMultipleOfTen(String message);
 }

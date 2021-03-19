@@ -9,5 +9,5 @@ public interface IAccountDatabase {
 
     boolean verifyAccountNumber(String accountNumber) throws SQLException;
 
-
+    int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException;
 }

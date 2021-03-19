@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.security.SecureRandom;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class AccountDatabase implements IAccountDatabase{
 
@@ -51,5 +54,36 @@ public class AccountDatabase implements IAccountDatabase{
             accountStatus = rs.getBoolean("active_status");
         }
         return accountStatus;
+    }
+
+    @Override
+    public int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException {
+        String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
+        String transactionId;
+        String date;
+        int output;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(10);
+        for (int i = 0; i < 10; i++)
+            sb.append(STR.charAt(random.nextInt(STR.length())));
+        transactionId = sb.toString();
+
+        DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        date = x.format(now);
+
+        String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setString(1, transactionId);
+        statement.setString(2, accountNumber);
+        statement.setString(3, transactionType);
+        statement.setInt(4, amount);
+        statement.setString(5, date);
+
+        output = statement.executeUpdate();
+        return  output;
+
     }
 }
