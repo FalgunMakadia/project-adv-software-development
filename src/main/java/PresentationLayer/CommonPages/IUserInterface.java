@@ -7,6 +7,8 @@ public interface IUserInterface {
 
     String getUserInput(String message);
 
+    String getIntegerUserInput(String message);
+
     String getMandatoryUserInput(String message);
 
     String getMandatoryIntegerUserInput(String message);

@@ -10,12 +10,14 @@ import java.sql.SQLException;
 
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
     @Override
     public void performAction() {
+        setCurrentPageInContext();
         System.out.println("Update Personal Details");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
@@ -25,5 +27,9 @@ public class UpdatePersonalDetails extends Action {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
     }
 }

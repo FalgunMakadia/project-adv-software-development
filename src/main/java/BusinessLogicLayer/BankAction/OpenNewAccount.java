@@ -1,66 +1,57 @@
 package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.User.Customer;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OpenNewAccount extends Action {
-    Customer customer = null;
     IDatabaseFactory databaseFactory;
     private static final String menuLabel = "Open New Account";
+    Map<Integer, FormState> openNewAccountStateMap;
+    OpenNewAccountStateContext openNewAccountStateContext;
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
     public OpenNewAccount() {
         super();
-        customer = new Customer();
         databaseFactory = new DatabaseFactory();
+        openNewAccountStateMap = new LinkedHashMap<>();
+        openNewAccountStateMap.put(1, new OpenNewAccountFormEditState("Refill the form"));
+        openNewAccountStateMap.put(2, new OpenNewAccountFormSaveState("Save"));
+        openNewAccountStateMap.put(3, new BackToMainMenuState("Back to main menu"));
+        openNewAccountStateContext =new OpenNewAccountStateContext();
+    }
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
 
-    }
-    private  String a (){
-        return "";
-    }
     public void performAction() {
+        setCurrentPageInContext();
         userInterface.displayMessage("Please enter the details of following fields:");
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
+        openNewAccountStateContext.setOpenNewAccountState(new OpenNewAccountFormEditState());
+        openNewAccountStateContext.executeStateTask();
 
+        while(loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
+            int key = 1;
+            for (int i = 0; i < openNewAccountStateMap.size(); i++) {
+                FormState formState = openNewAccountStateMap.get(key);
+                System.out.println(key + ". " + formState.getMenuLabel());
+                key = key + 1;
+            }
+            String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + openNewAccountStateMap.size() + " to perform appropriate action:");
 
-        String input = userInterface.getMandatoryUserInput("First Name*: ");
-        customer.setFirstName(input);
-        input = userInterface.getMandatoryUserInput("Last Name*: ");
-        customer.setLastName(input);
-        input = userInterface.getUserInput("Middle Name: ");
-        customer.setMiddleName(input);
-        input = userInterface.getMandatoryUserInput("Address Line 1*: ");
-        customer.setAddressLine1(input);
-        input = userInterface.getUserInput("Address Line 2: ");
-        customer.setAddressLine2(input);
-        input = userInterface.getMandatoryUserInput("City*: ");
-        customer.setCity(input);
-        input = userInterface.getMandatoryUserInput("State/ Province*: ");
-        customer.setProvince(input);
-        input = userInterface.getMandatoryUserInput("Postal Code*: ");
-        customer.setPostalCode(input);
-        input = userInterface.getMandatoryUserInput("Email Address*: ");
-        customer.setEmailAddress(input);
-        input = userInterface.getMandatoryIntegerUserInput("Contact Number*: ");
-        customer.setContact(input);
-        input = userInterface.getMandatoryUserInput("Passport Number*: ");
-        customer.setPassport(input);
-        input = userInterface.getMandatoryUserInput("SSN*: ");
-        customer.setSsnNo(input);
-        input = userInterface.getConfirmation("Do you want to save? ").toUpperCase();
-        if (input.equals("Y")) {
-
+            FormState newState = openNewAccountStateMap.get(Integer.parseInt(action));
+            openNewAccountStateContext.setOpenNewAccountState(newState);
+            userInterface.displayMessage(newState.getMenuLabel());
+            openNewAccountStateContext.executeStateTask();
         }
-
     }
 
 

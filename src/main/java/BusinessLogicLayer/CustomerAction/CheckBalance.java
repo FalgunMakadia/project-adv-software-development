@@ -14,7 +14,13 @@ public class CheckBalance extends Action {
         return menuLabel;
     }
     @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
+    @Override
     public void performAction() {
+
+        setCurrentPageInContext();
         String accountNumber = loggedInUserContext.getAccountNumber();
         String name = loggedInUserContext.getUserName();
         int currentBalance;
@@ -32,6 +38,7 @@ public class CheckBalance extends Action {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
 
     }
 }

@@ -28,6 +28,26 @@ public class UserInterface implements IUserInterface {
     }
 
     @Override
+    public String getIntegerUserInput(String message) {
+        String input = "";
+        int choiceNumber = 0;
+        do {
+            System.out.print(message);
+            try {
+                input = scanner.nextLine();
+                choiceNumber = Integer.parseInt(input);
+                break;
+            } catch (Exception exception) {
+                input = "";
+                System.out.println("Incorrect Input Format.");
+            }
+            System.out.println();
+        }while (input.length() > 0);
+        return String.valueOf(choiceNumber);
+
+    }
+
+    @Override
     public String getMandatoryUserInput(String message) {
         String input = "";
         while (input.trim().length() < 1) {

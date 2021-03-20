@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 public class MenuPage extends Page {
     private Map<String, Action> menu;
-    public MenuPage(Map<String, Action> menu){
+    public MenuPage(Map<String, Action> menu, String parentPage){
         super();
         this.menu = menu;
+        loggedInUserContext.setParentPage(parentPage);
     }
     public void printMenu() {
         System.out.println("Welcome " + loggedInUserContext.getUserName() + "!");

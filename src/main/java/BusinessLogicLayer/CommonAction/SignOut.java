@@ -10,7 +10,12 @@ public class SignOut extends Action {
         super();
     }
     @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage("");
+    }
+    @Override
     public void performAction() {
+        setCurrentPageInContext();
         System.out.println("Signing Out");
         loggedInUserContext.setUserName(null);
         loggedInUserContext.setUserRole(null);

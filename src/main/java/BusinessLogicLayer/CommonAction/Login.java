@@ -2,14 +2,14 @@ package BusinessLogicLayer.CommonAction;
 
 import DataAccessLayer.DatabaseFactory;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import DataAccessLayer.ILoginDatabase;
+import DataAccessLayer.IUserDetailsDatabase;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login implements ILogin {
-    private ILoginDatabase loginDatabase = null;
+    private IUserDetailsDatabase loginDatabase = null;
     private LoggedInUserContext loggedInUserContext;
     public Login() {
         DatabaseFactory databaseFactory = new DatabaseFactory();

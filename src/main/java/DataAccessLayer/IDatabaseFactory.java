@@ -5,5 +5,5 @@ import java.io.IOException;
 public interface IDatabaseFactory {
     ICustomerDatabase createCustomerDatabase();
     IAccountDatabase createAccountDatabase();
-    ILoginDatabase createLoginDatabase() throws IOException;
+    IUserDetailsDatabase createLoginDatabase() throws IOException;
 }
