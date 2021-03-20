@@ -9,7 +9,12 @@ public class CheckBalance extends Action {
         return menuLabel;
     }
     @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
+    @Override
     public void performAction() {
-        System.out.println("Check Balance");
+        setCurrentPageInContext();
+        System.out.println("CheckBalance");
     }
 }

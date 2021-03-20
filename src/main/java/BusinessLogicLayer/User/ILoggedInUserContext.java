@@ -4,7 +4,7 @@ public interface ILoggedInUserContext {
     static LoggedInUserContext Instance() {
         return null;
     }
-
+    Boolean getLoginStatus();
     String getUserName();
     void setUserName(String userName);
     String getUserRole();
@@ -14,7 +14,8 @@ public interface ILoggedInUserContext {
     Boolean getActiveStatus();
     void setActiveStatus(Boolean activeStatus);
     void setLoginStatus(Boolean loginStatus);
-    Boolean getLoginStatus();
+    void setCurrentPage(String currentPage);
+    void setParentPage(String parentPage);
 
-
+    boolean checkCurrentPageStatus(String menuLabel);
 }

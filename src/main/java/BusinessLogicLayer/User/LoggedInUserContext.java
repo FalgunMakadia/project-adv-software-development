@@ -7,8 +7,11 @@ public class LoggedInUserContext implements ILoggedInUserContext {
     private String accountNumber;
     private Boolean activeStatus = Boolean.FALSE;
     private Boolean loginStatus = Boolean.FALSE;
+    private String currentPage;
+    private String parentPage;
 
-    private LoggedInUserContext() { }
+    private LoggedInUserContext() {
+    }
 
     public static LoggedInUserContext instance() {
         if (null == uniqueInstance) {
@@ -51,6 +54,19 @@ public class LoggedInUserContext implements ILoggedInUserContext {
 
     public void setLoginStatus(Boolean loginStatus) {
         this.loginStatus = loginStatus;
+    }
+
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public void setParentPage(String parentPage) {
+        this.parentPage = parentPage;
+    }
+
+    @Override
+    public boolean checkCurrentPageStatus(String menuLabel) {
+        return currentPage.equals(menuLabel);
     }
 
     public Boolean getLoginStatus() {

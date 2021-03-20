@@ -18,10 +18,14 @@ public class ExistingBankAccount extends Action {
     public String getMenuLabel() {
         return menuLabel;
     }
-
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage("BankStatement");
+    }
     @Override
     public void performAction() {
         try {
+            setCurrentPageInContext();
             String accountNumber = userInterface.getMandatoryUserInput("Enter Account Number: ");
             validateLongInputFormat(accountNumber);
             IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();

@@ -10,10 +10,10 @@ import java.util.Properties;
 import static org.mockito.Mockito.mock;
 import java.sql.*;
 
-public class LoginDatabase implements ILoginDatabase{
+public class UserDetailsDatabase implements IUserDetailsDatabase {
     private Connection con = null;
     private PreparedStatement preparedStatement = null;
-    public LoginDatabase() throws IOException {
+    public UserDetailsDatabase() throws IOException {
        //FileReader reader=new FileReader("db.properties");
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
         Properties properties = new Properties();

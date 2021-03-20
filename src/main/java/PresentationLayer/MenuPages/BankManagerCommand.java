@@ -6,6 +6,7 @@ import BusinessLogicLayer.BankAction.OpenNewAccount;
 import BusinessLogicLayer.BankAction.WorkList;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.SignOut;
+import BusinessLogicLayer.User.BankManager;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class BankManagerCommand extends Command{
     }
     @Override
     public void execute() {
-        MenuPage menuPage = new MenuPage(menu);
+        MenuPage menuPage = new MenuPage(menu, "BankManager");
         menuPage.printMenu();
     }
 }

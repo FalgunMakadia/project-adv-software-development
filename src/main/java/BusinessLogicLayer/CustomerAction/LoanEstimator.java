@@ -32,6 +32,7 @@ public class LoanEstimator extends Action {
     @Override
     public void performAction() {
         try {
+            setCurrentPageInContext();
             String accountNumber = loggedInUserContext.getAccountNumber();
             IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
@@ -92,5 +93,9 @@ public class LoanEstimator extends Action {
                 ((Math.pow(1 + (monthlyInterestRate / 100), numberOfMonths)) - 1);
 
         return emiAmount;
+    }
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
     }
 }
