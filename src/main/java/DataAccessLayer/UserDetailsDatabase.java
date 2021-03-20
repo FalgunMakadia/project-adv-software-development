@@ -50,4 +50,9 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
         return resultSet;
     }
 
+    @Override
+    public int insertNewUser() {
+        return 0;
+    }
+
 }
