@@ -1,6 +1,7 @@
 package DataAccessLayer;
 
-import Models.User;
+import BusinessLogicLayer.User.Customer;
+import BusinessLogicLayer.User.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,7 +31,7 @@ public class CustomerDatabase implements ICustomerDatabase {
         PreparedStatement statement = connection.prepareStatement(query);
 
         statement.setString(1, accountNumber);
-        User user = new User();
+        User user = new Customer();
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
             user.setFirstName(rs.getString("first_name"));

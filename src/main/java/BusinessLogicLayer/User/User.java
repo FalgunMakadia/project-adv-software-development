@@ -1,6 +1,8 @@
 package BusinessLogicLayer.User;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class User {
     private String firstName;
@@ -16,6 +18,7 @@ public abstract class User {
     private String contact;
     private String passport;
     private String ssnNo;
+    private Map<String, String> listOfMandatoryFields;
 
     public String getPassport() {
         return passport;
@@ -128,5 +131,13 @@ public abstract class User {
     public boolean validateContact(){
         contact.length();
         return true;
+    }
+
+    public Map<String, String> getListOfMandatoryFields() {
+        return listOfMandatoryFields;
+    }
+
+    public void setListOfMandatoryFields(Map<String, String> listOfMandatoryFields) {
+        this.listOfMandatoryFields = listOfMandatoryFields;
     }
 }

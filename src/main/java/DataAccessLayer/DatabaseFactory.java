@@ -17,4 +17,9 @@ public class DatabaseFactory implements IDatabaseFactory{
     public ILoginDatabase createLoginDatabase() throws IOException {
         return new LoginDatabase();
     }
+
+    @Override
+    public IWorklistDatabase createWorkListDatabase() {
+        return new WorklistDatabase();
+    }
 }
