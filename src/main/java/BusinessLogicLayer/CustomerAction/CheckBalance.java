@@ -39,6 +39,6 @@ public class CheckBalance extends Action {
             throwables.printStackTrace();
         }
 
->>>>>>> src/main/java/BusinessLogicLayer/CustomerAction/CheckBalance.java
+
     }
 }

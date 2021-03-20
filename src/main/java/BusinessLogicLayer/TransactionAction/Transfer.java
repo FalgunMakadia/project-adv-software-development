@@ -39,7 +39,6 @@ public class Transfer extends Action {
         String targetAccountNumber;
         boolean verifyTargetAccountNumber;
 
->>>>>>> src/main/java/BusinessLogicLayer/TransactionAction/Transfer.java
         System.out.println("Transfer");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
