@@ -52,7 +52,7 @@ class WorklistDatabaseTest {
     @Test
     void addWorkListRequest() throws SQLException {
         WorklistDatabase worklistDatabase = new WorklistDatabase();
-        worklistDatabase.addWorkListRequest(this.worklistRequest);
+        worklistDatabase.addWorkListRequest(worklistRequest);
     }
 
     @Test
