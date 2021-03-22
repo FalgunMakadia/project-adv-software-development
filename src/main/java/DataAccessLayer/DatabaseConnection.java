@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection {
-    private static Connection connection = null;
+    private static Connection connection;
 
     static {
         InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream("config.properties");
