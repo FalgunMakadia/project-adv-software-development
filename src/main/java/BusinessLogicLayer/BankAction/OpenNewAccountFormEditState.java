@@ -44,7 +44,6 @@ public class OpenNewAccountFormEditState extends FormState {
         questionMap.put("Contact Number*: ", new MandatoryIntegerQuestion(""));
         questionMap.put("Passport Number*: ", new MandatoryQuestion(""));
         questionMap.put("SSN*: ", new MandatoryQuestion(""));
-
     }
 
     @Override
