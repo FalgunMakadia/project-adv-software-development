@@ -7,9 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.*;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,9 +16,6 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerDatabaseTest {
-    @Mock
-    CustomerDatabase customerDatabase;
-
     @Mock
     Connection connection;
 
@@ -33,9 +28,8 @@ class CustomerDatabaseTest {
     User user;
 
     @Before
-    void setup() throws SQLException {
-        Mockito.when(DatabaseConnection.instance()).thenReturn(connection);
-        Mockito.when(connection.prepareStatement(Mockito.any(String.class))).thenReturn(statement);
+    public void setup() throws SQLException {
+        Mockito.when(this.connection.prepareStatement(Mockito.any(String.class))).thenReturn(statement);
 
         user = new Customer();
         user.setFirstName("Test");
@@ -63,7 +57,8 @@ class CustomerDatabaseTest {
         Mockito.when(resultSet.getString("contact_number")).thenReturn(user.getContact());
         Mockito.when(resultSet.getString("passport_number")).thenReturn(user.getPassport());
         Mockito.when(resultSet.getString("ssn_number")).thenReturn(user.getSsnNo());
-        Mockito.when(customerDatabase.getUser("12345678")).thenReturn(user);
+        Mockito.when(statement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.first()).thenReturn(true);
 
     }
 
@@ -71,7 +66,9 @@ class CustomerDatabaseTest {
     void getUser() throws SQLException {
         CustomerDatabase database = new CustomerDatabase();
         database.add(user);
+        System.out.println(user);
         User userFromDBMock = database.getUser("12345678");
+        System.out.println(userFromDBMock);
         assertEquals(user, userFromDBMock);
     }
 

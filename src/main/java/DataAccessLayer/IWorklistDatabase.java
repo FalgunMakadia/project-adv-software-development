@@ -1,8 +1,11 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
+import java.sql.SQLException;
+
 public interface IWorklistDatabase {
-    boolean addWorkListRequest(WorklistRequest worklistRequest, User user);
+    int addWorkListRequest(WorklistRequest worklistRequest) throws SQLException;
+
+    WorklistRequest getWorkListRequest(int id);
 }

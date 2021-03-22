@@ -2,9 +2,8 @@ package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.User.User;
-import DataAccessLayer.ICustomerDatabase;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
+import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import DataAccessLayer.*;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -13,10 +12,13 @@ public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
     private IDatabaseFactory databaseFactory;
     private ICustomerDatabase customerDatabase;
+    private IWorklistDatabase worklistDatabase;
+    private boolean isUpdated = false;
 
     public UpdatePersonalDetails() {
         this.databaseFactory = new DatabaseFactory();
         this.customerDatabase = databaseFactory.createCustomerDatabase();
+        this.worklistDatabase = databaseFactory.createWorkListDatabase();
     }
 
     @Override
@@ -26,15 +28,17 @@ public class UpdatePersonalDetails extends Action {
 
     @Override
     public void performAction() {
+        isUpdated = false;
         userInterface.displayMessage("============UPDATE PERSONAL DETAILS=====================");
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         try {
             User user = customerDatabase.getUser(currentUserAccountNumber);
-            User updatedUser = updateMandatoryPersonalDetails(user);
-            if(user.equals(updatedUser)) {
-                System.out.println("User not changed");
+            user = updateMandatoryPersonalDetails(user);
+            if(isUpdated) {
+                WorklistRequest worklistRequest = new WorklistRequest("change", currentUserAccountNumber,user);
+                worklistDatabase.addWorkListRequest(worklistRequest);
             } else {
-                System.out.println("user changed");
+                System.out.println("user not changed");
             }
             System.out.println("Welcome: " + user.getFirstName());
         } catch (SQLException throwables) {
@@ -58,6 +62,9 @@ public class UpdatePersonalDetails extends Action {
         String userConfirmation = userInterface.getConfirmation("Do you want to edit " + fieldName + " ?");
         if (userConfirmation.equals("y")){
             String input = userInterface.getMandatoryUserInput("Enter New " + fieldName + ": ");
+            if(input != currentValue) {
+                isUpdated = true;
+            }
             return input;
         }else if(userConfirmation.equals("n")) {
             return currentValue;
