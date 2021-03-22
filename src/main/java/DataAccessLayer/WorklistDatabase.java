@@ -3,10 +3,7 @@ package DataAccessLayer;
 import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class WorklistDatabase implements IWorklistDatabase {
     Connection connection = null;
@@ -24,7 +21,7 @@ public class WorklistDatabase implements IWorklistDatabase {
                 "province, postal_code, email, contact_number, " +
                 "passport_number, ssn_number) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement statement = connection.prepareStatement(insertWorkListQuery);
+        PreparedStatement statement = connection.prepareStatement(insertWorkListQuery, new String[]{"request_id"});
 
         statement.setString(1, worklistRequest.getRequestType());
         statement.setString(2, worklistRequest.getPriority());
@@ -32,6 +29,8 @@ public class WorklistDatabase implements IWorklistDatabase {
         statement.setString(4,null);
 
         int record_id = statement.executeUpdate();
+        ResultSet rs = statement.getGeneratedKeys();
+        System.out.println("ResultSet" + rs);
 //
 //        if(0 != record_id) {
 //            User user = worklistRequest.getUser();
