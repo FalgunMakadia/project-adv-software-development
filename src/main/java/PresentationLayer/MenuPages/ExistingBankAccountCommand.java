@@ -21,7 +21,7 @@ public class ExistingBankAccountCommand extends Command{
     }
     @Override
     public void execute() {
-        MenuPage menuPage = new MenuPage(menu);
+        MenuPage menuPage = new MenuPage(menu,"ExistingBankAccount");
         menuPage.printMenu();
     }
 }

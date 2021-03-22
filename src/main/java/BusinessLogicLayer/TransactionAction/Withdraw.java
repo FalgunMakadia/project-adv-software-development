@@ -9,12 +9,20 @@ import java.sql.SQLException;
 
 public class Withdraw extends Action {
     private static final String menuLabel = "Withdraw";
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
+
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
+
     @Override
     public void performAction() {
+        setCurrentPageInContext();
         int previousBalance;
         int withdrawAmount;
         int finalBalance;

@@ -5,6 +5,7 @@ import BusinessLogicLayer.BankAction.OpenNewAccount;
 import BusinessLogicLayer.BankAction.WorkList;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.SignOut;
+import BusinessLogicLayer.User.BankEmployee;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class BankEmployeeCommand extends Command{
     }
     @Override
     public void execute() {
-        MenuPage menuPage = new MenuPage(menu);
+        MenuPage menuPage = new MenuPage(menu, "BankEmployee");
         menuPage.printMenu();
     }
 }

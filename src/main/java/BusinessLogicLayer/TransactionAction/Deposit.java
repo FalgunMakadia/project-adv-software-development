@@ -9,13 +9,14 @@ import java.sql.SQLException;
 
 public class Deposit extends Action {
     private static final String menuLabel = "Deposit";
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
     @Override
     public void performAction() {
-
+        setCurrentPageInContext();
         int previousBalance;
         int hundredBillCount;
         int fiftyBillCount;
@@ -72,4 +73,9 @@ public class Deposit extends Action {
             throwables.printStackTrace();
         }
     }
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
+
 }

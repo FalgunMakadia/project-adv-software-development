@@ -74,8 +74,9 @@ public abstract class Action {
         return validity;
     }
 
-
     public abstract void performAction();
 
     public abstract String getMenuLabel();
+
+    protected abstract void setCurrentPageInContext();
 }

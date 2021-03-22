@@ -29,6 +29,7 @@ public class CheckPreApprovedLoan extends Action {
     @Override
     public void performAction() {
         try {
+            setCurrentPageInContext();
             String accountNumber = loggedInUserContext.getAccountNumber();
             IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
@@ -50,7 +51,10 @@ public class CheckPreApprovedLoan extends Action {
         }
 
     }
-
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
+    }
     @Override
     public String getMenuLabel() {
         return menuLabel;

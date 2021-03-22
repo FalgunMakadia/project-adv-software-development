@@ -31,6 +31,10 @@ public class UpdatePersonalDetails extends Action {
         isUpdated = false;
         userInterface.displayMessage("============UPDATE PERSONAL DETAILS=====================");
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
+        setCurrentPageInContext();
+        System.out.println("Update Personal Details");
+        IDatabaseFactory databaseFactory = new DatabaseFactory();
+        ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
             User user = customerDatabase.getUser(currentUserAccountNumber);
             user = updateMandatoryPersonalDetails(user);
@@ -73,5 +77,10 @@ public class UpdatePersonalDetails extends Action {
             updateField(entrySet);
         }
         return currentValue;
+    }
+    
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
     }
 }
