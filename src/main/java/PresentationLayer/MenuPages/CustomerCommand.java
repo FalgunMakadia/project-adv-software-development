@@ -6,7 +6,6 @@ import BusinessLogicLayer.CustomerAction.*;
 import BusinessLogicLayer.TransactionAction.Deposit;
 import BusinessLogicLayer.TransactionAction.Transfer;
 import BusinessLogicLayer.TransactionAction.Withdraw;
-import BusinessLogicLayer.User.Customer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

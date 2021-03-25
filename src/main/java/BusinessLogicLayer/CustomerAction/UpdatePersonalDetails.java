@@ -4,6 +4,7 @@ import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.*;
+import PresentationLayer.MenuPages.IUserForm;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -35,19 +36,21 @@ public class UpdatePersonalDetails extends Action {
         System.out.println("Update Personal Details");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
-        try {
-            User user = customerDatabase.getUser(currentUserAccountNumber);
-            user = updateMandatoryPersonalDetails(user);
-            if(isUpdated) {
-                WorklistRequest worklistRequest = new WorklistRequest("change", currentUserAccountNumber,user);
-                worklistDatabase.addWorkListRequest(worklistRequest);
-            } else {
-                System.out.println("user not changed");
-            }
-            System.out.println("Welcome: " + user.getFirstName());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        IUserForm userForm = presentationFactory.createUserForm();
+        userForm.executeForm();
+//        try {
+//            User user = customerDatabase.getUser(currentUserAccountNumber);
+//            user = updateMandatoryPersonalDetails(user);
+//            if(isUpdated) {
+//                WorklistRequest worklistRequest = new WorklistRequest("change", currentUserAccountNumber,user);
+//                worklistDatabase.addWorkListRequest(worklistRequest);
+//            } else {
+//                System.out.println("user not changed");
+//            }
+//            System.out.println("Welcome: " + user.getFirstName());
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
     }
 
     private User updateMandatoryPersonalDetails(User user) {
