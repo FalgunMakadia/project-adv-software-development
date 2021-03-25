@@ -10,7 +10,9 @@ public class UpdatePostalCode extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Postal Code is: " + user.getPostalCode());
+        String userInput = userInterface.getMandatoryUserInput("Enter Postal Code*: ");
+        user.setPostalCode(userInput);
     }
 
     @Override

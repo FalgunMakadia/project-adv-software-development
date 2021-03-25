@@ -10,7 +10,9 @@ public class UpdateDOB extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Date Of Birth is: " + user.getDateOfBirth());
+        String userInput = userInterface.getMandatoryUserInput("Enter DOB(DD/MM/YYYY)*: ");
+        user.setDateOfBirth(userInput);
     }
 
     @Override

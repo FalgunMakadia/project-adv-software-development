@@ -10,7 +10,9 @@ public class UpdateSSNNumber extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your SSN Number is: " + user.getSsnNo());
+        String userInput = userInterface.getMandatoryUserInput("Enter SSN*: ");
+        user.setSsnNo(userInput);
     }
 
     @Override

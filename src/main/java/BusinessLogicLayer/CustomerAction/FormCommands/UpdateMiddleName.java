@@ -10,7 +10,7 @@ public class UpdateMiddleName extends FormCommand {
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Middle Name is " + user.getMiddleName());
+        userInterface.displayMessage("Your Middle Name is: " + user.getMiddleName());
         String userInput = userInterface.getUserInput("Enter New Middle Name: ");
         user.setMiddleName(userInput);
     }

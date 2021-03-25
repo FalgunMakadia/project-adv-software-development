@@ -10,7 +10,9 @@ public class UpdatePassPortNumber extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Passport Number is: " + user.getPassport());
+        String userInput = userInterface.getMandatoryUserInput("Enter Passport Number*: ");
+        user.setPassport(userInput);
     }
 
     @Override

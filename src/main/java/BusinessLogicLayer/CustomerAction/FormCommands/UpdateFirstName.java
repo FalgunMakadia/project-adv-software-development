@@ -10,7 +10,7 @@ public class UpdateFirstName extends FormCommand {
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your First Name is " + user.getFirstName());
+        userInterface.displayMessage("Your First Name is: " + user.getFirstName());
         String userInput = userInterface.getMandatoryUserInput("Enter New First Name*: ");
         user.setFirstName(userInput);
     }

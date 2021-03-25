@@ -10,7 +10,9 @@ public class UpdateContact extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Contact Number is: " + user.getContact());
+        String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Contact Number*: ", 10);
+        user.setContact(userInput);
     }
 
     @Override
