@@ -10,7 +10,9 @@ public class UpdateEmail extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Email is: " + user.getEmailAddress());
+        String userInput = userInterface.getMandatoryUserInput("Enter Email*: ");
+        user.setEmailAddress(userInput);
     }
 
     @Override

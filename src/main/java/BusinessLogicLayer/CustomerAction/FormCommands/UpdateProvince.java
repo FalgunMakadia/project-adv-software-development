@@ -10,7 +10,9 @@ public class UpdateProvince extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Province is: " + user.getProvince());
+        String userInput = userInterface.getMandatoryUserInput("Enter Province*: ");
+        user.setProvince(userInput);
     }
 
     @Override

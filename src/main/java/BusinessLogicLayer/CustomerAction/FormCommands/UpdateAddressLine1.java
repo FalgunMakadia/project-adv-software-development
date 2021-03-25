@@ -10,7 +10,9 @@ public class UpdateAddressLine1 extends FormCommand {
 
     @Override
     public void execute() {
-
+        userInterface.displayMessage("Your Address Line 1 is: " + user.getAddressLine1());
+        String userInput = userInterface.getMandatoryUserInput("Enter Address Line 1*: ");
+        user.setAddressLine1(userInput);
     }
 
     @Override

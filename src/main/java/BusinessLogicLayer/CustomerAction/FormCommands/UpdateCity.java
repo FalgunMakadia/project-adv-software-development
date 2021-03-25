@@ -10,7 +10,7 @@ public class UpdateCity extends FormCommand {
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your City is " + user.getCity());
+        userInterface.displayMessage("Your City is: " + user.getCity());
         String userInput = userInterface.getMandatoryUserInput("Enter New City*: ");
         user.setCity(userInput);
     }

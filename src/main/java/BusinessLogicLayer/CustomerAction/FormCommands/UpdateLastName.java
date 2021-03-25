@@ -10,7 +10,7 @@ public class UpdateLastName extends FormCommand {
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Last Name is " + user.getLastName());
+        userInterface.displayMessage("Your Last Name is: " + user.getLastName());
         String userInput = userInterface.getMandatoryUserInput("Enter Last Name*: ");
         user.setLastName(userInput);
     }
