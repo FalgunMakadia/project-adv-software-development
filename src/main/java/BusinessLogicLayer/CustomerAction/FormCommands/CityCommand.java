@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateCity extends FormCommand {
+public class CityCommand extends FormCommand {
     private final String FIELD_LABEL = "City";
-    public UpdateCity(User user) {
+    public CityCommand(User user) {
         super(user);
     }
 

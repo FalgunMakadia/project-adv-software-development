@@ -18,6 +18,7 @@ public abstract class User {
     private String contact;
     private String passport;
     private String ssnNo;
+    private String accountNumber;
     private Map<String, String> listOfMandatoryFields;
 
     public String getPassport() {
@@ -124,11 +125,19 @@ public abstract class User {
         this.ssnNo = ssnNo;
     }
 
-    public User (){
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public User() {
 
     }
 
-    public boolean validateContact(){
+    public boolean validateContact() {
         contact.length();
         return true;
     }

@@ -2,10 +2,14 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateFirstName extends FormCommand {
+public class FirstNameCommand extends FormCommand {
     private final String FIELD_LABEL = "First Name";
-    public UpdateFirstName(User user) {
+    public FirstNameCommand(User user) {
         super(user);
+    }
+
+    public FirstNameCommand() {
+        super();
     }
 
     @Override
@@ -24,4 +28,5 @@ public class UpdateFirstName extends FormCommand {
     public String getLabel() {
         return FIELD_LABEL;
     }
+
 }

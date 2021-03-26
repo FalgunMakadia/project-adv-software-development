@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateDOB extends FormCommand {
+public class DOBCommand extends FormCommand {
     private final String FIELD_LABEL = "Date Of Birth";
-    public UpdateDOB(User user) {
+    public DOBCommand(User user) {
         super(user);
     }
 

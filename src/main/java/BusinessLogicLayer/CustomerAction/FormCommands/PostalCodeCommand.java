@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdatePostalCode extends FormCommand {
+public class PostalCodeCommand extends FormCommand {
     private final String FIELD_LABEL = "Postal Code";
-    public UpdatePostalCode(User user) {
+    public PostalCodeCommand(User user) {
         super(user);
     }
 

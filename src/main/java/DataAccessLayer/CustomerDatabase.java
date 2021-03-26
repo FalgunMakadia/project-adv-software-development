@@ -47,7 +47,7 @@ public class CustomerDatabase implements ICustomerDatabase {
             user.setContact(resultSet.getString("contact_number"));
             user.setPassport(resultSet.getString("passport_number"));
             user.setSsnNo(resultSet.getString("ssn_number"));
-
+            user.setAccountNumber(resultSet.getString("account_no"));
             return user;
         }
         return null;

@@ -1,12 +1,13 @@
 package PresentationLayer.MenuPages;
 
-import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class FormPage extends Page {
+    private final int SAVE = 13;
+    private final int EXIT = 14;
     private Map<Integer, FormCommand> formFields;
 
     public FormPage(Map<Integer, FormCommand> formFields, String parentPage) {
@@ -29,15 +30,16 @@ public class FormPage extends Page {
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
-            System.out.println("Enter 13 to save details and 14 to go back to main menu");
+            System.out.println("Enter 14 to go back to main menu");
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
-                if(userInput == 13) {
+                FormCommand command = formFields.get(userInput);
+                if(userInput == SAVE) {
                     updateMode = false;
-                } else if (userInput == 14) {
+                    command.execute();
+                } else if (userInput == EXIT) {
                     updateMode = false;
                 } else {
-                    FormCommand command = formFields.get(userInput);
                     command.execute();
                 }
             }
@@ -50,7 +52,7 @@ public class FormPage extends Page {
         try {
             choiceNumber = input;
 
-            if (choiceNumber < 1 && choiceNumber > formFields.size() + 2) {
+            if (choiceNumber < 1 && choiceNumber > (formFields.size() + 1)) {
                 throw new IllegalArgumentException("Invalid input.");
             }
             validity = true;

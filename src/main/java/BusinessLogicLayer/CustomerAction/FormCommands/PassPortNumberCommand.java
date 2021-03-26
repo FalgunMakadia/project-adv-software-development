@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdatePassPortNumber extends FormCommand {
+public class PassPortNumberCommand extends FormCommand {
     private final String FIELD_LABEL = "Passport Number";
-    public UpdatePassPortNumber(User user) {
+    public PassPortNumberCommand(User user) {
         super(user);
     }
 

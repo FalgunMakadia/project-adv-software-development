@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateMiddleName extends FormCommand {
+public class MiddleNameCommand extends FormCommand {
     private final String FIELD_NAME = "Middle Name";
-    public UpdateMiddleName(User user) {
+    public MiddleNameCommand(User user) {
         super(user);
     }
 
