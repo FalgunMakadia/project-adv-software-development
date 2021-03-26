@@ -1,25 +1,22 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankAction.FormActionCommands;
 
-import DataAccessLayer.DatabaseFactory;
+import BusinessLogicLayer.User.User;
 import DataAccessLayer.IDatabaseFactory;
 
-public class OpenNewAccountFormSaveState extends FormState {
+public class SaveOpenNewAccountFormCommand extends FormActionCommand {
     private String menuLabel;
     private IDatabaseFactory databaseFactory;
+    User user;
 
-    public OpenNewAccountFormSaveState() {
-        super();
-        databaseFactory = new DatabaseFactory();
-
-    }
-
-    public OpenNewAccountFormSaveState(String menuLabel) {
+    public SaveOpenNewAccountFormCommand(String menuLabel, User user) {
         super();
         this.menuLabel = menuLabel;
+        this.user = user;
     }
 
     @Override
-    public void performStateTask() {
+    public void execute() {
+        //working on implementation
         createNewCustomer();
         createNewAccount();
         createNewUser();

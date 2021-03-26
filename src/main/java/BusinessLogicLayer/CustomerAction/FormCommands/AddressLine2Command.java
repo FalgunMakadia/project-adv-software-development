@@ -21,7 +21,7 @@ public class AddressLine2Command extends FormCommand {
     }
 
     @Override
-    public String getLabel() {
+    public String getMenuLabel() {
         return FIELD_LABEL;
     }
 }

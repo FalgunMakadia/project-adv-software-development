@@ -11,7 +11,7 @@ public class MiddleNameCommand extends FormCommand {
 
     @Override
     public void execute() {
-        String userInput = userInterface.getUserInput("Enter New Middle Name: ");
+        String userInput = userInterface.getUserInput("Enter Middle Name: ");
         user.setMiddleName(userInput);
     }
 
@@ -21,7 +21,7 @@ public class MiddleNameCommand extends FormCommand {
     }
 
     @Override
-    public String getLabel() {
+    public String getMenuLabel() {
         return FIELD_NAME;
     }
 }

@@ -26,6 +26,10 @@ public class PresentationFactory implements IPresentationFactory {
     public IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user) {
         return new UserForm(formFields, user);
     }
+    @Override
+    public IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user, String currentPage) {
+        return new UserForm(formFields, user, currentPage);
+    }
 
     @Override
     public IUserForm createUserForm(Map<Integer, FormCommand> formFields) {

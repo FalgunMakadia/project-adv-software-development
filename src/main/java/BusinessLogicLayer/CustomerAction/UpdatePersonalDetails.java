@@ -38,7 +38,7 @@ public class UpdatePersonalDetails extends Action {
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
             User user = customerDatabase.getUser(currentUserAccountNumber);
-            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user);
+            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user, loggedInUserContext.getCurrentPage());
             userForm.executeForm();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

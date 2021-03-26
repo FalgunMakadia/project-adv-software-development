@@ -15,7 +15,7 @@ public class FirstNameCommand extends FormCommand {
 
     @Override
     public void execute() {
-        String userInput = userInterface.getMandatoryUserInput("Enter New First Name*: ");
+        String userInput = userInterface.getMandatoryUserInput("Enter First Name*: ");
         user.setFirstName(userInput);
     }
 
@@ -25,7 +25,7 @@ public class FirstNameCommand extends FormCommand {
     }
 
     @Override
-    public String getLabel() {
+    public String getMenuLabel() {
         return FIELD_LABEL;
     }
 

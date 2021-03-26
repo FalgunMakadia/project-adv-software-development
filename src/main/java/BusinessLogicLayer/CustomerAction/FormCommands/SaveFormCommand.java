@@ -30,7 +30,7 @@ public class SaveFormCommand extends FormCommand {
     }
 
     @Override
-    public String getLabel() {
+    public String getMenuLabel() {
         return FIELD_LABEL;
     }
 }

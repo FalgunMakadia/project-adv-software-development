@@ -79,9 +79,9 @@ public class UserInterface implements IUserInterface {
     @Override
     public String getMandatoryLongUserInputWithMinimumRange(String message, long minimumRange) {
         String input = "";
-        long userNumber = minimumRange;
+        long userNumber = 0;
         do {
-            System.out.print(message);
+            System.out.print(message + "("+minimumRange+" digits)");
             try {
                 input = scanner.nextLine();
                 userNumber = Long.parseLong(input);
@@ -90,7 +90,7 @@ public class UserInterface implements IUserInterface {
                 System.out.println("Incorrect Input Format.");
             }
             System.out.println();
-        } while (userNumber < minimumRange);
+        } while (input.length() < minimumRange);
         return input;
     }
 
