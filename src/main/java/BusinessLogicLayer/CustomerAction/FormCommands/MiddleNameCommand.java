@@ -4,13 +4,13 @@ import BusinessLogicLayer.User.User;
 
 public class MiddleNameCommand extends FormCommand {
     private final String FIELD_NAME = "Middle Name";
+
     public MiddleNameCommand(User user) {
         super(user);
     }
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Middle Name is: " + user.getMiddleName());
         String userInput = userInterface.getUserInput("Enter New Middle Name: ");
         user.setMiddleName(userInput);
     }

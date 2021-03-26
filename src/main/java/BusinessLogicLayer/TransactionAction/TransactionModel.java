@@ -1,12 +1,12 @@
-package BusinessLogicLayer;
+package BusinessLogicLayer.TransactionAction;
 
-public class TransactionModal {
+public class TransactionModel {
     private String accountNumber;
     private String transactionType;
     private int amount;
     private String date;
 
-    public TransactionModal(String accountNumber, String transactionType, int amount, String date) {
+    public TransactionModel(String accountNumber, String transactionType, int amount, String date) {
         this.accountNumber = accountNumber;
         this.transactionType = transactionType;
         this.amount = amount;

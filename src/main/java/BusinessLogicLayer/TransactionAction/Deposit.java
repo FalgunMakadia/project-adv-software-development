@@ -9,26 +9,28 @@ import java.sql.SQLException;
 
 public class Deposit extends Action {
     private static final String menuLabel = "Deposit";
+    int previousBalance;
+    int hundredBillCount;
+    int fiftyBillCount;
+    int twentyBillCount;
+    int tenBillCount;
+    int totalDepositAmount;
+    int finalBalance;
+    int output;
+    String transactionType = "Cr";
 
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
+
     @Override
     public void performAction() {
         setCurrentPageInContext();
-        int previousBalance;
-        int hundredBillCount;
-        int fiftyBillCount;
-        int twentyBillCount;
-        int tenBillCount;
-        int totalDepositAmount;
-        int finalBalance;
-        int output;
-        String transactionType = "Cr";
+
         String accountNumber = loggedInUserContext.getAccountNumber();
 
-        System.out.println("Deposit");
+        userInterface.displayMessage("Deposit");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
@@ -43,7 +45,7 @@ public class Deposit extends Action {
             tenBillCount = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("10 CAD Bill(s): "));
 
             totalDepositAmount = (100 * hundredBillCount) + (50 * fiftyBillCount) + (20 * twentyBillCount) + (10 * tenBillCount);
-            if(totalDepositAmount == 0) {
+            if (totalDepositAmount == 0) {
                 userInterface.displayMessage("You need to at least Deposit 10 CAD!");
                 userInterface.insertEmptyLine();
                 userInterface.insertEmptyLine();
@@ -52,11 +54,11 @@ public class Deposit extends Action {
             userInterface.displayMessage("Total amount to Deposit:" + totalDepositAmount);
 
             String confirm = userInterface.getConfirmation("Are you sure you want to Deposit " + totalDepositAmount + " into Account Number " + accountNumber + "?");
-            if(confirm.equalsIgnoreCase("y")){
+            if (confirm.equalsIgnoreCase("y")) {
                 finalBalance = previousBalance + totalDepositAmount;
 
                 output = accountDatabase.updateBalance(finalBalance, accountNumber);
-                if(output == 1){
+                if (output == 1) {
                     userInterface.displayMessage("Deposit Success!");
                     accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
                     userInterface.displayMessage("Transaction Successfully registered!");
@@ -73,6 +75,7 @@ public class Deposit extends Action {
             throwables.printStackTrace();
         }
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);

@@ -28,29 +28,29 @@ public class WorklistDatabase implements IWorklistDatabase {
         statement.setString(1, worklistRequest.getRequestType());
         statement.setString(2, worklistRequest.getPriority());
         statement.setString(3, worklistRequest.getAccountNumber());
-        statement.setString(4,null);
+        statement.setString(4, null);
 
         int record_id = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
         System.out.println("ResultSet" + rs.getLong("request_id"));
 
-        if(0 != record_id) {
+        if (0 != record_id) {
             User user = worklistRequest.getUser();
             PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
             userInsertStatement.setInt(1, record_id);
-            userInsertStatement.setString(2,worklistRequest.getAccountNumber());
+            userInsertStatement.setString(2, worklistRequest.getAccountNumber());
             userInsertStatement.setString(3, user.getFirstName());
-            userInsertStatement.setString(4,user.getLastName());
-            userInsertStatement.setString(5,user.getMiddleName());
-            userInsertStatement.setString(6,user.getAddressLine1());
-            userInsertStatement.setString(7,user.getAddressLine2());
-            userInsertStatement.setString(8,user.getCity());
-            userInsertStatement.setString(9,user.getProvince());
-            userInsertStatement.setString(10,user.getPostalCode());
-            userInsertStatement.setString(11,user.getEmailAddress());
-            userInsertStatement.setString(12,user.getContact());
-            userInsertStatement.setString(13,user.getPassport());
-            userInsertStatement.setString(14,user.getSsnNo());
+            userInsertStatement.setString(4, user.getLastName());
+            userInsertStatement.setString(5, user.getMiddleName());
+            userInsertStatement.setString(6, user.getAddressLine1());
+            userInsertStatement.setString(7, user.getAddressLine2());
+            userInsertStatement.setString(8, user.getCity());
+            userInsertStatement.setString(9, user.getProvince());
+            userInsertStatement.setString(10, user.getPostalCode());
+            userInsertStatement.setString(11, user.getEmailAddress());
+            userInsertStatement.setString(12, user.getContact());
+            userInsertStatement.setString(13, user.getPassport());
+            userInsertStatement.setString(14, user.getSsnNo());
 
             userInsertStatement.executeUpdate();
         }

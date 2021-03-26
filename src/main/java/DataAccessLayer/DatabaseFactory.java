@@ -2,7 +2,7 @@ package DataAccessLayer;
 
 import java.io.IOException;
 
-public class DatabaseFactory implements IDatabaseFactory{
+public class DatabaseFactory implements IDatabaseFactory {
     @Override
     public ICustomerDatabase createCustomerDatabase() {
         return new CustomerDatabase();

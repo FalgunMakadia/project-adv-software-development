@@ -5,8 +5,10 @@ import BusinessLogicLayer.User.LoggedInUserContext;
 
 public abstract class Page {
     protected ILoggedInUserContext loggedInUserContext;
-    public Page(){
+
+    public Page() {
         loggedInUserContext = LoggedInUserContext.instance();
     }
-    public  abstract void printMenu();
-    }
+
+    public abstract void printMenu();
+}

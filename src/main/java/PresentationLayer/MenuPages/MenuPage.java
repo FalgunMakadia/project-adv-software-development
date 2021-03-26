@@ -7,11 +7,13 @@ import java.util.Scanner;
 
 public class MenuPage extends Page {
     private Map<String, Action> menu;
-    public MenuPage(Map<String, Action> menu, String parentPage){
+
+    public MenuPage(Map<String, Action> menu, String parentPage) {
         super();
         this.menu = menu;
         loggedInUserContext.setParentPage(parentPage);
     }
+
     public void printMenu() {
         System.out.println("Welcome " + loggedInUserContext.getUserName() + "!");
         System.out.println();
@@ -32,7 +34,8 @@ public class MenuPage extends Page {
             }
         }
     }
-    private boolean validateIntegerInputFormat(String input){
+
+    private boolean validateIntegerInputFormat(String input) {
         boolean validity = false;
         int choiceNumber = 0;
         try {
@@ -42,10 +45,9 @@ public class MenuPage extends Page {
                 throw new IllegalArgumentException("Invalid input.");
             }
             validity = true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-            return validity;
+        return validity;
     }
 }

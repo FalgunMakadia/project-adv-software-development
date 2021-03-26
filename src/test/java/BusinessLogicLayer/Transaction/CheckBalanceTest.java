@@ -6,8 +6,10 @@ import DataAccessLayer.IDatabaseFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.sql.SQLException;
 
 public class CheckBalanceTest {

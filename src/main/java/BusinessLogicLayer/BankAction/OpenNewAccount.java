@@ -12,10 +12,12 @@ public class OpenNewAccount extends Action {
     private static final String menuLabel = "Open New Account";
     Map<Integer, FormState> openNewAccountStateMap;
     OpenNewAccountStateContext openNewAccountStateContext;
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
+
     public OpenNewAccount() {
         super();
         databaseFactory = new DatabaseFactory();
@@ -23,8 +25,9 @@ public class OpenNewAccount extends Action {
         openNewAccountStateMap.put(1, new OpenNewAccountFormEditState("Refill the form"));
         openNewAccountStateMap.put(2, new OpenNewAccountFormSaveState("Save"));
         openNewAccountStateMap.put(3, new BackToMainMenuState("Back to main menu"));
-        openNewAccountStateContext =new OpenNewAccountStateContext();
+        openNewAccountStateContext = new OpenNewAccountStateContext();
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);
@@ -38,7 +41,7 @@ public class OpenNewAccount extends Action {
         openNewAccountStateContext.setOpenNewAccountState(new OpenNewAccountFormEditState());
         openNewAccountStateContext.executeStateTask();
 
-        while(loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
+        while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
             int key = 1;
             for (int i = 0; i < openNewAccountStateMap.size(); i++) {
                 FormState formState = openNewAccountStateMap.get(key);

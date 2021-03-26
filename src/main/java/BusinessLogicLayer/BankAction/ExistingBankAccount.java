@@ -11,17 +11,21 @@ import java.sql.SQLException;
 public class ExistingBankAccount extends Action {
     private static final String menuLabel = "Existing Bank Account";
     IDatabaseFactory databaseFactory;
-    public ExistingBankAccount(){
-         databaseFactory = new DatabaseFactory();
+
+    public ExistingBankAccount() {
+        databaseFactory = new DatabaseFactory();
     }
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage("BankStatement");
     }
+
     @Override
     public void performAction() {
         try {
@@ -29,16 +33,14 @@ public class ExistingBankAccount extends Action {
             String accountNumber = userInterface.getMandatoryUserInput("Enter Account Number: ");
             validateLongInputFormat(accountNumber);
             IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
-            if (accountDatabase.verifyAccountNumber(accountNumber)){
+            if (accountDatabase.verifyAccountNumber(accountNumber)) {
                 loggedInUserContext.setAccountNumber(accountNumber);
                 Command command = presentationFactory.createExistingBankAccountCommand();
                 command.execute();
             }
-        }
-        catch (SQLException exception){
+        } catch (SQLException exception) {
             userInterface.displayMessage("Error occurred in database connection.");
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             userInterface.displayMessage(exception.getMessage());
         }
         userInterface.insertEmptyLine();

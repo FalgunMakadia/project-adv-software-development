@@ -11,7 +11,7 @@ import PresentationLayer.MenuPages.UserForm;
 
 import java.util.Map;
 
-public class PresentationFactory implements IPresentationFactory{
+public class PresentationFactory implements IPresentationFactory {
     @Override
     public IUserInterface createUserInterface() {
         return new UserInterface();

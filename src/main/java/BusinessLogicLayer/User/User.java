@@ -19,7 +19,6 @@ public abstract class User {
     private String passport;
     private String ssnNo;
     private String accountNumber;
-    private Map<String, String> listOfMandatoryFields;
 
     public String getPassport() {
         return passport;
@@ -133,20 +132,4 @@ public abstract class User {
         this.accountNumber = accountNumber;
     }
 
-    public User() {
-
-    }
-
-    public boolean validateContact() {
-        contact.length();
-        return true;
-    }
-
-    public Map<String, String> getListOfMandatoryFields() {
-        return listOfMandatoryFields;
-    }
-
-    public void setListOfMandatoryFields(Map<String, String> listOfMandatoryFields) {
-        this.listOfMandatoryFields = listOfMandatoryFields;
-    }
 }

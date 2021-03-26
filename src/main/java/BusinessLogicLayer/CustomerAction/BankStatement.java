@@ -1,7 +1,7 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.TransactionModal;
+import BusinessLogicLayer.TransactionAction.TransactionModel;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
@@ -32,14 +32,14 @@ public class BankStatement extends Action {
     @Override
     public void performAction() {
         setCurrentPageInContext();
-        System.out.println("Bank Statement");
+        userInterface.displayMessage("Bank Statement");
         String accountNumber = loggedInUserContext.getAccountNumber();
         try {
-            ArrayList<TransactionModal> transactionList = accountDatabase.getMiniStatement(accountNumber);
+            ArrayList<TransactionModel> transactionList = accountDatabase.getMiniStatement(accountNumber);
             if (0 == transactionList.size()) {
                 userInterface.displayMessage("No Transactions are available for this account");
             } else {
-                for (TransactionModal transaction : transactionList) {
+                for (TransactionModel transaction : transactionList) {
                     userInterface.displayMessage("TransactionType: " + transaction.getTransactionType()
                             + " Amount: " + transaction.getAmount()
                             + " Date: " + transaction.getDate());

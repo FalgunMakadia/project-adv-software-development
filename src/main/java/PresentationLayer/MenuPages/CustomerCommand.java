@@ -1,8 +1,10 @@
 package PresentationLayer.MenuPages;
 
+import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.SignOut;
 import BusinessLogicLayer.CustomerAction.*;
+import BusinessLogicLayer.IActionFactory;
 import BusinessLogicLayer.TransactionAction.Deposit;
 import BusinessLogicLayer.TransactionAction.Transfer;
 import BusinessLogicLayer.TransactionAction.Withdraw;
@@ -13,17 +15,19 @@ import java.util.Map;
 public class CustomerCommand extends Command{
     private Map<String, Action> menu;
     public CustomerCommand(){
+        IActionFactory actionFactory = new ActionFactory();
+
         menu = new LinkedHashMap<>();
-        menu.put("1", new UpdatePersonalDetails());
-        menu.put("2", new Withdraw());
-        menu.put("3", new Deposit());
-        menu.put("4", new Transfer());
-        menu.put("5", new BankStatement());
-        menu.put("6", new CheckBalance());
-        menu.put("7", new UpdatePassword());
-        menu.put("8", new LoanEstimator());
-        menu.put("9", new CheckPreApprovedLoan());
-        menu.put("10", new SignOut());
+        menu.put("1", actionFactory.createUpdatePersonalDetails());
+        menu.put("2", actionFactory.createWithdraw());
+        menu.put("3", actionFactory.createDeposit());
+        menu.put("4", actionFactory.createTransfer());
+        menu.put("5", actionFactory.createBankStatement());
+        menu.put("6", actionFactory.createCheckBalance());
+        menu.put("7", actionFactory.createUpdatePassword());
+        menu.put("8", actionFactory.createLoanEstimator());
+        menu.put("9", actionFactory.createCheckPreApprovedLoan());
+        menu.put("10", actionFactory.createSignOut());
     }
     @Override
     public void execute() {

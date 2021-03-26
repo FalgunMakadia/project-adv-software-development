@@ -9,14 +9,17 @@ import java.sql.SQLException;
 
 public class CheckBalance extends Action {
     private static final String menuLabel = "Check Balance";
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);
     }
+
     @Override
     public void performAction() {
 
@@ -25,7 +28,7 @@ public class CheckBalance extends Action {
         String name = loggedInUserContext.getUserName();
         int currentBalance;
 
-        System.out.println("Check Balance");
+        userInterface.displayMessage("Check Balance");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
@@ -38,7 +41,5 @@ public class CheckBalance extends Action {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
     }
 }

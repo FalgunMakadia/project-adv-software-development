@@ -1,6 +1,6 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.TransactionModal;
+import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,5 +14,5 @@ public interface IAccountDatabase {
 
     int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException;
 
-    ArrayList<TransactionModal> getMiniStatement(String accountNumber) throws SQLException;
+    ArrayList<TransactionModel> getMiniStatement(String accountNumber) throws SQLException;
 }
