@@ -10,10 +10,12 @@ import java.util.Map;
 
 public class OpenNewAccountFormEditState extends FormState {
     String menuLabel;
+
     public OpenNewAccountFormEditState() {
         super();
         populateQuestionMap();
     }
+
     public OpenNewAccountFormEditState(String menuLabel) {
         super();
         this.menuLabel = menuLabel;
@@ -28,7 +30,7 @@ public class OpenNewAccountFormEditState extends FormState {
         while (iterator.hasNext()) {
             Map.Entry<String, FormQuestion> formQuestionEntry = iterator.next();
             formQuestionEntry.getValue().getStringUserInput(formQuestionEntry.getKey());
-            questionNumber = questionNumber +1;
+            questionNumber = questionNumber + 1;
         }
     }
 

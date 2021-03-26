@@ -25,7 +25,8 @@ public class FormPage extends Page {
                 FormCommand command = formFields.get(fieldIndex);
                 if(null == command.getFieldValue()) {
                     System.out.println(fieldIndex + ". " + command.getLabel());
-                } else {
+                }
+                else {
                     System.out.println(fieldIndex + ". " + command.getLabel() + ": " + command.getFieldValue());
                 }
             }
