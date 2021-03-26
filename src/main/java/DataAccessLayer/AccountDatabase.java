@@ -1,6 +1,6 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.TransactionModal;
+import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,9 +90,9 @@ public class AccountDatabase implements IAccountDatabase{
     }
 
     @Override
-    public ArrayList<TransactionModal> getMiniStatement(String accountNumber) throws SQLException {
+    public ArrayList<TransactionModel> getMiniStatement(String accountNumber) throws SQLException {
         String query = "SELECT * FROM transactions WHERE account_no = ? ORDER BY transaction_date DESC LIMIT 5";
-        ArrayList<TransactionModal> transactionList = new ArrayList<>();
+        ArrayList<TransactionModel> transactionList = new ArrayList<>();
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, accountNumber);
 
@@ -101,7 +101,7 @@ public class AccountDatabase implements IAccountDatabase{
             String transactionType = resultSet.getString("transaction_type");
             int amount = resultSet.getInt("transaction_amount");
             String date = resultSet.getString("transaction_date");
-            transactionList.add(new TransactionModal(accountNumber, transactionType, amount, date));
+            transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
         }
         return transactionList;
     }

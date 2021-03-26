@@ -82,8 +82,9 @@ public class Transfer extends Action {
                     userInterface.displayMessage("Updated Balance in your account: " + originAccountFinalBalance);
                     userInterface.insertEmptyLine();
                     userInterface.insertEmptyLine();
-                } else {
-                    userInterface.displayMessage("Trasfer request failed!");
+                }
+                else {
+                    userInterface.displayMessage("Transfer request failed!");
                     accountDatabase.updateBalance(originAccountPreviousBalance, originAccountNumber);
                     accountDatabase.updateBalance(targetAccountPreviousBalance, targetAccountNumber);
                 }
