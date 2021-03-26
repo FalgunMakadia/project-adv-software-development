@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateProvince extends FormCommand {
+public class ProvinceCommand extends FormCommand {
     private final String FIELD_NAME = "Province";
-    public UpdateProvince(User user) {
+    public ProvinceCommand(User user) {
         super(user);
     }
 

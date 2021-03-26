@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateAddressLine1 extends FormCommand {
+public class AddressLine1Command extends FormCommand {
     private final String FIELD_LABEL = "Address Line 1";
-    public UpdateAddressLine1(User user) {
+    public AddressLine1Command(User user) {
         super(user);
     }
 

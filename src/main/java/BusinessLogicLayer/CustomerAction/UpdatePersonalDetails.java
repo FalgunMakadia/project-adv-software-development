@@ -1,25 +1,25 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.*;
 import PresentationLayer.MenuPages.IUserForm;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
     private IDatabaseFactory databaseFactory;
-    private ICustomerDatabase customerDatabase;
-    private IWorklistDatabase worklistDatabase;
     private boolean isUpdated = false;
+    private Map<Integer, FormCommand> formFields;
 
     public UpdatePersonalDetails() {
         this.databaseFactory = new DatabaseFactory();
-        this.customerDatabase = databaseFactory.createCustomerDatabase();
-        this.worklistDatabase = databaseFactory.createWorkListDatabase();
+        formFields = new HashMap<>();
     }
 
     @Override
@@ -38,55 +38,31 @@ public class UpdatePersonalDetails extends Action {
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
             User user = customerDatabase.getUser(currentUserAccountNumber);
-            IUserForm userForm = presentationFactory.createUserForm(user);
+            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user);
             userForm.executeForm();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-//        try {
-//            User user = customerDatabase.getUser(currentUserAccountNumber);
-//            user = updateMandatoryPersonalDetails(user);
-//            if(isUpdated) {
-//                WorklistRequest worklistRequest = new WorklistRequest("change", currentUserAccountNumber,user);
-//                worklistDatabase.addWorkListRequest(worklistRequest);
-//            } else {
-//                System.out.println("user not changed");
-//            }
-//            System.out.println("Welcome: " + user.getFirstName());
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
     }
 
-    private User updateMandatoryPersonalDetails(User user) {
-        Map<String, String> fieldSet = user.getListOfMandatoryFields();
-        for (Map.Entry<String, String> entry : fieldSet.entrySet()) {
-            entry.setValue(updateField(entry));
-        }
-        user.setListOfMandatoryFields(fieldSet);
-        return user;
+    private Map<Integer, FormCommand> getFormFields(User user) {
+        formFields.put(1, new FirstNameCommand(user));
+        formFields.put(2, new MiddleNameCommand(user));
+        formFields.put(3, new LastNameCommand(user));
+        formFields.put(4, new AddressLine1Command(user));
+        formFields.put(5, new AddressLine2Command(user));
+        formFields.put(6, new CityCommand(user));
+        formFields.put(7, new ProvinceCommand(user));
+        formFields.put(8, new ContactCommand(user));
+        formFields.put(9, new EmailCommand(user));
+        formFields.put(10, new PassPortNumberCommand(user));
+        formFields.put(11, new SSNNumberCommand(user));
+        formFields.put(12, new DOBCommand(user));
+        formFields.put(13, new SaveFormCommand(user));
+
+        return formFields;
     }
 
-    private String updateField(Map.Entry<String, String> entrySet) {
-        String fieldName = entrySet.getKey();
-        String currentValue = entrySet.getValue();
-        userInterface.displayMessage(fieldName + " is " + currentValue);
-        String userConfirmation = userInterface.getConfirmation("Do you want to edit " + fieldName + " ?");
-        if (userConfirmation.equals("y")){
-            String input = userInterface.getMandatoryUserInput("Enter New " + fieldName + ": ");
-            if(input != currentValue) {
-                isUpdated = true;
-            }
-            return input;
-        }else if(userConfirmation.equals("n")) {
-            return currentValue;
-        } else {
-            userInterface.displayMessage("Invalid User Input Please try again: Input should be y or n");
-            updateField(entrySet);
-        }
-        return currentValue;
-    }
-    
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);

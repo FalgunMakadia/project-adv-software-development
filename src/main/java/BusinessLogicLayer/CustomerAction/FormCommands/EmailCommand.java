@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateEmail extends FormCommand {
+public class EmailCommand extends FormCommand {
     private final String FIELD_LABEL = "Email";
-    public UpdateEmail(User user) {
+    public EmailCommand(User user) {
         super(user);
     }
 

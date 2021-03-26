@@ -2,9 +2,9 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.User;
 
-public class UpdateSSNNumber extends FormCommand {
+public class SSNNumberCommand extends FormCommand {
     private final String FIELD_LABEL = "SSN Number";
-    public UpdateSSNNumber(User user) {
+    public SSNNumberCommand(User user) {
         super(user);
     }
 

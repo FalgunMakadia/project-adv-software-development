@@ -14,7 +14,9 @@ public class WorklistDatabase implements IWorklistDatabase {
 
     @Override
     public int addWorkListRequest(WorklistRequest worklistRequest) throws SQLException {
-        String insertWorkListQuery = "INSERT INTO worklist (request_type, priority, account_number, handled_by) VALUES (? ,?, ?, ?)";
+        String insertWorkListQuery = "INSERT INTO worklist " +
+                "(request_type, priority, account_number, handled_by) " +
+                "VALUES (? ,?, ?, ?)";
         String insertWorkListUserQuery = "INSERT INTO worklist_user_details " +
                 "(worklist_id, account_no, first_name, last_name, " +
                 "middle_name, addressline_1, addressline_2, city, " +
@@ -30,7 +32,7 @@ public class WorklistDatabase implements IWorklistDatabase {
 
         int record_id = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
-        System.out.println("ResultSet" + rs);
+        System.out.println("ResultSet" + rs.getLong("request_id"));
 
         if(0 != record_id) {
             User user = worklistRequest.getUser();
