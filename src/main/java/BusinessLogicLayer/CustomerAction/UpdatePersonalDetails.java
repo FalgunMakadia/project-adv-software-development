@@ -1,5 +1,6 @@
 package BusinessLogicLayer.CustomerAction;
 
+import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.User;
@@ -38,7 +39,7 @@ public class UpdatePersonalDetails extends Action {
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
             User user = customerDatabase.getUser(currentUserAccountNumber);
-            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user);
+            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user, loggedInUserContext.getCurrentPage());
             userForm.executeForm();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -59,6 +60,7 @@ public class UpdatePersonalDetails extends Action {
         formFields.put(11, new SSNNumberCommand(user));
         formFields.put(12, new DOBCommand(user));
         formFields.put(13, new SaveFormCommand(user));
+        formFields.put(14, new BackToMainMenuCommand("Back to main menu"));
 
         return formFields;
     }

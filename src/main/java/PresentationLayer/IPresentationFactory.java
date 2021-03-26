@@ -15,5 +15,7 @@ public interface IPresentationFactory {
 
     IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user);
 
+    IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user, String currentPage);
+
     IUserForm createUserForm(Map<Integer, FormCommand> formFields);
 }

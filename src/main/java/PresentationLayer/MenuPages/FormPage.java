@@ -9,24 +9,25 @@ public class FormPage extends Page {
     private final int SAVE = 13;
     private final int EXIT = 14;
     private Map<Integer, FormCommand> formFields;
+    String currentPage;
 
-    public FormPage(Map<Integer, FormCommand> formFields, String parentPage) {
+    public FormPage(Map<Integer, FormCommand> formFields, String currentPage) {
         this.formFields = formFields;
-        loggedInUserContext.setParentPage(parentPage);
+        this.currentPage = currentPage;
     }
 
     @Override
     public void printMenu() {
-        System.out.println("Customer Form");
-        boolean updateMode = true;
-        while (updateMode) {
+        System.out.println("Form");
+
+        do {
             Scanner scanner = new Scanner(System.in);
             for (int fieldIndex = 1; fieldIndex <= formFields.size(); fieldIndex++) {
                 FormCommand command = formFields.get(fieldIndex);
                 if (null == command.getFieldValue()) {
-                    System.out.println(fieldIndex + ". " + command.getLabel());
+                    System.out.println(fieldIndex + ". " + command.getMenuLabel());
                 } else {
-                    System.out.println(fieldIndex + ". " + command.getLabel() + ": " + command.getFieldValue());
+                    System.out.println(fieldIndex + ". " + command.getMenuLabel() + ": " + command.getFieldValue());
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
@@ -34,16 +35,9 @@ public class FormPage extends Page {
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
                 FormCommand command = formFields.get(userInput);
-                if (userInput == SAVE) {
-                    updateMode = false;
-                    command.execute();
-                } else if (userInput == EXIT) {
-                    updateMode = false;
-                } else {
-                    command.execute();
-                }
+                command.execute();
             }
-        }
+        } while (loggedInUserContext.checkCurrentPageStatus(currentPage));
     }
 
     private boolean validateIntegerInputFormat(int input) {

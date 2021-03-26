@@ -60,11 +60,14 @@ public class LoggedInUserContext implements ILoggedInUserContext {
         this.currentPage = currentPage;
     }
 
+    public String getCurrentPage() {
+        return currentPage;
+    }
+
     public void setParentPage(String parentPage) {
         this.parentPage = parentPage;
     }
 
-    @Override
     public boolean checkCurrentPageStatus(String menuLabel) {
         return currentPage.equals(menuLabel);
     }

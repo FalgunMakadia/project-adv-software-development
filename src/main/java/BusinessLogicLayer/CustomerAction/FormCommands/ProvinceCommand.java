@@ -21,7 +21,7 @@ public class ProvinceCommand extends FormCommand {
     }
 
     @Override
-    public String getLabel() {
+    public String getMenuLabel() {
         return FIELD_NAME;
     }
 }

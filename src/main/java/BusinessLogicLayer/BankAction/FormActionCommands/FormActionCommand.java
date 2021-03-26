@@ -1,4 +1,4 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankAction.FormActionCommands;
 
 import BusinessLogicLayer.CommonAction.FormQuestion;
 import PresentationLayer.CommonPages.IUserInterface;
@@ -8,19 +8,15 @@ import PresentationLayer.PresentationFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class FormState {
+public abstract class FormActionCommand {
     protected Map<String, FormQuestion> questionMap;
 
-    public FormState() {
+    public FormActionCommand() {
         questionMap = new LinkedHashMap<>();
         IPresentationFactory presentationFactory = new PresentationFactory();
     }
 
-    public abstract void performStateTask();
-
-    public Map<String, FormQuestion> getQuestionMap() {
-        return questionMap;
-    }
+    public abstract void execute();
 
     public abstract String getMenuLabel();
 }
