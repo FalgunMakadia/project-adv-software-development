@@ -1,5 +1,6 @@
 package BusinessLogicLayer;
 
+import BusinessLogicLayer.BankAction.EnrollNewEmployee;
 import BusinessLogicLayer.BankAction.ExistingBankAccount;
 import BusinessLogicLayer.BankAction.OpenNewAccount;
 import BusinessLogicLayer.BankAction.WorkList;
@@ -12,7 +13,7 @@ import BusinessLogicLayer.User.User;
 
 public class ActionFactory implements IActionFactory {
     @Override
-    public Action createNewOpenNewAccount() {
+    public Action createOpenNewAccount() {
         return new OpenNewAccount();
     }
 
@@ -29,6 +30,11 @@ public class ActionFactory implements IActionFactory {
     @Override
     public Action createSignOut() {
         return new SignOut();
+    }
+
+    @Override
+    public Action createEnrollNewEmployee() {
+        return new EnrollNewEmployee();
     }
 
     @Override

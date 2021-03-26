@@ -10,7 +10,10 @@ import java.util.Map;
 
 public interface IPresentationFactory {
     IUserInterface createUserInterface();
+
     Command createExistingBankAccountCommand();
+
     IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user);
+
     IUserForm createUserForm(Map<Integer, FormCommand> formFields);
 }

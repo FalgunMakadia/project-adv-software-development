@@ -17,7 +17,7 @@ public class UserForm implements IUserForm {
         this.user = new Customer();
     }
 
-    public UserForm(Map<Integer, FormCommand> formFields,User user) {
+    public UserForm(Map<Integer, FormCommand> formFields, User user) {
         this.user = user;
         this.formFields = formFields;
     }
