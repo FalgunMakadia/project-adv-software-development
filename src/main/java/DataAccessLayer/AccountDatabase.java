@@ -1,5 +1,7 @@
 package DataAccessLayer;
 
+import BusinessLogicLayer.TransactionModal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 import java.security.SecureRandom;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class AccountDatabase implements IAccountDatabase{
 
@@ -84,6 +87,22 @@ public class AccountDatabase implements IAccountDatabase{
 
         output = statement.executeUpdate();
         return  output;
+    }
 
+    @Override
+    public ArrayList<TransactionModal> getMiniStatement(String accountNumber) throws SQLException {
+        String query = "SELECT * FROM transactions WHERE account_no = ? ORDER BY transaction_date DESC LIMIT 5";
+        ArrayList<TransactionModal> transactionList = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, accountNumber);
+
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            String transactionType = resultSet.getString("transaction_type");
+            int amount = resultSet.getInt("transaction_amount");
+            String date = resultSet.getString("transaction_date");
+            transactionList.add(new TransactionModal(accountNumber, transactionType, amount, date));
+        }
+        return transactionList;
     }
 }
