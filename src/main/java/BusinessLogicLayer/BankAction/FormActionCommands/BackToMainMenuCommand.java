@@ -1,9 +1,10 @@
 package BusinessLogicLayer.BankAction.FormActionCommands;
 
+import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 
-public class BackToMainMenuCommand extends FormActionCommand {
+public class BackToMainMenuCommand extends FormCommand {
     ILoggedInUserContext loggedInUserContext;
     String menuLabel;
 
@@ -15,6 +16,11 @@ public class BackToMainMenuCommand extends FormActionCommand {
     @Override
     public void execute() {
         loggedInUserContext.setCurrentPage("");
+    }
+
+    @Override
+    public String getFieldValue() {
+        return null;
     }
 
     @Override

@@ -1,9 +1,10 @@
 package BusinessLogicLayer.BankAction.FormActionCommands;
 
+import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.User;
 import DataAccessLayer.IDatabaseFactory;
 
-public class SaveOpenNewAccountFormCommand extends FormActionCommand {
+public class SaveOpenNewAccountFormCommand extends FormCommand {
     private String menuLabel;
     private IDatabaseFactory databaseFactory;
     User user;
@@ -20,6 +21,15 @@ public class SaveOpenNewAccountFormCommand extends FormActionCommand {
         createNewCustomer();
         createNewAccount();
         createNewUser();
+        createNewWorkListRequest();
+    }
+
+    @Override
+    public String getFieldValue() {
+        return null;
+    }
+
+    private void createNewWorkListRequest() {
     }
 
     private void createNewUser() {

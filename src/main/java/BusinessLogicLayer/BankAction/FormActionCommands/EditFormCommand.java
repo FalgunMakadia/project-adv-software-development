@@ -9,7 +9,7 @@ import PresentationLayer.PresentationFactory;
 
 import java.util.Map;
 
-public class EditFormCommand extends FormActionCommand {
+public class EditFormCommand extends FormCommand {
     String menuLabel;
     User user;
     Map<Integer, FormCommand> formFieldMap;
@@ -33,6 +33,11 @@ public class EditFormCommand extends FormActionCommand {
 
         }
 
+    }
+
+    @Override
+    public String getFieldValue() {
+        return null;
     }
 
     @Override

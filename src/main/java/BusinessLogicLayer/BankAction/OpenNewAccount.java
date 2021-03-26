@@ -16,9 +16,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OpenNewAccount extends Action {
-    IDatabaseFactory databaseFactory;
     private static final String menuLabel = "Open New Account";
-    Map<Integer, FormActionCommand> openNewAccountStateMap;
+    Map<Integer, FormCommand> formActionCommandMap;
     private Map<Integer, FormCommand> openNewAccountFormFieldMap;
     User customer;
     @Override
@@ -28,13 +27,12 @@ public class OpenNewAccount extends Action {
 
     public OpenNewAccount() {
         super();
-        databaseFactory = new DatabaseFactory();
         customer = new Customer();
         getOpenNewAccountFormFieldMap();
-        openNewAccountStateMap = new LinkedHashMap<>();
-        openNewAccountStateMap.put(1, new EditFormCommand("Edit", customer, openNewAccountFormFieldMap));
-        openNewAccountStateMap.put(2, new SaveOpenNewAccountFormCommand("Save", customer));
-        openNewAccountStateMap.put(3, new BackToMainMenuCommand("Back to main menu"));
+        formActionCommandMap = new LinkedHashMap<>();
+        formActionCommandMap.put(1, new EditFormCommand("Edit", customer, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, new SaveOpenNewAccountFormCommand("Save", customer));
+        formActionCommandMap.put(3, new BackToMainMenuCommand("Back to main menu"));
     }
 
     @Override
@@ -58,14 +56,14 @@ public class OpenNewAccount extends Action {
 
         while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
             int key = 1;
-            for (int i = 0; i < openNewAccountStateMap.size(); i++) {
-                FormActionCommand formState = openNewAccountStateMap.get(key);
+            for (int i = 0; i < formActionCommandMap.size(); i++) {
+                FormCommand formState = formActionCommandMap.get(key);
                 System.out.println(key + ". " + formState.getMenuLabel());
                 key = key + 1;
             }
-            String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + openNewAccountStateMap.size() + " to perform appropriate action:");
+            String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-            FormActionCommand formCommand = openNewAccountStateMap.get(Integer.parseInt(action));
+            FormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
             formCommand.execute();
 
         }
