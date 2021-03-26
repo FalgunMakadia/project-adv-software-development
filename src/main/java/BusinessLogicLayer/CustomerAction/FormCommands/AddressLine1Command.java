@@ -4,13 +4,13 @@ import BusinessLogicLayer.User.User;
 
 public class AddressLine1Command extends FormCommand {
     private final String FIELD_LABEL = "Address Line 1";
+
     public AddressLine1Command(User user) {
         super(user);
     }
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Address Line 1 is: " + user.getAddressLine1());
         String userInput = userInterface.getMandatoryUserInput("Enter Address Line 1*: ");
         user.setAddressLine1(userInput);
     }

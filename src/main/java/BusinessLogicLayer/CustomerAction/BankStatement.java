@@ -32,7 +32,7 @@ public class BankStatement extends Action {
     @Override
     public void performAction() {
         setCurrentPageInContext();
-        System.out.println("Bank Statement");
+        userInterface.displayMessage("Bank Statement");
         String accountNumber = loggedInUserContext.getAccountNumber();
         try {
             ArrayList<TransactionModel> transactionList = accountDatabase.getMiniStatement(accountNumber);

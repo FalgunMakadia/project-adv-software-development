@@ -9,11 +9,13 @@ public class UpdatePassword extends Action {
     public String getMenuLabel() {
         return menuLabel;
     }
+
     @Override
     public void performAction() {
         setCurrentPageInContext();
-        System.out.println("Update Password");
+        userInterface.displayMessage("Update Password");
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);

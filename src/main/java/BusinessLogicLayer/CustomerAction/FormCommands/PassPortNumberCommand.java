@@ -4,13 +4,13 @@ import BusinessLogicLayer.User.User;
 
 public class PassPortNumberCommand extends FormCommand {
     private final String FIELD_LABEL = "Passport Number";
+
     public PassPortNumberCommand(User user) {
         super(user);
     }
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Passport Number is: " + user.getPassport());
         String userInput = userInterface.getMandatoryUserInput("Enter Passport Number*: ");
         user.setPassport(userInput);
     }

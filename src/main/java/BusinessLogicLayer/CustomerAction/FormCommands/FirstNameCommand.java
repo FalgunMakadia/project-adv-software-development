@@ -4,6 +4,7 @@ import BusinessLogicLayer.User.User;
 
 public class FirstNameCommand extends FormCommand {
     private final String FIELD_LABEL = "First Name";
+
     public FirstNameCommand(User user) {
         super(user);
     }
@@ -14,7 +15,6 @@ public class FirstNameCommand extends FormCommand {
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your First Name is: " + user.getFirstName());
         String userInput = userInterface.getMandatoryUserInput("Enter New First Name*: ");
         user.setFirstName(userInput);
     }

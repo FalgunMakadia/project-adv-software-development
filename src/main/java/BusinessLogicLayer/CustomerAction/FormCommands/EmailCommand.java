@@ -4,13 +4,13 @@ import BusinessLogicLayer.User.User;
 
 public class EmailCommand extends FormCommand {
     private final String FIELD_LABEL = "Email";
+
     public EmailCommand(User user) {
         super(user);
     }
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Email is: " + user.getEmailAddress());
         String userInput = userInterface.getMandatoryUserInput("Enter Email*: ");
         user.setEmailAddress(userInput);
     }

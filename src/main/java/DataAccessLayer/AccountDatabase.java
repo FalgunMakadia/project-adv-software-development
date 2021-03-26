@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class AccountDatabase implements IAccountDatabase{
+public class AccountDatabase implements IAccountDatabase {
 
     Connection connection = null;
 
@@ -27,7 +27,7 @@ public class AccountDatabase implements IAccountDatabase{
         statement.setString(1, accountNumber);
         ResultSet rs = statement.executeQuery();
         int balance = 0;
-        if(rs.next()){
+        if (rs.next()) {
             balance = rs.getInt("balance");
         }
         return balance;
@@ -52,8 +52,8 @@ public class AccountDatabase implements IAccountDatabase{
 
         statement.setString(1, accountNumber);
         ResultSet rs = statement.executeQuery();
-        boolean accountStatus= false;
-        if(rs.next()){
+        boolean accountStatus = false;
+        if (rs.next()) {
             accountStatus = rs.getBoolean("active_status");
         }
         return accountStatus;
@@ -61,16 +61,11 @@ public class AccountDatabase implements IAccountDatabase{
 
     @Override
     public int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException {
-        String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
         String transactionId;
         String date;
         int output;
 
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(10);
-        for (int i = 0; i < 10; i++)
-            sb.append(STR.charAt(random.nextInt(STR.length())));
-        transactionId = sb.toString();
+        transactionId = getGeneratedID();
 
         DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -86,7 +81,7 @@ public class AccountDatabase implements IAccountDatabase{
         statement.setString(5, date);
 
         output = statement.executeUpdate();
-        return  output;
+        return output;
     }
 
     @Override
@@ -104,5 +99,18 @@ public class AccountDatabase implements IAccountDatabase{
             transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
         }
         return transactionList;
+    }
+
+    private String getGeneratedID() {
+        String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
+        final int GENERATED_STRING_LENGTH = 10;
+        int output;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(GENERATED_STRING_LENGTH);
+        for (int i = 0; i < GENERATED_STRING_LENGTH; i++) {
+            sb.append(STR.charAt(random.nextInt(STR.length())));
+        }
+        return sb.toString();
     }
 }

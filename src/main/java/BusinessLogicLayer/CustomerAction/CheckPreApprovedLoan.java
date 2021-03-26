@@ -14,16 +14,17 @@ public class CheckPreApprovedLoan extends Action {
     private double annualInterestRate = 8;
     private static final int minimumLoanAmount = 10000;
     private static final double defaultInterestRate = 8.8;
-    int balance= 0;
+    int balance = 0;
     private IDatabaseFactory databaseFactory;
     private Map<Double, LoanInterestRange> loanInterestRangeMap;
-    public CheckPreApprovedLoan(){
+
+    public CheckPreApprovedLoan() {
         databaseFactory = new DatabaseFactory();
         loanInterestRangeMap = new HashMap<>();
-        loanInterestRangeMap.put(8.0,new LoanInterestRange(10000,25000,15000));
-        loanInterestRangeMap.put(8.2,new LoanInterestRange(25000, 50000,30000));
-        loanInterestRangeMap.put(8.5,new LoanInterestRange(50000,100000,75000));
-        loanInterestRangeMap.put(8.8,new LoanInterestRange(100000, Double.POSITIVE_INFINITY,100000));
+        loanInterestRangeMap.put(8.0, new LoanInterestRange(10000, 25000, 15000));
+        loanInterestRangeMap.put(8.2, new LoanInterestRange(25000, 50000, 30000));
+        loanInterestRangeMap.put(8.5, new LoanInterestRange(50000, 100000, 75000));
+        loanInterestRangeMap.put(8.8, new LoanInterestRange(100000, Double.POSITIVE_INFINITY, 100000));
     }
 
     @Override
@@ -38,23 +39,23 @@ public class CheckPreApprovedLoan extends Action {
             double annualInterest = getPreApprovedLoanAnnualInterest(balance);
             double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);
 
-            userInterface.displayMessage("You have a pre-approved loan of "+ preApprovedLoanAmount + "CAD with " +annualInterest+ "% annual interest.");
+            userInterface.displayMessage("You have a pre-approved loan of " + preApprovedLoanAmount + "CAD with " + annualInterest + "% annual interest.");
             userInterface.addDelay();
             userInterface.insertEmptyLine();
 
-        }
-        catch (SQLException exception){
+        } catch (SQLException exception) {
             userInterface.displayMessage("Error occurred in database connection.");
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             userInterface.displayMessage(exception.getMessage());
         }
 
     }
+
     @Override
     protected void setCurrentPageInContext() {
         loggedInUserContext.setCurrentPage(menuLabel);
     }
+
     @Override
     public String getMenuLabel() {
         return menuLabel;
@@ -63,31 +64,32 @@ public class CheckPreApprovedLoan extends Action {
     public double getPreApprovedLoanAnnualInterest(int balance) {
         double annualInterest = defaultInterestRate;
         LoanInterestRange loanInterestRange = getPreApprovedLoanBracket(balance);
-        if(loanInterestRange.getApprovedLoanStatus()){
+        if (loanInterestRange.getApprovedLoanStatus()) {
             annualInterest = loanInterestRange.getApprovedLoanInterest();
         }
         return annualInterest;
     }
+
     public double getPreApprovedLoanAmount(int balance) {
         double PreApprovedLoanAmount = 0;
-            LoanInterestRange loanInterestRange = getPreApprovedLoanBracket(balance);
-            if(loanInterestRange.getApprovedLoanStatus()){
-                PreApprovedLoanAmount = loanInterestRange.getApprovedLoanAmount();
-            }
+        LoanInterestRange loanInterestRange = getPreApprovedLoanBracket(balance);
+        if (loanInterestRange.getApprovedLoanStatus()) {
+            PreApprovedLoanAmount = loanInterestRange.getApprovedLoanAmount();
+        }
         return PreApprovedLoanAmount;
     }
 
     private LoanInterestRange getPreApprovedLoanBracket(int balance) {
         LoanInterestRange loanInterestRange = null;
-        for (Map.Entry<Double,LoanInterestRange> loanInterestRangeEntry : loanInterestRangeMap.entrySet()){
+        for (Map.Entry<Double, LoanInterestRange> loanInterestRangeEntry : loanInterestRangeMap.entrySet()) {
             loanInterestRange = loanInterestRangeEntry.getValue();
-            if(loanInterestRange.includes(balance)){
+            if (loanInterestRange.includes(balance)) {
                 loanInterestRange.setApprovedLoanInterest(loanInterestRangeEntry.getKey());
                 loanInterestRange.setApprovedLoanStatus(true);
                 break;
             }
 
-            }
+        }
         return loanInterestRange;
     }
 }

@@ -4,13 +4,13 @@ import BusinessLogicLayer.User.User;
 
 public class ContactCommand extends FormCommand {
     private final String FIELD_LABEL = "Contact";
+
     public ContactCommand(User user) {
         super(user);
     }
 
     @Override
     public void execute() {
-        userInterface.displayMessage("Your Contact Number is: " + user.getContact());
         String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Contact Number*: ", 10);
         user.setContact(userInput);
     }
@@ -24,4 +24,5 @@ public class ContactCommand extends FormCommand {
     public String getLabel() {
         return FIELD_LABEL;
     }
+
 }

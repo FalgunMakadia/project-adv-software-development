@@ -13,6 +13,7 @@ public abstract class FormCommand {
     protected IUserInterface userInterface;
     protected IWorklistDatabase worklistDatabase;
     protected DatabaseFactory databaseFactory;
+
     public FormCommand(User user) {
         this.user = user;
         init();

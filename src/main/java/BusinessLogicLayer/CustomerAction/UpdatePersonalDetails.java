@@ -33,7 +33,7 @@ public class UpdatePersonalDetails extends Action {
         userInterface.displayMessage("============UPDATE PERSONAL DETAILS=====================");
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         setCurrentPageInContext();
-        System.out.println("Update Personal Details");
+        userInterface.displayMessage("Update Personal Details");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
