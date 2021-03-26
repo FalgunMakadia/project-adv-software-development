@@ -29,10 +29,17 @@ public class FormPage extends Page {
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
+            System.out.println("Enter 13 to save details and 14 to go back to main menu");
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
-                FormCommand command = formFields.get(userInput);
-                command.execute();
+                if(userInput == 13) {
+                    updateMode = false;
+                } else if (userInput == 14) {
+                    updateMode = false;
+                } else {
+                    FormCommand command = formFields.get(userInput);
+                    command.execute();
+                }
             }
         }
     }
@@ -43,7 +50,7 @@ public class FormPage extends Page {
         try {
             choiceNumber = input;
 
-            if (choiceNumber < 1 && choiceNumber > formFields.size()) {
+            if (choiceNumber < 1 && choiceNumber > formFields.size() + 2) {
                 throw new IllegalArgumentException("Invalid input.");
             }
             validity = true;

@@ -10,6 +10,7 @@ import java.util.Map;
 public class UserForm implements IUserForm {
     private Map<Integer, FormCommand> formFields;
     private User user;
+    private boolean saveUserDetails = false;
 
     public UserForm() {
         this.user = new Customer();

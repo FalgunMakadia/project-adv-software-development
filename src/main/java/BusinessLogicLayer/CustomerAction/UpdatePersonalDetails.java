@@ -36,8 +36,13 @@ public class UpdatePersonalDetails extends Action {
         System.out.println("Update Personal Details");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
-        IUserForm userForm = presentationFactory.createUserForm();
-        userForm.executeForm();
+        try {
+            User user = customerDatabase.getUser(currentUserAccountNumber);
+            IUserForm userForm = presentationFactory.createUserForm(user);
+            userForm.executeForm();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 //        try {
 //            User user = customerDatabase.getUser(currentUserAccountNumber);
 //            user = updateMandatoryPersonalDetails(user);
