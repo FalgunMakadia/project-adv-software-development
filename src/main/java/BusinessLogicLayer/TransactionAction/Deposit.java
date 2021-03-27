@@ -6,6 +6,7 @@ import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Deposit extends Action {
     private static final String menuLabel = "Deposit";
@@ -33,6 +34,7 @@ public class Deposit extends Action {
         userInterface.displayMessage("Deposit");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
         try {
             previousBalance = accountDatabase.getUserBalance(accountNumber);
@@ -60,7 +62,9 @@ public class Deposit extends Action {
                 output = accountDatabase.updateBalance(finalBalance, accountNumber);
                 if (output == 1) {
                     userInterface.displayMessage("Deposit Success!");
-                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
+                    saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, totalDepositAmount, null));
+//                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
+                    accountDatabase.saveTransaction(saveTransactionInModel);
                     userInterface.displayMessage("Transaction Successfully registered!");
                     userInterface.displayMessage("Updated Balance: " + finalBalance);
                     userInterface.insertEmptyLine();

@@ -7,6 +7,7 @@ import DataAccessLayer.IDatabaseFactory;
 import PresentationLayer.CommonPages.UserInterface;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Transfer extends Action {
     private static final String menuLabel = "Transfer";
@@ -42,6 +43,7 @@ public class Transfer extends Action {
         userInterface.displayMessage("Transfer");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
         try {
             originAccountPreviousBalance = accountDatabase.getUserBalance(originAccountNumber);
@@ -76,8 +78,11 @@ public class Transfer extends Action {
 
                 if (originOutput == 1 && targetOutput == 1) {
                     userInterface.displayMessage("Transfer Success!");
-                    accountDatabase.saveTransaction(originAccountNumber, originTransactionType, transferAmount);
-                    accountDatabase.saveTransaction(targetAccountNumber, targetTransactionType, transferAmount);
+                    saveTransactionInModel.add(new TransactionModel(originAccountNumber, originTransactionType, transferAmount, null));
+                    saveTransactionInModel.add(new TransactionModel(targetAccountNumber, targetTransactionType, transferAmount, null));
+//                    accountDatabase.saveTransaction(originAccountNumber, originTransactionType, transferAmount);
+//                    accountDatabase.saveTransaction(targetAccountNumber, targetTransactionType, transferAmount);
+                    accountDatabase.saveTransaction(saveTransactionInModel);
                     userInterface.displayMessage("Transaction Successfully registered!");
                     userInterface.displayMessage("Updated Balance in your account: " + originAccountFinalBalance);
                     userInterface.insertEmptyLine();
