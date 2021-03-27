@@ -64,15 +64,13 @@ public class AccountDatabase implements IAccountDatabase {
         String transactionId;
         String date;
 
-        DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime now = LocalDateTime.now();
-        date = x.format(now);
+        date = getCurrentDate();
 
         String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
 
         for (TransactionModel transaction : saveTransactionInModel) {
-            transactionId = getGeneratedID();
+            transactionId = generateRandomTransactionId();
             statement.setString(1, transactionId);
             statement.setString(2, transaction.getAccountNumber());
             statement.setString(3, transaction.getTransactionType());
@@ -101,7 +99,7 @@ public class AccountDatabase implements IAccountDatabase {
         return transactionList;
     }
 
-    private String getGeneratedID() {
+    private String generateRandomTransactionId() {
         String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
         final int GENERATED_STRING_LENGTH = 10;
         int output;
@@ -112,5 +110,15 @@ public class AccountDatabase implements IAccountDatabase {
             sb.append(STR.charAt(random.nextInt(STR.length())));
         }
         return sb.toString();
+    }
+
+    private String getCurrentDate() {
+        String date;
+
+        DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        date = x.format(now);
+
+        return date;
     }
 }
