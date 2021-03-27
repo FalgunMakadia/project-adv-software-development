@@ -60,12 +60,9 @@ public class AccountDatabase implements IAccountDatabase {
     }
 
     @Override
-    public int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException {
+    public void saveTransaction(ArrayList<TransactionModel> saveTransactionInModel) throws SQLException {
         String transactionId;
         String date;
-        int output;
-
-        transactionId = getGeneratedID();
 
         DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -74,14 +71,17 @@ public class AccountDatabase implements IAccountDatabase {
         String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(query);
 
-        statement.setString(1, transactionId);
-        statement.setString(2, accountNumber);
-        statement.setString(3, transactionType);
-        statement.setInt(4, amount);
-        statement.setString(5, date);
+        for (TransactionModel transaction : saveTransactionInModel) {
+            transactionId = getGeneratedID();
+            statement.setString(1, transactionId);
+            statement.setString(2, transaction.getAccountNumber());
+            statement.setString(3, transaction.getTransactionType());
+            statement.setInt(4, transaction.getAmount());
+            statement.setString(5, date);
 
-        output = statement.executeUpdate();
-        return output;
+            statement.executeUpdate();
+        }
+
     }
 
     @Override
