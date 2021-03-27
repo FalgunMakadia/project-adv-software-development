@@ -6,6 +6,7 @@ import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Withdraw extends Action {
     private static final String menuLabel = "Withdraw";
@@ -34,6 +35,7 @@ public class Withdraw extends Action {
         userInterface.displayMessage("Withdraw");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
         try {
             previousBalance = accountDatabase.getUserBalance(accountNumber);
@@ -54,7 +56,9 @@ public class Withdraw extends Action {
                 output = accountDatabase.updateBalance(finalBalance, accountNumber);
                 if (output == 1) {
                     userInterface.displayMessage("Withdraw Success!");
-                    accountDatabase.saveTransaction(accountNumber, transactionType, withdrawAmount);
+                    saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, withdrawAmount, null));
+//                    accountDatabase.saveTransaction(accountNumber, transactionType, withdrawAmount);
+                    accountDatabase.saveTransaction(saveTransactionInModel);
                     userInterface.displayMessage("Transaction Successfully registered!");
                     userInterface.displayMessage("Updated Balance: " + finalBalance);
                     userInterface.insertEmptyLine();

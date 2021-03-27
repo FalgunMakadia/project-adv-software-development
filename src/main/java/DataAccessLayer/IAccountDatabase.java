@@ -12,7 +12,7 @@ public interface IAccountDatabase {
 
     boolean verifyAccountNumber(String accountNumber) throws SQLException;
 
-    int saveTransaction(String accountNumber, String transactionType, int amount) throws SQLException;
+    void saveTransaction(ArrayList<TransactionModel> transactionList) throws SQLException;
 
     ArrayList<TransactionModel> getMiniStatement(String accountNumber) throws SQLException;
 }
