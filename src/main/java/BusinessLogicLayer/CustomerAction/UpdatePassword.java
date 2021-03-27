@@ -22,7 +22,7 @@ public class UpdatePassword extends Action {
 
 
     private static final String menuLabel = "Update Password";
-    IUserDetailsDatabase userDatabase = null;
+    IUserDetailsDatabase userDetailsDatabase = null;
 
 
     @Override
@@ -36,7 +36,7 @@ public class UpdatePassword extends Action {
     }
 
     @Override
-    public void performAction()  {
+    public void performAction() {
         setCurrentPageInContext();
         userInterface.displayMessage("Update Password");
         String userName = loggedInUserContext.getUserName();
@@ -52,14 +52,13 @@ public class UpdatePassword extends Action {
             userInterface.displayMessage(userName + " your new  password is updated: ");
             userInterface.insertEmptyLine();
             userInterface.insertEmptyLine();
-            userDatabase.UpdatePassword(userName, newPassword);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+            userDetailsDatabase.UpdatePassword(userName, newPassword);
+        } catch (IOException throwables) {
+            throwables.printStackTrace();
 
+
+        }
 
 
     }
 }
-
