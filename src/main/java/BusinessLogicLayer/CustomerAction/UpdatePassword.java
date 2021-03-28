@@ -34,7 +34,8 @@ public class UpdatePassword extends Action {
 
 
         }
-
+        
+    }
 
     @Override
     protected void setCurrentPageInContext() {
