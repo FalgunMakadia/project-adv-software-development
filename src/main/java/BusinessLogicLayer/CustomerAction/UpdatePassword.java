@@ -1,6 +1,12 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
+import DataAccessLayer.DatabaseFactory;
+import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.IUserDetailsDatabase;
+
+import java.io.IOException;
+
 
 public class UpdatePassword extends Action {
     private static final String menuLabel = "Update Password";
