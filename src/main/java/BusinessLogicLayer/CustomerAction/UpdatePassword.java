@@ -1,24 +1,13 @@
 package BusinessLogicLayer.CustomerAction;
 
+import BusinessLogicLayer.CommonAction.Action;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IUserDetailsDatabase;
-import BusinessLogicLayer.CommonAction.Action;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class UpdatePassword extends Action {
-    UpdatePassword updatePassword;
-    String newpassword;
-
-    public String getNewpassword() {
-        return newpassword;
-    }
-
-    public void setNewpassword(String newpassword) {
-        this.newpassword = newpassword;
-    }
 
 
     private static final String menuLabel = "Update Password";
@@ -45,14 +34,15 @@ public class UpdatePassword extends Action {
             IUserDetailsDatabase userDetailsDatabase = databaseFactory.createLoginDatabase();
             userInterface.displayMessage("Hello " + userName);
             String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
-            String ConfirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
-            if (newPassword.equals(ConfirmPassword))
-                newPassword.hashCode();
-            updatePassword.setNewpassword(newPassword);
+            String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
+            if (newPassword.equals(confirmPassword)) {
+                int changedPassword = newPassword.hashCode();
+                userDetailsDatabase.UpdatePassword(userName, changedPassword);
+            }
             userInterface.displayMessage(userName + " your new  password is updated: ");
             userInterface.insertEmptyLine();
             userInterface.insertEmptyLine();
-            userDetailsDatabase.UpdatePassword(userName, newPassword);
+
         } catch (IOException throwables) {
             throwables.printStackTrace();
 
