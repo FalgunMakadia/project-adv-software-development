@@ -7,5 +7,5 @@ public interface IUserDetailsDatabase {
 
     public int insertNewUser();
 
-    void UpdatePassword(String userName, String newPassword);
+    void UpdatePassword(String userName, int newPassword);
 }

@@ -1,11 +1,8 @@
 package DataAccessLayer;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Properties;
 
 import static org.mockito.Mockito.mock;
 
@@ -21,9 +18,17 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
 
     public ResultSet validateUser(String username, int password) {
         ResultSet resultSet = null;
+        String loginQuery = "SELECT * FROM login WHERE userName = '" + username + "' AND userPassword = '" + password + "'";
+        try {
+            preparedStatement = connection.prepareStatement(loginQuery);
+            resultSet = preparedStatement.executeQuery();
 
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
         return resultSet;
     }
+
 
     @Override
     public int insertNewUser() {
@@ -31,8 +36,8 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
     }
 
     @Override
-    public void UpdatePassword(String userName, String newPassword) {
-        String updatePasswordQuery = "Update  FROM login SET userPassword = '" + newPassword+ "' WHERE userName = '" + userName + "'";
+    public void UpdatePassword(String userName, int newPassword) {
+        String updatePasswordQuery = "UPDATE  login SET userPassword = '" + newPassword+ "' WHERE userName = '" + userName + "'";
         try {
             preparedStatement = connection.prepareStatement(updatePasswordQuery);
             preparedStatement.executeUpdate();
