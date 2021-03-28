@@ -36,8 +36,8 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
     }
 
     @Override
-    public void UpdatePassword(String userName, int newPassword) {
-        String updatePasswordQuery = "UPDATE  login SET userPassword = '" + newPassword+ "' WHERE userName = '" + userName + "'";
+    public void UpdatePassword(String userName, int changedPassword) {
+        String updatePasswordQuery = "UPDATE  login SET userPassword = '" + changedPassword+ "' WHERE userName = '" + userName + "'";
         try {
             preparedStatement = connection.prepareStatement(updatePasswordQuery);
             preparedStatement.executeUpdate();
