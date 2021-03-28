@@ -1,27 +1,13 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IUserDetailsDatabase;
-
-import java.io.IOException;
 
 public class UpdatePassword extends Action {
-
-
     private static final String menuLabel = "Update Password";
-    IUserDetailsDatabase userDetailsDatabase = null;
-
 
     @Override
     public String getMenuLabel() {
         return menuLabel;
-    }
-
-    @Override
-    protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
     }
 
     @Override
@@ -50,5 +36,8 @@ public class UpdatePassword extends Action {
         }
 
 
+    @Override
+    protected void setCurrentPageInContext() {
+        loggedInUserContext.setCurrentPage(menuLabel);
     }
 }
