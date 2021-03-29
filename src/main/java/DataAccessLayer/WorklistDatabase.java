@@ -23,7 +23,7 @@ public class WorklistDatabase implements IWorklistDatabase {
                 "province, postal_code, email, contact_number, " +
                 "passport_number, ssn_number) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement statement = connection.prepareStatement(insertWorkListQuery, new String[]{"request_id"});
+        PreparedStatement statement = connection.prepareStatement(insertWorkListQuery, Statement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, worklistRequest.getRequestType());
         statement.setString(2, worklistRequest.getPriority());
@@ -32,7 +32,9 @@ public class WorklistDatabase implements IWorklistDatabase {
 
         int record_id = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
-        System.out.println("ResultSet" + rs.getLong("request_id"));
+        if(null !=  rs && rs.next()){
+            record_id = rs.getInt(1);
+        }
 
         if (0 != record_id) {
             User user = worklistRequest.getUser();
