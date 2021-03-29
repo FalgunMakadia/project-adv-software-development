@@ -48,6 +48,7 @@ public class CustomerDatabase implements ICustomerDatabase {
             user.setPassport(resultSet.getString("passport_number"));
             user.setSsnNo(resultSet.getString("ssn_number"));
             user.setAccountNumber(resultSet.getString("account_no"));
+            user.setDateOfBirth(resultSet.getString("birth_date"));
             return user;
         }
         return null;

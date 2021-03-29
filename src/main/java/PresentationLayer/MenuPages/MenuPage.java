@@ -30,7 +30,6 @@ public class MenuPage extends Page {
             if (validateIntegerInputFormat(input)) {
                 Action action = menu.get(input);
                 action.performAction();
-
             }
         }
     }
