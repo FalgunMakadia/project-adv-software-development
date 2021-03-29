@@ -30,8 +30,11 @@ public class UpdatePassword extends Action {
             if (newPassword.equals(confirmPassword)) {
                 int changedPassword = newPassword.hashCode();
                 userDetailsDatabase.UpdatePassword(userName, changedPassword);
+                userInterface.displayMessage(userName + " your new  password is updated: ");
             }
-            userInterface.displayMessage(userName + " your new  password is updated: ");
+            else{
+                userInterface.displayMessage("Password did not match");
+            }
             userInterface.insertEmptyLine();
             userInterface.insertEmptyLine();
 
