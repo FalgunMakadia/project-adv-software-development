@@ -4,6 +4,7 @@ import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class WorklistDatabase implements IWorklistDatabase {
     Connection connection = null;
@@ -62,6 +63,33 @@ public class WorklistDatabase implements IWorklistDatabase {
 
     @Override
     public WorklistRequest getWorkListRequest(int id) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<WorklistRequest> getWorkLists() {
+        String query = "SELECT * FROM worklist";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+            int cols = resultSetMetaData.getColumnCount();
+            for (int i = 1; i <= cols; i++) {
+                System.out.println(resultSetMetaData.getColumnName(i) + "\t");
+            }
+            System.out.println();
+            while (resultSet.next()) {
+                for (int i = 1; i <= cols; i++) {
+                    System.out.println(resultSet.getString(i) + "\t");
+                }
+                System.out.println();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return null;
     }
 }
