@@ -9,6 +9,9 @@ public class WorklistRequest {
     private String accountNumber;
     private String handledBy = null;
 
+    public WorklistRequest() {
+    }
+
     public WorklistRequest(String requestType, String accountNumber, User user) {
         this.requestType = requestType;
         this.accountNumber = accountNumber;

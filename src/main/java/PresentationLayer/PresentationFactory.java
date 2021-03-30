@@ -2,12 +2,10 @@ package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.CommonPages.UserInterface;
-import PresentationLayer.MenuPages.Command;
-import PresentationLayer.MenuPages.ExistingBankAccountCommand;
-import PresentationLayer.MenuPages.IUserForm;
-import PresentationLayer.MenuPages.UserForm;
+import PresentationLayer.MenuPages.*;
 
 import java.util.Map;
 
@@ -34,5 +32,10 @@ public class PresentationFactory implements IPresentationFactory {
     @Override
     public IUserForm createUserForm(Map<Integer, FormCommand> formFields) {
         return new UserForm(formFields);
+    }
+
+    @Override
+    public IWorklistPage createWorklistPage() {
+        return new WorklistPage();
     }
 }

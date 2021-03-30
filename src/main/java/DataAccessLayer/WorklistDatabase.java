@@ -1,10 +1,12 @@
 package DataAccessLayer;
 
+import BusinessLogicLayer.User.Customer;
 import BusinessLogicLayer.User.User;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WorklistDatabase implements IWorklistDatabase {
     Connection connection = null;
@@ -67,29 +69,38 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public ArrayList<WorklistRequest> getWorkLists() {
+    public Map<Integer, WorklistRequest> getWorkLists() {
+        Map<Integer,WorklistRequest> worklistRequestMap = new HashMap<>();
         String query = "SELECT * FROM worklist";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
-
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-            int cols = resultSetMetaData.getColumnCount();
-            for (int i = 1; i <= cols; i++) {
-                System.out.println(resultSetMetaData.getColumnName(i) + "\t");
-            }
-            System.out.println();
             while (resultSet.next()) {
-                for (int i = 1; i <= cols; i++) {
-                    System.out.println(resultSet.getString(i) + "\t");
-                }
-                System.out.println();
+                int requestId = resultSet.getInt("request_id");
+                WorklistRequest worklistRequest = new WorklistRequest();
+                worklistRequest.setRequestType(resultSet.getString("request_type"));
+                worklistRequest.setPriority(resultSet.getString("priority"));
+                worklistRequest.setAccountNumber(resultSet.getString("account_number"));
+                worklistRequest.setHandledBy(resultSet.getString("handled_by"));
+                worklistRequestMap.put(requestId, worklistRequest);
             }
+//            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+//            int cols = resultSetMetaData.getColumnCount();
+//            for (int i = 1; i <= cols; i++) {
+//                System.out.print(resultSetMetaData.getColumnName(i) + "\t");
+//            }
+//            System.out.println();
+//            while (resultSet.next()) {
+//                for (int i = 1; i <= cols; i++) {
+//                    System.out.print(resultSet.getString(i) + "\t \t \t");
+//                }
+//                System.out.println();
+//            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return null;
+        return worklistRequestMap;
     }
 }
