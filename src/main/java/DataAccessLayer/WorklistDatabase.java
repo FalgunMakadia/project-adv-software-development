@@ -126,6 +126,7 @@ public class WorklistDatabase implements IWorklistDatabase {
         User user = new Customer();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
                 user.setFirstName(resultSet.getString("first_name"));

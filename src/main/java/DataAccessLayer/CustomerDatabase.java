@@ -3,10 +3,7 @@ package DataAccessLayer;
 import BusinessLogicLayer.User.Customer;
 import BusinessLogicLayer.User.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CustomerDatabase implements ICustomerDatabase {
     Connection connection = null;
@@ -55,7 +52,32 @@ public class CustomerDatabase implements ICustomerDatabase {
     }
 
     @Override
-    public void updateUser(User user) {
+    public boolean updateUser(String accountNumber, User user) {
+        String query = "UPDATE customers SET " +
+                "first_name = " + user.getFirstName() + "," +
+                "middle_name = " + user.getMiddleName() + "," +
+                "last_name = " + user.getLastName() + "," +
+                "addressline_1 = " + user.getAddressLine1() + "," +
+                "addressline_2 = " + user.getAddressLine2() + "," +
+                "city = " + user.getCity() + "," +
+                "province = " + user.getProvince() + "," +
+                "postal_code = " + user.getPostalCode() + "," +
+                "email = " + user.getEmailAddress() + "," +
+                "contact_number = " + user.getContact() + "," +
+                "passport_number = " + user.getPassport() + "," +
+                "ssn_number = " + user.getSsnNo() + "," +
+                "birth_date = " + user.getDateOfBirth() +
+                " WHERE account_no = " + accountNumber;
 
+        try {
+            Statement statement = connection.createStatement();
+
+            int affectedRows = statement.executeUpdate(query);
+
+            return affectedRows == 1 ? true : false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

@@ -6,6 +6,7 @@ import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
+import PresentationLayer.CommonPages.IUserDetailPage;
 import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
@@ -16,6 +17,8 @@ public abstract class WorkListAction {
     protected IUserInterface userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IWorklistDatabase worklistDatabase;
+    protected IUserDetailPage userDetailPage;
+    IDatabaseFactory databaseFactory;
 
     public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
         this.worklistRequest = worklistRequest;
@@ -24,8 +27,9 @@ public abstract class WorkListAction {
 
         IPresentationFactory presentationFactory = new PresentationFactory();
         this.userInterface = presentationFactory.createUserInterface();
+        this.userDetailPage = presentationFactory.createUserDetailPage();
 
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
+        this.databaseFactory = new DatabaseFactory();
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
     }
 
