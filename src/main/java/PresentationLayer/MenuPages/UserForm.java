@@ -27,7 +27,6 @@ public class UserForm implements IUserForm {
         this.user = user;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);
-
     }
 
     public User getUser() {

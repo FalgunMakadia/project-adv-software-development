@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class PostalCodeCommand extends FormCommand {
-    private final String FIELD_LABEL = "Postal Code";
+    private final String COMMAND_LABEL = "Postal Code";
 
     public PostalCodeCommand(User user) {
         super(user);
@@ -21,7 +21,7 @@ public class PostalCodeCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }

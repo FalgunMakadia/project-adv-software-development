@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class MiddleNameCommand extends FormCommand {
-    private final String FIELD_NAME = "Middle Name";
+    private final String COMMAND_LABEL = "Middle Name";
 
     public MiddleNameCommand(User user) {
         super(user);
@@ -21,7 +21,7 @@ public class MiddleNameCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_NAME;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }

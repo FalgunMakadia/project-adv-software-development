@@ -52,7 +52,7 @@ public class EnrollNewEmployee extends Action {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
                 FormCommand formState = formActionCommandMap.get(key);
-                System.out.println(key + ". " + formState.getMenuLabel());
+                System.out.println(key + ". " + formState.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");

@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FormPage extends Page {
-    private final int SAVE = 13;
-    private final int EXIT = 14;
     private Map<Integer, FormCommand> formFields;
     String currentPage;
 
@@ -19,15 +17,14 @@ public class FormPage extends Page {
     @Override
     public void printMenu() {
         System.out.println("Form");
-
         do {
             Scanner scanner = new Scanner(System.in);
             for (int fieldIndex = 1; fieldIndex <= formFields.size(); fieldIndex++) {
                 FormCommand command = formFields.get(fieldIndex);
                 if (null == command.getFieldValue()) {
-                    System.out.println(fieldIndex + ". " + command.getMenuLabel());
+                    System.out.println(fieldIndex + ". " + command.getCommandLabel());
                 } else {
-                    System.out.println(fieldIndex + ". " + command.getMenuLabel() + ": " + command.getFieldValue());
+                    System.out.println(fieldIndex + ". " + command.getCommandLabel() + ": " + command.getFieldValue());
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
@@ -46,7 +43,7 @@ public class FormPage extends Page {
         try {
             choiceNumber = input;
 
-            if (choiceNumber < 1 && choiceNumber > (formFields.size() + 1)) {
+            if (choiceNumber < 1 && choiceNumber > formFields.size()) {
                 throw new IllegalArgumentException("Invalid input.");
             }
             validity = true;

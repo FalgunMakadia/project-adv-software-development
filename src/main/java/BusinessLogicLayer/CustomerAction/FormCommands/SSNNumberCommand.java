@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class SSNNumberCommand extends FormCommand {
-    private final String FIELD_LABEL = "SSN Number";
+    private final String COMMAND_LABEL = "SSN Number";
 
     public SSNNumberCommand(User user) {
         super(user);
@@ -21,7 +21,7 @@ public class SSNNumberCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }
