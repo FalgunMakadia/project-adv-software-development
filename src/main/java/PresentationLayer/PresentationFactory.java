@@ -41,4 +41,9 @@ public class PresentationFactory implements IPresentationFactory {
     public IBankStatementTable createBankStatementTable() {
         return new BankStatementTable();
     }
+
+    @Override
+    public IUserDetailPage createUserDetailPage() {
+        return new UserDetailPage();
+    }
 }

@@ -3,6 +3,7 @@ package PresentationLayer;
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.User;
 import PresentationLayer.CommonPages.IBankStatementTable;
+import PresentationLayer.CommonPages.IUserDetailPage;
 import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.MenuPages.Command;
 import PresentationLayer.MenuPages.IUserForm;
@@ -24,4 +25,6 @@ public interface IPresentationFactory {
     IWorklistTable createWorklistTable();
 
     IBankStatementTable createBankStatementTable();
+
+    IUserDetailPage createUserDetailPage();
 }

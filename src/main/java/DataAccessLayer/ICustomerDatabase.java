@@ -11,5 +11,5 @@ public interface ICustomerDatabase {
 
     User getUser(String accountNumber) throws SQLException;
 
-    void updateUser(User user);
+    boolean updateUser(String accountNumber, User user);
 }
