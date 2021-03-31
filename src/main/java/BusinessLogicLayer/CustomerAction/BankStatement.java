@@ -5,6 +5,7 @@ import BusinessLogicLayer.TransactionAction.TransactionModel;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
+import PresentationLayer.CommonPages.IBankStatementTable;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,10 +14,12 @@ public class BankStatement extends Action {
     private static final String menuLabel = "Bank Statement";
     private IAccountDatabase accountDatabase;
     private IDatabaseFactory databaseFactory;
+    private IBankStatementTable bankStatementTable;
 
     public BankStatement() {
         databaseFactory = new DatabaseFactory();
         accountDatabase = databaseFactory.createAccountDatabase();
+        bankStatementTable = presentationFactory.createBankStatementTable();
     }
 
     @Override
@@ -39,11 +42,7 @@ public class BankStatement extends Action {
             if (0 == transactionList.size()) {
                 userInterface.displayMessage("No Transactions are available for this account");
             } else {
-                for (TransactionModel transaction : transactionList) {
-                    userInterface.displayMessage("TransactionType: " + transaction.getTransactionType()
-                            + " Amount: " + transaction.getAmount()
-                            + " Date: " + transaction.getDate());
-                }
+                bankStatementTable.printBankStatementTable(transactionList);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

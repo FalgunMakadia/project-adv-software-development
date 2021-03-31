@@ -2,9 +2,7 @@ package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.User;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import PresentationLayer.CommonPages.IUserInterface;
-import PresentationLayer.CommonPages.UserInterface;
+import PresentationLayer.CommonPages.*;
 import PresentationLayer.MenuPages.*;
 
 import java.util.Map;
@@ -35,7 +33,12 @@ public class PresentationFactory implements IPresentationFactory {
     }
 
     @Override
-    public IWorklistPage createWorklistPage() {
-        return new WorklistPage();
+    public IWorklistTable createWorklistTable() {
+        return new WorklistTable();
+    }
+
+    @Override
+    public IBankStatementTable createBankStatementTable() {
+        return new BankStatementTable();
     }
 }
