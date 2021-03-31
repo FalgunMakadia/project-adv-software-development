@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class PassPortNumberCommand extends FormCommand {
-    private final String FIELD_LABEL = "Passport Number";
+    private final String COMMAND_LABEL = "Passport Number";
 
     public PassPortNumberCommand(User user) {
         super(user);
@@ -21,7 +21,7 @@ public class PassPortNumberCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }

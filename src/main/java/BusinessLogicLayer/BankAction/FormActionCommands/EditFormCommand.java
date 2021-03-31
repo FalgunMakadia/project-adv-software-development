@@ -29,7 +29,7 @@ public class EditFormCommand extends FormCommand {
         for (int fieldIndex = 1; fieldIndex <= formFieldMap.size(); fieldIndex++) {
             FormCommand command = formFieldMap.get(fieldIndex);
 
-            userInterface.displayMessage(command.getMenuLabel() + ": " + command.getFieldValue());
+            userInterface.displayMessage(command.getCommandLabel() + ": " + command.getFieldValue());
 
         }
 
@@ -41,7 +41,7 @@ public class EditFormCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
+    public String getCommandLabel() {
         return menuLabel;
     }
 

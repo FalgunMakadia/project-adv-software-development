@@ -2,16 +2,12 @@ package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
 import BusinessLogicLayer.BankAction.FormActionCommands.EditFormCommand;
-import BusinessLogicLayer.BankAction.FormActionCommands.FormActionCommand;
 import BusinessLogicLayer.BankAction.FormActionCommands.SaveOpenNewAccountFormCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.Customer;
 import BusinessLogicLayer.User.User;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
 
-import java.text.ParseException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -59,7 +55,7 @@ public class OpenNewAccount extends Action {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
                 FormCommand formState = formActionCommandMap.get(key);
-                System.out.println(key + ". " + formState.getMenuLabel());
+                System.out.println(key + ". " + formState.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");

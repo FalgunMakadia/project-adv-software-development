@@ -6,7 +6,7 @@ import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import java.sql.SQLException;
 
 public class SaveFormCommand extends FormCommand {
-    private final String FIELD_LABEL = "Save Details";
+    private final String COMMAND_LABEL = "Save Details";
 
     public SaveFormCommand(User user) {
         super(user);
@@ -30,7 +30,7 @@ public class SaveFormCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }

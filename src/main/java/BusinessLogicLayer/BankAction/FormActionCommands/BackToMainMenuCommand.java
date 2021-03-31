@@ -24,7 +24,7 @@ public class BackToMainMenuCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
+    public String getCommandLabel() {
         return menuLabel;
     }
 }

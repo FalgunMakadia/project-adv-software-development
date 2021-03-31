@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DOBCommand extends FormCommand {
-    private final String FIELD_LABEL = "Date Of Birth";
+    private final String COMMAND_LABEL = "Date Of Birth";
 
     public DOBCommand(User user) {
         super(user);
@@ -26,8 +26,8 @@ public class DOBCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 
     public boolean validateBirthDate(String birthDate) {

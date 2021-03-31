@@ -35,5 +35,5 @@ public abstract class FormCommand {
 
     public abstract String getFieldValue();
 
-    public abstract String getMenuLabel();
+    public abstract String getCommandLabel();
 }

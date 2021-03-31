@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class ContactCommand extends FormCommand {
-    private final String FIELD_LABEL = "Contact";
+    private final String COMMAND_LABEL = "Contact";
 
     public ContactCommand(User user) {
         super(user);
@@ -21,8 +21,8 @@ public class ContactCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_LABEL;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 
 }

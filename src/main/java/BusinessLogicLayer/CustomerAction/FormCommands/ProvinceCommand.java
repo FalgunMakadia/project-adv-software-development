@@ -3,7 +3,7 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.User;
 
 public class ProvinceCommand extends FormCommand {
-    private final String FIELD_NAME = "Province";
+    private final String COMMAND_LABEL = "Province";
 
     public ProvinceCommand(User user) {
         super(user);
@@ -21,7 +21,7 @@ public class ProvinceCommand extends FormCommand {
     }
 
     @Override
-    public String getMenuLabel() {
-        return FIELD_NAME;
+    public String getCommandLabel() {
+        return COMMAND_LABEL;
     }
 }

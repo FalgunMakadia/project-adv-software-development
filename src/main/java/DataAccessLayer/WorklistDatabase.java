@@ -35,7 +35,7 @@ public class WorklistDatabase implements IWorklistDatabase {
 
         int record_id = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
-        if(null !=  rs && rs.next()){
+        if (null != rs && rs.next()) {
             record_id = rs.getInt(1);
         }
 
@@ -65,12 +65,41 @@ public class WorklistDatabase implements IWorklistDatabase {
 
     @Override
     public WorklistRequest getWorkListRequest(int id) {
+        String query = "SELECT * from worklist WHERE request_id=?";
+        WorklistRequest worklistRequest;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.first()) {
+                worklistRequest = new WorklistRequest();
+                User user = getUserDetails(id);
+                String worklistType = resultSet.getString("request_type");
+                String priority = resultSet.getString("priority");
+                String accountNumber = resultSet.getString("account_number");
+                String handledBy = resultSet.getString("handled_by");
+
+                worklistRequest.setRequestType(worklistType);
+                worklistRequest.setPriority(priority);
+                worklistRequest.setAccountNumber(accountNumber);
+                worklistRequest.setHandledBy(handledBy);
+                worklistRequest.setUser(user);
+
+                return worklistRequest;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return null;
     }
 
     @Override
     public Map<Integer, WorklistRequest> getWorkLists() {
-        Map<Integer,WorklistRequest> worklistRequestMap = new HashMap<>();
+        Map<Integer, WorklistRequest> worklistRequestMap = new HashMap<>();
         String query = "SELECT * FROM worklist";
         PreparedStatement statement = null;
         try {
@@ -85,22 +114,56 @@ public class WorklistDatabase implements IWorklistDatabase {
                 worklistRequest.setHandledBy(resultSet.getString("handled_by"));
                 worklistRequestMap.put(requestId, worklistRequest);
             }
-//            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-//            int cols = resultSetMetaData.getColumnCount();
-//            for (int i = 1; i <= cols; i++) {
-//                System.out.print(resultSetMetaData.getColumnName(i) + "\t");
-//            }
-//            System.out.println();
-//            while (resultSet.next()) {
-//                for (int i = 1; i <= cols; i++) {
-//                    System.out.print(resultSet.getString(i) + "\t \t \t");
-//                }
-//                System.out.println();
-//            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return worklistRequestMap;
+    }
+
+    @Override
+    public User getUserDetails(int id) {
+        String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
+        User user = new Customer();
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.first()) {
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setMiddleName(resultSet.getString("middle_name"));
+                user.setAddressLine1(resultSet.getString("addressline_1"));
+                user.setAddressLine2(resultSet.getString("addressline_2"));
+                user.setCity(resultSet.getString("city"));
+                user.setProvince(resultSet.getString("province"));
+                user.setPostalCode(resultSet.getString("postal_code"));
+                user.setEmailAddress(resultSet.getString("email"));
+                user.setContact(resultSet.getString("contact_number"));
+                user.setPassport(resultSet.getString("passport_number"));
+                user.setSsnNo(resultSet.getString("ssn_number"));
+                user.setAccountNumber(resultSet.getString("account_no"));
+                user.setDateOfBirth(resultSet.getString("birth_date"));
+
+                return user;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean updateAssignee(int id, String assigneeUsername) {
+        String query = "UPDATE worklist SET handled_by = ? WHERE request_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, assigneeUsername);
+            statement.setInt(2, id);
+
+            int affectedRows = statement.executeUpdate();
+            return affectedRows == 1 ? true : false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

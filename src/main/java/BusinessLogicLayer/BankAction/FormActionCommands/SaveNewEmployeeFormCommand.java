@@ -37,7 +37,7 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
 
 
     @Override
-    public String getMenuLabel() {
+    public String getCommandLabel() {
         return menuLabel;
     }
 
