@@ -2,11 +2,11 @@ package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.User;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import PresentationLayer.CommonPages.IBankStatementTable;
 import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.MenuPages.Command;
 import PresentationLayer.MenuPages.IUserForm;
-import PresentationLayer.MenuPages.IWorklistPage;
+import PresentationLayer.CommonPages.IWorklistTable;
 
 import java.util.Map;
 
@@ -21,5 +21,7 @@ public interface IPresentationFactory {
 
     IUserForm createUserForm(Map<Integer, FormCommand> formFields);
 
-    IWorklistPage createWorklistPage();
+    IWorklistTable createWorklistTable();
+
+    IBankStatementTable createBankStatementTable();
 }
