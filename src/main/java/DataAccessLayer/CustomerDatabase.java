@@ -3,18 +3,57 @@ package DataAccessLayer;
 import BusinessLogicLayer.User.Customer;
 import BusinessLogicLayer.User.User;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class CustomerDatabase implements ICustomerDatabase {
     Connection connection = null;
 
-    public CustomerDatabase(){
-         connection = DatabaseConnection.instance();
+    public CustomerDatabase() {
+        connection = DatabaseConnection.instance();
     }
 
     @Override
-    public int add(User user) {
-        return 0;
+    public boolean add(User user) {
+        String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
+                "addressline_1, addressline_2, city, province, postal_code, email" +
+                "contact_number, passport_number, ssn_number, birth_date) VALUES " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String createAccount = "INSERT INTO accounts (account_no, balance, active_status) VALUES " +
+                "(?, ?, ?)";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMiddleName());
+            statement.setString(4, user.getAddressLine1());
+            statement.setString(5, user.getAddressLine2());
+            statement.setString(6, user.getCity());
+            statement.setString(7, user.getProvince());
+            statement.setString(8, user.getPostalCode());
+            statement.setString(9, user.getEmailAddress());
+            statement.setString(10, user.getContact());
+            statement.setString(11, user.getPassport());
+            statement.setString(12, user.getSsnNo());
+            statement.setString(13, user.getDateOfBirth());
+
+            statement.executeUpdate();
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (null != resultSet && resultSet.next()) {
+                long accontNumber = resultSet.getLong(1);
+                if (0L != accontNumber) {
+                    PreparedStatement createAccountStatement = connection.prepareStatement(createAccount);
+                    int affectedRows = createAccountStatement.executeUpdate();
+
+                    return affectedRows == 1 ? true : false;
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     @Override

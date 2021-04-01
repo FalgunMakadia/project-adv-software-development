@@ -5,7 +5,7 @@ import BusinessLogicLayer.User.User;
 import java.sql.SQLException;
 
 public interface ICustomerDatabase {
-    int add(User user);
+    boolean add(User user);
 
     void delete(User user);
 

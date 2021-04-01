@@ -4,6 +4,7 @@ import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.DatabaseFactory;
+import DataAccessLayer.ICustomerDatabase;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
 import PresentationLayer.CommonPages.IUserDetailPage;
@@ -17,6 +18,7 @@ public abstract class WorkListAction {
     protected IUserInterface userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IWorklistDatabase worklistDatabase;
+    protected ICustomerDatabase customerDatabase;
     protected IUserDetailPage userDetailPage;
     IDatabaseFactory databaseFactory;
 
@@ -31,6 +33,7 @@ public abstract class WorkListAction {
 
         this.databaseFactory = new DatabaseFactory();
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
+        this.customerDatabase = databaseFactory.createCustomerDatabase();
     }
 
     public abstract void processWorkList();
@@ -40,5 +43,15 @@ public abstract class WorkListAction {
         this.userInterface.displayMessage("Request Type: " + worklistRequest.getRequestType());
         this.userInterface.displayMessage("Account Number: " + worklistRequest.getAccountNumber());
         this.userInterface.displayMessage("Priority: " + worklistRequest.getPriority());
+    }
+
+    public Boolean assignWorklist() {
+        String userInput = userInterface.getConfirmation("Assign to me ?");
+        if (userInput.equalsIgnoreCase("y")) {
+            String empUserName = loggedInUserContext.getUserName();
+            boolean isUpdated = worklistDatabase.updateAssignee(worklistID, empUserName);
+            return isUpdated;
+        }
+        return false;
     }
 }

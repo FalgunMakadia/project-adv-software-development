@@ -16,7 +16,7 @@ import java.util.Map;
 public class WorkList extends Action {
     private static final int EXIT = 0;
     private static final String CHANGE_REQUEST = "change";
-    private static final String NEW_ACCOUNT_REQUEST = "new";
+    private static final String CREATE_ACCOUNT_REQUEST = "create";
 
     private static final String menuLabel = "WorkList";
     private IWorklistDatabase worklistDatabase;
@@ -58,7 +58,7 @@ public class WorkList extends Action {
                     if(worklistRequest.getRequestType().equals(CHANGE_REQUEST)) {
                         workListAction = new WorkListChangeAction(worklistRequest, userInput);
                         workListAction.processWorkList();
-                    } else if(worklistRequest.getRequestType().equals(NEW_ACCOUNT_REQUEST)) {
+                    } else if(worklistRequest.getRequestType().equals(CREATE_ACCOUNT_REQUEST)) {
                         workListAction = new WorkListNewAccountRequest(worklistRequest, userInput);
                         workListAction.processWorkList();
                     }
