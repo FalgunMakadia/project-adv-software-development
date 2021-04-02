@@ -93,25 +93,29 @@ public class CustomerDatabase implements ICustomerDatabase {
     @Override
     public boolean updateUser(String accountNumber, User user) {
         String query = "UPDATE customers SET " +
-                "first_name = " + user.getFirstName() + "," +
-                "middle_name = " + user.getMiddleName() + "," +
-                "last_name = " + user.getLastName() + "," +
-                "addressline_1 = " + user.getAddressLine1() + "," +
-                "addressline_2 = " + user.getAddressLine2() + "," +
-                "city = " + user.getCity() + "," +
-                "province = " + user.getProvince() + "," +
-                "postal_code = " + user.getPostalCode() + "," +
-                "email = " + user.getEmailAddress() + "," +
-                "contact_number = " + user.getContact() + "," +
-                "passport_number = " + user.getPassport() + "," +
-                "ssn_number = " + user.getSsnNo() + "," +
-                "birth_date = " + user.getDateOfBirth() +
-                " WHERE account_no = " + accountNumber;
+                "first_name = ?, last_name = ?, middle_name = ?, addressline_1 = ?," +
+                "addressline_2 = ?, city = ?, province = ?, postal_code = ?," +
+                "email = ?, contact_number = ?, passport_number = ?, ssn_number = ?," +
+                "birth_date = ? WHERE account_no = ?";
 
         try {
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMiddleName());
+            statement.setString(4, user.getAddressLine1());
+            statement.setString(5, user.getAddressLine2());
+            statement.setString(6, user.getCity());
+            statement.setString(7, user.getProvince());
+            statement.setString(8, user.getPostalCode());
+            statement.setString(9, user.getEmailAddress());
+            statement.setString(10, user.getContact());
+            statement.setString(11, user.getPassport());
+            statement.setString(12, user.getSsnNo());
+            statement.setString(13, user.getDateOfBirth());
+            statement.setString(14, accountNumber);
 
-            int affectedRows = statement.executeUpdate(query);
+            int affectedRows = statement.executeUpdate();
 
             return affectedRows == 1 ? true : false;
         } catch (SQLException throwables) {

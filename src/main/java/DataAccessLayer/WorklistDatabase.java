@@ -24,8 +24,7 @@ public class WorklistDatabase implements IWorklistDatabase {
                 "(worklist_id, account_no, first_name, last_name, " +
                 "middle_name, addressline_1, addressline_2, city, " +
                 "province, postal_code, email, contact_number, " +
-                "passport_number, ssn_number) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+                "passport_number, ssn_number, birth_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(insertWorkListQuery, Statement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, worklistRequest.getRequestType());
@@ -56,6 +55,7 @@ public class WorklistDatabase implements IWorklistDatabase {
             userInsertStatement.setString(12, user.getContact());
             userInsertStatement.setString(13, user.getPassport());
             userInsertStatement.setString(14, user.getSsnNo());
+            userInsertStatement.setString(15, user.getDateOfBirth());
 
             userInsertStatement.executeUpdate();
         }

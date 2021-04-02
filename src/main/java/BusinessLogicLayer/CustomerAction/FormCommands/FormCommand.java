@@ -1,6 +1,8 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
 import BusinessLogicLayer.User.Customer;
+import BusinessLogicLayer.User.ILoggedInUserContext;
+import BusinessLogicLayer.User.LoggedInUserContext;
 import BusinessLogicLayer.User.User;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
@@ -13,6 +15,7 @@ public abstract class FormCommand {
     protected IUserInterface userInterface;
     protected IWorklistDatabase worklistDatabase;
     protected DatabaseFactory databaseFactory;
+    protected ILoggedInUserContext loggedInUserContext;
 
     public FormCommand(User user) {
         this.user = user;
@@ -29,6 +32,7 @@ public abstract class FormCommand {
         this.databaseFactory = new DatabaseFactory();
         this.userInterface = presentationFactory.createUserInterface();
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
+        this.loggedInUserContext = LoggedInUserContext.instance();
     }
 
     public abstract void execute();

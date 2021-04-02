@@ -6,6 +6,7 @@ import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import java.sql.SQLException;
 
 public class SaveFormCommand extends FormCommand {
+    private final String CHANGE_REQUEST = "change personal details";
     private final String COMMAND_LABEL = "Save Details";
 
     public SaveFormCommand(User user) {
@@ -15,10 +16,16 @@ public class SaveFormCommand extends FormCommand {
     @Override
     public void execute() {
         try {
-            WorklistRequest worklistRequest = new WorklistRequest("change",
+            WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
                     user.getAccountNumber(),
                     user);
-            worklistDatabase.addWorkListRequest(worklistRequest);
+            int worklistId = worklistDatabase.addWorkListRequest(worklistRequest);
+            if(worklistId == 0) {
+                userInterface.displayMessage("There is an error in submitting request");
+            } else {
+                userInterface.displayMessage("Request is generated with ID: " + worklistId + "\n");
+            }
+            loggedInUserContext.setCurrentPage("");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -54,4 +54,8 @@ public abstract class WorkListAction {
         }
         return false;
     }
+
+    public void returnToMainMenu() {
+        loggedInUserContext.setCurrentPage("");
+    }
 }

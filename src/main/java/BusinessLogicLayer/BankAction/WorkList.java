@@ -15,8 +15,8 @@ import java.util.Map;
 
 public class WorkList extends Action {
     private static final int EXIT = 0;
-    private static final String CHANGE_REQUEST = "change";
-    private static final String CREATE_ACCOUNT_REQUEST = "create";
+    private static final String CHANGE_REQUEST = "change personal details";
+    private static final String CREATE_ACCOUNT_REQUEST = "create new account";
 
     private static final String menuLabel = "WorkList";
     private IWorklistDatabase worklistDatabase;
