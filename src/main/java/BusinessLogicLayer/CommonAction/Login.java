@@ -16,7 +16,7 @@ public class Login implements ILogin {
         loggedInUserContext = LoggedInUserContext.instance();
 
         try {
-            loginDatabase = databaseFactory.createLoginDatabase();
+            loginDatabase = databaseFactory.createUserDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }

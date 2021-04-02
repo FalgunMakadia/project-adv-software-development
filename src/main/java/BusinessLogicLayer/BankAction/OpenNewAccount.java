@@ -74,12 +74,13 @@ public class OpenNewAccount extends Action {
         openNewAccountFormFieldMap.put(4, new AddressLine1Command(customer));
         openNewAccountFormFieldMap.put(5, new AddressLine2Command(customer));
         openNewAccountFormFieldMap.put(6, new CityCommand(customer));
-        openNewAccountFormFieldMap.put(7, new ProvinceCommand(customer));
-        openNewAccountFormFieldMap.put(8, new ContactCommand(customer));
-        openNewAccountFormFieldMap.put(9, new EmailCommand(customer));
-        openNewAccountFormFieldMap.put(10, new PassPortNumberCommand(customer));
-        openNewAccountFormFieldMap.put(11, new SSNNumberCommand(customer));
-        openNewAccountFormFieldMap.put(12, new DOBCommand(customer));
+        openNewAccountFormFieldMap.put(7, new PostalCodeCommand(customer));
+        openNewAccountFormFieldMap.put(8, new ProvinceCommand(customer));
+        openNewAccountFormFieldMap.put(9, new ContactCommand(customer));
+        openNewAccountFormFieldMap.put(10, new EmailCommand(customer));
+        openNewAccountFormFieldMap.put(11, new PassPortNumberCommand(customer));
+        openNewAccountFormFieldMap.put(12, new SSNNumberCommand(customer));
+        openNewAccountFormFieldMap.put(13, new DOBCommand(customer));
     }
 
 }

@@ -31,7 +31,7 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
 
 
     @Override
-    public int insertNewUser() {
+    public int insertNewUser(String userName, int defaultPassword, String c) {
         return 0;
     }
 

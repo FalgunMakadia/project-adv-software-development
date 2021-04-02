@@ -132,4 +132,12 @@ public abstract class User {
         this.accountNumber = accountNumber;
     }
 
+    public String getUserName() {
+        return firstName + "_" + lastName;
+    }
+
+    public int generateDefaultPassword() {
+        String password = lastName + dateOfBirth;
+        return password.hashCode();
+    }
 }
