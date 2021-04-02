@@ -31,6 +31,8 @@ public class WorkListChangeAction extends WorkListAction {
                     userInterface.displayMessage("Error in updating user details");
                 }
             }
+
+            returnToMainMenu();
         } else {
             userInterface.displayMessage("Error in updating work list details...");
         }

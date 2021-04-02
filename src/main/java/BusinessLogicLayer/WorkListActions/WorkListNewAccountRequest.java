@@ -26,6 +26,8 @@ public class WorkListNewAccountRequest extends WorkListAction {
                     userInterface.displayMessage("Error in Creating New User");
                 }
             }
+
+            returnToMainMenu();
         } else {
             userInterface.displayMessage("Error in updating work list details...");
         }
