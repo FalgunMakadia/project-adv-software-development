@@ -16,4 +16,6 @@ public interface IWorklistDatabase {
     User getUserDetails(int id);
 
     boolean updateAssignee(int id, String assigneeUsername);
+
+    boolean updateProcessStatus(int worklistId, Boolean isProcessed);
 }

@@ -24,14 +24,13 @@ public class WorkListChangeAction extends WorkListAction {
             if (processInput.equalsIgnoreCase("y")) {
                 boolean isDetailsUpdated = customerDatabase.
                         updateUser(worklistRequest.getAccountNumber(), worklistRequest.getUser());
-
+                worklistDatabase.updateProcessStatus(worklistID, isDetailsUpdated);
                 if (isDetailsUpdated) {
                     userInterface.displayMessage("User details updated successfully");
                 } else {
                     userInterface.displayMessage("Error in updating user details");
                 }
             }
-
             returnToMainMenu();
         } else {
             userInterface.displayMessage("Error in updating work list details...");

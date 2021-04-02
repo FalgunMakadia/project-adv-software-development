@@ -63,7 +63,8 @@ public class WorkList extends Action {
                         workListAction.processWorkList();
                     }
                 }
-            } while(userInput != EXIT);
+            } while(loggedInUserContext.getCurrentPage().equals(menuLabel)
+                    && userInput != EXIT);
         }
     }
 }

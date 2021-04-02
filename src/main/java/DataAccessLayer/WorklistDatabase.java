@@ -18,8 +18,8 @@ public class WorklistDatabase implements IWorklistDatabase {
     @Override
     public int addWorkListRequest(WorklistRequest worklistRequest) throws SQLException {
         String insertWorkListQuery = "INSERT INTO worklist " +
-                "(request_type, priority, account_number, handled_by) " +
-                "VALUES (? ,?, ?, ?)";
+                "(request_type, priority, account_number) " +
+                "VALUES (? ,?, ?)";
         String insertWorkListUserQuery = "INSERT INTO worklist_user_details " +
                 "(worklist_id, account_no, first_name, last_name, " +
                 "middle_name, addressline_1, addressline_2, city, " +
@@ -30,7 +30,6 @@ public class WorklistDatabase implements IWorklistDatabase {
         statement.setString(1, worklistRequest.getRequestType());
         statement.setString(2, worklistRequest.getPriority());
         statement.setString(3, worklistRequest.getAccountNumber());
-        statement.setString(4, null);
 
         int record_id = statement.executeUpdate();
         ResultSet rs = statement.getGeneratedKeys();
@@ -100,7 +99,7 @@ public class WorklistDatabase implements IWorklistDatabase {
     @Override
     public Map<Integer, WorklistRequest> getWorkLists() {
         Map<Integer, WorklistRequest> worklistRequestMap = new HashMap<>();
-        String query = "SELECT * FROM worklist";
+        String query = "SELECT * FROM worklist WHERE is_processed = 0";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
@@ -162,6 +161,21 @@ public class WorklistDatabase implements IWorklistDatabase {
 
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1 ? true : false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateProcessStatus(int worklistId, Boolean isProcessed) {
+        String query = "UPDATE worklist SET isProcessed = ? WHERE request_id = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setBoolean(1, isProcessed);
+            statement.setInt(2, worklistId);
+
+            return statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
