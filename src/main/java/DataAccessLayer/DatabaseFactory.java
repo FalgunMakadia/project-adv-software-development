@@ -22,4 +22,8 @@ public class DatabaseFactory implements IDatabaseFactory {
     public IWorklistDatabase createWorkListDatabase() {
         return new WorklistDatabase();
     }
+
+    public IEmployeeDatabase createNewEmployee() {
+        return new EmployeeDatabase();
+}
 }
