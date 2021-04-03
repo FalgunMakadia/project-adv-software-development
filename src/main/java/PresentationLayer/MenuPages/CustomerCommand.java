@@ -2,6 +2,7 @@ package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.CommonAction.SignOut;
 import BusinessLogicLayer.CustomerAction.*;
 import BusinessLogicLayer.IActionFactory;
@@ -13,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CustomerCommand extends Command{
-    private Map<String, Action> menu;
+    private Map<String, IAction> menu;
     public CustomerCommand(){
         IActionFactory actionFactory = new ActionFactory();
 

@@ -2,13 +2,14 @@ package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.IActionFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BankEmployeeCommand extends Command{
-    private Map<String, Action> menu;
+    private Map<String, IAction> menu;
     private static final String pageName = "BankEmployeeProfile";
 
     public BankEmployeeCommand(){

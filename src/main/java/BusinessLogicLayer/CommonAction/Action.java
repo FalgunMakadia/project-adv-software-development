@@ -8,7 +8,7 @@ import PresentationLayer.PresentationFactory;
 
 import java.math.BigInteger;
 
-public abstract class Action {
+public abstract class Action implements IAction{
     protected IUserInterface userInterface = null;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;

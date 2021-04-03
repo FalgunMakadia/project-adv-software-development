@@ -5,6 +5,7 @@ import BusinessLogicLayer.BankAction.EnrollNewEmployee;
 import BusinessLogicLayer.BankAction.ExistingBankAccount;
 import BusinessLogicLayer.BankAction.WorkList;
 import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.CommonAction.SignOut;
 import BusinessLogicLayer.IActionFactory;
 
@@ -12,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BankManagerCommand extends Command {
-    private Map<String, Action> menu;
+    private Map<String, IAction> menu;
     private static final String pageName = "BankManager";
 
     public BankManagerCommand() {
