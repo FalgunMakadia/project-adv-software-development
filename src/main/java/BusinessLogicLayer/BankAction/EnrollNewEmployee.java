@@ -2,7 +2,7 @@ package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
 import BusinessLogicLayer.BankAction.FormActionCommands.EditFormCommand;
-import BusinessLogicLayer.BankAction.FormActionCommands.SaveOpenNewAccountFormCommand;
+import BusinessLogicLayer.BankAction.FormActionCommands.SaveNewEmployeeFormCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.BankEmployee;
@@ -21,7 +21,7 @@ public class EnrollNewEmployee extends Action {
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
         formActionCommandMap.put(1, new EditFormCommand("Edit", bankEmployee, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, new SaveOpenNewAccountFormCommand("Save", bankEmployee));
+        formActionCommandMap.put(2, new SaveNewEmployeeFormCommand("Save", bankEmployee));
         formActionCommandMap.put(3, new BackToMainMenuCommand("Back to main menu"));
     }
 

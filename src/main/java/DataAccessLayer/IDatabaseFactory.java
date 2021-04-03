@@ -9,6 +9,7 @@ public interface IDatabaseFactory {
 
     IWorklistDatabase createWorkListDatabase();
 
-    IUserDetailsDatabase createUserDatabase() throws IOException;
+    IUserDetailsDatabase createLoginDatabase() throws IOException;
 
+    IEmployeeDatabase createNewEmployee() throws IOException;
 }
