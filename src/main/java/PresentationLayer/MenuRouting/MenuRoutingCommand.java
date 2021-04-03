@@ -1,6 +1,6 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.MenuRouting;
 
-public abstract class Command implements ICommand {
+public abstract class MenuRoutingCommand implements IMenuRoutingCommand {
     private String userRole = "";
 
     public void setUserRole(String userRole) {

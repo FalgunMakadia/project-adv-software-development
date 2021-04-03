@@ -7,7 +7,7 @@ import PresentationLayer.CommonPages.IBankStatementTable;
 import PresentationLayer.CommonPages.IUserDetailPage;
 import PresentationLayer.CommonPages.IUserInterface;
 
-import PresentationLayer.MenuPages.ICommand;
+import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 import PresentationLayer.MenuPages.IUserForm;
 import PresentationLayer.CommonPages.IWorklistTable;
 
@@ -16,7 +16,7 @@ import java.util.Map;
 public interface IPresentationFactory {
     IUserInterface createUserInterface();
 
-    ICommand createExistingBankAccountCommand();
+    IMenuRoutingCommand createExistingBankAccountCommand();
 
     IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract);
 

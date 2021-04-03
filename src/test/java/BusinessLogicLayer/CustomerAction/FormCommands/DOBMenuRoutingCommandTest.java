@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DOBCommandTest {
+class DOBMenuRoutingCommandTest {
     String date1;
     String date2;
     String date3;

@@ -4,6 +4,8 @@ import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.*;
 import PresentationLayer.MenuPages.*;
+import PresentationLayer.MenuRouting.ExistingBankAccountMenuRoutingCommand;
+import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
 import java.util.Map;
 
@@ -14,8 +16,8 @@ public class PresentationFactory implements IPresentationFactory {
     }
 
     @Override
-    public ICommand createExistingBankAccountCommand() {
-        return new ExistingBankAccountCommand();
+    public IMenuRoutingCommand createExistingBankAccountCommand() {
+        return new ExistingBankAccountMenuRoutingCommand();
     }
 
     @Override

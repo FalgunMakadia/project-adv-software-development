@@ -1,18 +1,18 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.MenuRouting;
 
 import BusinessLogicLayer.ActionFactory;
-import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.IActionFactory;
+import PresentationLayer.MenuPages.MenuPage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class BankEmployeeCommand extends Command{
+public class BankEmployeeMenuRoutingCommand extends MenuRoutingCommand {
     private Map<String, IAction> menu;
     private static final String pageName = "BankEmployeeProfile";
 
-    public BankEmployeeCommand(){
+    public BankEmployeeMenuRoutingCommand(){
         IActionFactory actionFactory = new ActionFactory();
         menu = new LinkedHashMap<>();
         menu.put("1", actionFactory.createOpenNewAccount());

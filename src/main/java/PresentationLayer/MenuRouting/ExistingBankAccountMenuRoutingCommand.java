@@ -1,22 +1,17 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.MenuRouting;
 
 import BusinessLogicLayer.ActionFactory;
-import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.IAction;
-import BusinessLogicLayer.CommonAction.SignOut;
-import BusinessLogicLayer.CustomerAction.*;
 import BusinessLogicLayer.IActionFactory;
-import BusinessLogicLayer.TransactionAction.Deposit;
-import BusinessLogicLayer.TransactionAction.Transfer;
-import BusinessLogicLayer.TransactionAction.Withdraw;
+import PresentationLayer.MenuPages.MenuPage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ExistingBankAccountCommand extends Command {
+public class ExistingBankAccountMenuRoutingCommand extends MenuRoutingCommand {
     private Map<String, IAction> menu;
 
-    public ExistingBankAccountCommand() {
+    public ExistingBankAccountMenuRoutingCommand() {
         IActionFactory actionFactory = new ActionFactory();
 
         menu = new LinkedHashMap<>();

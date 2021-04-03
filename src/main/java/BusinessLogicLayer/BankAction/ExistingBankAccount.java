@@ -4,9 +4,7 @@ import BusinessLogicLayer.CommonAction.Action;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
-import PresentationLayer.MenuPages.ICommand;
-
-import java.sql.SQLException;
+import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
 public class ExistingBankAccount extends Action {
     private static final String menuLabel = "Existing Bank Account";
@@ -34,7 +32,7 @@ public class ExistingBankAccount extends Action {
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         if (accountDatabase.verifyAccountNumber(accountNumber)) {
             loggedInUserContext.setAccountNumber(accountNumber);
-            ICommand command = presentationFactory.createExistingBankAccountCommand();
+            IMenuRoutingCommand command = presentationFactory.createExistingBankAccountCommand();
             command.execute();
         }
         userInterface.insertEmptyLine();

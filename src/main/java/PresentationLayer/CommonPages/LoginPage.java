@@ -2,9 +2,9 @@ package PresentationLayer.CommonPages;
 
 import BusinessLogicLayer.CommonAction.ILogin;
 import BusinessLogicLayer.ActionFactory;
-import PresentationLayer.MenuPages.BankManagerCommand;
-import PresentationLayer.MenuPages.CustomerCommand;
-import PresentationLayer.MenuPages.ICommand;
+import PresentationLayer.MenuRouting.BankManagerMenuRoutingCommand;
+import PresentationLayer.MenuRouting.CustomerMenuRoutingCommand;
+import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +13,12 @@ import java.util.Scanner;
 public class LoginPage {
     private String username;
     private String password;
-    private Map<String,ICommand> route;
+    private Map<String, IMenuRoutingCommand> route;
     public LoginPage(){
         route = new HashMap<>();
-        route.put("E", new BankManagerCommand());
-        route.put("M", new BankManagerCommand());
-        route.put("C", new CustomerCommand());
+        route.put("E", new BankManagerMenuRoutingCommand());
+        route.put("M", new BankManagerMenuRoutingCommand());
+        route.put("C", new CustomerMenuRoutingCommand());
     }
     public void takeUserInput() {
         Scanner scanner = new Scanner(System.in);
@@ -48,7 +48,7 @@ public class LoginPage {
     }
 
     private void routeToMenu(String userRole){
-       ICommand command = route.get(userRole);
+       IMenuRoutingCommand command = route.get(userRole);
        command.execute();
     }
 
