@@ -1,6 +1,5 @@
 package PresentationLayer;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.*;
@@ -15,7 +14,7 @@ public class PresentationFactory implements IPresentationFactory {
     }
 
     @Override
-    public Command createExistingBankAccountCommand() {
+    public ICommand createExistingBankAccountCommand() {
         return new ExistingBankAccountCommand();
     }
 

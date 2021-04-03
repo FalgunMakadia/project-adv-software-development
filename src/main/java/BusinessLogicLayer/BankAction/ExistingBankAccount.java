@@ -4,7 +4,7 @@ import BusinessLogicLayer.CommonAction.Action;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
-import PresentationLayer.MenuPages.Command;
+import PresentationLayer.MenuPages.ICommand;
 
 import java.sql.SQLException;
 
@@ -35,7 +35,7 @@ public class ExistingBankAccount extends Action {
             IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
             if (accountDatabase.verifyAccountNumber(accountNumber)) {
                 loggedInUserContext.setAccountNumber(accountNumber);
-                Command command = presentationFactory.createExistingBankAccountCommand();
+                ICommand command = presentationFactory.createExistingBankAccountCommand();
                 command.execute();
             }
         } catch (SQLException exception) {

@@ -3,8 +3,8 @@ package PresentationLayer.CommonPages;
 import BusinessLogicLayer.CommonAction.ILogin;
 import BusinessLogicLayer.ActionFactory;
 import PresentationLayer.MenuPages.BankManagerCommand;
-import PresentationLayer.MenuPages.Command;
 import PresentationLayer.MenuPages.CustomerCommand;
+import PresentationLayer.MenuPages.ICommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class LoginPage {
     private String username;
     private String password;
-    private Map<String,Command> route;
+    private Map<String,ICommand> route;
     public LoginPage(){
         route = new HashMap<>();
         route.put("E", new BankManagerCommand());
@@ -48,7 +48,7 @@ public class LoginPage {
     }
 
     private void routeToMenu(String userRole){
-       Command command = route.get(userRole);
+       ICommand command = route.get(userRole);
        command.execute();
     }
 
