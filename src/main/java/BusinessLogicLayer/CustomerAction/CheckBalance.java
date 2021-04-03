@@ -32,14 +32,10 @@ public class CheckBalance extends Action {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
-        try {
-            userInterface.displayMessage("Hello " + name);
-            currentBalance = accountDatabase.getUserBalance(accountNumber);
-            userInterface.displayMessage("Current Balance in your account number " + accountNumber + " is: " + currentBalance);
-            userInterface.insertEmptyLine();
-            userInterface.insertEmptyLine();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        userInterface.displayMessage("Hello " + name);
+        currentBalance = accountDatabase.getUserBalance(accountNumber);
+        userInterface.displayMessage("Current Balance in your account number " + accountNumber + " is: " + currentBalance);
+        userInterface.insertEmptyLine();
+        userInterface.insertEmptyLine();
     }
 }

@@ -28,20 +28,14 @@ public class ExistingBankAccount extends Action {
 
     @Override
     public void performAction() {
-        try {
-            setCurrentPageInContext();
-            String accountNumber = userInterface.getMandatoryUserInput("Enter Account Number: ");
-            validateLongInputFormat(accountNumber);
-            IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
-            if (accountDatabase.verifyAccountNumber(accountNumber)) {
-                loggedInUserContext.setAccountNumber(accountNumber);
-                ICommand command = presentationFactory.createExistingBankAccountCommand();
-                command.execute();
-            }
-        } catch (SQLException exception) {
-            userInterface.displayMessage("Error occurred in database connection.");
-        } catch (Exception exception) {
-            userInterface.displayMessage(exception.getMessage());
+        setCurrentPageInContext();
+        String accountNumber = userInterface.getMandatoryUserInput("Enter Account Number: ");
+        validateLongInputFormat(accountNumber);
+        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        if (accountDatabase.verifyAccountNumber(accountNumber)) {
+            loggedInUserContext.setAccountNumber(accountNumber);
+            ICommand command = presentationFactory.createExistingBankAccountCommand();
+            command.execute();
         }
         userInterface.insertEmptyLine();
     }

@@ -11,42 +11,24 @@ import java.sql.SQLException;
 public class Login implements ILogin {
     private IUserDetailsDatabase loginDatabase = null;
     private LoggedInUserContext loggedInUserContext;
+
     public Login() {
         DatabaseFactory databaseFactory = new DatabaseFactory();
         loggedInUserContext = LoggedInUserContext.instance();
 
-        try {
-            loginDatabase = databaseFactory.createUserDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loginDatabase = databaseFactory.createUserDatabase();
     }
 
     public void validateUser(String userName, String password) {
         int hashedPassword = password.hashCode();
-        ResultSet resultSet = loginDatabase.validateUser(userName, hashedPassword);
-        createLoggedInUserContext(resultSet);
+        loginDatabase.validateUser(userName, hashedPassword);
     }
 
-    private void createLoggedInUserContext(ResultSet resultSet) {
-        try {
-            while (resultSet.next()) {
-                loggedInUserContext.setUserName(resultSet.getString("userName"));
-                loggedInUserContext.setUserRole(resultSet.getString("userRole"));
-                loggedInUserContext.setAccountNumber(resultSet.getString("accountNumber"));
-                loggedInUserContext.setActiveStatus(resultSet.getBoolean("ActiveStatus"));
-                loggedInUserContext.setLoginStatus(true);
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-    public boolean checkStatus(){
+    public boolean checkStatus() {
         return loggedInUserContext.getActiveStatus();
     }
 
-    public String getUserRole(){
+    public String getUserRole() {
         return loggedInUserContext.getUserRole();
     }
 }

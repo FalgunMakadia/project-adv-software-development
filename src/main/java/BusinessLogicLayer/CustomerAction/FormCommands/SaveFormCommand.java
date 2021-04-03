@@ -15,20 +15,16 @@ public class SaveFormCommand extends FormCommand {
 
     @Override
     public void execute() {
-        try {
-            WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
-                    profile.getAccountNumber(),
-                    profile);
-            int worklistId = worklistDatabase.addWorkListRequest(worklistRequest);
-            if(worklistId == 0) {
-                userInterface.displayMessage("There is an error in submitting request");
-            } else {
-                userInterface.displayMessage("Request is generated with ID: " + worklistId + "\n");
-            }
-            loggedInUserContext.setCurrentPage("");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
+                profile.getAccountNumber(),
+                profile);
+        int worklistId = worklistDatabase.addWorkListRequest(worklistRequest);
+        if (worklistId == 0) {
+            userInterface.displayMessage("There is an error in submitting request");
+        } else {
+            userInterface.displayMessage("Request is generated with ID: " + worklistId + "\n");
         }
+        loggedInUserContext.setCurrentPage("");
     }
 
     @Override

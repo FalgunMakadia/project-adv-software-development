@@ -38,17 +38,11 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
         int defaultPassword = profile.generateDefaultPassword();
 
         IUserDetailsDatabase userDatabase = null;
-        try {
-            userDatabase = databaseFactory.createUserDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        userDatabase = databaseFactory.createUserDatabase();
         userDatabase.insertNewUser(userName, defaultPassword, profile.getProfileRole());
-       
+
     }
 
-
-    
 
     @Override
     public String getFieldValue() {
@@ -57,10 +51,10 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
 
 
     private void createNewEmployee() throws IOException {
-        databaseFactory=new DatabaseFactory();
-        employeeDatabase=databaseFactory.createNewEmployee();
+        databaseFactory = new DatabaseFactory();
+        employeeDatabase = databaseFactory.createNewEmployee();
         employeeDatabase.add(profile);
-        
+
     }
 
 

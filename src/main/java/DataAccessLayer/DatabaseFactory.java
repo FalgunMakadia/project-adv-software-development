@@ -14,7 +14,7 @@ public class DatabaseFactory implements IDatabaseFactory {
     }
 
     @Override
-    public IUserDetailsDatabase createUserDatabase() throws IOException {
+    public IUserDetailsDatabase createUserDatabase() {
         return new UserDetailsDatabase();
     }
 

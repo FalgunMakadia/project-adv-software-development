@@ -10,13 +10,15 @@ import java.util.Map;
 
 public class WorklistDatabase implements IWorklistDatabase {
     Connection connection = null;
+    IDatabaseConnection databaseConnection;
 
     public WorklistDatabase() {
-        connection = DatabaseConnection.instance();
+        databaseConnection = DatabaseConnection.instance();
     }
 
     @Override
-    public int addWorkListRequest(WorklistRequest worklistRequest) throws SQLException {
+    public int addWorkListRequest(WorklistRequest worklistRequest) {
+        connection = databaseConnection.openConnection();
         String insertWorkListQuery = "INSERT INTO worklist " +
                 "(request_type, priority, account_number) " +
                 "VALUES (? ,?, ?)";
@@ -25,45 +27,53 @@ public class WorklistDatabase implements IWorklistDatabase {
                 "middle_name, addressline_1, addressline_2, city, " +
                 "province, postal_code, email, contact_number, " +
                 "passport_number, ssn_number, birth_date) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(insertWorkListQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(insertWorkListQuery, Statement.RETURN_GENERATED_KEYS);
 
-        statement.setString(1, worklistRequest.getRequestType());
-        statement.setString(2, worklistRequest.getPriority());
-        statement.setString(3, worklistRequest.getAccountNumber());
+            statement.setString(1, worklistRequest.getRequestType());
+            statement.setString(2, worklistRequest.getPriority());
+            statement.setString(3, worklistRequest.getAccountNumber());
 
-        int record_id = statement.executeUpdate();
-        ResultSet rs = statement.getGeneratedKeys();
-        if (null != rs && rs.next()) {
-            record_id = rs.getInt(1);
+            int record_id = statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            if (null != rs && rs.next()) {
+                record_id = rs.getInt(1);
+            }
+
+            if (0 != record_id) {
+                ProfileAbstract profileAbstract = worklistRequest.getUser();
+                PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
+                userInsertStatement.setInt(1, record_id);
+                userInsertStatement.setString(2, worklistRequest.getAccountNumber());
+                userInsertStatement.setString(3, profileAbstract.getFirstName());
+                userInsertStatement.setString(4, profileAbstract.getLastName());
+                userInsertStatement.setString(5, profileAbstract.getMiddleName());
+                userInsertStatement.setString(6, profileAbstract.getAddressLine1());
+                userInsertStatement.setString(7, profileAbstract.getAddressLine2());
+                userInsertStatement.setString(8, profileAbstract.getCity());
+                userInsertStatement.setString(9, profileAbstract.getProvince());
+                userInsertStatement.setString(10, profileAbstract.getPostalCode());
+                userInsertStatement.setString(11, profileAbstract.getEmailAddress());
+                userInsertStatement.setString(12, profileAbstract.getContact());
+                userInsertStatement.setString(13, profileAbstract.getPassport());
+                userInsertStatement.setString(14, profileAbstract.getSsnNo());
+                userInsertStatement.setString(15, profileAbstract.getDateOfBirth());
+
+                userInsertStatement.executeUpdate();
+            }
+            return record_id;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
-
-        if (0 != record_id) {
-            ProfileAbstract profileAbstract = worklistRequest.getUser();
-            PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
-            userInsertStatement.setInt(1, record_id);
-            userInsertStatement.setString(2, worklistRequest.getAccountNumber());
-            userInsertStatement.setString(3, profileAbstract.getFirstName());
-            userInsertStatement.setString(4, profileAbstract.getLastName());
-            userInsertStatement.setString(5, profileAbstract.getMiddleName());
-            userInsertStatement.setString(6, profileAbstract.getAddressLine1());
-            userInsertStatement.setString(7, profileAbstract.getAddressLine2());
-            userInsertStatement.setString(8, profileAbstract.getCity());
-            userInsertStatement.setString(9, profileAbstract.getProvince());
-            userInsertStatement.setString(10, profileAbstract.getPostalCode());
-            userInsertStatement.setString(11, profileAbstract.getEmailAddress());
-            userInsertStatement.setString(12, profileAbstract.getContact());
-            userInsertStatement.setString(13, profileAbstract.getPassport());
-            userInsertStatement.setString(14, profileAbstract.getSsnNo());
-            userInsertStatement.setString(15, profileAbstract.getDateOfBirth());
-
-            userInsertStatement.executeUpdate();
-        }
-
-        return record_id;
+        return 0;
     }
 
     @Override
     public WorklistRequest getWorkListRequest(int id) {
+        connection = databaseConnection.openConnection();
         String query = "SELECT * from worklist WHERE request_id=?";
         WorklistRequest worklistRequest;
 
@@ -91,6 +101,8 @@ public class WorklistDatabase implements IWorklistDatabase {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
 
         return null;
@@ -98,6 +110,7 @@ public class WorklistDatabase implements IWorklistDatabase {
 
     @Override
     public Map<Integer, WorklistRequest> getWorkLists() {
+        connection = databaseConnection.openConnection();
         Map<Integer, WorklistRequest> worklistRequestMap = new HashMap<>();
         String query = "SELECT * FROM worklist WHERE is_processed = 0";
         PreparedStatement statement = null;
@@ -115,12 +128,15 @@ public class WorklistDatabase implements IWorklistDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return worklistRequestMap;
     }
 
     @Override
     public ProfileAbstract getUserDetails(int id) {
+        connection = databaseConnection.openConnection();
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
         ProfileAbstract profileAbstract = new CustomerProfile();
         try {
@@ -147,12 +163,15 @@ public class WorklistDatabase implements IWorklistDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return null;
     }
 
     @Override
     public boolean updateAssignee(int id, String assigneeUsername) {
+        connection = databaseConnection.openConnection();
         String query = "UPDATE worklist SET handled_by = ? WHERE request_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -163,12 +182,15 @@ public class WorklistDatabase implements IWorklistDatabase {
             return affectedRows == 1 ? true : false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return false;
     }
 
     @Override
     public boolean updateProcessStatus(int worklistId, Boolean isProcessed) {
+        connection = databaseConnection.openConnection();
         String query = "UPDATE worklist SET is_processed = ? WHERE request_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -178,6 +200,8 @@ public class WorklistDatabase implements IWorklistDatabase {
             return statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return false;
     }

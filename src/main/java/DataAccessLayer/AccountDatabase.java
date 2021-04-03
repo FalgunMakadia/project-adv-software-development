@@ -14,76 +14,110 @@ import java.util.ArrayList;
 public class AccountDatabase implements IAccountDatabase {
 
     Connection connection = null;
+    IDatabaseConnection databaseConnection;
 
     public AccountDatabase() {
-        connection = DatabaseConnection.instance();
+        databaseConnection = DatabaseConnection.instance();
     }
 
     @Override
-    public int getUserBalance(String accountNumber) throws SQLException {
+    public int getUserBalance(String accountNumber) {
+        connection = databaseConnection.openConnection();
         String query = "SELECT balance FROM accounts WHERE account_no = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
 
-        statement.setString(1, accountNumber);
-        ResultSet rs = statement.executeQuery();
-        int balance = 0;
-        if (rs.next()) {
-            balance = rs.getInt("balance");
+            statement.setString(1, accountNumber);
+            ResultSet rs = statement.executeQuery();
+            int balance = 0;
+            if (rs.next()) {
+                balance = rs.getInt("balance");
+            }
+            return balance;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
-        return balance;
+        return 0;
     }
 
     @Override
-    public int updateBalance(int finalBalance, String accountNumber) throws SQLException {
-
+    public int updateBalance(int finalBalance, String accountNumber) {
+        connection = databaseConnection.openConnection();
         String query = "UPDATE accounts SET balance = ? WHERE account_no = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
 
-        statement.setInt(1, finalBalance);
-        statement.setString(2, accountNumber);
-        int output = statement.executeUpdate();
-        return output;
-    }
-
-    @Override
-    public boolean verifyAccountNumber(String accountNumber) throws SQLException {
-        String query = "SELECT * FROM accounts WHERE account_no = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-
-        statement.setString(1, accountNumber);
-        ResultSet rs = statement.executeQuery();
-        boolean accountStatus = false;
-        if (rs.next()) {
-            accountStatus = rs.getBoolean("active_status");
+            statement.setInt(1, finalBalance);
+            statement.setString(2, accountNumber);
+            int output = statement.executeUpdate();
+            return output;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
-        return accountStatus;
+        return 0;
     }
 
     @Override
-    public void saveTransaction(ArrayList<TransactionModel> saveTransactionInModel) throws SQLException {
+    public boolean verifyAccountNumber(String accountNumber) {
+        connection = databaseConnection.openConnection();
+        String query = "SELECT * FROM accounts WHERE account_no = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+
+            statement.setString(1, accountNumber);
+            ResultSet rs = statement.executeQuery();
+            boolean accountStatus = false;
+            if (rs.next()) {
+                accountStatus = rs.getBoolean("active_status");
+            }
+            return accountStatus;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
+        }
+        return false;
+    }
+
+    @Override
+    public void saveTransaction(ArrayList<TransactionModel> saveTransactionInModel){
+        connection = databaseConnection.openConnection();
         String transactionId;
         String date;
 
         date = getCurrentDate();
 
         String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+            for (TransactionModel transaction : saveTransactionInModel) {
+                transactionId = generateRandomTransactionId();
+                statement.setString(1, transactionId);
+                statement.setString(2, transaction.getAccountNumber());
+                statement.setString(3, transaction.getTransactionType());
+                statement.setInt(4, transaction.getAmount());
+                statement.setString(5, date);
 
-        for (TransactionModel transaction : saveTransactionInModel) {
-            transactionId = generateRandomTransactionId();
-            statement.setString(1, transactionId);
-            statement.setString(2, transaction.getAccountNumber());
-            statement.setString(3, transaction.getTransactionType());
-            statement.setInt(4, transaction.getAmount());
-            statement.setString(5, date);
-
-            statement.executeUpdate();
+                statement.executeUpdate();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
-
     }
 
     @Override
     public ArrayList<TransactionModel> getMiniStatement(String accountNumber) {
+        connection = databaseConnection.openConnection();
         String query = "SELECT * FROM transactions WHERE account_no = ? ORDER BY transaction_date DESC LIMIT 5";
         ArrayList<TransactionModel> transactionList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -100,6 +134,8 @@ public class AccountDatabase implements IAccountDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return transactionList;
     }

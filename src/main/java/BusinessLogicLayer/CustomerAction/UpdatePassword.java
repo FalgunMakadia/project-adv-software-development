@@ -21,29 +21,20 @@ public class UpdatePassword extends Action {
         setCurrentPageInContext();
         userInterface.displayMessage("Update Password");
         String userName = loggedInUserContext.getUserName();
-        try {
-            IDatabaseFactory databaseFactory = new DatabaseFactory();
-            IUserDetailsDatabase userDetailsDatabase = databaseFactory.createUserDatabase();
-            userInterface.displayMessage("Hello " + userName);
-            String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
-            String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
-            if (newPassword.equals(confirmPassword)) {
-                int changedPassword = newPassword.hashCode();
-                userDetailsDatabase.UpdatePassword(userName, changedPassword);
-                userInterface.displayMessage(userName + " your new  password is updated: ");
-            }
-            else{
-                userInterface.displayMessage("Password did not match");
-            }
-            userInterface.insertEmptyLine();
-            userInterface.insertEmptyLine();
-
-        } catch (IOException throwables) {
-            throwables.printStackTrace();
-
-
+        IDatabaseFactory databaseFactory = new DatabaseFactory();
+        IUserDetailsDatabase userDetailsDatabase = databaseFactory.createUserDatabase();
+        userInterface.displayMessage("Hello " + userName);
+        String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
+        String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
+        if (newPassword.equals(confirmPassword)) {
+            int changedPassword = newPassword.hashCode();
+            userDetailsDatabase.UpdatePassword(userName, changedPassword);
+            userInterface.displayMessage(userName + " your new  password is updated: ");
+        } else {
+            userInterface.displayMessage("Password did not match");
         }
-        
+        userInterface.insertEmptyLine();
+        userInterface.insertEmptyLine();
     }
 
     @Override

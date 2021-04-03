@@ -34,35 +34,28 @@ public class LoanEstimator extends Action {
 
     @Override
     public void performAction() {
-        try {
-            setCurrentPageInContext();
-            String accountNumber = loggedInUserContext.getAccountNumber();
-            IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        setCurrentPageInContext();
+        String accountNumber = loggedInUserContext.getAccountNumber();
+        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
-            balance = accountDatabase.getUserBalance(accountNumber);
+        balance = accountDatabase.getUserBalance(accountNumber);
 
-            String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Loan Amount (minimum " + minimumLoanAmount + "): ", minimumLoanAmount);
-            long loanAmount = convertStringToLong(userInput);
+        String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Loan Amount (minimum " + minimumLoanAmount + "): ", minimumLoanAmount);
+        long loanAmount = convertStringToLong(userInput);
 
-            userInput = userInterface.getMandatoryIntegerUserInput("Enter tenure (years): ");
-            int tenure = convertStringToInteger(userInput);
+        userInput = userInterface.getMandatoryIntegerUserInput("Enter tenure (years): ");
+        int tenure = convertStringToInteger(userInput);
 
-            annualInterestRate = getAnnualInterest(balance);
+        annualInterestRate = getAnnualInterest(balance);
 
-            double emiAmount = calculateEmi(loanAmount, tenure);
-            double totalPayableAmount = calculateTotalPayableAmount(emiAmount, tenure);
-            double interestPayable = totalPayableAmount - loanAmount;
+        double emiAmount = calculateEmi(loanAmount, tenure);
+        double totalPayableAmount = calculateTotalPayableAmount(emiAmount, tenure);
+        double interestPayable = totalPayableAmount - loanAmount;
 
-            userInterface.displayMessage("EMI: " + Math.round(emiAmount));
-            userInterface.displayMessage("Interest Payable: " + Math.round(interestPayable));
-            userInterface.displayMessage("Total Amount Payable: " + Math.round(totalPayableAmount));
-            userInterface.insertEmptyLine();
-
-        } catch (SQLException exception) {
-            userInterface.displayMessage("Error occurred in database connection.");
-        } catch (Exception exception) {
-            userInterface.displayMessage(exception.getMessage());
-        }
+        userInterface.displayMessage("EMI: " + Math.round(emiAmount));
+        userInterface.displayMessage("Interest Payable: " + Math.round(interestPayable));
+        userInterface.displayMessage("Total Amount Payable: " + Math.round(totalPayableAmount));
+        userInterface.insertEmptyLine();
 
     }
 

@@ -8,19 +8,21 @@ import BusinessLogicLayer.User.ProfileAbstract;
 
 public class EmployeeDatabase implements IEmployeeDatabase {
     Connection connection = null;
+    IDatabaseConnection databaseConnection;
 
     public EmployeeDatabase() {
-        connection = DatabaseConnection.instance();
+        databaseConnection = DatabaseConnection.instance();
     }
 
 
     @Override
     public void add(ProfileAbstract bankEmployeeProfile) {
+        connection = databaseConnection.openConnection();
         String createEmployee = "INSERT INTO Employees (first_name,middle_name, last_name," +
                 "addressline_1, addressline_2, city, province,contact_number ," +
                 "email, passport_number, ssn_number, birth_date) VALUES " +
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
 
         try {
             PreparedStatement statement = connection.prepareStatement(createEmployee);
@@ -39,10 +41,11 @@ public class EmployeeDatabase implements IEmployeeDatabase {
 
             statement.executeUpdate();
 
-        
-    } catch (SQLException throwables) {
-        throwables.printStackTrace();
-    }
 
-}
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
+        }
+    }
 }

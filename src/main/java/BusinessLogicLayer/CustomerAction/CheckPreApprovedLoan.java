@@ -29,25 +29,18 @@ public class CheckPreApprovedLoan extends Action {
 
     @Override
     public void performAction() {
-        try {
-            setCurrentPageInContext();
-            String accountNumber = loggedInUserContext.getAccountNumber();
-            IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+        setCurrentPageInContext();
+        String accountNumber = loggedInUserContext.getAccountNumber();
+        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
-            balance = accountDatabase.getUserBalance(accountNumber);
+        balance = accountDatabase.getUserBalance(accountNumber);
 
-            double annualInterest = getPreApprovedLoanAnnualInterest(balance);
-            double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);
+        double annualInterest = getPreApprovedLoanAnnualInterest(balance);
+        double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);
 
-            userInterface.displayMessage("You have a pre-approved loan of " + preApprovedLoanAmount + "CAD with " + annualInterest + "% annual interest.");
-            userInterface.addDelay();
-            userInterface.insertEmptyLine();
-
-        } catch (SQLException exception) {
-            userInterface.displayMessage("Error occurred in database connection.");
-        } catch (Exception exception) {
-            userInterface.displayMessage(exception.getMessage());
-        }
+        userInterface.displayMessage("You have a pre-approved loan of " + preApprovedLoanAmount + "CAD with " + annualInterest + "% annual interest.");
+        userInterface.addDelay();
+        userInterface.insertEmptyLine();
 
     }
 

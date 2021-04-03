@@ -7,13 +7,15 @@ import java.sql.*;
 
 public class CustomerDatabase implements ICustomerDatabase {
     Connection connection = null;
+    IDatabaseConnection databaseConnection;
 
     public CustomerDatabase() {
-        connection = DatabaseConnection.instance();
+        databaseConnection = DatabaseConnection.instance();
     }
 
     @Override
     public boolean add(ProfileAbstract profileAbstract) {
+        connection = databaseConnection.openConnection();
         String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
                 "addressline_1, addressline_2, city, province, postal_code, email," +
                 "contact_number, passport_number, ssn_number, birth_date) VALUES " +
@@ -51,6 +53,8 @@ public class CustomerDatabase implements ICustomerDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return false;
     }
@@ -62,6 +66,7 @@ public class CustomerDatabase implements ICustomerDatabase {
 
     @Override
     public ProfileAbstract getUser(String accountNumber) {
+        connection = databaseConnection.openConnection();
         String query = "SELECT * from customers WHERE account_no = ?";
         PreparedStatement statement = null;
         try {
@@ -89,12 +94,15 @@ public class CustomerDatabase implements ICustomerDatabase {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return null;
     }
 
     @Override
     public boolean updateUser(String accountNumber, ProfileAbstract profileAbstract) {
+        connection = databaseConnection.openConnection();
         String query = "UPDATE customers SET " +
                 "first_name = ?, last_name = ?, middle_name = ?, addressline_1 = ?," +
                 "addressline_2 = ?, city = ?, province = ?, postal_code = ?," +
@@ -123,6 +131,8 @@ public class CustomerDatabase implements ICustomerDatabase {
             return affectedRows == 1 ? true : false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            databaseConnection.closeConnection();
         }
         return false;
     }
