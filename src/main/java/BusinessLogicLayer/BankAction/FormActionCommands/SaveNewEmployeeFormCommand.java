@@ -40,11 +40,11 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
         String userRole="E";
         IUserDetailsDatabase userDatabase = null;
         try {
-            userDatabase = databaseFactory.createLoginDatabase();
+            userDatabase = databaseFactory.createUserDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        userDatabase.insertNewEmployee(userName, defaultPassword,userRole);
+        userDatabase.insertNewUser(userName, defaultPassword,userRole);
        
     }
 
