@@ -14,11 +14,14 @@ public class DOBCommand extends FormCommand {
 
     @Override
     public void execute() {
-        String userInput = userInterface.getMandatoryUserInput("Enter DOB(YYYY-MM-DD)*: ");
-        if(validateBirthDate(userInput)) {
-            user.setDateOfBirth(userInput);
-        }
+        String userInput = "";
+        do {
+            userInput = userInterface.getMandatoryUserInput("Enter DOB(YYYY-MM-DD)*: ");
+
+        }while(validateBirthDate(userInput));
+        user.setDateOfBirth(userInput);
     }
+
 
     @Override
     public String getFieldValue() {
@@ -37,8 +40,8 @@ public class DOBCommand extends FormCommand {
             format.parse(birthDate);
         } catch (ParseException e) {
             userInterface.displayMessage("You entered invalid date format, correct format is (yyyy-MM-dd)");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

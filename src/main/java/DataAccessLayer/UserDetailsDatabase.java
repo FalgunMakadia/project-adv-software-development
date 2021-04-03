@@ -31,8 +31,22 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
 
 
     @Override
-    public int insertNewUser() {
-        return 0;
+    public int insertNewUser(String userName, int defaultPassword, String userRole) {
+        int affectedRow = 0;
+        String query = "INSERT INTO login VALUES (?,?,?,?,?)";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,userName);
+            preparedStatement.setString(2,String.valueOf(defaultPassword));
+            preparedStatement.setString(3,null);
+            preparedStatement.setString(4,userRole);
+            preparedStatement.setBoolean(5,false);
+            affectedRow = preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return affectedRow;
     }
 
     @Override

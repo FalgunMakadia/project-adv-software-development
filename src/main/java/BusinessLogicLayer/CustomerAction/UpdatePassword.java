@@ -23,7 +23,7 @@ public class UpdatePassword extends Action {
         String userName = loggedInUserContext.getUserName();
         try {
             IDatabaseFactory databaseFactory = new DatabaseFactory();
-            IUserDetailsDatabase userDetailsDatabase = databaseFactory.createLoginDatabase();
+            IUserDetailsDatabase userDetailsDatabase = databaseFactory.createUserDatabase();
             userInterface.displayMessage("Hello " + userName);
             String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
             String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
