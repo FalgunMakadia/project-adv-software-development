@@ -14,6 +14,7 @@ import java.util.Map;
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
     private Map<Integer,IFormCommand> formFields;
+    private IDatabaseFactory databaseFactory;
 
     public UpdatePersonalDetails() {
         this.databaseFactory = new DatabaseFactory();
@@ -27,7 +28,6 @@ public class UpdatePersonalDetails extends Action {
 
     @Override
     public void performAction() {
-        isUpdated = false;
         userInterface.displayMessage("============UPDATE PERSONAL DETAILS=====================");
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         setCurrentPageInContext();
