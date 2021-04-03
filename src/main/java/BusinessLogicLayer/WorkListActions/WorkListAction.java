@@ -12,7 +12,7 @@ import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
-public abstract class WorkListAction {
+public abstract class WorkListAction implements IWorkListAction {
     protected WorklistRequest worklistRequest;
     protected int worklistID;
     protected IUserInterface userInterface;
@@ -35,8 +35,6 @@ public abstract class WorkListAction {
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
         this.customerDatabase = databaseFactory.createCustomerDatabase();
     }
-
-    public abstract void processWorkList();
 
     public void showWorkListDetail() {
         this.userInterface.displayMessage("Request ID: " + worklistID);
