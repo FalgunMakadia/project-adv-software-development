@@ -1,7 +1,7 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
+import PresentationLayer.Pages.Page;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class FormPage extends Page {
     }
 
     @Override
-    public void printMenu() {
+    public void printPage() {
         System.out.println("Form");
         do {
             Scanner scanner = new Scanner(System.in);

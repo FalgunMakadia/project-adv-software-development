@@ -5,7 +5,7 @@ import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.*;
-import PresentationLayer.MenuPages.IUserForm;
+import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +35,8 @@ public class UpdatePersonalDetails extends Action {
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
 
         ProfileAbstract profileAbstract = customerDatabase.getUser(currentUserAccountNumber);
-        IUserForm userForm = presentationFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
-        userForm.executeForm();
+        IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
+        userForm.printForm();
     }
 
     private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profileAbstract) {

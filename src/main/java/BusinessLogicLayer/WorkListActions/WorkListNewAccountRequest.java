@@ -34,8 +34,9 @@ public class WorkListNewAccountRequest extends WorkListAction {
     }
 
     private void showUserDetails() {
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
         userInterface.displayMessage("=====New ProfileAbstract Details====");
-        userDetailPage.printUserDetails(worklistRequest.getUser());
+        userDetailPage.printPage();
         userInterface.insertEmptyLine();
     }
 }

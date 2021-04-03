@@ -3,19 +3,29 @@ package BusinessLogicLayer.CommonAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import PresentationLayer.IPresentationFactory;
-import PresentationLayer.CommonPages.IUserInterface;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
+import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 import PresentationLayer.PresentationFactory;
 
-import java.math.BigInteger;
-
 public abstract class Action implements IAction{
-    protected IUserInterface userInterface = null;
+    protected IUserInterfacePage userInterface = null;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;
+    protected IMenuRoutingFactory menuRoutingFactory;
+    protected IBankCentricPagesFactory bankCentricPagesFactory;
+    protected ICommonPagesFactory commonPagesFactory;
+    protected ICustomerCentricPagesFactory customerCentricPagesFactory;
     public Action() {
         presentationFactory = new PresentationFactory();
-        userInterface = presentationFactory.createUserInterface();
+        commonPagesFactory = presentationFactory.createCommonPagesFactory();
+        userInterface = commonPagesFactory.createUserInterface();
         loggedInUserContext = LoggedInUserContext.instance();
+        menuRoutingFactory = presentationFactory.createMenuRoutingFactory();
+        bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
+        customerCentricPagesFactory = presentationFactory.createCustomerCentricPagesFactory();
     }
 
     protected int convertStringToInteger(String input) {

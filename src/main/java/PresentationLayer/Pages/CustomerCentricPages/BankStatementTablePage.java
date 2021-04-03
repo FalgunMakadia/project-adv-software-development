@@ -1,10 +1,10 @@
-package PresentationLayer.CommonPages;
+package PresentationLayer.Pages.CustomerCentricPages;
 
 import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.util.ArrayList;
 
-public class BankStatementTable implements IBankStatementTable {
+public class BankStatementTablePage implements IBankStatementTablePage {
     @Override
     public void printBankStatementTable(ArrayList<TransactionModel> transactionList) {
         System.out.println("===================================");

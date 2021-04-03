@@ -6,16 +6,19 @@ import BusinessLogicLayer.User.LoggedInUserContext;
 import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
-import PresentationLayer.CommonPages.IUserInterface;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
 public abstract class FormCommand implements IFormCommand {
     protected ProfileAbstract profile;
-    protected IUserInterface userInterface;
+    protected IUserInterfacePage userInterface;
     protected IWorklistDatabase worklistDatabase;
     protected DatabaseFactory databaseFactory;
     protected ILoggedInUserContext loggedInUserContext;
+    protected IPresentationFactory presentationFactory;
+    protected ICommonPagesFactory commonPagesFactory;
 
     public FormCommand(ProfileAbstract profile) {
         this.profile = profile;
@@ -28,9 +31,11 @@ public abstract class FormCommand implements IFormCommand {
     }
 
     private void init() {
-        IPresentationFactory presentationFactory = new PresentationFactory();
+        presentationFactory = new PresentationFactory();
+        commonPagesFactory = presentationFactory.createCommonPagesFactory();
+
         this.databaseFactory = new DatabaseFactory();
-        this.userInterface = presentationFactory.createUserInterface();
+        this.userInterface = commonPagesFactory.createUserInterface();
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
         this.loggedInUserContext = LoggedInUserContext.instance();
     }

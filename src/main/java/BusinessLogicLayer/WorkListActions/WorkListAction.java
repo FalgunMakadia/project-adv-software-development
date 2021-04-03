@@ -7,29 +7,35 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.ICustomerDatabase;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
-import PresentationLayer.CommonPages.IUserDetailPage;
-import PresentationLayer.CommonPages.IUserInterface;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
+import PresentationLayer.Pages.IPage;
 import PresentationLayer.PresentationFactory;
 
 public abstract class WorkListAction implements IWorkListAction {
     protected WorklistRequest worklistRequest;
     protected int worklistID;
-    protected IUserInterface userInterface;
+    protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IWorklistDatabase worklistDatabase;
     protected ICustomerDatabase customerDatabase;
-    protected IUserDetailPage userDetailPage;
+    protected IPage userDetailPage;
     IDatabaseFactory databaseFactory;
-
+    protected IPresentationFactory presentationFactory;
+    protected IBankCentricPagesFactory bankCentricPagesFactory;
+    protected ICommonPagesFactory commonPagesFactory;
     public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
         this.worklistRequest = worklistRequest;
         this.worklistID = worklistID;
         this.loggedInUserContext = LoggedInUserContext.instance();
 
-        IPresentationFactory presentationFactory = new PresentationFactory();
-        this.userInterface = presentationFactory.createUserInterface();
-        this.userDetailPage = presentationFactory.createUserDetailPage();
+        presentationFactory = new PresentationFactory();
+        commonPagesFactory = presentationFactory.createCommonPagesFactory();
+        this.userInterface = commonPagesFactory.createUserInterface();
+        this.bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
 
         this.databaseFactory = new DatabaseFactory();
         this.worklistDatabase = databaseFactory.createWorkListDatabase();

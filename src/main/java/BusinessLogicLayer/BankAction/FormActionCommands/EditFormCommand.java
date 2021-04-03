@@ -3,9 +3,10 @@ package BusinessLogicLayer.BankAction.FormActionCommands;
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
-import PresentationLayer.CommonPages.UserInterface;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
+import PresentationLayer.Pages.CommonPages.UserInterfacePage;
 import PresentationLayer.IPresentationFactory;
-import PresentationLayer.MenuPages.IUserForm;
+import PresentationLayer.Pages.CommonPages.IUserFormPage;
 import PresentationLayer.PresentationFactory;
 
 import java.util.Map;
@@ -23,10 +24,10 @@ public class EditFormCommand extends FormCommand {
 
     @Override
     public void execute() {
-        IPresentationFactory presentationFactory = new PresentationFactory();
-        IUserForm userForm = presentationFactory.createUserForm(formFieldMap, profileAbstract);
-        userForm.executeForm();
-        UserInterface userInterface = new UserInterface();
+        IUserFormPage userForm = commonPagesFactory.createUserForm(formFieldMap, profileAbstract);
+        userForm.printForm();
+
+        IUserInterfacePage userInterface = commonPagesFactory.createUserInterface();
         for (int fieldIndex = 1; fieldIndex <= formFieldMap.size(); fieldIndex++) {
            IFormCommand command = formFieldMap.get(fieldIndex);
 

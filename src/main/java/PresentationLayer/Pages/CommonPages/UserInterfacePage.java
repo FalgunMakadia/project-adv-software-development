@@ -1,11 +1,11 @@
-package PresentationLayer.CommonPages;
+package PresentationLayer.Pages.CommonPages;
 
 import java.util.Scanner;
 
-public class UserInterface implements IUserInterface {
+public class UserInterfacePage implements IUserInterfacePage {
     Scanner scanner = null;
 
-    public UserInterface() {
+    public UserInterfacePage() {
         scanner = new Scanner(System.in);
     }
 
@@ -25,26 +25,6 @@ public class UserInterface implements IUserInterface {
         String input = scanner.nextLine();
         System.out.println();
         return input;
-    }
-
-    @Override
-    public String getIntegerUserInput(String message) {
-        String input = "";
-        int choiceNumber = 0;
-        do {
-            System.out.print(message);
-            try {
-                input = scanner.nextLine();
-                choiceNumber = Integer.parseInt(input);
-                break;
-            } catch (Exception exception) {
-                input = "";
-                System.out.println("Incorrect Input Format.");
-            }
-            System.out.println();
-        }while (input.length() > 0);
-        return String.valueOf(choiceNumber);
-
     }
 
     @Override
@@ -91,24 +71,6 @@ public class UserInterface implements IUserInterface {
             }
             System.out.println();
         } while (input.length() < minimumRange);
-        return input;
-    }
-
-    @Override
-    public String getMandatoryIntegerUserInput(String message, int length) {
-        String input = "";
-        int choiceNumber = 0;
-        while (input.length() < 1) {
-            System.out.print(message);
-            try {
-                input = scanner.nextLine();
-                choiceNumber = Integer.parseInt(input);
-            } catch (Exception exception) {
-                input = "";
-                System.out.println("Incorrect Input Format.");
-            }
-            System.out.println();
-        }
         return input;
     }
 

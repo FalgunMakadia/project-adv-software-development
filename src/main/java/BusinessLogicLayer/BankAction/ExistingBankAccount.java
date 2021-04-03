@@ -32,7 +32,7 @@ public class ExistingBankAccount extends Action {
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         if (accountDatabase.verifyAccountNumber(accountNumber)) {
             loggedInUserContext.setAccountNumber(accountNumber);
-            IMenuRoutingCommand command = presentationFactory.createExistingBankAccountCommand();
+            IMenuRoutingCommand command = menuRoutingFactory.createExistingBankAccountCommand();
             command.execute();
         }
         userInterface.insertEmptyLine();

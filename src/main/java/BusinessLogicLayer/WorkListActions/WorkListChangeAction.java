@@ -39,12 +39,14 @@ public class WorkListChangeAction extends WorkListAction {
     private void showComparisonOfUserDetails() {
         ProfileAbstract oldProfileAbstractDetails = null;
         oldProfileAbstractDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(oldProfileAbstractDetails);
         userInterface.displayMessage("====Old Details====");
-        userDetailPage.printUserDetails(oldProfileAbstractDetails);
+        userDetailPage.printPage();
         userInterface.insertEmptyLine();
 
         userInterface.displayMessage("=====New ProfileAbstract Details====");
-        userDetailPage.printUserDetails(worklistRequest.getUser());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
+        userDetailPage.printPage();
         userInterface.insertEmptyLine();
     }
 }

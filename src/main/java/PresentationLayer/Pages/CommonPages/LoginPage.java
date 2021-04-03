@@ -1,7 +1,8 @@
-package PresentationLayer.CommonPages;
+package PresentationLayer.Pages.CommonPages;
 
 import BusinessLogicLayer.CommonAction.ILogin;
 import BusinessLogicLayer.ActionFactory;
+import PresentationLayer.MenuRouting.BankEmployeeMenuRoutingCommand;
 import PresentationLayer.MenuRouting.BankManagerMenuRoutingCommand;
 import PresentationLayer.MenuRouting.CustomerMenuRoutingCommand;
 import PresentationLayer.MenuRouting.IMenuRoutingCommand;
@@ -10,17 +11,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class LoginPage {
+public class LoginPage implements ILoginPage{
     private String username;
     private String password;
-    private Map<String, IMenuRoutingCommand> route;
-    public LoginPage(){
-        route = new HashMap<>();
-        route.put("E", new BankManagerMenuRoutingCommand());
-        route.put("M", new BankManagerMenuRoutingCommand());
-        route.put("C", new CustomerMenuRoutingCommand());
+    private Map<String, IMenuRoutingCommand> menuRoutingCommandMap;
+    public LoginPage() {
+        menuRoutingCommandMap = new HashMap<>();
+        menuRoutingCommandMap.put("E", new BankEmployeeMenuRoutingCommand());
+        menuRoutingCommandMap.put("M", new BankManagerMenuRoutingCommand());
+        menuRoutingCommandMap.put("C", new CustomerMenuRoutingCommand());
     }
-    public void takeUserInput() {
+    public void takeLoginCredential() {
         Scanner scanner = new Scanner(System.in);
         do{
             System.out.print("Username:");
@@ -48,8 +49,8 @@ public class LoginPage {
     }
 
     private void routeToMenu(String userRole){
-       IMenuRoutingCommand command = route.get(userRole);
-       command.execute();
+       IMenuRoutingCommand menuRoutingCommand = menuRoutingCommandMap.get(userRole);
+       menuRoutingCommand.execute();
     }
 
 

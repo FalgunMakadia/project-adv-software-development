@@ -1,7 +1,7 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.MenuRouting;
 
-import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.IAction;
+import PresentationLayer.Pages.Page;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class MenuPage extends Page {
         loggedInUserContext.setParentPage(parentPage);
     }
 
-    public void printMenu() {
+    public void printPage() {
         System.out.println("Welcome " + loggedInUserContext.getUserName() + "!");
         System.out.println();
         while (loggedInUserContext.getLoginStatus()) {

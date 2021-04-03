@@ -1,13 +1,11 @@
-package PresentationLayer.CommonPages;
+package PresentationLayer.Pages.CommonPages;
 
-public interface IUserInterface {
+public interface IUserInterfacePage {
     void displayMessage(String message);
 
     void insertEmptyLine();
 
     String getUserInput(String message);
-
-    String getIntegerUserInput(String message);
 
     String getMandatoryUserInput(String message);
 
@@ -15,9 +13,8 @@ public interface IUserInterface {
 
     String getMandatoryLongUserInputWithMinimumRange(String message, long minimumRange);
 
-    String getMandatoryIntegerUserInput(String message, int length);
-
     String getConfirmation(String message);
+
     String getUserInputInMultipleOfTen(String message);
 
     void addDelay();

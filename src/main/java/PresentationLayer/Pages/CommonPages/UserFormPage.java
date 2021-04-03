@@ -1,28 +1,29 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.Pages.CommonPages;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
+import PresentationLayer.Pages.IPage;
 
 import java.util.Map;
 
-public class UserForm implements IUserForm {
+public class UserFormPage implements IUserFormPage {
     private Map<Integer,IFormCommand> formFields;
     private ProfileAbstract profileAbstract;
     private IPage formPage;
 
-    public UserForm(Map<Integer,IFormCommand> formFields) {
+    public UserFormPage(Map<Integer,IFormCommand> formFields) {
         this.formFields = formFields;
         this.profileAbstract = new CustomerProfile();
     }
 
-    public UserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract) {
+    public UserFormPage(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract) {
         this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, "");
     }
 
-    public UserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
+    public UserFormPage(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
         this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);
@@ -37,8 +38,8 @@ public class UserForm implements IUserForm {
     }
 
     @Override
-    public void executeForm() {
-        formPage.printMenu();
+    public void printForm() {
+        formPage.printPage();
     }
 
 }

@@ -1,4 +1,4 @@
-package PresentationLayer.MenuPages;
+package PresentationLayer.Pages;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
@@ -10,5 +10,5 @@ public abstract class Page implements IPage {
         loggedInUserContext = LoggedInUserContext.instance();
     }
 
-    public abstract void printMenu();
+    public abstract void printPage();
 }

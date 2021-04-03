@@ -4,9 +4,7 @@ import BusinessLogicLayer.CommonAction.Action;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
-import PresentationLayer.CommonPages.UserInterface;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Transfer extends Action {

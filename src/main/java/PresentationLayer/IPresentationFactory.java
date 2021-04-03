@@ -3,30 +3,28 @@ package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
-import PresentationLayer.CommonPages.IBankStatementTable;
-import PresentationLayer.CommonPages.IUserDetailPage;
-import PresentationLayer.CommonPages.IUserInterface;
+import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.ILoginPage;
+import PresentationLayer.Pages.CustomerCentricPages.IBankStatementTablePage;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
+import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
+import PresentationLayer.Pages.IPage;
 import PresentationLayer.MenuRouting.IMenuRoutingCommand;
-import PresentationLayer.MenuPages.IUserForm;
-import PresentationLayer.CommonPages.IWorklistTable;
+import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
 import java.util.Map;
 
 public interface IPresentationFactory {
-    IUserInterface createUserInterface();
 
-    IMenuRoutingCommand createExistingBankAccountCommand();
+    IMenuRoutingFactory createMenuRoutingFactory();
 
-    IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract);
+    IBankCentricPagesFactory createBankCentricPagesFactory();
 
-    IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage);
+    ICommonPagesFactory createCommonPagesFactory();
 
-    IUserForm createUserForm(Map<Integer,IFormCommand> formFields);
-
-    IWorklistTable createWorklistTable();
-
-    IBankStatementTable createBankStatementTable();
-
-    IUserDetailPage createUserDetailPage();
+    ICustomerCentricPagesFactory createCustomerCentricPagesFactory();
 }

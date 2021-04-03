@@ -5,7 +5,7 @@ import BusinessLogicLayer.TransactionAction.TransactionModel;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
-import PresentationLayer.CommonPages.IBankStatementTable;
+import PresentationLayer.Pages.CustomerCentricPages.IBankStatementTablePage;
 
 import java.util.ArrayList;
 
@@ -13,12 +13,12 @@ public class BankStatement extends Action {
     private static final String menuLabel = "Bank Statement";
     private IAccountDatabase accountDatabase;
     private IDatabaseFactory databaseFactory;
-    private IBankStatementTable bankStatementTable;
+    private IBankStatementTablePage bankStatementTable;
 
     public BankStatement() {
         databaseFactory = new DatabaseFactory();
         accountDatabase = databaseFactory.createAccountDatabase();
-        bankStatementTable = presentationFactory.createBankStatementTable();
+        bankStatementTable = customerCentricPagesFactory.createBankStatementTable();
     }
 
     @Override

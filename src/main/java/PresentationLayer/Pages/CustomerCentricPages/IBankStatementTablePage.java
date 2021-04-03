@@ -1,9 +1,9 @@
-package PresentationLayer.CommonPages;
+package PresentationLayer.Pages.CustomerCentricPages;
 
 import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.util.ArrayList;
 
-public interface IBankStatementTable {
+public interface IBankStatementTablePage {
     void printBankStatementTable(ArrayList<TransactionModel> transactionList);
 }

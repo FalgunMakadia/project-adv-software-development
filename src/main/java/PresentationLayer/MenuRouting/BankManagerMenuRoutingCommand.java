@@ -3,7 +3,7 @@ package PresentationLayer.MenuRouting;
 import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.IActionFactory;
-import PresentationLayer.MenuPages.MenuPage;
+import PresentationLayer.Pages.IPage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class BankManagerMenuRoutingCommand extends MenuRoutingCommand {
 
     @Override
     public void execute() {
-        MenuPage menuPage = new MenuPage(menu, "BankManager");
-        menuPage.printMenu();
+        IPage menuPage = new MenuPage(menu, "BankManager");
+        menuPage.printPage();
     }
 }
