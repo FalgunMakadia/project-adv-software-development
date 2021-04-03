@@ -23,8 +23,8 @@ class DOBCommandTest {
 
     @Test
     void dateValidator() {
-        assertFalse(dobCommand.validateBirthDate(date1));
-        assertFalse(dobCommand.validateBirthDate(date2));
-        assertTrue(dobCommand.validateBirthDate(date3));
+        assertTrue(dobCommand.validateBirthDate(date1));
+        assertTrue(dobCommand.validateBirthDate(date2));
+        assertFalse(dobCommand.validateBirthDate(date3));
     }
 }
