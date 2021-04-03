@@ -169,7 +169,7 @@ public class WorklistDatabase implements IWorklistDatabase {
 
     @Override
     public boolean updateProcessStatus(int worklistId, Boolean isProcessed) {
-        String query = "UPDATE worklist SET isProcessed = ? WHERE request_id = ?";
+        String query = "UPDATE worklist SET is_processed = ? WHERE request_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setBoolean(1, isProcessed);
