@@ -1,9 +1,8 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.ProfileAbstract;
 
-import java.math.BigDecimal;
 import java.sql.*;
 
 public class CustomerDatabase implements ICustomerDatabase {
@@ -14,7 +13,7 @@ public class CustomerDatabase implements ICustomerDatabase {
     }
 
     @Override
-    public boolean add(User user) {
+    public boolean add(ProfileAbstract profileAbstract) {
         String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
                 "addressline_1, addressline_2, city, province, postal_code, email," +
                 "contact_number, passport_number, ssn_number, birth_date) VALUES " +
@@ -24,19 +23,19 @@ public class CustomerDatabase implements ICustomerDatabase {
 
         try {
             PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMiddleName());
-            statement.setString(4, user.getAddressLine1());
-            statement.setString(5, user.getAddressLine2());
-            statement.setString(6, user.getCity());
-            statement.setString(7, user.getProvince());
-            statement.setString(8, user.getPostalCode());
-            statement.setString(9, user.getEmailAddress());
-            statement.setString(10, user.getContact());
-            statement.setString(11, user.getPassport());
-            statement.setString(12, user.getSsnNo());
-            statement.setString(13, user.getDateOfBirth());
+            statement.setString(1, profileAbstract.getFirstName());
+            statement.setString(2, profileAbstract.getLastName());
+            statement.setString(3, profileAbstract.getMiddleName());
+            statement.setString(4, profileAbstract.getAddressLine1());
+            statement.setString(5, profileAbstract.getAddressLine2());
+            statement.setString(6, profileAbstract.getCity());
+            statement.setString(7, profileAbstract.getProvince());
+            statement.setString(8, profileAbstract.getPostalCode());
+            statement.setString(9, profileAbstract.getEmailAddress());
+            statement.setString(10, profileAbstract.getContact());
+            statement.setString(11, profileAbstract.getPassport());
+            statement.setString(12, profileAbstract.getSsnNo());
+            statement.setString(13, profileAbstract.getDateOfBirth());
 
             statement.executeUpdate();
 
@@ -57,41 +56,41 @@ public class CustomerDatabase implements ICustomerDatabase {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(ProfileAbstract profileAbstract) {
 
     }
 
     @Override
-    public User getUser(String accountNumber) throws SQLException {
+    public ProfileAbstract getUser(String accountNumber) throws SQLException {
         String query = "SELECT * from customers WHERE account_no = ?";
         PreparedStatement statement = connection.prepareStatement(query);
 
         statement.setString(1, accountNumber);
-        User user = new Customer();
+        ProfileAbstract profileAbstract = new CustomerProfile();
         ResultSet resultSet = statement.executeQuery();
         System.out.println(resultSet.first());
         if (resultSet.first()) {
-            user.setFirstName(resultSet.getString("first_name"));
-            user.setLastName(resultSet.getString("last_name"));
-            user.setMiddleName(resultSet.getString("middle_name"));
-            user.setAddressLine1(resultSet.getString("addressline_1"));
-            user.setAddressLine2(resultSet.getString("addressline_2"));
-            user.setCity(resultSet.getString("city"));
-            user.setProvince(resultSet.getString("province"));
-            user.setPostalCode(resultSet.getString("postal_code"));
-            user.setEmailAddress(resultSet.getString("email"));
-            user.setContact(resultSet.getString("contact_number"));
-            user.setPassport(resultSet.getString("passport_number"));
-            user.setSsnNo(resultSet.getString("ssn_number"));
-            user.setAccountNumber(resultSet.getString("account_no"));
-            user.setDateOfBirth(resultSet.getString("birth_date"));
-            return user;
+            profileAbstract.setFirstName(resultSet.getString("first_name"));
+            profileAbstract.setLastName(resultSet.getString("last_name"));
+            profileAbstract.setMiddleName(resultSet.getString("middle_name"));
+            profileAbstract.setAddressLine1(resultSet.getString("addressline_1"));
+            profileAbstract.setAddressLine2(resultSet.getString("addressline_2"));
+            profileAbstract.setCity(resultSet.getString("city"));
+            profileAbstract.setProvince(resultSet.getString("province"));
+            profileAbstract.setPostalCode(resultSet.getString("postal_code"));
+            profileAbstract.setEmailAddress(resultSet.getString("email"));
+            profileAbstract.setContact(resultSet.getString("contact_number"));
+            profileAbstract.setPassport(resultSet.getString("passport_number"));
+            profileAbstract.setSsnNo(resultSet.getString("ssn_number"));
+            profileAbstract.setAccountNumber(resultSet.getString("account_no"));
+            profileAbstract.setDateOfBirth(resultSet.getString("birth_date"));
+            return profileAbstract;
         }
         return null;
     }
 
     @Override
-    public boolean updateUser(String accountNumber, User user) {
+    public boolean updateUser(String accountNumber, ProfileAbstract profileAbstract) {
         String query = "UPDATE customers SET " +
                 "first_name = ?, last_name = ?, middle_name = ?, addressline_1 = ?," +
                 "addressline_2 = ?, city = ?, province = ?, postal_code = ?," +
@@ -100,19 +99,19 @@ public class CustomerDatabase implements ICustomerDatabase {
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMiddleName());
-            statement.setString(4, user.getAddressLine1());
-            statement.setString(5, user.getAddressLine2());
-            statement.setString(6, user.getCity());
-            statement.setString(7, user.getProvince());
-            statement.setString(8, user.getPostalCode());
-            statement.setString(9, user.getEmailAddress());
-            statement.setString(10, user.getContact());
-            statement.setString(11, user.getPassport());
-            statement.setString(12, user.getSsnNo());
-            statement.setString(13, user.getDateOfBirth());
+            statement.setString(1, profileAbstract.getFirstName());
+            statement.setString(2, profileAbstract.getLastName());
+            statement.setString(3, profileAbstract.getMiddleName());
+            statement.setString(4, profileAbstract.getAddressLine1());
+            statement.setString(5, profileAbstract.getAddressLine2());
+            statement.setString(6, profileAbstract.getCity());
+            statement.setString(7, profileAbstract.getProvince());
+            statement.setString(8, profileAbstract.getPostalCode());
+            statement.setString(9, profileAbstract.getEmailAddress());
+            statement.setString(10, profileAbstract.getContact());
+            statement.setString(11, profileAbstract.getPassport());
+            statement.setString(12, profileAbstract.getSsnNo());
+            statement.setString(13, profileAbstract.getDateOfBirth());
             statement.setString(14, accountNumber);
 
             int affectedRows = statement.executeUpdate();

@@ -1,7 +1,7 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.User.BankEmployee;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public interface IEmployeeDatabase {
-    void add(BankEmployee bankEmployee);
+    void add(ProfileAbstract bankEmployeeProfile);
 }

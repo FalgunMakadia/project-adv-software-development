@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class MiddleNameCommand extends FormCommand {
     private final String COMMAND_LABEL = "Middle Name";
 
-    public MiddleNameCommand(User user) {
-        super(user);
+    public MiddleNameCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getUserInput("Enter Middle Name: ");
-        user.setMiddleName(userInput);
+        profile.setMiddleName(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getMiddleName();
+        return profile.getMiddleName();
     }
 
     @Override

@@ -1,9 +1,9 @@
 package BusinessLogicLayer.WorklistRequest;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class WorklistRequest {
-    private User user;
+    private ProfileAbstract profileAbstract;
     private String requestType;
     private String priority = "low";
     private String accountNumber;
@@ -12,18 +12,18 @@ public class WorklistRequest {
     public WorklistRequest() {
     }
 
-    public WorklistRequest(String requestType, String accountNumber, User user) {
+    public WorklistRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract) {
         this.requestType = requestType;
         this.accountNumber = accountNumber;
-        this.user = user;
+        this.profileAbstract = profileAbstract;
     }
 
-    public User getUser() {
-        return user;
+    public ProfileAbstract getUser() {
+        return profileAbstract;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(ProfileAbstract profileAbstract) {
+        this.profileAbstract = profileAbstract;
     }
 
     public String getRequestType() {

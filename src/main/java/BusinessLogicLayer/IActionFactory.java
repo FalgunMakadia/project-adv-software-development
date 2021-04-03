@@ -2,7 +2,7 @@ package BusinessLogicLayer;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CommonAction.ILogin;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public interface IActionFactory {
     Action createOpenNewAccount();
@@ -21,6 +21,6 @@ public interface IActionFactory {
     Action createCheckPreApprovedLoan();
     ILogin createLogin();
 
-    User createCustomer();
+    ProfileAbstract createCustomer();
 
 }

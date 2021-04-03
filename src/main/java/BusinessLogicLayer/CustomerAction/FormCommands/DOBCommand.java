@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 public class DOBCommand extends FormCommand {
     private final String COMMAND_LABEL = "Date Of Birth";
 
-    public DOBCommand(User user) {
-        super(user);
+    public DOBCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
@@ -19,13 +19,13 @@ public class DOBCommand extends FormCommand {
             userInput = userInterface.getMandatoryUserInput("Enter DOB(YYYY-MM-DD)*: ");
 
         }while(validateBirthDate(userInput));
-        user.setDateOfBirth(userInput);
+        profile.setDateOfBirth(userInput);
     }
 
 
     @Override
     public String getFieldValue() {
-        return user.getDateOfBirth();
+        return profile.getDateOfBirth();
     }
 
     @Override

@@ -24,7 +24,7 @@ public class WorkListNewAccountRequest extends WorkListAction {
                 if (isUserCreated) {
                     userInterface.displayMessage("New Account is Created");
                 } else {
-                    userInterface.displayMessage("Error in Creating New User");
+                    userInterface.displayMessage("Error in Creating New ProfileAbstract");
                 }
             }
             returnToMainMenu();
@@ -34,7 +34,7 @@ public class WorkListNewAccountRequest extends WorkListAction {
     }
 
     private void showUserDetails() {
-        userInterface.displayMessage("=====New User Details====");
+        userInterface.displayMessage("=====New ProfileAbstract Details====");
         userDetailPage.printUserDetails(worklistRequest.getUser());
         userInterface.insertEmptyLine();
     }

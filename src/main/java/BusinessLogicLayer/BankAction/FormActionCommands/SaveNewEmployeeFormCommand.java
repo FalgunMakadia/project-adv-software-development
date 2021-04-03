@@ -3,7 +3,7 @@ package BusinessLogicLayer.BankAction.FormActionCommands;
 import java.io.IOException;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.User.BankEmployee;
+import BusinessLogicLayer.User.BankEmployeeProfile;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IEmployeeDatabase;
@@ -13,12 +13,11 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
     private final String menuLabel;
     private IDatabaseFactory databaseFactory;
     private IEmployeeDatabase employeeDatabase;
-    BankEmployee bankEmployee;
 
-    public SaveNewEmployeeFormCommand(String menuLabel, BankEmployee bankEmployee) {
+    public SaveNewEmployeeFormCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
         super();
         this.menuLabel = menuLabel;
-        this.bankEmployee = bankEmployee;
+        this.profile = bankEmployeeProfile;
     }
 
     @Override
@@ -35,16 +34,16 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
     }
 
     private void createNewUser() {
-        String userName = bankEmployee.getUserName();
-        int defaultPassword = bankEmployee.generateDefaultPassword();
-        String userRole="E";
+        String userName = profile.getUserName();
+        int defaultPassword = profile.generateDefaultPassword();
+
         IUserDetailsDatabase userDatabase = null;
         try {
             userDatabase = databaseFactory.createUserDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        userDatabase.insertNewUser(userName, defaultPassword,userRole);
+        userDatabase.insertNewUser(userName, defaultPassword, profile.getProfileRole());
        
     }
 
@@ -60,7 +59,7 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
     private void createNewEmployee() throws IOException {
         databaseFactory=new DatabaseFactory();
         employeeDatabase=databaseFactory.createNewEmployee();
-        employeeDatabase.add(bankEmployee);
+        employeeDatabase.add(profile);
         
     }
 

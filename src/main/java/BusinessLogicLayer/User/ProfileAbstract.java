@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class User {
+public abstract class ProfileAbstract {
     private String firstName;
     private String lastName;
     private String middleName;
@@ -140,4 +140,6 @@ public abstract class User {
         String password = lastName + dateOfBirth;
         return password.hashCode();
     }
+
+    public abstract String getProfileRole();
 }

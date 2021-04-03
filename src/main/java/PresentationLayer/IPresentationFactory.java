@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.IBankStatementTable;
 import PresentationLayer.CommonPages.IUserDetailPage;
 import PresentationLayer.CommonPages.IUserInterface;
@@ -16,9 +16,9 @@ public interface IPresentationFactory {
 
     Command createExistingBankAccountCommand();
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user);
+    IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract);
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user, String currentPage);
+    IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract, String currentPage);
 
     IUserForm createUserForm(Map<Integer, FormCommand> formFields);
 

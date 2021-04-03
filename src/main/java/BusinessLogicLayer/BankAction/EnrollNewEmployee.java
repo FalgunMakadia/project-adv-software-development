@@ -5,7 +5,7 @@ import BusinessLogicLayer.BankAction.FormActionCommands.EditFormCommand;
 import BusinessLogicLayer.BankAction.FormActionCommands.SaveNewEmployeeFormCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
-import BusinessLogicLayer.User.BankEmployee;
+import BusinessLogicLayer.User.BankEmployeeProfile;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,14 +14,14 @@ public class EnrollNewEmployee extends Action {
     private static final String menuLabel = "Enroll New Employee";
     Map<Integer, FormCommand> formActionCommandMap;
     private Map<Integer, FormCommand> openNewAccountFormFieldMap;
-    BankEmployee bankEmployee;
+    BankEmployeeProfile bankEmployeeProfile;
     public EnrollNewEmployee() {
         super();
-        bankEmployee = new BankEmployee();
+        bankEmployeeProfile = new BankEmployeeProfile();
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
-        formActionCommandMap.put(1, new EditFormCommand("Edit", bankEmployee, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, new SaveNewEmployeeFormCommand("Save", bankEmployee));
+        formActionCommandMap.put(1, new EditFormCommand("Edit", bankEmployeeProfile, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, new SaveNewEmployeeFormCommand("Save", bankEmployeeProfile));
         formActionCommandMap.put(3, new BackToMainMenuCommand("Back to main menu"));
     }
 
@@ -65,18 +65,18 @@ public class EnrollNewEmployee extends Action {
 
     private void getOpenNewAccountFormFieldMap() {
         openNewAccountFormFieldMap = new LinkedHashMap<>();
-        openNewAccountFormFieldMap.put(1, new FirstNameCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(2, new MiddleNameCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(3, new LastNameCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(4, new AddressLine1Command(bankEmployee));
-        openNewAccountFormFieldMap.put(5, new AddressLine2Command(bankEmployee));
-        openNewAccountFormFieldMap.put(6, new CityCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(7, new ProvinceCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(8, new ContactCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(9, new EmailCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(10, new PassPortNumberCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(11, new SSNNumberCommand(bankEmployee));
-        openNewAccountFormFieldMap.put(12, new DOBCommand(bankEmployee));
+        openNewAccountFormFieldMap.put(1, new FirstNameCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(2, new MiddleNameCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(3, new LastNameCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(4, new AddressLine1Command(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(5, new AddressLine2Command(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(6, new CityCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(7, new ProvinceCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(8, new ContactCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(9, new EmailCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(10, new PassPortNumberCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(11, new SSNNumberCommand(bankEmployeeProfile));
+        openNewAccountFormFieldMap.put(12, new DOBCommand(bankEmployeeProfile));
     }
 
 }

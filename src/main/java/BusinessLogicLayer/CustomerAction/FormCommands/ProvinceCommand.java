@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class ProvinceCommand extends FormCommand {
     private final String COMMAND_LABEL = "Province";
 
-    public ProvinceCommand(User user) {
-        super(user);
+    public ProvinceCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Province*: ");
-        user.setProvince(userInput);
+        profile.setProvince(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getProvince();
+        return profile.getProvince();
     }
 
     @Override

@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class PassPortNumberCommand extends FormCommand {
     private final String COMMAND_LABEL = "Passport Number";
 
-    public PassPortNumberCommand(User user) {
-        super(user);
+    public PassPortNumberCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Passport Number*: ");
-        user.setPassport(userInput);
+        profile.setPassport(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getPassport();
+        return profile.getPassport();
     }
 
     @Override

@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class SSNNumberCommand extends FormCommand {
     private final String COMMAND_LABEL = "SSN Number";
 
-    public SSNNumberCommand(User user) {
-        super(user);
+    public SSNNumberCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter SSN*: ");
-        user.setSsnNo(userInput);
+        profile.setSsnNo(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getSsnNo();
+        return profile.getSsnNo();
     }
 
     @Override

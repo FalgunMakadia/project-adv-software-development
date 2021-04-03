@@ -1,9 +1,9 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.Customer;
+import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
 import PresentationLayer.CommonPages.IUserInterface;
@@ -11,19 +11,19 @@ import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
 public abstract class FormCommand {
-    protected User user;
+    protected ProfileAbstract profile;
     protected IUserInterface userInterface;
     protected IWorklistDatabase worklistDatabase;
     protected DatabaseFactory databaseFactory;
     protected ILoggedInUserContext loggedInUserContext;
 
-    public FormCommand(User user) {
-        this.user = user;
+    public FormCommand(ProfileAbstract profile) {
+        this.profile = profile;
         init();
     }
 
     public FormCommand() {
-        this.user = new Customer();
+        this.profile = new CustomerProfile();
         init();
     }
 

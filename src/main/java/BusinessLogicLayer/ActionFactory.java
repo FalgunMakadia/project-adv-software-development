@@ -12,8 +12,8 @@ import BusinessLogicLayer.CustomerAction.*;
 import BusinessLogicLayer.TransactionAction.Deposit;
 import BusinessLogicLayer.TransactionAction.Transfer;
 import BusinessLogicLayer.TransactionAction.Withdraw;
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class ActionFactory implements IActionFactory {
     @Override
@@ -92,7 +92,7 @@ public class ActionFactory implements IActionFactory {
     }
 
     @Override
-    public User createCustomer() {
-        return new Customer();
+    public ProfileAbstract createCustomer() {
+        return new CustomerProfile();
     }
 }

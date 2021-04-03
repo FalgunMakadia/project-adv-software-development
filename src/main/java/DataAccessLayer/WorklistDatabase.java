@@ -1,7 +1,7 @@
 package DataAccessLayer;
 
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
 import java.sql.*;
@@ -38,23 +38,23 @@ public class WorklistDatabase implements IWorklistDatabase {
         }
 
         if (0 != record_id) {
-            User user = worklistRequest.getUser();
+            ProfileAbstract profileAbstract = worklistRequest.getUser();
             PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
             userInsertStatement.setInt(1, record_id);
             userInsertStatement.setString(2, worklistRequest.getAccountNumber());
-            userInsertStatement.setString(3, user.getFirstName());
-            userInsertStatement.setString(4, user.getLastName());
-            userInsertStatement.setString(5, user.getMiddleName());
-            userInsertStatement.setString(6, user.getAddressLine1());
-            userInsertStatement.setString(7, user.getAddressLine2());
-            userInsertStatement.setString(8, user.getCity());
-            userInsertStatement.setString(9, user.getProvince());
-            userInsertStatement.setString(10, user.getPostalCode());
-            userInsertStatement.setString(11, user.getEmailAddress());
-            userInsertStatement.setString(12, user.getContact());
-            userInsertStatement.setString(13, user.getPassport());
-            userInsertStatement.setString(14, user.getSsnNo());
-            userInsertStatement.setString(15, user.getDateOfBirth());
+            userInsertStatement.setString(3, profileAbstract.getFirstName());
+            userInsertStatement.setString(4, profileAbstract.getLastName());
+            userInsertStatement.setString(5, profileAbstract.getMiddleName());
+            userInsertStatement.setString(6, profileAbstract.getAddressLine1());
+            userInsertStatement.setString(7, profileAbstract.getAddressLine2());
+            userInsertStatement.setString(8, profileAbstract.getCity());
+            userInsertStatement.setString(9, profileAbstract.getProvince());
+            userInsertStatement.setString(10, profileAbstract.getPostalCode());
+            userInsertStatement.setString(11, profileAbstract.getEmailAddress());
+            userInsertStatement.setString(12, profileAbstract.getContact());
+            userInsertStatement.setString(13, profileAbstract.getPassport());
+            userInsertStatement.setString(14, profileAbstract.getSsnNo());
+            userInsertStatement.setString(15, profileAbstract.getDateOfBirth());
 
             userInsertStatement.executeUpdate();
         }
@@ -74,7 +74,7 @@ public class WorklistDatabase implements IWorklistDatabase {
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.first()) {
                 worklistRequest = new WorklistRequest();
-                User user = getUserDetails(id);
+                ProfileAbstract profileAbstract = getUserDetails(id);
                 String worklistType = resultSet.getString("request_type");
                 String priority = resultSet.getString("priority");
                 String accountNumber = resultSet.getString("account_number");
@@ -84,7 +84,7 @@ public class WorklistDatabase implements IWorklistDatabase {
                 worklistRequest.setPriority(priority);
                 worklistRequest.setAccountNumber(accountNumber);
                 worklistRequest.setHandledBy(handledBy);
-                worklistRequest.setUser(user);
+                worklistRequest.setUser(profileAbstract);
 
                 return worklistRequest;
             }
@@ -120,30 +120,30 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public User getUserDetails(int id) {
+    public ProfileAbstract getUserDetails(int id) {
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
-        User user = new Customer();
+        ProfileAbstract profileAbstract = new CustomerProfile();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setMiddleName(resultSet.getString("middle_name"));
-                user.setAddressLine1(resultSet.getString("addressline_1"));
-                user.setAddressLine2(resultSet.getString("addressline_2"));
-                user.setCity(resultSet.getString("city"));
-                user.setProvince(resultSet.getString("province"));
-                user.setPostalCode(resultSet.getString("postal_code"));
-                user.setEmailAddress(resultSet.getString("email"));
-                user.setContact(resultSet.getString("contact_number"));
-                user.setPassport(resultSet.getString("passport_number"));
-                user.setSsnNo(resultSet.getString("ssn_number"));
-                user.setAccountNumber(resultSet.getString("account_no"));
-                user.setDateOfBirth(resultSet.getString("birth_date"));
+                profileAbstract.setFirstName(resultSet.getString("first_name"));
+                profileAbstract.setLastName(resultSet.getString("last_name"));
+                profileAbstract.setMiddleName(resultSet.getString("middle_name"));
+                profileAbstract.setAddressLine1(resultSet.getString("addressline_1"));
+                profileAbstract.setAddressLine2(resultSet.getString("addressline_2"));
+                profileAbstract.setCity(resultSet.getString("city"));
+                profileAbstract.setProvince(resultSet.getString("province"));
+                profileAbstract.setPostalCode(resultSet.getString("postal_code"));
+                profileAbstract.setEmailAddress(resultSet.getString("email"));
+                profileAbstract.setContact(resultSet.getString("contact_number"));
+                profileAbstract.setPassport(resultSet.getString("passport_number"));
+                profileAbstract.setSsnNo(resultSet.getString("ssn_number"));
+                profileAbstract.setAccountNumber(resultSet.getString("account_no"));
+                profileAbstract.setDateOfBirth(resultSet.getString("birth_date"));
 
-                return user;
+                return profileAbstract;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,40 +1,39 @@
 package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.ProfileAbstract;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class UserForm implements IUserForm {
     private Map<Integer, FormCommand> formFields;
-    private User user;
+    private ProfileAbstract profileAbstract;
     private Page formPage;
 
     public UserForm(Map<Integer, FormCommand> formFields) {
         this.formFields = formFields;
-        this.user = new Customer();
+        this.profileAbstract = new CustomerProfile();
     }
 
-    public UserForm(Map<Integer, FormCommand> formFields, User user) {
-        this.user = user;
+    public UserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract) {
+        this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, "");
     }
 
-    public UserForm(Map<Integer, FormCommand> formFields, User user, String currentPage) {
-        this.user = user;
+    public UserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
+        this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);
     }
 
-    public User getUser() {
-        return user;
+    public ProfileAbstract getUser() {
+        return profileAbstract;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(ProfileAbstract profileAbstract) {
+        this.profileAbstract = profileAbstract;
     }
 
     @Override

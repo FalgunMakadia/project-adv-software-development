@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
 import java.sql.SQLException;
@@ -9,16 +9,16 @@ public class SaveFormCommand extends FormCommand {
     private final String CHANGE_REQUEST = "change personal details";
     private final String COMMAND_LABEL = "Save Details";
 
-    public SaveFormCommand(User user) {
-        super(user);
+    public SaveFormCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         try {
             WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
-                    user.getAccountNumber(),
-                    user);
+                    profile.getAccountNumber(),
+                    profile);
             int worklistId = worklistDatabase.addWorkListRequest(worklistRequest);
             if(worklistId == 0) {
                 userInterface.displayMessage("There is an error in submitting request");

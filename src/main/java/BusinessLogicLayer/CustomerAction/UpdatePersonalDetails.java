@@ -3,8 +3,7 @@ package BusinessLogicLayer.CustomerAction;
 import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
-import BusinessLogicLayer.User.User;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.*;
 import PresentationLayer.MenuPages.IUserForm;
 
@@ -38,28 +37,28 @@ public class UpdatePersonalDetails extends Action {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
         try {
-            User user = customerDatabase.getUser(currentUserAccountNumber);
-            IUserForm userForm = presentationFactory.createUserForm(getFormFields(user), user, loggedInUserContext.getCurrentPage());
+            ProfileAbstract profileAbstract = customerDatabase.getUser(currentUserAccountNumber);
+            IUserForm userForm = presentationFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
             userForm.executeForm();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    private Map<Integer, FormCommand> getFormFields(User user) {
-        formFields.put(1, new FirstNameCommand(user));
-        formFields.put(2, new MiddleNameCommand(user));
-        formFields.put(3, new LastNameCommand(user));
-        formFields.put(4, new AddressLine1Command(user));
-        formFields.put(5, new AddressLine2Command(user));
-        formFields.put(6, new CityCommand(user));
-        formFields.put(7, new ProvinceCommand(user));
-        formFields.put(8, new ContactCommand(user));
-        formFields.put(9, new EmailCommand(user));
-        formFields.put(10, new PassPortNumberCommand(user));
-        formFields.put(11, new SSNNumberCommand(user));
-        formFields.put(12, new DOBCommand(user));
-        formFields.put(13, new SaveFormCommand(user));
+    private Map<Integer, FormCommand> getFormFields(ProfileAbstract profileAbstract) {
+        formFields.put(1, new FirstNameCommand(profileAbstract));
+        formFields.put(2, new MiddleNameCommand(profileAbstract));
+        formFields.put(3, new LastNameCommand(profileAbstract));
+        formFields.put(4, new AddressLine1Command(profileAbstract));
+        formFields.put(5, new AddressLine2Command(profileAbstract));
+        formFields.put(6, new CityCommand(profileAbstract));
+        formFields.put(7, new ProvinceCommand(profileAbstract));
+        formFields.put(8, new ContactCommand(profileAbstract));
+        formFields.put(9, new EmailCommand(profileAbstract));
+        formFields.put(10, new PassPortNumberCommand(profileAbstract));
+        formFields.put(11, new SSNNumberCommand(profileAbstract));
+        formFields.put(12, new DOBCommand(profileAbstract));
+        formFields.put(13, new SaveFormCommand(profileAbstract));
         formFields.put(14, new BackToMainMenuCommand("Back to main menu"));
 
         return formFields;

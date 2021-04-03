@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class AddressLine1Command extends FormCommand {
     private final String COMMAND_LABEL = "Address Line 1";
 
-    public AddressLine1Command(User user) {
-        super(user);
+    public AddressLine1Command(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Address Line 1*: ");
-        user.setAddressLine1(userInput);
+        profile.setAddressLine1(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getAddressLine1();
+        return profile.getAddressLine1();
     }
 
     @Override

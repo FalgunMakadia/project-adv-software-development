@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class BankEmployeeCommand extends Command{
     private Map<String, Action> menu;
-    private static final String pageName = "BankEmployee";
+    private static final String pageName = "BankEmployeeProfile";
 
     public BankEmployeeCommand(){
         IActionFactory actionFactory = new ActionFactory();

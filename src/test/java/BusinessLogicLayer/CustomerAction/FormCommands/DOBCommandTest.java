@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.Customer;
+import BusinessLogicLayer.User.CustomerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ class DOBCommandTest {
 
     @BeforeEach
     void setup() {
-        dobCommand = new DOBCommand(new Customer());
+        dobCommand = new DOBCommand(new CustomerProfile());
         date1 = "10/09/1997";
         date2 = "2000-30-09";
         date3 = "2020-03-21";

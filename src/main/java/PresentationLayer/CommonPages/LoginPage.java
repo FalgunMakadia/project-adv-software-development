@@ -40,7 +40,7 @@ public class LoginPage {
             }
             else{
                 System.out.println("Login Failed!");
-                System.out.println("No Active User Found.");
+                System.out.println("No Active ProfileAbstract Found.");
                 System.out.println("Please Try Again.");
             }
         }while (true);

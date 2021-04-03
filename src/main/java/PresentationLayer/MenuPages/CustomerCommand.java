@@ -31,7 +31,7 @@ public class CustomerCommand extends Command{
     }
     @Override
     public void execute() {
-        MenuPage menuPage = new MenuPage(menu, "Customer");
+        MenuPage menuPage = new MenuPage(menu, "CustomerProfile");
         menuPage.printMenu();
     }
 }

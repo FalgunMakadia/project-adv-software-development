@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class PostalCodeCommand extends FormCommand {
     private final String COMMAND_LABEL = "Postal Code";
 
-    public PostalCodeCommand(User user) {
-        super(user);
+    public PostalCodeCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Postal Code*: ");
-        user.setPostalCode(userInput);
+        profile.setPostalCode(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getPostalCode();
+        return profile.getPostalCode();
     }
 
     @Override

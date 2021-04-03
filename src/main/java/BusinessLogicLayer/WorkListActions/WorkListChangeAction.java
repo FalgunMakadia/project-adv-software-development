@@ -1,8 +1,7 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.ICustomerDatabase;
 
 import java.sql.SQLException;
 
@@ -26,9 +25,9 @@ public class WorkListChangeAction extends WorkListAction {
                         updateUser(worklistRequest.getAccountNumber(), worklistRequest.getUser());
                 worklistDatabase.updateProcessStatus(worklistID, isDetailsUpdated);
                 if (isDetailsUpdated) {
-                    userInterface.displayMessage("User details updated successfully");
+                    userInterface.displayMessage("ProfileAbstract details updated successfully");
                 } else {
-                    userInterface.displayMessage("Error in updating user details");
+                    userInterface.displayMessage("Error in updating profile details");
                 }
             }
             returnToMainMenu();
@@ -38,14 +37,14 @@ public class WorkListChangeAction extends WorkListAction {
     }
 
     private void showComparisonOfUserDetails() {
-        User oldUserDetails = null;
+        ProfileAbstract oldProfileAbstractDetails = null;
         try {
-            oldUserDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
+            oldProfileAbstractDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
             userInterface.displayMessage("====Old Details====");
-            userDetailPage.printUserDetails(oldUserDetails);
+            userDetailPage.printUserDetails(oldProfileAbstractDetails);
             userInterface.insertEmptyLine();
 
-            userInterface.displayMessage("=====New User Details====");
+            userInterface.displayMessage("=====New ProfileAbstract Details====");
             userDetailPage.printUserDetails(worklistRequest.getUser());
             userInterface.insertEmptyLine();
         } catch (SQLException throwables) {

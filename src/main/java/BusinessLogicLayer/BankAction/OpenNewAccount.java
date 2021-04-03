@@ -5,8 +5,8 @@ import BusinessLogicLayer.BankAction.FormActionCommands.EditFormCommand;
 import BusinessLogicLayer.BankAction.FormActionCommands.SaveOpenNewAccountFormCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -16,7 +16,7 @@ public class OpenNewAccount extends Action {
     private static final String menuLabel = "Open New Account";
     Map<Integer, FormCommand> formActionCommandMap;
     private Map<Integer, FormCommand> openNewAccountFormFieldMap;
-    User customer;
+    ProfileAbstract customer;
     @Override
     public String getMenuLabel() {
         return menuLabel;
@@ -24,7 +24,7 @@ public class OpenNewAccount extends Action {
 
     public OpenNewAccount() {
         super();
-        customer = new Customer();
+        customer = new CustomerProfile();
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
         formActionCommandMap.put(1, new EditFormCommand("Edit", customer, openNewAccountFormFieldMap));

@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class LastNameCommand extends FormCommand {
     private final String COMMAND_LABEL = "Last Name";
 
-    public LastNameCommand(User user) {
-        super(user);
+    public LastNameCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Last Name*: ");
-        user.setLastName(userInput);
+        profile.setLastName(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getLastName();
+        return profile.getLastName();
     }
 
     @Override

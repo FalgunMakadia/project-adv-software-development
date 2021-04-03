@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class EmailCommand extends FormCommand {
     private final String COMMAND_LABEL = "Email";
 
-    public EmailCommand(User user) {
-        super(user);
+    public EmailCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter Email*: ");
-        user.setEmailAddress(userInput);
+        profile.setEmailAddress(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getEmailAddress();
+        return profile.getEmailAddress();
     }
 
     @Override

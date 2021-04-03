@@ -1,7 +1,7 @@
 package PresentationLayer.CommonPages;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public interface IUserDetailPage {
-    void printUserDetails(User user);
+    void printUserDetails(ProfileAbstract profileAbstract);
 }

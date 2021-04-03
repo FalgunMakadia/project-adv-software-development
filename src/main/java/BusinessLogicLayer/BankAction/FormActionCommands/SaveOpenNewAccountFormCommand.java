@@ -1,9 +1,8 @@
 package BusinessLogicLayer.BankAction.FormActionCommands;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IUserDetailsDatabase;
 
 import java.io.IOException;
@@ -11,12 +10,11 @@ import java.sql.SQLException;
 
 public class SaveOpenNewAccountFormCommand extends FormCommand {
     private String menuLabel;
-    User user;
 
-    public SaveOpenNewAccountFormCommand(String menuLabel, User user) {
+    public SaveOpenNewAccountFormCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
         super();
         this.menuLabel = menuLabel;
-        this.user = user;
+        this.profile = newCustomerProfile;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class SaveOpenNewAccountFormCommand extends FormCommand {
         try {
             WorklistRequest worklistRequest = new WorklistRequest();
             worklistRequest.setRequestType("Open New Account");
-            worklistRequest.setUser(user);
+            worklistRequest.setUser(profile);
             workListId = worklistDatabase.addWorkListRequest(worklistRequest);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -51,15 +49,15 @@ public class SaveOpenNewAccountFormCommand extends FormCommand {
     }
 
     private int createNewUser() {
-        String userName = user.getUserName();
-        int defaultPassword = user.generateDefaultPassword();
+        String userName = profile.getUserName();
+        int defaultPassword = profile.generateDefaultPassword();
         IUserDetailsDatabase userDatabase = null;
         try {
             userDatabase = databaseFactory.createUserDatabase();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int affectedRows = userDatabase.insertNewUser(userName, defaultPassword, "C");
+        int affectedRows = userDatabase.insertNewUser(userName, defaultPassword, profile.getProfileRole());
         return  affectedRows;
     }
 

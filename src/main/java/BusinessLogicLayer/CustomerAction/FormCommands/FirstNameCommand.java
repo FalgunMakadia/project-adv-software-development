@@ -1,12 +1,12 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class FirstNameCommand extends FormCommand {
     private final String COMMAND_LABEL = "First Name";
 
-    public FirstNameCommand(User user) {
-        super(user);
+    public FirstNameCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     public FirstNameCommand() {
@@ -16,12 +16,12 @@ public class FirstNameCommand extends FormCommand {
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter First Name*: ");
-        user.setFirstName(userInput);
+        profile.setFirstName(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getFirstName();
+        return profile.getFirstName();
     }
 
     @Override

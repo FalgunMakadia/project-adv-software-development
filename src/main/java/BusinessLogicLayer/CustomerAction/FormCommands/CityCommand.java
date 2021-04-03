@@ -1,23 +1,23 @@
 package BusinessLogicLayer.CustomerAction.FormCommands;
 
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.User.ProfileAbstract;
 
 public class CityCommand extends FormCommand {
     private final String COMMAND_LABEL = "City";
 
-    public CityCommand(User user) {
-        super(user);
+    public CityCommand(ProfileAbstract profileAbstract) {
+        super(profileAbstract);
     }
 
     @Override
     public void execute() {
         String userInput = userInterface.getMandatoryUserInput("Enter New City*: ");
-        user.setCity(userInput);
+        profile.setCity(userInput);
     }
 
     @Override
     public String getFieldValue() {
-        return user.getCity();
+        return profile.getCity();
     }
 
     @Override
