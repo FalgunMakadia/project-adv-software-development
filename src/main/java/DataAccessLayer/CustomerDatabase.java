@@ -16,7 +16,7 @@ public class CustomerDatabase implements ICustomerDatabase {
     @Override
     public boolean add(User user) {
         String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
-                "addressline_1, addressline_2, city, province, postal_code, email" +
+                "addressline_1, addressline_2, city, province, postal_code, email," +
                 "contact_number, passport_number, ssn_number, birth_date) VALUES " +
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String createAccount = "INSERT INTO accounts (account_no, balance, active_status) VALUES " +

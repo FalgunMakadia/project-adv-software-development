@@ -1,6 +1,7 @@
 package BusinessLogicLayer.BankAction;
 
 import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.WorkListActions.IWorkListAction;
 import BusinessLogicLayer.WorkListActions.WorkListAction;
 import BusinessLogicLayer.WorkListActions.WorkListChangeAction;
 import BusinessLogicLayer.WorkListActions.WorkListNewAccountRequest;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class WorkList extends Action {
     private static final int EXIT = 0;
     private static final String CHANGE_REQUEST = "change personal details";
-    private static final String CREATE_ACCOUNT_REQUEST = "create new account";
+    private static final String CREATE_ACCOUNT_REQUEST = "Open New Account";
 
     private static final String menuLabel = "WorkList";
     private IWorklistDatabase worklistDatabase;
@@ -54,7 +55,7 @@ public class WorkList extends Action {
                 userInput = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Enter Value:"));
                 WorklistRequest worklistRequest = worklistDatabase.getWorkListRequest(userInput);
                 if(null != worklistRequest) {
-                    WorkListAction workListAction;
+                    IWorkListAction workListAction;
                     if(worklistRequest.getRequestType().equals(CHANGE_REQUEST)) {
                         workListAction = new WorkListChangeAction(worklistRequest, userInput);
                         workListAction.processWorkList();
