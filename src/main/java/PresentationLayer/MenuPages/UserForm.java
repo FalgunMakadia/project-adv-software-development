@@ -9,7 +9,7 @@ import java.util.Map;
 public class UserForm implements IUserForm {
     private Map<Integer,IFormCommand> formFields;
     private ProfileAbstract profileAbstract;
-    private Page formPage;
+    private IPage formPage;
 
     public UserForm(Map<Integer,IFormCommand> formFields) {
         this.formFields = formFields;

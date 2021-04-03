@@ -1,6 +1,6 @@
 package PresentationLayer.CommonPages;
 
-import PresentationLayer.MenuPages.Page;
+import PresentationLayer.MenuPages.IPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ public enum LoginCommand {;
 
     private String userRole;
     private String description;
-    private Page menuPage;
+    private IPage menuPage;
 
     public String getUserRole() {
         return userRole;
@@ -22,10 +22,10 @@ public enum LoginCommand {;
         return description;
     }
 
-    public Page getMenuPage() { return menuPage; }
+    public IPage getMenuPage() { return menuPage; }
 
 
-    LoginCommand(String number, String desc, Page page){
+    LoginCommand(String number, String desc, IPage page){
         this.userRole = number;
         this.description = desc;
         this.menuPage = page;
