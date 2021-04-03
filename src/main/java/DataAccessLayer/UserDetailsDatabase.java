@@ -1,13 +1,8 @@
 package DataAccessLayer;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Properties;
-
-import static org.mockito.Mockito.mock;
 
 import java.sql.*;
 
@@ -32,9 +27,38 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
         return resultSet;
     }
 
+
+    
+
     @Override
-    public int insertNewUser() {
-        return 0;
+    public void UpdatePassword(String userName, int changedPassword) {
+        String updatePasswordQuery = "UPDATE  login SET userPassword = '" + changedPassword+ "' WHERE userName = '" + userName + "'";
+        try {
+            preparedStatement = connection.prepareStatement(updatePasswordQuery);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
     }
 
+    @Override
+    public void insertNewEmployee(String userName,int defaultPassword,String userRole) {
+         String newEmployeeLogin = "INSERT INTO login VALUES (?,?,?,?,?)";
+        try {
+            preparedStatement = connection.prepareStatement(newEmployeeLogin);
+            preparedStatement.setString(1,userName);
+            preparedStatement.setString(2,String.valueOf(defaultPassword));
+            preparedStatement.setString(3,null);
+            preparedStatement.setString(4,userRole);
+            preparedStatement.setBoolean(5,false);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+
+        
+    }
+    }
 }
