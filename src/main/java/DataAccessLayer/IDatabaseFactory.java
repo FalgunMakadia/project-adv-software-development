@@ -11,4 +11,5 @@ public interface IDatabaseFactory {
 
     IUserDetailsDatabase createUserDatabase() throws IOException;
 
+    IEmployeeDatabase createNewEmployee() throws IOException;
 }

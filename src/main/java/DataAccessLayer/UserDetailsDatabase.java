@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-import static org.mockito.Mockito.mock;
-
 import java.sql.*;
 
 public class UserDetailsDatabase implements IUserDetailsDatabase {
@@ -29,7 +27,6 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
         return resultSet;
     }
 
-
     @Override
     public int insertNewUser(String userName, int defaultPassword, String userRole) {
         int affectedRow = 0;
@@ -49,6 +46,8 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
         return affectedRow;
     }
 
+
+
     @Override
     public void UpdatePassword(String userName, int changedPassword) {
         String updatePasswordQuery = "UPDATE  login SET userPassword = '" + changedPassword+ "' WHERE userName = '" + userName + "'";
@@ -61,5 +60,6 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
         }
 
     }
+
 
 }
