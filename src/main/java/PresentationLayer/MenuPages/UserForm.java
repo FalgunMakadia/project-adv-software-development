@@ -7,22 +7,22 @@ import BusinessLogicLayer.User.ProfileAbstract;
 import java.util.Map;
 
 public class UserForm implements IUserForm {
-    private Map<Integer, FormCommand> formFields;
+    private Map<Integer,IFormCommand> formFields;
     private ProfileAbstract profileAbstract;
     private Page formPage;
 
-    public UserForm(Map<Integer, FormCommand> formFields) {
+    public UserForm(Map<Integer,IFormCommand> formFields) {
         this.formFields = formFields;
         this.profileAbstract = new CustomerProfile();
     }
 
-    public UserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract) {
+    public UserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract) {
         this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, "");
     }
 
-    public UserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
+    public UserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
         this.profileAbstract = profileAbstract;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);

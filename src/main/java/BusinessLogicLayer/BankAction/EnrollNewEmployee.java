@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class EnrollNewEmployee extends Action {
     private static final String menuLabel = "Enroll New Employee";
-    Map<Integer, FormCommand> formActionCommandMap;
-    private Map<Integer, FormCommand> openNewAccountFormFieldMap;
+    Map<Integer,IFormCommand> formActionCommandMap;
+    private Map<Integer,IFormCommand> openNewAccountFormFieldMap;
     BankEmployeeProfile bankEmployeeProfile;
     public EnrollNewEmployee() {
         super();
@@ -42,8 +42,8 @@ public class EnrollNewEmployee extends Action {
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
 
-        for (Map.Entry<Integer, FormCommand> formQuestionEntry : openNewAccountFormFieldMap.entrySet()) {
-            FormCommand formCommand = formQuestionEntry.getValue();
+        for (Map.Entry<Integer,IFormCommand> formQuestionEntry : openNewAccountFormFieldMap.entrySet()) {
+           IFormCommand formCommand = formQuestionEntry.getValue();
             formCommand.execute();
         }
 
@@ -51,13 +51,13 @@ public class EnrollNewEmployee extends Action {
         while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
-                FormCommand formState = formActionCommandMap.get(key);
+               IFormCommand formState = formActionCommandMap.get(key);
                 System.out.println(key + ". " + formState.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-            FormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+           IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
             formCommand.execute();
 
         }

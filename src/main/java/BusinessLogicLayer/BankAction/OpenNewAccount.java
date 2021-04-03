@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class OpenNewAccount extends Action {
     private static final String menuLabel = "Open New Account";
-    Map<Integer, FormCommand> formActionCommandMap;
-    private Map<Integer, FormCommand> openNewAccountFormFieldMap;
+    Map<Integer,IFormCommand> formActionCommandMap;
+    private Map<Integer,IFormCommand> openNewAccountFormFieldMap;
     ProfileAbstract customer;
     @Override
     public String getMenuLabel() {
@@ -43,10 +43,10 @@ public class OpenNewAccount extends Action {
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
 
-        Iterator<Map.Entry<Integer, FormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
+        Iterator<Map.Entry<Integer,IFormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Integer, FormCommand> formQuestionEntry = iterator.next();
-            FormCommand formCommand = formQuestionEntry.getValue();
+            Map.Entry<Integer,IFormCommand> formQuestionEntry = iterator.next();
+           IFormCommand formCommand = formQuestionEntry.getValue();
             formCommand.execute();
         }
 
@@ -54,13 +54,13 @@ public class OpenNewAccount extends Action {
         while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
-                FormCommand formState = formActionCommandMap.get(key);
+               IFormCommand formState = formActionCommandMap.get(key);
                 System.out.println(key + ". " + formState.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-            FormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+           IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
             formCommand.execute();
 
         }

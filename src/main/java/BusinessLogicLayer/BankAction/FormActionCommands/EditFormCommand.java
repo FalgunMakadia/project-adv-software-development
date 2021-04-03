@@ -1,6 +1,7 @@
 package BusinessLogicLayer.BankAction.FormActionCommands;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.UserInterface;
 import PresentationLayer.IPresentationFactory;
@@ -12,8 +13,8 @@ import java.util.Map;
 public class EditFormCommand extends FormCommand {
     String menuLabel;
     ProfileAbstract profileAbstract;
-    Map<Integer, FormCommand> formFieldMap;
-    public EditFormCommand(String menuLabel, ProfileAbstract profileAbstract, Map<Integer, FormCommand> formFieldMap) {
+    Map<Integer,IFormCommand> formFieldMap;
+    public EditFormCommand(String menuLabel, ProfileAbstract profileAbstract, Map<Integer, IFormCommand> formFieldMap) {
         super();
         this.menuLabel = menuLabel;
         this.profileAbstract = profileAbstract;
@@ -27,7 +28,7 @@ public class EditFormCommand extends FormCommand {
         userForm.executeForm();
         UserInterface userInterface = new UserInterface();
         for (int fieldIndex = 1; fieldIndex <= formFieldMap.size(); fieldIndex++) {
-            FormCommand command = formFieldMap.get(fieldIndex);
+           IFormCommand command = formFieldMap.get(fieldIndex);
 
             userInterface.displayMessage(command.getCommandLabel() + ": " + command.getFieldValue());
 

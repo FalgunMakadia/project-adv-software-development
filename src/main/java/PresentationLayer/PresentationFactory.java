@@ -1,6 +1,7 @@
 package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.*;
 import PresentationLayer.MenuPages.*;
@@ -19,16 +20,16 @@ public class PresentationFactory implements IPresentationFactory {
     }
 
     @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract) {
+    public IUserForm createUserForm(Map<Integer, IFormCommand> formFields, ProfileAbstract profileAbstract) {
         return new UserForm(formFields, profileAbstract);
     }
     @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
+    public IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage) {
         return new UserForm(formFields, profileAbstract, currentPage);
     }
 
     @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields) {
+    public IUserForm createUserForm(Map<Integer,IFormCommand> formFields) {
         return new UserForm(formFields);
     }
 

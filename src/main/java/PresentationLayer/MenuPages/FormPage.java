@@ -1,15 +1,16 @@
 package PresentationLayer.MenuPages;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class FormPage extends Page {
-    private Map<Integer, FormCommand> formFields;
+    private Map<Integer, IFormCommand> formFields;
     String currentPage;
 
-    public FormPage(Map<Integer, FormCommand> formFields, String currentPage) {
+    public FormPage(Map<Integer,IFormCommand> formFields, String currentPage) {
         this.formFields = formFields;
         this.currentPage = currentPage;
     }
@@ -20,7 +21,7 @@ public class FormPage extends Page {
         do {
             Scanner scanner = new Scanner(System.in);
             for (int fieldIndex = 1; fieldIndex <= formFields.size(); fieldIndex++) {
-                FormCommand command = formFields.get(fieldIndex);
+               IFormCommand command = formFields.get(fieldIndex);
                 if (null == command.getFieldValue()) {
                     System.out.println(fieldIndex + ". " + command.getCommandLabel());
                 } else {
@@ -31,7 +32,7 @@ public class FormPage extends Page {
             System.out.println("Enter 14 to go back to main menu");
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
-                FormCommand command = formFields.get(userInput);
+               IFormCommand command = formFields.get(userInput);
                 command.execute();
             }
         } while (loggedInUserContext.checkCurrentPageStatus(currentPage));

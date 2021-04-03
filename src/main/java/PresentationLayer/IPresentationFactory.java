@@ -1,6 +1,7 @@
 package PresentationLayer;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.CommonPages.IBankStatementTable;
 import PresentationLayer.CommonPages.IUserDetailPage;
@@ -16,11 +17,11 @@ public interface IPresentationFactory {
 
     Command createExistingBankAccountCommand();
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract);
+    IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract);
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, ProfileAbstract profileAbstract, String currentPage);
+    IUserForm createUserForm(Map<Integer,IFormCommand> formFields, ProfileAbstract profileAbstract, String currentPage);
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields);
+    IUserForm createUserForm(Map<Integer,IFormCommand> formFields);
 
     IWorklistTable createWorklistTable();
 

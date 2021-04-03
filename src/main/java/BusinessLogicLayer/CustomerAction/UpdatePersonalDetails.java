@@ -13,9 +13,7 @@ import java.util.Map;
 
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
-    private IDatabaseFactory databaseFactory;
-    private boolean isUpdated = false;
-    private Map<Integer, FormCommand> formFields;
+    private Map<Integer,IFormCommand> formFields;
 
     public UpdatePersonalDetails() {
         this.databaseFactory = new DatabaseFactory();
@@ -45,7 +43,7 @@ public class UpdatePersonalDetails extends Action {
         }
     }
 
-    private Map<Integer, FormCommand> getFormFields(ProfileAbstract profileAbstract) {
+    private Map<Integer,IFormCommand> getFormFields(ProfileAbstract profileAbstract) {
         formFields.put(1, new FirstNameCommand(profileAbstract));
         formFields.put(2, new MiddleNameCommand(profileAbstract));
         formFields.put(3, new LastNameCommand(profileAbstract));

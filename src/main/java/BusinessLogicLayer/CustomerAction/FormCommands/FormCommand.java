@@ -10,7 +10,7 @@ import PresentationLayer.CommonPages.IUserInterface;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
-public abstract class FormCommand {
+public abstract class FormCommand implements IFormCommand {
     protected ProfileAbstract profile;
     protected IUserInterface userInterface;
     protected IWorklistDatabase worklistDatabase;
@@ -34,10 +34,4 @@ public abstract class FormCommand {
         this.worklistDatabase = databaseFactory.createWorkListDatabase();
         this.loggedInUserContext = LoggedInUserContext.instance();
     }
-
-    public abstract void execute();
-
-    public abstract String getFieldValue();
-
-    public abstract String getCommandLabel();
 }
