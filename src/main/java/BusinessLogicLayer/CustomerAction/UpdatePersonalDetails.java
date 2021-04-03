@@ -7,13 +7,12 @@ import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.*;
 import PresentationLayer.MenuPages.IUserForm;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
-    private Map<Integer,IFormCommand> formFields;
+    private Map<Integer, IFormCommand> formFields;
     private IDatabaseFactory databaseFactory;
 
     public UpdatePersonalDetails() {
@@ -34,16 +33,13 @@ public class UpdatePersonalDetails extends Action {
         userInterface.displayMessage("Update Personal Details");
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
-        try {
-            ProfileAbstract profileAbstract = customerDatabase.getUser(currentUserAccountNumber);
-            IUserForm userForm = presentationFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
-            userForm.executeForm();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
+        ProfileAbstract profileAbstract = customerDatabase.getUser(currentUserAccountNumber);
+        IUserForm userForm = presentationFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
+        userForm.executeForm();
     }
 
-    private Map<Integer,IFormCommand> getFormFields(ProfileAbstract profileAbstract) {
+    private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profileAbstract) {
         formFields.put(1, new FirstNameCommand(profileAbstract));
         formFields.put(2, new MiddleNameCommand(profileAbstract));
         formFields.put(3, new LastNameCommand(profileAbstract));

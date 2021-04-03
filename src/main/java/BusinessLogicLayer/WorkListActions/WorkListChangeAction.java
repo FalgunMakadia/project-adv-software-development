@@ -38,17 +38,13 @@ public class WorkListChangeAction extends WorkListAction {
 
     private void showComparisonOfUserDetails() {
         ProfileAbstract oldProfileAbstractDetails = null;
-        try {
-            oldProfileAbstractDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
-            userInterface.displayMessage("====Old Details====");
-            userDetailPage.printUserDetails(oldProfileAbstractDetails);
-            userInterface.insertEmptyLine();
+        oldProfileAbstractDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
+        userInterface.displayMessage("====Old Details====");
+        userDetailPage.printUserDetails(oldProfileAbstractDetails);
+        userInterface.insertEmptyLine();
 
-            userInterface.displayMessage("=====New ProfileAbstract Details====");
-            userDetailPage.printUserDetails(worklistRequest.getUser());
-            userInterface.insertEmptyLine();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        userInterface.displayMessage("=====New ProfileAbstract Details====");
+        userDetailPage.printUserDetails(worklistRequest.getUser());
+        userInterface.insertEmptyLine();
     }
 }

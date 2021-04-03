@@ -83,18 +83,23 @@ public class AccountDatabase implements IAccountDatabase {
     }
 
     @Override
-    public ArrayList<TransactionModel> getMiniStatement(String accountNumber) throws SQLException {
+    public ArrayList<TransactionModel> getMiniStatement(String accountNumber) {
         String query = "SELECT * FROM transactions WHERE account_no = ? ORDER BY transaction_date DESC LIMIT 5";
         ArrayList<TransactionModel> transactionList = new ArrayList<>();
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, accountNumber);
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, accountNumber);
 
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            String transactionType = resultSet.getString("transaction_type");
-            int amount = resultSet.getInt("transaction_amount");
-            String date = resultSet.getString("transaction_date");
-            transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String transactionType = resultSet.getString("transaction_type");
+                int amount = resultSet.getInt("transaction_amount");
+                String date = resultSet.getString("transaction_date");
+                transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return transactionList;
     }

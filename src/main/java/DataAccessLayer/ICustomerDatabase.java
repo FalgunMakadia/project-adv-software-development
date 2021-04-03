@@ -9,7 +9,7 @@ public interface ICustomerDatabase {
 
     void delete(ProfileAbstract profileAbstract);
 
-    ProfileAbstract getUser(String accountNumber) throws SQLException;
+    ProfileAbstract getUser(String accountNumber);
 
     boolean updateUser(String accountNumber, ProfileAbstract profileAbstract);
 }

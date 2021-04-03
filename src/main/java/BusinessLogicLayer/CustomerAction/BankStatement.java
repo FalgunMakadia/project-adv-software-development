@@ -7,7 +7,6 @@ import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 import PresentationLayer.CommonPages.IBankStatementTable;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BankStatement extends Action {
@@ -37,15 +36,11 @@ public class BankStatement extends Action {
         setCurrentPageInContext();
         userInterface.displayMessage("Bank Statement");
         String accountNumber = loggedInUserContext.getAccountNumber();
-        try {
-            ArrayList<TransactionModel> transactionList = accountDatabase.getMiniStatement(accountNumber);
-            if (0 == transactionList.size()) {
-                userInterface.displayMessage("No Transactions are available for this account");
-            } else {
-                bankStatementTable.printBankStatementTable(transactionList);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        ArrayList<TransactionModel> transactionList = accountDatabase.getMiniStatement(accountNumber);
+        if (0 == transactionList.size()) {
+            userInterface.displayMessage("No Transactions are available for this account");
+        } else {
+            bankStatementTable.printBankStatementTable(transactionList);
         }
     }
 }

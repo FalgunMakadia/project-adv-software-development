@@ -61,30 +61,34 @@ public class CustomerDatabase implements ICustomerDatabase {
     }
 
     @Override
-    public ProfileAbstract getUser(String accountNumber) throws SQLException {
+    public ProfileAbstract getUser(String accountNumber) {
         String query = "SELECT * from customers WHERE account_no = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-
-        statement.setString(1, accountNumber);
-        ProfileAbstract profileAbstract = new CustomerProfile();
-        ResultSet resultSet = statement.executeQuery();
-        System.out.println(resultSet.first());
-        if (resultSet.first()) {
-            profileAbstract.setFirstName(resultSet.getString("first_name"));
-            profileAbstract.setLastName(resultSet.getString("last_name"));
-            profileAbstract.setMiddleName(resultSet.getString("middle_name"));
-            profileAbstract.setAddressLine1(resultSet.getString("addressline_1"));
-            profileAbstract.setAddressLine2(resultSet.getString("addressline_2"));
-            profileAbstract.setCity(resultSet.getString("city"));
-            profileAbstract.setProvince(resultSet.getString("province"));
-            profileAbstract.setPostalCode(resultSet.getString("postal_code"));
-            profileAbstract.setEmailAddress(resultSet.getString("email"));
-            profileAbstract.setContact(resultSet.getString("contact_number"));
-            profileAbstract.setPassport(resultSet.getString("passport_number"));
-            profileAbstract.setSsnNo(resultSet.getString("ssn_number"));
-            profileAbstract.setAccountNumber(resultSet.getString("account_no"));
-            profileAbstract.setDateOfBirth(resultSet.getString("birth_date"));
-            return profileAbstract;
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1, accountNumber);
+            ProfileAbstract profileAbstract = new CustomerProfile();
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(resultSet.first());
+            if (resultSet.first()) {
+                profileAbstract.setFirstName(resultSet.getString("first_name"));
+                profileAbstract.setLastName(resultSet.getString("last_name"));
+                profileAbstract.setMiddleName(resultSet.getString("middle_name"));
+                profileAbstract.setAddressLine1(resultSet.getString("addressline_1"));
+                profileAbstract.setAddressLine2(resultSet.getString("addressline_2"));
+                profileAbstract.setCity(resultSet.getString("city"));
+                profileAbstract.setProvince(resultSet.getString("province"));
+                profileAbstract.setPostalCode(resultSet.getString("postal_code"));
+                profileAbstract.setEmailAddress(resultSet.getString("email"));
+                profileAbstract.setContact(resultSet.getString("contact_number"));
+                profileAbstract.setPassport(resultSet.getString("passport_number"));
+                profileAbstract.setSsnNo(resultSet.getString("ssn_number"));
+                profileAbstract.setAccountNumber(resultSet.getString("account_no"));
+                profileAbstract.setDateOfBirth(resultSet.getString("birth_date"));
+                return profileAbstract;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return null;
     }

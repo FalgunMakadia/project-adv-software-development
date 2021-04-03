@@ -14,5 +14,5 @@ public interface IAccountDatabase {
 
     void saveTransaction(ArrayList<TransactionModel> transactionList) throws SQLException;
 
-    ArrayList<TransactionModel> getMiniStatement(String accountNumber) throws SQLException;
+    ArrayList<TransactionModel> getMiniStatement(String accountNumber);
 }
