@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.SQLException;
 
-public class TransferTest {
+public class TransferActionTest {
 
     IDatabaseFactory databaseFactory = null;
     int actual;

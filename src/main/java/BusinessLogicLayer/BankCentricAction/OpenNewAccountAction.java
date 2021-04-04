@@ -13,9 +13,6 @@ import java.util.Map;
 
 public class OpenNewAccountAction extends Action {
     private static final String ACTION_TITLE = "Open New Account";
-    private static final String EDIT_LABEL = "Edit";
-    private static final String SAVE_LABEL = "Save";
-    private static final String BACK_TO_MAIN_MENU_LABEL  = "Back to main menu";
 
     private Map<Integer, IFormCommand> formActionCommandMap;
     private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
@@ -34,9 +31,9 @@ public class OpenNewAccountAction extends Action {
 
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
-        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand(EDIT_LABEL, customer, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, profileFormFactory.createSaveNewAccountProfileFormActionCommand(SAVE_LABEL, customer));
-        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand(BACK_TO_MAIN_MENU_LABEL));
+        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand(customer, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, profileFormFactory.createSaveNewAccountProfileFormActionCommand(customer));
+        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand());
     }
 
     @Override

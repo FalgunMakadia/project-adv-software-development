@@ -14,7 +14,7 @@ public class UserDetailPage extends Page {
         System.out.println("Middle Name: " + profile.getMiddleName());
         System.out.println("Last Name: " + profile.getLastName());
         System.out.println("AddressLine 1: " + profile.getAddressLine1());
-        System.out.println("AddressLine 2" + profile.getAddressLine2());
+        System.out.println("AddressLine 2: " + profile.getAddressLine2());
         System.out.println("City: " + profile.getCity());
         System.out.println("Province: " + profile.getProvince());
         System.out.println("Contact: " + profile.getContact());

@@ -6,13 +6,13 @@ import BusinessLogicLayer.User.AbstractProfile;
 import java.util.Map;
 
 public interface IProfileFormFactory {
-    IFormCommand createBackToMainMenuProfileFormActionCommand(String menuLabel);
+    IFormCommand createBackToMainMenuProfileFormActionCommand();
 
-    IFormCommand createEditProfileFormActionCommand(String menuLabel, AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap);
+    IFormCommand createEditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap);
 
-    IFormCommand createSaveNewAccountProfileFormActionCommand(String menuLabel, AbstractProfile newCustomerProfile);
+    IFormCommand createSaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile);
 
-    IFormCommand createSaveNewEmployeeProfileFormActionCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile);
+    IFormCommand createSaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile);
 
     IFormCommand createSaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile);
 

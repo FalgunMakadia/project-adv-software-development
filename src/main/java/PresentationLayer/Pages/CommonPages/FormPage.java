@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FormPage extends Page {
+    private static final String COMMAND_TYPE = "ACTION";
+
     private Map<Integer, IFormCommand> formFields;
     String currentPage;
 
@@ -22,7 +24,7 @@ public class FormPage extends Page {
             Scanner scanner = new Scanner(System.in);
             for (int fieldIndex = 1; fieldIndex <= formFields.size(); fieldIndex++) {
                IFormCommand command = formFields.get(fieldIndex);
-                if (null == command.getFieldValue()) {
+                if (null == command.getFieldValue() || COMMAND_TYPE == command.getFieldValue()) {
                     System.out.println(fieldIndex + ". " + command.getCommandLabel());
                 } else {
                     System.out.println(fieldIndex + ". " + command.getCommandLabel() + ": " + command.getFieldValue());

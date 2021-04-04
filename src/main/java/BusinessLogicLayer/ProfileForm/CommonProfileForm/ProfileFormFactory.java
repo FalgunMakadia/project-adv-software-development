@@ -9,23 +9,23 @@ import java.util.Map;
 
 public class ProfileFormFactory implements IProfileFormFactory{
     @Override
-    public IFormCommand createBackToMainMenuProfileFormActionCommand(String menuLabel) {
-        return new BackToMainMenuProfileFormActionCommand(menuLabel);
+    public IFormCommand createBackToMainMenuProfileFormActionCommand() {
+        return new BackToMainMenuProfileFormActionCommand();
     }
 
     @Override
-    public IFormCommand createEditProfileFormActionCommand(String menuLabel, AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
-        return new EditProfileFormActionCommand(menuLabel, profile, formFieldMap);
+    public IFormCommand createEditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
+        return new EditProfileFormActionCommand(profile, formFieldMap);
     }
 
     @Override
-    public IFormCommand createSaveNewAccountProfileFormActionCommand(String menuLabel, AbstractProfile newCustomerProfile) {
-        return new SaveNewAccountProfileFormActionCommand(menuLabel, newCustomerProfile);
+    public IFormCommand createSaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile) {
+        return new SaveNewAccountProfileFormActionCommand(newCustomerProfile);
     }
 
     @Override
-    public IFormCommand createSaveNewEmployeeProfileFormActionCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
-        return new SaveNewEmployeeProfileFormActionCommand(menuLabel, bankEmployeeProfile);
+    public IFormCommand createSaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile) {
+        return new SaveNewEmployeeProfileFormActionCommand(bankEmployeeProfile);
     }
 
     @Override

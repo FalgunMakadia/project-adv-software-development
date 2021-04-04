@@ -8,13 +8,14 @@ import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
-    private final String menuLabel;
+    private static final String COMMAND_LABEL = "Save";
+    private static final String COMMAND_TYPE = "ACTION";
+
     private IUserProfileDatabase userProfileDatabase;
     private IEmployeeProfileDatabase employeeProfileDatabase;
 
-    public SaveNewEmployeeProfileFormActionCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
+    public SaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile) {
         super();
-        this.menuLabel = menuLabel;
         this.profile = bankEmployeeProfile;
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
@@ -42,7 +43,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getFieldValue() {
-        return null;
+        return COMMAND_TYPE;
     }
 
 
@@ -55,7 +56,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getCommandLabel() {
-        return menuLabel;
+        return COMMAND_LABEL;
     }
 
 }

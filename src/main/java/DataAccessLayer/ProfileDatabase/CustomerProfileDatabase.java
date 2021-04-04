@@ -37,8 +37,9 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 "addressline_1, addressline_2, city, province, postal_code, email," +
                 "contact_number, passport_number, ssn_number, birth_date) VALUES " +
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String createAccount = "INSERT INTO accounts (account_no, balance, active_status) VALUES " +
-                "(?, ?, ?)";
+        String createAccount = "INSERT INTO accounts (account_no, active_status) VALUES " +
+                "(?, ?)";
+        String activateUserCredentials = "UPDATE INTO login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
@@ -63,9 +64,22 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 long accontNumber = resultSet.getLong(1);
                 if (0L != accontNumber) {
                     PreparedStatement createAccountStatement = connection.prepareStatement(createAccount);
-                    int affectedRows = createAccountStatement.executeUpdate();
+                    createAccountStatement.setLong(1,accontNumber);
+                    createAccountStatement.setBoolean(2, true);
+                    createAccountStatement.executeUpdate();
 
-                    return affectedRows == 1 ? true : false;
+                    PreparedStatement activeUserCredentialsStatement = connection.prepareStatement(activateUserCredentials);
+                    activeUserCredentialsStatement.setLong(1, accontNumber);
+                    activeUserCredentialsStatement.setBoolean(2, true);
+                    activeUserCredentialsStatement.setString(3, profile.getUserName());
+
+                    int affectedRows = activeUserCredentialsStatement.executeUpdate();
+
+                    if (affectedRows == 1) {
+                        return true;
+                    }
+
+                    return false;
                 }
             }
         } catch (SQLException throwables) {

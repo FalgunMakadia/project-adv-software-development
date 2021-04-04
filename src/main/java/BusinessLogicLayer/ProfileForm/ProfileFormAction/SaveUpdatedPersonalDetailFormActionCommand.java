@@ -7,8 +7,9 @@ import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
 
 public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
+    private static final String COMMAND_TYPE = "ACTION";
     private final String CHANGE_REQUEST = "Change Personal Details";
-    private final String COMMAND_LABEL = "Save Details";
+    private final String COMMAND_LABEL = "Save";
 
     public SaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile) {
         super(profile);
@@ -31,7 +32,7 @@ public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
 
     @Override
     public String getFieldValue() {
-        return null;
+        return COMMAND_TYPE;
     }
 
     @Override

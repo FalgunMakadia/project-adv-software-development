@@ -5,12 +5,13 @@ import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 
 public class BackToMainMenuProfileFormActionCommand extends FormCommand {
-    ILoggedInUserContext loggedInUserContext;
-    String menuLabel;
+    private static final String COMMAND_LABEL = "Back to Main Menu";
+    private static final String COMMAND_TYPE = "ACTION";
 
-    public BackToMainMenuProfileFormActionCommand(String menuLabel) {
+    ILoggedInUserContext loggedInUserContext;
+
+    public BackToMainMenuProfileFormActionCommand() {
         loggedInUserContext = LoggedInUserContext.instance();
-        this.menuLabel = menuLabel;
     }
 
     @Override
@@ -20,11 +21,11 @@ public class BackToMainMenuProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getFieldValue() {
-        return null;
+        return COMMAND_TYPE;
     }
 
     @Override
     public String getCommandLabel() {
-        return menuLabel;
+        return COMMAND_LABEL;
     }
 }

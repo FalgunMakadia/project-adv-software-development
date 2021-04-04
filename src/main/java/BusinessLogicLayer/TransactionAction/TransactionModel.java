@@ -25,23 +25,11 @@ public class TransactionModel {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
-    }
-
     public int getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }

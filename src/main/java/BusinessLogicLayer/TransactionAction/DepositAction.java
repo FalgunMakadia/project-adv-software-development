@@ -6,8 +6,10 @@ import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
-public class Deposit extends Action {
-    private static final String menuLabel = "Deposit";
+public class DepositAction extends Action {
+    private static final String ACTION_TITLE = "Deposit";
+    private static final String TRANSACTION_TYPE = "Cr";
+    private static final String YES = "y";
 
     private int previousBalance;
     private int hundredBillCount;
@@ -17,17 +19,16 @@ public class Deposit extends Action {
     private int totalDepositAmount;
     private int finalBalance;
     private int output;
-    private String transactionType = "Cr";
     private IAccountOperationDatabase accountOperationDatabase;
 
-    public Deposit() {
+    public DepositAction() {
         IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
     @Override
     public String getActionTitle() {
-        return menuLabel;
+        return ACTION_TITLE;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Deposit extends Action {
 
         String accountNumber = loggedInUserContext.getAccountNumber();
 
-        userInterface.displayMessage("Deposit");
+        userInterface.displayMessage(ACTION_TITLE);
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
         previousBalance = accountOperationDatabase.getBalance(accountNumber);
@@ -58,13 +59,13 @@ public class Deposit extends Action {
         userInterface.displayMessage("Total amount to Deposit:" + totalDepositAmount);
 
         String confirm = userInterface.getConfirmation("Are you sure you want to Deposit " + totalDepositAmount + " into Account Number " + accountNumber + "?");
-        if (confirm.equalsIgnoreCase("y")) {
+        if (confirm.equalsIgnoreCase(YES)) {
             finalBalance = previousBalance + totalDepositAmount;
 
             output = accountOperationDatabase.updateBalance(finalBalance, accountNumber);
             if (output == 1) {
                 userInterface.displayMessage("Deposit Success!");
-                saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, totalDepositAmount, null));
+                saveTransactionInModel.add(new TransactionModel(accountNumber, TRANSACTION_TYPE, totalDepositAmount, null));
 //                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
                 accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
@@ -80,7 +81,7 @@ public class Deposit extends Action {
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
 }

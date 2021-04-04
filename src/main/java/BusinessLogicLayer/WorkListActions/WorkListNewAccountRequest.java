@@ -33,7 +33,7 @@ public class WorkListNewAccountRequest extends WorkListAction {
 
     private void showUserDetails() {
         userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
-        userInterface.displayMessage("=====New ProfileAbstract Details====");
+        userInterface.displayMessage("=====New Customer Profile Details====");
         userDetailPage.printPage();
         userInterface.insertEmptyLine();
     }

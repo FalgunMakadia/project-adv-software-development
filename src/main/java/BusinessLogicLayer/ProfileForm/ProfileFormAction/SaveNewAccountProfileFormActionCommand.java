@@ -9,13 +9,17 @@ import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class SaveNewAccountProfileFormActionCommand extends FormCommand {
-    private String menuLabel;
+    private static final String COMMAND_LABEL = "Save";
+    private static final String COMMAND_TYPE = "ACTION";
+    private static final String PRIORITY = "medium";
+    private static final String WORKLIST_REQUEST_TYPE = "Open New Account";
+
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
     private IWorkListActionFactory workListActionFactory;
-    public SaveNewAccountProfileFormActionCommand(String menuLabel, AbstractProfile newCustomerProfile) {
+
+    public SaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile) {
         super();
-        this.menuLabel = menuLabel;
         this.profile = newCustomerProfile;
         workListActionFactory = new WorkListActionFactory();
 
@@ -38,13 +42,14 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getFieldValue() {
-        return null;
+        return COMMAND_TYPE;
     }
 
     private int createNewWorkListRequest() {
         int workListId = 0;
         IWorkListRequest workListRequest = workListActionFactory.createWorkListRequest();
-        workListRequest.setRequestType("Open New Account");
+        workListRequest.setPriority(PRIORITY);
+        workListRequest.setRequestType(WORKLIST_REQUEST_TYPE);
         workListRequest.setUser(profile);
         workListId = worklistOperationDatabase.addWorkListRequest(workListRequest);
         return workListId;
@@ -59,7 +64,7 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getCommandLabel() {
-        return menuLabel;
+        return COMMAND_LABEL;
     }
 
 }

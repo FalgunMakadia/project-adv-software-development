@@ -9,9 +9,9 @@ import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.CommonAction.SignOutAction;
 import BusinessLogicLayer.CustomerCentricAction.*;
-import BusinessLogicLayer.TransactionAction.Deposit;
-import BusinessLogicLayer.TransactionAction.Transfer;
-import BusinessLogicLayer.TransactionAction.Withdraw;
+import BusinessLogicLayer.TransactionAction.DepositAction;
+import BusinessLogicLayer.TransactionAction.TransferAction;
+import BusinessLogicLayer.TransactionAction.WithdrawAction;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
@@ -48,17 +48,17 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createWithdraw() {
-        return new Withdraw();
+        return new WithdrawAction();
     }
 
     @Override
     public IAction createDeposit() {
-        return new Deposit();
+        return new DepositAction();
     }
 
     @Override
     public IAction createTransfer() {
-        return new Transfer();
+        return new TransferAction();
     }
 
     @Override

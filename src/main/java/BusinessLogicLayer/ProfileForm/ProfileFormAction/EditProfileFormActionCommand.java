@@ -9,12 +9,14 @@ import PresentationLayer.Pages.CommonPages.IUserFormPage;
 import java.util.Map;
 
 public class EditProfileFormActionCommand extends FormCommand {
-    String menuLabel;
+    private static final String COMMAND_LABEL = "EDIT";
+    private static final String COMMAND_TYPE = "ACTION";
+
     AbstractProfile profile;
     Map<Integer, IFormCommand> formFieldMap;
-    public EditProfileFormActionCommand(String menuLabel, AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
+
+    public EditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
         super();
-        this.menuLabel = menuLabel;
         this.profile = profile;
         this.formFieldMap = formFieldMap;
     }
@@ -36,12 +38,12 @@ public class EditProfileFormActionCommand extends FormCommand {
 
     @Override
     public String getFieldValue() {
-        return null;
+        return COMMAND_TYPE;
     }
 
     @Override
     public String getCommandLabel() {
-        return menuLabel;
+        return COMMAND_LABEL;
     }
 
 }

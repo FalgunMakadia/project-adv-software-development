@@ -6,29 +6,31 @@ import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
-public class Withdraw extends Action {
-    private static final String menuLabel = "Withdraw";
+public class WithdrawAction extends Action {
+    private static final String ACTION_TITLE = "Withdraw";
+    private static final String TRANSACTION_TYPE = "Dr";
+    private static final String YES = "y";
+
     private int previousBalance;
     private int withdrawAmount;
     private int finalBalance;
     private int output;
-    private String transactionType = "Dr";
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IAccountOperationDatabase accountOperationDatabase;
 
-    public Withdraw() {
+    public WithdrawAction() {
         operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
     @Override
     public String getActionTitle() {
-        return menuLabel;
+        return ACTION_TITLE;
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Withdraw extends Action {
 
         String accountNumber = loggedInUserContext.getAccountNumber();
 
-        userInterface.displayMessage("Withdraw");
+        userInterface.displayMessage(ACTION_TITLE);
 
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
         previousBalance = accountOperationDatabase.getBalance(accountNumber);
@@ -52,14 +54,13 @@ public class Withdraw extends Action {
         }
 
         String confirm = userInterface.getConfirmation("Are you sure you want to Withdraw " + withdrawAmount + " from Account Number " + accountNumber + "?");
-        if (confirm.equalsIgnoreCase("y")) {
+        if (confirm.equalsIgnoreCase(YES)) {
             finalBalance = previousBalance - withdrawAmount;
 
             output = accountOperationDatabase.updateBalance(finalBalance, accountNumber);
             if (output == 1) {
                 userInterface.displayMessage("Withdraw Success!");
-                saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, withdrawAmount, null));
-//                    accountDatabase.saveTransaction(accountNumber, transactionType, withdrawAmount);
+                saveTransactionInModel.add(new TransactionModel(accountNumber, TRANSACTION_TYPE, withdrawAmount, null));
                 accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
                 userInterface.displayMessage("Updated Balance: " + finalBalance);
