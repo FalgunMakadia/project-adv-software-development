@@ -9,6 +9,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WorklistDatabase implements IWorklistDatabase {
+    private static final String REQUEST_ID_COLUMN_NAME  = "request_id";
+    private static final String REQUEST_TYPE_COLUMN_NAME  = "request_type";
+    private static final String PRIORITY_COLUMN_NAME  = "priority";
+    private static final String WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME  = "account_number";
+    private static final String HANDLED_BY_COLUMN_NAME  = "handled_by";
+    private static final String FIRST_NAME_COLUMN_NAME = "first_name";
+    private static final String LAST_NAME_COLUMN_NAME = "last_name";
+    private static final String MIDDLE_NAME_COLUMN_NAME = "middle_name";
+    private static final String ADDRESSLINE_1_COLUMN_NAME = "addressline_1";
+    private static final String ADDRESSLINE_2_COLUMN_NAME = "addressline_2";
+    private static final String CITY_COLUMN_NAME = "city";
+    private static final String PROVINCE_COLUMN_NAME = "province";
+    private static final String POSTAL_CODE_COLUMN_NAME = "postal_code";
+    private static final String EMAIL_COLUMN_NAME = "email";
+    private static final String CONTACT_NUMBER_COLUMN_NAME = "contact_number";
+    private static final String PASSPORT_NUMBER_COLUMN_NAME = "passport_number";
+    private static final String SSN_NUMBER_COLUMN_NAME = "ssn_number";
+    private static final String ACCOUNT_NUMBER_COLUMN_NAME = "account_no";
+    private static final String BIRTH_DATE_COLUMN_NAME = "birth_date";
+
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
@@ -42,23 +62,23 @@ public class WorklistDatabase implements IWorklistDatabase {
             }
 
             if (0 != record_id) {
-                ProfileAbstract profileAbstract = worklistRequest.getUser();
+                ProfileAbstract profile = worklistRequest.getUser();
                 PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
                 userInsertStatement.setInt(1, record_id);
                 userInsertStatement.setString(2, worklistRequest.getAccountNumber());
-                userInsertStatement.setString(3, profileAbstract.getFirstName());
-                userInsertStatement.setString(4, profileAbstract.getLastName());
-                userInsertStatement.setString(5, profileAbstract.getMiddleName());
-                userInsertStatement.setString(6, profileAbstract.getAddressLine1());
-                userInsertStatement.setString(7, profileAbstract.getAddressLine2());
-                userInsertStatement.setString(8, profileAbstract.getCity());
-                userInsertStatement.setString(9, profileAbstract.getProvince());
-                userInsertStatement.setString(10, profileAbstract.getPostalCode());
-                userInsertStatement.setString(11, profileAbstract.getEmailAddress());
-                userInsertStatement.setString(12, profileAbstract.getContact());
-                userInsertStatement.setString(13, profileAbstract.getPassport());
-                userInsertStatement.setString(14, profileAbstract.getSsnNo());
-                userInsertStatement.setString(15, profileAbstract.getDateOfBirth());
+                userInsertStatement.setString(3, profile.getFirstName());
+                userInsertStatement.setString(4, profile.getLastName());
+                userInsertStatement.setString(5, profile.getMiddleName());
+                userInsertStatement.setString(6, profile.getAddressLine1());
+                userInsertStatement.setString(7, profile.getAddressLine2());
+                userInsertStatement.setString(8, profile.getCity());
+                userInsertStatement.setString(9, profile.getProvince());
+                userInsertStatement.setString(10, profile.getPostalCode());
+                userInsertStatement.setString(11, profile.getEmailAddress());
+                userInsertStatement.setString(12, profile.getContact());
+                userInsertStatement.setString(13, profile.getPassport());
+                userInsertStatement.setString(14, profile.getSsnNo());
+                userInsertStatement.setString(15, profile.getDateOfBirth());
 
                 userInsertStatement.executeUpdate();
             }
@@ -84,11 +104,11 @@ public class WorklistDatabase implements IWorklistDatabase {
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.first()) {
                 worklistRequest = new WorklistRequest();
-                ProfileAbstract profileAbstract = getUserDetails(id);
-                String worklistType = resultSet.getString("request_type");
-                String priority = resultSet.getString("priority");
-                String accountNumber = resultSet.getString("account_number");
-                String handledBy = resultSet.getString("handled_by");
+                ProfileAbstract profileAbstract = getWorkListUserDetail(id);
+                String worklistType = resultSet.getString(REQUEST_TYPE_COLUMN_NAME);
+                String priority = resultSet.getString(PRIORITY_COLUMN_NAME);
+                String accountNumber = resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME);
+                String handledBy = resultSet.getString(HANDLED_BY_COLUMN_NAME);
 
                 worklistRequest.setRequestType(worklistType);
                 worklistRequest.setPriority(priority);
@@ -109,7 +129,7 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public Map<Integer, WorklistRequest> getWorkLists() {
+    public Map<Integer, WorklistRequest> getWorkList() {
         connection = databaseConnection.openConnection();
         Map<Integer, WorklistRequest> worklistRequestMap = new HashMap<>();
         String query = "SELECT * FROM worklist WHERE is_processed = 0";
@@ -118,12 +138,12 @@ public class WorklistDatabase implements IWorklistDatabase {
             statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                int requestId = resultSet.getInt("request_id");
+                int requestId = resultSet.getInt(REQUEST_ID_COLUMN_NAME);
                 WorklistRequest worklistRequest = new WorklistRequest();
-                worklistRequest.setRequestType(resultSet.getString("request_type"));
-                worklistRequest.setPriority(resultSet.getString("priority"));
-                worklistRequest.setAccountNumber(resultSet.getString("account_number"));
-                worklistRequest.setHandledBy(resultSet.getString("handled_by"));
+                worklistRequest.setRequestType(resultSet.getString(REQUEST_TYPE_COLUMN_NAME));
+                worklistRequest.setPriority(resultSet.getString(PRIORITY_COLUMN_NAME));
+                worklistRequest.setAccountNumber(resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME));
+                worklistRequest.setHandledBy(resultSet.getString(HANDLED_BY_COLUMN_NAME));
                 worklistRequestMap.put(requestId, worklistRequest);
             }
         } catch (SQLException throwables) {
@@ -135,31 +155,31 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public ProfileAbstract getUserDetails(int id) {
+    public ProfileAbstract getWorkListUserDetail(int id) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
-        ProfileAbstract profileAbstract = new CustomerProfile();
+        ProfileAbstract profile = new CustomerProfile();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.first()) {
-                profileAbstract.setFirstName(resultSet.getString("first_name"));
-                profileAbstract.setLastName(resultSet.getString("last_name"));
-                profileAbstract.setMiddleName(resultSet.getString("middle_name"));
-                profileAbstract.setAddressLine1(resultSet.getString("addressline_1"));
-                profileAbstract.setAddressLine2(resultSet.getString("addressline_2"));
-                profileAbstract.setCity(resultSet.getString("city"));
-                profileAbstract.setProvince(resultSet.getString("province"));
-                profileAbstract.setPostalCode(resultSet.getString("postal_code"));
-                profileAbstract.setEmailAddress(resultSet.getString("email"));
-                profileAbstract.setContact(resultSet.getString("contact_number"));
-                profileAbstract.setPassport(resultSet.getString("passport_number"));
-                profileAbstract.setSsnNo(resultSet.getString("ssn_number"));
-                profileAbstract.setAccountNumber(resultSet.getString("account_no"));
-                profileAbstract.setDateOfBirth(resultSet.getString("birth_date"));
+                profile.setFirstName(resultSet.getString(FIRST_NAME_COLUMN_NAME));
+                profile.setLastName(resultSet.getString(LAST_NAME_COLUMN_NAME));
+                profile.setMiddleName(resultSet.getString(MIDDLE_NAME_COLUMN_NAME));
+                profile.setAddressLine1(resultSet.getString(ADDRESSLINE_1_COLUMN_NAME));
+                profile.setAddressLine2(resultSet.getString(ADDRESSLINE_2_COLUMN_NAME));
+                profile.setCity(resultSet.getString(CITY_COLUMN_NAME));
+                profile.setProvince(resultSet.getString(PROVINCE_COLUMN_NAME));
+                profile.setPostalCode(resultSet.getString(POSTAL_CODE_COLUMN_NAME));
+                profile.setEmailAddress(resultSet.getString(EMAIL_COLUMN_NAME));
+                profile.setContact(resultSet.getString(CONTACT_NUMBER_COLUMN_NAME));
+                profile.setPassport(resultSet.getString(PASSPORT_NUMBER_COLUMN_NAME));
+                profile.setSsnNo(resultSet.getString(SSN_NUMBER_COLUMN_NAME));
+                profile.setAccountNumber(resultSet.getString(ACCOUNT_NUMBER_COLUMN_NAME));
+                profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
 
-                return profileAbstract;
+                return profile;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -170,7 +190,7 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public boolean updateAssignee(int id, String assigneeUsername) {
+    public boolean assignWorkListRequest(int id, String assigneeUsername) {
         connection = databaseConnection.openConnection();
         String query = "UPDATE worklist SET handled_by = ? WHERE request_id = ?";
         try {
@@ -189,7 +209,7 @@ public class WorklistDatabase implements IWorklistDatabase {
     }
 
     @Override
-    public boolean updateProcessStatus(int worklistId, Boolean isProcessed) {
+    public boolean updateWorkListStatus(int worklistId, Boolean isProcessed) {
         connection = databaseConnection.openConnection();
         String query = "UPDATE worklist SET is_processed = ? WHERE request_id = ?";
         try {

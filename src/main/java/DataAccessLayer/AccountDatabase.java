@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AccountDatabase implements IAccountDatabase {
+    private static final String BALANCE_COLUMN_NAME = "balance";
+    private static final String ACTIVE_STATUS_COLUMN_NAME = "active_status";
+    private static final String TRANSACTION_TYPE_COLUMN_NAME = "transaction_type";
+    private static final String TRANSACTION_AMOUNT_COLUMN_NAME = "transaction_amount";
+    private static final String TRANSACTION_DATE_COLUMN_NAME = "transaction_date";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     Connection connection = null;
     IDatabaseConnection databaseConnection;
@@ -21,7 +27,7 @@ public class AccountDatabase implements IAccountDatabase {
     }
 
     @Override
-    public int getUserBalance(String accountNumber) {
+    public int getBalance(String accountNumber) {
         connection = databaseConnection.openConnection();
         String query = "SELECT balance FROM accounts WHERE account_no = ?";
         PreparedStatement statement = null;
@@ -32,7 +38,7 @@ public class AccountDatabase implements IAccountDatabase {
             ResultSet rs = statement.executeQuery();
             int balance = 0;
             if (rs.next()) {
-                balance = rs.getInt("balance");
+                balance = rs.getInt(BALANCE_COLUMN_NAME);
             }
             return balance;
         } catch (SQLException throwables) {
@@ -75,7 +81,7 @@ public class AccountDatabase implements IAccountDatabase {
             ResultSet rs = statement.executeQuery();
             boolean accountStatus = false;
             if (rs.next()) {
-                accountStatus = rs.getBoolean("active_status");
+                accountStatus = rs.getBoolean(ACTIVE_STATUS_COLUMN_NAME);
             }
             return accountStatus;
         } catch (SQLException throwables) {
@@ -127,9 +133,9 @@ public class AccountDatabase implements IAccountDatabase {
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String transactionType = resultSet.getString("transaction_type");
-                int amount = resultSet.getInt("transaction_amount");
-                String date = resultSet.getString("transaction_date");
+                String transactionType = resultSet.getString(TRANSACTION_TYPE_COLUMN_NAME);
+                int amount = resultSet.getInt(TRANSACTION_AMOUNT_COLUMN_NAME);
+                String date = resultSet.getString(TRANSACTION_DATE_COLUMN_NAME);
                 transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
             }
         } catch (SQLException throwables) {
@@ -141,9 +147,8 @@ public class AccountDatabase implements IAccountDatabase {
     }
 
     private String generateRandomTransactionId() {
-        String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
+        final String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
         final int GENERATED_STRING_LENGTH = 10;
-        int output;
 
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder(GENERATED_STRING_LENGTH);
@@ -156,7 +161,7 @@ public class AccountDatabase implements IAccountDatabase {
     private String getCurrentDate() {
         String date;
 
-        DateTimeFormatter x = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter x = DateTimeFormatter.ofPattern(DATE_FORMAT);
         LocalDateTime now = LocalDateTime.now();
         date = x.format(now);
 

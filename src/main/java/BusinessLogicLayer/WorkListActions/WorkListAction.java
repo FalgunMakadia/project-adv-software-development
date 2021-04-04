@@ -7,7 +7,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.ICustomerDatabase;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IWorklistDatabase;
-import PresentationLayer.MenuRouting.IMenuRoutingFactory;
 import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
 import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
@@ -54,7 +53,7 @@ public abstract class WorkListAction implements IWorkListAction {
         String userInput = userInterface.getConfirmation("Assign to me ?");
         if (userInput.equalsIgnoreCase("y")) {
             String empUserName = loggedInUserContext.getUserName();
-            boolean isUpdated = worklistDatabase.updateAssignee(worklistID, empUserName);
+            boolean isUpdated = worklistDatabase.assignWorkListRequest(worklistID, empUserName);
             return isUpdated;
         }
         return false;

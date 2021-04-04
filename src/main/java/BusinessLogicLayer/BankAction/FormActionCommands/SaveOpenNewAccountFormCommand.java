@@ -43,10 +43,10 @@ public class SaveOpenNewAccountFormCommand extends FormCommand {
 
     private int createNewUser() {
         String userName = profile.getUserName();
-        int defaultPassword = profile.generateDefaultPassword();
+        String defaultPassword = String.valueOf(profile.generateDefaultPassword());
         IUserDetailsDatabase userDatabase = null;
         userDatabase = databaseFactory.createUserDatabase();
-        int affectedRows = userDatabase.insertNewUser(userName, defaultPassword, profile.getProfileRole());
+        int affectedRows = userDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
         return affectedRows;
     }
 

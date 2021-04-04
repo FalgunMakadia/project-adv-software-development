@@ -3,8 +3,6 @@ package BusinessLogicLayer.WorkListActions;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
-import java.sql.SQLException;
-
 public class WorkListChangeAction extends WorkListAction {
 
     public WorkListChangeAction(WorklistRequest worklistRequest, int worklistID) {
@@ -22,8 +20,8 @@ public class WorkListChangeAction extends WorkListAction {
             String processInput = userInterface.getConfirmation("Do you want to process this change");
             if (processInput.equalsIgnoreCase("y")) {
                 boolean isDetailsUpdated = customerDatabase.
-                        updateUser(worklistRequest.getAccountNumber(), worklistRequest.getUser());
-                worklistDatabase.updateProcessStatus(worklistID, isDetailsUpdated);
+                        updateCustomerProfile(worklistRequest.getAccountNumber(), worklistRequest.getUser());
+                worklistDatabase.updateWorkListStatus(worklistID, isDetailsUpdated);
                 if (isDetailsUpdated) {
                     userInterface.displayMessage("ProfileAbstract details updated successfully");
                 } else {
@@ -38,7 +36,7 @@ public class WorkListChangeAction extends WorkListAction {
 
     private void showComparisonOfUserDetails() {
         ProfileAbstract oldProfileAbstractDetails = null;
-        oldProfileAbstractDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
+        oldProfileAbstractDetails = customerDatabase.getCustomerProfile(worklistRequest.getAccountNumber());
         userDetailPage = bankCentricPagesFactory.createUserDetailPage(oldProfileAbstractDetails);
         userInterface.displayMessage("====Old Details====");
         userDetailPage.printPage();

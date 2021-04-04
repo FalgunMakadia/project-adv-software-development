@@ -2,14 +2,10 @@ package DataAccessLayer;
 
 import BusinessLogicLayer.User.ProfileAbstract;
 
-import java.sql.SQLException;
-
 public interface ICustomerDatabase {
-    boolean add(ProfileAbstract profileAbstract);
+    boolean addNewCustomerProfile(ProfileAbstract profile);
 
-    void delete(ProfileAbstract profileAbstract);
+    ProfileAbstract getCustomerProfile(String accountNumber);
 
-    ProfileAbstract getUser(String accountNumber);
-
-    boolean updateUser(String accountNumber, ProfileAbstract profileAbstract);
+    boolean updateCustomerProfile(String accountNumber, ProfileAbstract profile);
 }

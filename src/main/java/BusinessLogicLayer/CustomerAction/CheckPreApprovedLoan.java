@@ -5,7 +5,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class CheckPreApprovedLoan extends Action {
         String accountNumber = loggedInUserContext.getAccountNumber();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
-        balance = accountDatabase.getUserBalance(accountNumber);
+        balance = accountDatabase.getBalance(accountNumber);
 
         double annualInterest = getPreApprovedLoanAnnualInterest(balance);
         double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);

@@ -5,8 +5,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IDatabaseFactory;
 import DataAccessLayer.IUserDetailsDatabase;
 
-import java.io.IOException;
-
 
 public class UpdatePassword extends Action {
     private static final String menuLabel = "Update Password";
@@ -28,7 +26,7 @@ public class UpdatePassword extends Action {
         String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
         if (newPassword.equals(confirmPassword)) {
             int changedPassword = newPassword.hashCode();
-            userDetailsDatabase.UpdatePassword(userName, changedPassword);
+            userDetailsDatabase.updateUserPassword(userName, changedPassword);
             userInterface.displayMessage(userName + " your new  password is updated: ");
         } else {
             userInterface.displayMessage("Password did not match");

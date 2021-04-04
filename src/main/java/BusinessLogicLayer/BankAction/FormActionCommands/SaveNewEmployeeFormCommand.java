@@ -1,7 +1,5 @@
 package BusinessLogicLayer.BankAction.FormActionCommands;
 
-import java.io.IOException;
-
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.BankEmployeeProfile;
 import DataAccessLayer.DatabaseFactory;
@@ -22,24 +20,20 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
 
     @Override
     public void execute() {
-        //working on implementation
-        try {
-            createNewEmployee();
+        int affectedRows = createNewEmployee();
+        if (affectedRows > 0) {
+            createNewUser();
             userInterface.displayMessage("The employee details are saved ");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        createNewUser();
-
     }
 
     private void createNewUser() {
         String userName = profile.getUserName();
-        int defaultPassword = profile.generateDefaultPassword();
+        String defaultPassword = String.valueOf(profile.generateDefaultPassword());
 
         IUserDetailsDatabase userDatabase = null;
         userDatabase = databaseFactory.createUserDatabase();
-        userDatabase.insertNewUser(userName, defaultPassword, profile.getProfileRole());
+        userDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
 
     }
 
@@ -50,11 +44,11 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
     }
 
 
-    private void createNewEmployee() throws IOException {
+    private int createNewEmployee() {
         databaseFactory = new DatabaseFactory();
         employeeDatabase = databaseFactory.createNewEmployee();
-        employeeDatabase.add(profile);
-
+        int affectedRows = employeeDatabase.addNewBankEmployeeProfile(profile);
+        return affectedRows;
     }
 
 

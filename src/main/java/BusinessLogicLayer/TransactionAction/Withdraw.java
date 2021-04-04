@@ -5,7 +5,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Withdraw extends Action {
@@ -36,7 +35,7 @@ public class Withdraw extends Action {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
-        previousBalance = accountDatabase.getUserBalance(accountNumber);
+        previousBalance = accountDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);
         withdrawAmount = Integer.parseInt(userInterface.getUserInputInMultipleOfTen("Please enter Withdraw amount (only in multiple of 10): "));
 

@@ -5,8 +5,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
-import java.sql.SQLException;
-
 public class CheckBalance extends Action {
     private static final String menuLabel = "Check Balance";
 
@@ -33,7 +31,7 @@ public class CheckBalance extends Action {
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
         userInterface.displayMessage("Hello " + name);
-        currentBalance = accountDatabase.getUserBalance(accountNumber);
+        currentBalance = accountDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance in your account number " + accountNumber + " is: " + currentBalance);
         userInterface.insertEmptyLine();
         userInterface.insertEmptyLine();

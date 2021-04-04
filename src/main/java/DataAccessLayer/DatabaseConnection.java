@@ -10,6 +10,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection implements IDatabaseConnection {
+    private static final String CONFIG_FILE_NAME = "config.properties";
+    private static final String DRIVER_CLASS_NAME = "db.driverClassName";
+    private static final String DATABASE_URL  = "db.url";
+    private static final String DATABASE_USERNAME  = "db.username";
+    private static final String DATABASE_PASSWORD = "db.password";
+    private static final String DATABASE_OPTIONAL_PARAMETERS  = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
     private static DatabaseConnection uniqueInstance;
     private static Connection connection;
     private static String driverClassname;
@@ -18,7 +25,7 @@ public class DatabaseConnection implements IDatabaseConnection {
     private static String dbPassword;
 
     private DatabaseConnection() {
-        InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream("config.properties");
+        InputStream inputStream = DatabaseConnection.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
         Properties properties = new Properties();
         try {
             properties.load(inputStream);
@@ -26,10 +33,10 @@ public class DatabaseConnection implements IDatabaseConnection {
             e.printStackTrace();
         }
 
-        driverClassname = properties.getProperty("db.driverClassName");
-        url = properties.getProperty("db.url");
-        dbUsername = properties.getProperty("db.username");
-        dbPassword = properties.getProperty("db.password");
+        driverClassname = properties.getProperty(DRIVER_CLASS_NAME);
+        url = properties.getProperty(DATABASE_URL);
+        dbUsername = properties.getProperty(DATABASE_USERNAME);
+        dbPassword = properties.getProperty(DATABASE_PASSWORD);
 
         try {
             Class.forName(driverClassname);
@@ -48,7 +55,7 @@ public class DatabaseConnection implements IDatabaseConnection {
     public Connection openConnection() {
         try {
             connection = DriverManager.getConnection(
-                    url + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    url + DATABASE_OPTIONAL_PARAMETERS,
                     dbUsername,
                     dbPassword);
         } catch (SQLException throwables) {

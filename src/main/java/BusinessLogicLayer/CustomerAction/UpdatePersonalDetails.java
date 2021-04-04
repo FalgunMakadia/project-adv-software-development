@@ -33,7 +33,7 @@ public class UpdatePersonalDetails extends Action {
         userInterface.displayMessage("Update Personal Details");
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
 
-        ProfileAbstract profile = customerDatabase.getUser(currentUserAccountNumber);
+        ProfileAbstract profile = customerDatabase.getCustomerProfile(currentUserAccountNumber);
         IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profile), profile, loggedInUserContext.getCurrentPage());
         userForm.printForm();
     }

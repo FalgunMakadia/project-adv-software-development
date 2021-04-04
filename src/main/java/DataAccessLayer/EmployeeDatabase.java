@@ -14,15 +14,14 @@ public class EmployeeDatabase implements IEmployeeDatabase {
         databaseConnection = DatabaseConnection.instance();
     }
 
-
     @Override
-    public void add(ProfileAbstract bankEmployeeProfile) {
+    public int addNewBankEmployeeProfile(ProfileAbstract bankEmployeeProfile) {
         connection = databaseConnection.openConnection();
+        int affectedRows = 0;
         String createEmployee = "INSERT INTO Employees (first_name,middle_name, last_name," +
                 "addressline_1, addressline_2, city, province,contact_number ," +
                 "email, passport_number, ssn_number, birth_date) VALUES " +
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
 
         try {
             PreparedStatement statement = connection.prepareStatement(createEmployee);
@@ -39,13 +38,13 @@ public class EmployeeDatabase implements IEmployeeDatabase {
             statement.setString(11, bankEmployeeProfile.getSsnNo());
             statement.setString(12, bankEmployeeProfile.getDateOfBirth());
 
-            statement.executeUpdate();
-
+            affectedRows = statement.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
+        return affectedRows;
     }
 }

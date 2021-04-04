@@ -3,7 +3,6 @@ package DataAccessLayer;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 public interface IWorklistDatabase {
@@ -11,11 +10,11 @@ public interface IWorklistDatabase {
 
     WorklistRequest getWorkListRequest(int id);
 
-    Map<Integer, WorklistRequest> getWorkLists();
+    Map<Integer, WorklistRequest> getWorkList();
 
-    ProfileAbstract getUserDetails(int id);
+    ProfileAbstract getWorkListUserDetail(int id);
 
-    boolean updateAssignee(int id, String assigneeUsername);
+    boolean assignWorkListRequest(int id, String assigneeUsername);
 
-    boolean updateProcessStatus(int worklistId, Boolean isProcessed);
+    boolean updateWorkListStatus(int worklistId, Boolean isProcessed);
 }

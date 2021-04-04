@@ -5,7 +5,6 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Deposit extends Action {
@@ -36,7 +35,7 @@ public class Deposit extends Action {
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
-        previousBalance = accountDatabase.getUserBalance(accountNumber);
+        previousBalance = accountDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);
 
         userInterface.displayMessage("Please enter each bill count that you want to deposit-");

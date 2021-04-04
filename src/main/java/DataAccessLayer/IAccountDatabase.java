@@ -2,11 +2,10 @@ package DataAccessLayer;
 
 import BusinessLogicLayer.TransactionAction.TransactionModel;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IAccountDatabase {
-    int getUserBalance(String accountNumber);
+    int getBalance(String accountNumber);
 
     int updateBalance(int finalBalance, String accountNumber);
 

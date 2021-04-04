@@ -19,8 +19,8 @@ public class WorkListNewAccountRequest extends WorkListAction {
             String processInput = userInterface
                     .getConfirmation("Do you want to process with this New Account Request ?");
             if (processInput.equalsIgnoreCase("y")) {
-                boolean isUserCreated = customerDatabase.add(worklistRequest.getUser());
-                worklistDatabase.updateProcessStatus(worklistID, isUserCreated);
+                boolean isUserCreated = customerDatabase.addNewCustomerProfile(worklistRequest.getUser());
+                worklistDatabase.updateWorkListStatus(worklistID, isUserCreated);
                 if (isUserCreated) {
                     userInterface.displayMessage("New Account is Created");
                 } else {

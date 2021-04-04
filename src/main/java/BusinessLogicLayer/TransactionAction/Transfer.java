@@ -42,7 +42,7 @@ public class Transfer extends Action {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
-        originAccountPreviousBalance = accountDatabase.getUserBalance(originAccountNumber);
+        originAccountPreviousBalance = accountDatabase.getBalance(originAccountNumber);
         userInterface.displayMessage("Current Balance:" + originAccountPreviousBalance);
         transferAmount = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Please enter Transfer amount: "));
 
@@ -62,7 +62,7 @@ public class Transfer extends Action {
             userInterface.insertEmptyLine();
             return;
         }
-        targetAccountPreviousBalance = accountDatabase.getUserBalance(targetAccountNumber);
+        targetAccountPreviousBalance = accountDatabase.getBalance(targetAccountNumber);
 
         String confirm = userInterface.getConfirmation("Are you sure you want to Transfer " + transferAmount + " to Account Number " + targetAccountNumber + "?");
         if (confirm.equalsIgnoreCase("y")) {

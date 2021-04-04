@@ -23,7 +23,7 @@ public class CheckBalanceTest {
         databaseFactory = Mockito.mock(DatabaseFactory.class);
         when(databaseFactory.createAccountDatabase()).thenReturn(new AccountDatabase());
 
-        actual = databaseFactory.createAccountDatabase().getUserBalance("9800001001");
+        actual = databaseFactory.createAccountDatabase().getBalance("9800001001");
 
     }
 

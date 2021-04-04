@@ -43,7 +43,7 @@ public class WorkList extends Action {
 
     @Override
     public void performAction() {
-        this.worklistRequestMap = worklistDatabase.getWorkLists();
+        this.worklistRequestMap = worklistDatabase.getWorkList();
         if(this.worklistRequestMap.size() > 0) {
             workListPage = bankCentricPagesFactory.createWorkListTable(worklistRequestMap);
             workListPage.printPage();
