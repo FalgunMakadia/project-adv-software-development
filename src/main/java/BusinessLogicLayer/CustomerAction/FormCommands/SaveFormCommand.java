@@ -6,7 +6,7 @@ import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import java.sql.SQLException;
 
 public class SaveFormCommand extends FormCommand {
-    private final String CHANGE_REQUEST = "change personal details";
+    private final String CHANGE_REQUEST = "Change Personal Details";
     private final String COMMAND_LABEL = "Save Details";
 
     public SaveFormCommand(ProfileAbstract profileAbstract) {

@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class WorkList extends Action {
     private static final int EXIT = 0;
-    private static final String CHANGE_REQUEST = "change personal details";
+    private static final String CHANGE_REQUEST = "Change Personal Details";
     private static final String CREATE_ACCOUNT_REQUEST = "Open New Account";
 
     private static final String menuLabel = "WorkList";
@@ -28,7 +28,6 @@ public class WorkList extends Action {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         worklistDatabase = databaseFactory.createWorkListDatabase();
         worklistRequestMap = new HashMap<>();
-
     }
 
     @Override

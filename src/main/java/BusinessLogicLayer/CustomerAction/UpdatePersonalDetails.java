@@ -31,11 +31,10 @@ public class UpdatePersonalDetails extends Action {
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         setCurrentPageInContext();
         userInterface.displayMessage("Update Personal Details");
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
         ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
 
-        ProfileAbstract profileAbstract = customerDatabase.getUser(currentUserAccountNumber);
-        IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profileAbstract), profileAbstract, loggedInUserContext.getCurrentPage());
+        ProfileAbstract profile = customerDatabase.getUser(currentUserAccountNumber);
+        IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profile), profile, loggedInUserContext.getCurrentPage());
         userForm.printForm();
     }
 

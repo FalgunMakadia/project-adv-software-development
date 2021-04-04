@@ -27,6 +27,7 @@ public abstract class WorkListAction implements IWorkListAction {
     protected IPresentationFactory presentationFactory;
     protected IBankCentricPagesFactory bankCentricPagesFactory;
     protected ICommonPagesFactory commonPagesFactory;
+
     public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
         this.worklistRequest = worklistRequest;
         this.worklistID = worklistID;
