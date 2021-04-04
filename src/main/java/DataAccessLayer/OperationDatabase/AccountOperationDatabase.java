@@ -19,7 +19,7 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     private static final String TRANSACTION_TYPE_COLUMN_NAME = "transaction_type";
     private static final String TRANSACTION_AMOUNT_COLUMN_NAME = "transaction_amount";
     private static final String TRANSACTION_DATE_COLUMN_NAME = "transaction_date";
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     Connection connection = null;
     IDatabaseConnection databaseConnection;
