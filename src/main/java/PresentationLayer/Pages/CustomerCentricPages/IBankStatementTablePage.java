@@ -5,5 +5,5 @@ import BusinessLogicLayer.TransactionAction.TransactionModel;
 import java.util.ArrayList;
 
 public interface IBankStatementTablePage {
-    void printBankStatementTable(ArrayList<TransactionModel> transactionList);
+    void printBankStatementTable();
 }

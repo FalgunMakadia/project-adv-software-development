@@ -6,6 +6,7 @@ import DataAccessLayer.DatabaseFactory;
 import DataAccessLayer.IAccountDatabase;
 import DataAccessLayer.IDatabaseFactory;
 import PresentationLayer.Pages.CustomerCentricPages.IBankStatementTablePage;
+import PresentationLayer.Pages.IPage;
 
 import java.util.ArrayList;
 
@@ -13,12 +14,11 @@ public class BankStatement extends Action {
     private static final String menuLabel = "Bank Statement";
     private IAccountDatabase accountDatabase;
     private IDatabaseFactory databaseFactory;
-    private IBankStatementTablePage bankStatementTable;
+    private IPage bankStatementTable;
 
     public BankStatement() {
         databaseFactory = new DatabaseFactory();
         accountDatabase = databaseFactory.createAccountDatabase();
-        bankStatementTable = customerCentricPagesFactory.createBankStatementTable();
     }
 
     @Override
@@ -40,7 +40,8 @@ public class BankStatement extends Action {
         if (0 == transactionList.size()) {
             userInterface.displayMessage("No Transactions are available for this account");
         } else {
-            bankStatementTable.printBankStatementTable(transactionList);
+            bankStatementTable = customerCentricPagesFactory.createBankStatementTable(transactionList);
+            bankStatementTable.printPage();
         }
     }
 }
