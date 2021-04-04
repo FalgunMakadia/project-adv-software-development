@@ -41,7 +41,7 @@ public class LoanEstimatorAction extends Action {
 
         balance = accountOperationDatabase.getBalance(accountNumber);
 
-        String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Loan Amount (minimum " + MINIMUM_LOAN_AMOUNT + "): ", MINIMUM_LOAN_AMOUNT);
+        String userInput = userInterface.getMandatoryLongUserInputWithMinimumValue("Enter Loan Amount (minimum " + MINIMUM_LOAN_AMOUNT + "): ", MINIMUM_LOAN_AMOUNT);
         long loanAmount = convertStringToLong(userInput);
 
         userInput = userInterface.getMandatoryIntegerUserInput("Enter tenure (years): ");
