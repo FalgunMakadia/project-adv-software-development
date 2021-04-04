@@ -75,6 +75,24 @@ public class UserInterfacePage implements IUserInterfacePage {
     }
 
     @Override
+    public String getMandatoryLongUserInputWithMinimumValue(String message, long minimumValue) {
+        String input = "";
+        long userNumber = 0;
+        do {
+            System.out.print(message + "("+minimumValue+" amount)");
+            try {
+                input = scanner.nextLine();
+                userNumber = Long.parseLong(input);
+            } catch (Exception exception) {
+                input = "";
+                System.out.println("Incorrect Input Format.");
+            }
+            System.out.println();
+        } while (userNumber < minimumValue);
+        return input;
+    }
+
+    @Override
     public String getConfirmation(String message) {
         String input = "";
         while (input.length() < 1) {

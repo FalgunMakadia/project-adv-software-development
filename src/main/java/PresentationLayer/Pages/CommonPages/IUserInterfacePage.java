@@ -13,6 +13,8 @@ public interface IUserInterfacePage {
 
     String getMandatoryLongUserInputWithMinimumRange(String message, long minimumRange);
 
+    String getMandatoryLongUserInputWithMinimumValue(String message, long minimumValue);
+
     String getConfirmation(String message);
 
     String getUserInputInMultipleOfTen(String message);
