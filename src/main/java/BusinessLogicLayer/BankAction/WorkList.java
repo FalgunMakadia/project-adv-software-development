@@ -22,6 +22,7 @@ public class WorkList extends Action {
     private IWorklistDatabase worklistDatabase;
     private Map<Integer, WorklistRequest> worklistRequestMap;
     private IPage workListPage;
+    private Map<String, IWorkListAction> workListActionMap;
 
     public WorkList() {
         setCurrentPageInContext();
@@ -42,7 +43,6 @@ public class WorkList extends Action {
 
     @Override
     public void performAction() {
-        System.out.println("WorkList");
         this.worklistRequestMap = worklistDatabase.getWorkLists();
         if(this.worklistRequestMap.size() > 0) {
             workListPage = bankCentricPagesFactory.createWorkListTable(worklistRequestMap);
@@ -53,18 +53,21 @@ public class WorkList extends Action {
             do {
                 userInput = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Enter Value:"));
                 WorklistRequest worklistRequest = worklistDatabase.getWorkListRequest(userInput);
+                workListActionMap = getWorkListActionMap(worklistRequest, userInput);
                 if(null != worklistRequest) {
-                    IWorkListAction workListAction;
-                    if(worklistRequest.getRequestType().equals(CHANGE_REQUEST)) {
-                        workListAction = new WorkListChangeAction(worklistRequest, userInput);
-                        workListAction.processWorkList();
-                    } else if(worklistRequest.getRequestType().equals(CREATE_ACCOUNT_REQUEST)) {
-                        workListAction = new WorkListNewAccountRequest(worklistRequest, userInput);
-                        workListAction.processWorkList();
-                    }
+                    IWorkListAction workListAction = workListActionMap.get(worklistRequest.getRequestType());
+                    workListAction.processWorkList();
                 }
             } while(loggedInUserContext.getCurrentPage().equals(menuLabel)
                     && userInput != EXIT);
         }
+    }
+
+    private Map<String, IWorkListAction> getWorkListActionMap(WorklistRequest worklistRequest, int userInput) {
+        workListActionMap = new HashMap<>();
+        workListActionMap.put(CHANGE_REQUEST, new WorkListChangeAction(worklistRequest, userInput));
+        workListActionMap.put(CREATE_ACCOUNT_REQUEST, new WorkListNewAccountRequest(worklistRequest, userInput));
+
+        return workListActionMap;
     }
 }

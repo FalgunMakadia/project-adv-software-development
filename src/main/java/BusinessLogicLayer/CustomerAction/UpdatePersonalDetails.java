@@ -38,20 +38,20 @@ public class UpdatePersonalDetails extends Action {
         userForm.printForm();
     }
 
-    private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profileAbstract) {
-        formFields.put(1, new FirstNameCommand(profileAbstract));
-        formFields.put(2, new MiddleNameCommand(profileAbstract));
-        formFields.put(3, new LastNameCommand(profileAbstract));
-        formFields.put(4, new AddressLine1Command(profileAbstract));
-        formFields.put(5, new AddressLine2Command(profileAbstract));
-        formFields.put(6, new CityCommand(profileAbstract));
-        formFields.put(7, new ProvinceCommand(profileAbstract));
-        formFields.put(8, new ContactCommand(profileAbstract));
-        formFields.put(9, new EmailCommand(profileAbstract));
-        formFields.put(10, new PassPortNumberCommand(profileAbstract));
-        formFields.put(11, new SSNNumberCommand(profileAbstract));
-        formFields.put(12, new DOBCommand(profileAbstract));
-        formFields.put(13, new SaveFormCommand(profileAbstract));
+    private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profile) {
+        formFields.put(1, new FirstNameCommand(profile));
+        formFields.put(2, new MiddleNameCommand(profile));
+        formFields.put(3, new LastNameCommand(profile));
+        formFields.put(4, new AddressLine1Command(profile));
+        formFields.put(5, new AddressLine2Command(profile));
+        formFields.put(6, new CityCommand(profile));
+        formFields.put(7, new ProvinceCommand(profile));
+        formFields.put(8, new ContactCommand(profile));
+        formFields.put(9, new EmailCommand(profile));
+        formFields.put(10, new PassPortNumberCommand(profile));
+        formFields.put(11, new SSNNumberCommand(profile));
+        formFields.put(12, new DOBCommand(profile));
+        formFields.put(13, new SaveFormCommand(profile));
         formFields.put(14, new BackToMainMenuCommand("Back to main menu"));
 
         return formFields;
