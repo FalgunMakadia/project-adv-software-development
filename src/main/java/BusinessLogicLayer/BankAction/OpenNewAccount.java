@@ -1,10 +1,13 @@
 package BusinessLogicLayer.BankAction;
 
-import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
-import BusinessLogicLayer.BankAction.FormActionCommands.EditFormCommand;
-import BusinessLogicLayer.BankAction.FormActionCommands.SaveOpenNewAccountFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
+import BusinessLogicLayer.ProfileForm.ProfileFormAction.BackToMainMenuProfileFormActionCommand;
+import BusinessLogicLayer.ProfileForm.ProfileFormAction.EditProfileFormActionCommand;
+import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
+import BusinessLogicLayer.ProfileForm.ProfileFormAction.SaveNewAccountProfileFormActionCommand;
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
 
@@ -14,22 +17,23 @@ import java.util.Map;
 
 public class OpenNewAccount extends Action {
     private static final String menuLabel = "Open New Account";
-    Map<Integer,IFormCommand> formActionCommandMap;
+    Map<Integer, IFormCommand> formActionCommandMap;
     private Map<Integer,IFormCommand> openNewAccountFormFieldMap;
     ProfileAbstract customer;
     @Override
     public String getMenuLabel() {
         return menuLabel;
     }
-
+    IProfileFormFactory profileFormFactory;
     public OpenNewAccount() {
         super();
+        profileFormFactory =new ProfileFormFactory();
         customer = new CustomerProfile();
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
-        formActionCommandMap.put(1, new EditFormCommand("Edit", customer, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, new SaveOpenNewAccountFormCommand("Save", customer));
-        formActionCommandMap.put(3, new BackToMainMenuCommand("Back to main menu"));
+        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand("Edit", customer, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, profileFormFactory.createSaveNewAccountProfileFormActionCommand("Save", customer));
+        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand("Back to main menu"));
     }
 
     @Override
@@ -68,19 +72,19 @@ public class OpenNewAccount extends Action {
 
     private void getOpenNewAccountFormFieldMap() {
         openNewAccountFormFieldMap = new LinkedHashMap<>();
-        openNewAccountFormFieldMap.put(1, new FirstNameCommand(customer));
-        openNewAccountFormFieldMap.put(2, new MiddleNameCommand(customer));
-        openNewAccountFormFieldMap.put(3, new LastNameCommand(customer));
-        openNewAccountFormFieldMap.put(4, new AddressLine1Command(customer));
-        openNewAccountFormFieldMap.put(5, new AddressLine2Command(customer));
-        openNewAccountFormFieldMap.put(6, new CityCommand(customer));
-        openNewAccountFormFieldMap.put(7, new PostalCodeCommand(customer));
-        openNewAccountFormFieldMap.put(8, new ProvinceCommand(customer));
-        openNewAccountFormFieldMap.put(9, new ContactCommand(customer));
-        openNewAccountFormFieldMap.put(10, new EmailCommand(customer));
-        openNewAccountFormFieldMap.put(11, new PassPortNumberCommand(customer));
-        openNewAccountFormFieldMap.put(12, new SSNNumberCommand(customer));
-        openNewAccountFormFieldMap.put(13, new DOBCommand(customer));
+        openNewAccountFormFieldMap.put(1, profileFormFactory.createFirstNameFieldCommand(customer));
+        openNewAccountFormFieldMap.put(2, profileFormFactory.createMiddleNameFieldCommand(customer));
+        openNewAccountFormFieldMap.put(3, profileFormFactory.createLastNameFieldCommand(customer));
+        openNewAccountFormFieldMap.put(4, profileFormFactory.createAddressLine1FieldCommand(customer));
+        openNewAccountFormFieldMap.put(5, profileFormFactory.createAddressLine2FieldCommand(customer));
+        openNewAccountFormFieldMap.put(6, profileFormFactory.createCityFieldCommand(customer));
+        openNewAccountFormFieldMap.put(7, profileFormFactory.createPostalCodeFieldCommand(customer));
+        openNewAccountFormFieldMap.put(8, profileFormFactory.createProvinceFieldCommand(customer));
+        openNewAccountFormFieldMap.put(9, profileFormFactory.createContactFieldCommand(customer));
+        openNewAccountFormFieldMap.put(10, profileFormFactory.createEmailFieldCommand(customer));
+        openNewAccountFormFieldMap.put(11, profileFormFactory.createPassPortNumberFieldCommand(customer));
+        openNewAccountFormFieldMap.put(12, profileFormFactory.createSsnNumberFieldCommand(customer));
+        openNewAccountFormFieldMap.put(13, profileFormFactory.createDateOfBirthFieldCommand(customer));
     }
 
 }

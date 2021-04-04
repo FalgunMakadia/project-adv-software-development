@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class CityCommand extends FormCommand {
+public class CityFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "City";
 
-    public CityCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public CityFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

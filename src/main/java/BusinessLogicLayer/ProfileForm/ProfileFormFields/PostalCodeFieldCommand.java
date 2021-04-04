@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class PostalCodeCommand extends FormCommand {
+public class PostalCodeFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Postal Code";
 
-    public PostalCodeCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public PostalCodeFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

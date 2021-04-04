@@ -1,14 +1,14 @@
-package BusinessLogicLayer.BankAction.FormActionCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 
-public class BackToMainMenuCommand extends FormCommand {
+public class BackToMainMenuProfileFormActionCommand extends FormCommand {
     ILoggedInUserContext loggedInUserContext;
     String menuLabel;
 
-    public BackToMainMenuCommand(String menuLabel) {
+    public BackToMainMenuProfileFormActionCommand(String menuLabel) {
         loggedInUserContext = LoggedInUserContext.instance();
         this.menuLabel = menuLabel;
     }

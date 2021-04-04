@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class AddressLine2Command extends FormCommand {
+public class AddressLine2FieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Address Line 2";
 
-    public AddressLine2Command(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public AddressLine2FieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

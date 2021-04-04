@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class EmailCommand extends FormCommand {
+public class EmailFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Email";
 
-    public EmailCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public EmailFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class SSNNumberCommand extends FormCommand {
+public class SsnNumberFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "SSN Number";
 
-    public SSNNumberCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public SsnNumberFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

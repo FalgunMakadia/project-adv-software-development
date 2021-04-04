@@ -1,14 +1,15 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
-public class SaveFormCommand extends FormCommand {
+public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
     private final String CHANGE_REQUEST = "Change Personal Details";
     private final String COMMAND_LABEL = "Save Details";
 
-    public SaveFormCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public SaveUpdatedPersonalDetailFormActionCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
 import java.util.Map;

@@ -1,21 +1,18 @@
-package BusinessLogicLayer.BankAction.FormActionCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.CustomerAction.FormCommands.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
-import PresentationLayer.Pages.CommonPages.UserInterfacePage;
-import PresentationLayer.IPresentationFactory;
 import PresentationLayer.Pages.CommonPages.IUserFormPage;
-import PresentationLayer.PresentationFactory;
 
 import java.util.Map;
 
-public class EditFormCommand extends FormCommand {
+public class EditProfileFormActionCommand extends FormCommand {
     String menuLabel;
     ProfileAbstract profileAbstract;
-    Map<Integer,IFormCommand> formFieldMap;
-    public EditFormCommand(String menuLabel, ProfileAbstract profileAbstract, Map<Integer, IFormCommand> formFieldMap) {
+    Map<Integer, IFormCommand> formFieldMap;
+    public EditProfileFormActionCommand(String menuLabel, ProfileAbstract profile, Map<Integer, IFormCommand> formFieldMap) {
         super();
         this.menuLabel = menuLabel;
         this.profileAbstract = profileAbstract;

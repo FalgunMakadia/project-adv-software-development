@@ -1,19 +1,18 @@
-package BusinessLogicLayer.BankAction.FormActionCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.BankEmployeeProfile;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveNewEmployeeFormCommand extends FormCommand {
+public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
     private final String menuLabel;
     private IUserProfileDatabase userProfileDatabase;
     private IEmployeeProfileDatabase employeeProfileDatabase;
 
-    public SaveNewEmployeeFormCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
+    public SaveNewEmployeeProfileFormActionCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = bankEmployeeProfile;

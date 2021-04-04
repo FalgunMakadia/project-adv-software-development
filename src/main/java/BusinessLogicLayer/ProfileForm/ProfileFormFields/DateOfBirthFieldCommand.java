@@ -1,15 +1,16 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class DOBCommand extends FormCommand {
+public class DateOfBirthFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Date Of Birth";
 
-    public DOBCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public DateOfBirthFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

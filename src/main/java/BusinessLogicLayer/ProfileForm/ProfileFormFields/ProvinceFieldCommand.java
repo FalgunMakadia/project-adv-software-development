@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class ProvinceCommand extends FormCommand {
+public class ProvinceFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Province";
 
-    public ProvinceCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public ProvinceFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

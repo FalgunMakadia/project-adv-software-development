@@ -1,17 +1,17 @@
-package BusinessLogicLayer.BankAction.FormActionCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveOpenNewAccountFormCommand extends FormCommand {
+public class SaveNewAccountProfileFormActionCommand extends FormCommand {
     private String menuLabel;
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
 
-    public SaveOpenNewAccountFormCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
+    public SaveNewAccountProfileFormActionCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = newCustomerProfile;

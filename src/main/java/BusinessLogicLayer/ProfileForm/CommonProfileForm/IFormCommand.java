@@ -1,4 +1,4 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
 public interface IFormCommand {
     void execute();

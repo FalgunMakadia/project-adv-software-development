@@ -1,8 +1,12 @@
 package BusinessLogicLayer.CustomerAction;
 
-import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
+import BusinessLogicLayer.ProfileForm.ProfileFormAction.BackToMainMenuProfileFormActionCommand;
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.CustomerAction.FormCommands.*;
+import BusinessLogicLayer.ProfileForm.ProfileFormAction.SaveUpdatedPersonalDetailFormActionCommand;
+import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
 import BusinessLogicLayer.User.ProfileAbstract;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
@@ -41,20 +45,22 @@ public class UpdatePersonalDetails extends Action {
     }
 
     private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profile) {
-        formFields.put(1, new FirstNameCommand(profile));
-        formFields.put(2, new MiddleNameCommand(profile));
-        formFields.put(3, new LastNameCommand(profile));
-        formFields.put(4, new AddressLine1Command(profile));
-        formFields.put(5, new AddressLine2Command(profile));
-        formFields.put(6, new CityCommand(profile));
-        formFields.put(7, new ProvinceCommand(profile));
-        formFields.put(8, new ContactCommand(profile));
-        formFields.put(9, new EmailCommand(profile));
-        formFields.put(10, new PassPortNumberCommand(profile));
-        formFields.put(11, new SSNNumberCommand(profile));
-        formFields.put(12, new DOBCommand(profile));
-        formFields.put(13, new SaveFormCommand(profile));
-        formFields.put(14, new BackToMainMenuCommand("Back to main menu"));
+        IProfileFormFactory profileFormFactory =new ProfileFormFactory();
+
+        formFields.put(1, profileFormFactory.createFirstNameFieldCommand(profile));
+        formFields.put(2, profileFormFactory.createMiddleNameFieldCommand(profile));
+        formFields.put(3, profileFormFactory.createLastNameFieldCommand(profile));
+        formFields.put(4, profileFormFactory.createAddressLine1FieldCommand(profile));
+        formFields.put(5, profileFormFactory.createAddressLine2FieldCommand(profile));
+        formFields.put(6, profileFormFactory.createCityFieldCommand(profile));
+        formFields.put(7, profileFormFactory.createProvinceFieldCommand(profile));
+        formFields.put(8, profileFormFactory.createContactFieldCommand(profile));
+        formFields.put(9, profileFormFactory.createEmailFieldCommand(profile));
+        formFields.put(10, profileFormFactory.createPassPortNumberFieldCommand(profile));
+        formFields.put(11, profileFormFactory.createSsnNumberFieldCommand(profile));
+        formFields.put(12, profileFormFactory.createDateOfBirthFieldCommand(profile));
+        formFields.put(13, profileFormFactory.createSaveUpdatedPersonalDetailFormActionCommand(profile));
+        formFields.put(14, profileFormFactory.createBackToMainMenuProfileFormActionCommand("Back to main menu"));
 
         return formFields;
     }

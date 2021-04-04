@@ -1,12 +1,13 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class MiddleNameCommand extends FormCommand {
+public class MiddleNameFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Middle Name";
 
-    public MiddleNameCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public MiddleNameFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
     @Override

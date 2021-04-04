@@ -1,17 +1,15 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class FirstNameCommand extends FormCommand {
+public class FirstNameFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "First Name";
 
-    public FirstNameCommand(ProfileAbstract profileAbstract) {
-        super(profileAbstract);
+    public FirstNameFieldCommand(ProfileAbstract profile) {
+        super(profile);
     }
 
-    public FirstNameCommand() {
-        super();
-    }
 
     @Override
     public void execute() {

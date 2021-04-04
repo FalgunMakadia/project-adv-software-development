@@ -1,4 +1,4 @@
-package BusinessLogicLayer.CustomerAction.FormCommands;
+package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;

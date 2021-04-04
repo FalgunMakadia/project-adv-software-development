@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.*;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
 import PresentationLayer.Pages.IPage;
@@ -8,7 +8,7 @@ import PresentationLayer.Pages.IPage;
 import java.util.Map;
 
 public class UserFormPage implements IUserFormPage {
-    private Map<Integer,IFormCommand> formFields;
+    private Map<Integer, IFormCommand> formFields;
     private ProfileAbstract profileAbstract;
     private IPage formPage;
 
