@@ -1,30 +1,28 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-
 public class WorkListNewAccountRequest extends WorkListAction {
 
-    public WorkListNewAccountRequest(WorklistRequest worklistRequest, int worklistID) {
-        super(worklistRequest, worklistID);
+    public WorkListNewAccountRequest(IWorkListRequest workListRequest, int workListID) {
+        super(workListRequest, workListID);
     }
 
     @Override
     public void processWorkList() {
         showWorkListDetail();
 
-        boolean isAssigned = assignWorklist();
+        boolean isAssigned = assignWorkList();
         if (isAssigned) {
             showUserDetails();
 
             String processInput = userInterface
                     .getConfirmation("Do you want to process with this New Account Request ?");
-            if (processInput.equalsIgnoreCase("y")) {
-                boolean isUserCreated = customerDatabase.add(worklistRequest.getUser());
-                worklistDatabase.updateProcessStatus(worklistID, isUserCreated);
+            if (processInput.equalsIgnoreCase(YES)) {
+                boolean isUserCreated = customerDatabase.addNewCustomerProfile(worklistRequest.getUser());
+                workListDatabase.updateWorkListStatus(workListID, isUserCreated);
                 if (isUserCreated) {
                     userInterface.displayMessage("New Account is Created");
                 } else {
-                    userInterface.displayMessage("Error in Creating New User");
+                    userInterface.displayMessage("Error in Creating New ProfileAbstract");
                 }
             }
             returnToMainMenu();
@@ -34,8 +32,9 @@ public class WorkListNewAccountRequest extends WorkListAction {
     }
 
     private void showUserDetails() {
-        userInterface.displayMessage("=====New User Details====");
-        userDetailPage.printUserDetails(worklistRequest.getUser());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
+        userInterface.displayMessage("=====New Customer Profile Details====");
+        userDetailPage.printPage();
         userInterface.insertEmptyLine();
     }
 }

@@ -2,58 +2,71 @@ package BusinessLogicLayer.WorkListActions;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.ICustomerDatabase;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IWorklistDatabase;
-import PresentationLayer.CommonPages.IUserDetailPage;
-import PresentationLayer.CommonPages.IUserInterface;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
+import PresentationLayer.Pages.IPage;
 import PresentationLayer.PresentationFactory;
 
 public abstract class WorkListAction implements IWorkListAction {
-    protected WorklistRequest worklistRequest;
-    protected int worklistID;
-    protected IUserInterface userInterface;
-    protected ILoggedInUserContext loggedInUserContext;
-    protected IWorklistDatabase worklistDatabase;
-    protected ICustomerDatabase customerDatabase;
-    protected IUserDetailPage userDetailPage;
-    IDatabaseFactory databaseFactory;
+    protected static final String YES = "y";
 
-    public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
-        this.worklistRequest = worklistRequest;
-        this.worklistID = worklistID;
+    protected IWorkListRequest worklistRequest;
+    protected int workListID;
+    protected IUserInterfacePage userInterface;
+    protected ILoggedInUserContext loggedInUserContext;
+    protected IWorklistOperationDatabase workListDatabase;
+    protected ICustomerProfileDatabase customerDatabase;
+    protected IPage userDetailPage;
+    protected IDatabaseFactory databaseFactory;
+    protected IPresentationFactory presentationFactory;
+    protected IBankCentricPagesFactory bankCentricPagesFactory;
+    protected ICommonPagesFactory commonPagesFactory;
+    protected IOperationDatabaseFactory operationDatabaseFactory;
+    protected IProfileDatabaseFactory profileDatabaseFactory;
+
+    public WorkListAction(IWorkListRequest workListRequest, int workListID) {
+        this.worklistRequest = workListRequest;
+        this.workListID = workListID;
         this.loggedInUserContext = LoggedInUserContext.instance();
 
-        IPresentationFactory presentationFactory = new PresentationFactory();
-        this.userInterface = presentationFactory.createUserInterface();
-        this.userDetailPage = presentationFactory.createUserDetailPage();
+        presentationFactory = new PresentationFactory();
+        commonPagesFactory = presentationFactory.createCommonPagesFactory();
+        this.userInterface = commonPagesFactory.createUserInterface();
+        this.bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
 
         this.databaseFactory = new DatabaseFactory();
-        this.worklistDatabase = databaseFactory.createWorkListDatabase();
-        this.customerDatabase = databaseFactory.createCustomerDatabase();
+        this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        this.profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        this.workListDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
+        this.customerDatabase = profileDatabaseFactory.createCustomerProfileDatabase();
     }
 
     public void showWorkListDetail() {
-        this.userInterface.displayMessage("Request ID: " + worklistID);
+        this.userInterface.displayMessage("Request ID: " + workListID);
         this.userInterface.displayMessage("Request Type: " + worklistRequest.getRequestType());
         this.userInterface.displayMessage("Account Number: " + worklistRequest.getAccountNumber());
         this.userInterface.displayMessage("Priority: " + worklistRequest.getPriority());
     }
 
-    public Boolean assignWorklist() {
+    public Boolean assignWorkList() {
         String userInput = userInterface.getConfirmation("Assign to me ?");
-        if (userInput.equalsIgnoreCase("y")) {
+        if (userInput.equalsIgnoreCase(YES)) {
             String empUserName = loggedInUserContext.getUserName();
-            boolean isUpdated = worklistDatabase.updateAssignee(worklistID, empUserName);
+            boolean isUpdated = workListDatabase.assignWorkListRequest(workListID, empUserName);
             return isUpdated;
         }
         return false;
     }
 
     public void returnToMainMenu() {
-        loggedInUserContext.setCurrentPage("");
+        loggedInUserContext.clearCurrentPage();
     }
 }

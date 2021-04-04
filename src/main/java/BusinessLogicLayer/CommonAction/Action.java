@@ -2,36 +2,41 @@ package BusinessLogicLayer.CommonAction;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import PresentationLayer.IPresentationFactory;
-import PresentationLayer.CommonPages.IUserInterface;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
+import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 import PresentationLayer.PresentationFactory;
 
-import java.math.BigInteger;
-
-public abstract class Action {
-    protected IUserInterface userInterface = null;
+public abstract class Action implements IAction{
+    protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;
+    protected IMenuRoutingFactory menuRoutingFactory;
+    protected IBankCentricPagesFactory bankCentricPagesFactory;
+    protected ICommonPagesFactory commonPagesFactory;
+    protected ICustomerCentricPagesFactory customerCentricPagesFactory;
+    protected IDatabaseFactory databaseFactory;
+
     public Action() {
+        databaseFactory = new DatabaseFactory();
         presentationFactory = new PresentationFactory();
-        userInterface = presentationFactory.createUserInterface();
+        commonPagesFactory = presentationFactory.createCommonPagesFactory();
+        userInterface = commonPagesFactory.createUserInterface();
         loggedInUserContext = LoggedInUserContext.instance();
+        menuRoutingFactory = presentationFactory.createMenuRoutingFactory();
+        bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
+        customerCentricPagesFactory = presentationFactory.createCustomerCentricPagesFactory();
     }
 
     protected int convertStringToInteger(String input) {
         int choiceNumber = 0;
         try {
             choiceNumber = Integer.parseInt(input);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid input.");
-        }
-        return choiceNumber;
-    }
-
-    protected double convertStringToDouble(String input) {
-        double choiceNumber = 0;
-        try {
-            choiceNumber = Double.parseDouble(input);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid input.");
         }
@@ -46,19 +51,6 @@ public abstract class Action {
             throw new IllegalArgumentException("Invalid input.");
         }
         return choiceNumber;
-    }
-
-    protected boolean validateIntegerInputFormat(String input) {
-        boolean validity = true;
-        int choiceNumber = 0;
-        try {
-            choiceNumber = Integer.parseInt(input);
-
-        } catch (Exception exception) {
-            validity = false;
-            throw new IllegalArgumentException("Invalid input.");
-        }
-        return validity;
     }
 
     protected boolean validateLongInputFormat(String input) {
@@ -76,7 +68,7 @@ public abstract class Action {
 
     public abstract void performAction();
 
-    public abstract String getMenuLabel();
+    public abstract String getActionTitle();
 
     protected abstract void setCurrentPageInContext();
 }

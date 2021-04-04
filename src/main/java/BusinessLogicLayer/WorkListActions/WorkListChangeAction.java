@@ -1,34 +1,30 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.User;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.ICustomerDatabase;
-
-import java.sql.SQLException;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class WorkListChangeAction extends WorkListAction {
 
-    public WorkListChangeAction(WorklistRequest worklistRequest, int worklistID) {
-        super(worklistRequest, worklistID);
+    public WorkListChangeAction(IWorkListRequest workListRequest, int workListID) {
+        super(workListRequest, workListID);
     }
 
     @Override
     public void processWorkList() {
         showWorkListDetail();
 
-        boolean isAssigned = assignWorklist();
+        boolean isAssigned = assignWorkList();
         if (isAssigned) {
             showComparisonOfUserDetails();
 
             String processInput = userInterface.getConfirmation("Do you want to process this change");
-            if (processInput.equalsIgnoreCase("y")) {
+            if (processInput.equalsIgnoreCase(YES)) {
                 boolean isDetailsUpdated = customerDatabase.
-                        updateUser(worklistRequest.getAccountNumber(), worklistRequest.getUser());
-                worklistDatabase.updateProcessStatus(worklistID, isDetailsUpdated);
+                        updateCustomerProfile(worklistRequest.getAccountNumber(), worklistRequest.getUser());
+                workListDatabase.updateWorkListStatus(workListID, isDetailsUpdated);
                 if (isDetailsUpdated) {
-                    userInterface.displayMessage("User details updated successfully");
+                    userInterface.displayMessage("ProfileAbstract details updated successfully");
                 } else {
-                    userInterface.displayMessage("Error in updating user details");
+                    userInterface.displayMessage("Error in updating profile details");
                 }
             }
             returnToMainMenu();
@@ -38,18 +34,16 @@ public class WorkListChangeAction extends WorkListAction {
     }
 
     private void showComparisonOfUserDetails() {
-        User oldUserDetails = null;
-        try {
-            oldUserDetails = customerDatabase.getUser(worklistRequest.getAccountNumber());
-            userInterface.displayMessage("====Old Details====");
-            userDetailPage.printUserDetails(oldUserDetails);
-            userInterface.insertEmptyLine();
+        AbstractProfile oldProfileAbstractDetails = null;
+        oldProfileAbstractDetails = customerDatabase.getCustomerProfile(worklistRequest.getAccountNumber());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(oldProfileAbstractDetails);
+        userInterface.displayMessage("====Old Details====");
+        userDetailPage.printPage();
+        userInterface.insertEmptyLine();
 
-            userInterface.displayMessage("=====New User Details====");
-            userDetailPage.printUserDetails(worklistRequest.getUser());
-            userInterface.insertEmptyLine();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        userInterface.displayMessage("=====New ProfileAbstract Details====");
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
+        userDetailPage.printPage();
+        userInterface.insertEmptyLine();
     }
 }

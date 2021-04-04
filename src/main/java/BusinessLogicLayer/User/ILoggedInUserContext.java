@@ -15,8 +15,11 @@ public interface ILoggedInUserContext {
     void setActiveStatus(Boolean activeStatus);
     void setLoginStatus(Boolean loginStatus);
     void setCurrentPage(String currentPage);
+    void clearCurrentPage();
     String getCurrentPage();
     void setParentPage(String parentPage);
 
     boolean checkCurrentPageStatus(String menuLabel);
+
+    void signOut();
 }
