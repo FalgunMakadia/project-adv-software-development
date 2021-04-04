@@ -1,16 +1,18 @@
-package DataAccessLayer;
+package DataAccessLayer.ProfileDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import BusinessLogicLayer.User.ProfileAbstract;
+import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
-public class EmployeeDatabase implements IEmployeeDatabase {
+public class EmployeeProfileDatabase implements IEmployeeProfileDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
-    public EmployeeDatabase() {
+    public EmployeeProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
     }
 

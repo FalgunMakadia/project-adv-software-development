@@ -1,7 +1,7 @@
-package DataAccessLayer;
+package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public interface IEmployeeDatabase {
+public interface IEmployeeProfileDatabase {
     int addNewBankEmployeeProfile(ProfileAbstract bankEmployeeProfile);
 }

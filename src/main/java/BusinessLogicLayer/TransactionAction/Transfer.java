@@ -1,25 +1,32 @@
 package BusinessLogicLayer.TransactionAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
 public class Transfer extends Action {
     private static final String menuLabel = "Transfer";
-    int originAccountPreviousBalance;
-    int targetAccountPreviousBalance;
-    int transferAmount;
-    int originAccountFinalBalance;
-    int targetAccountFinalBalance;
-    int originOutput;
-    int targetOutput;
-    String originTransactionType = "T-Dr";
-    String targetTransactionType = "T-Cr";
-    String targetAccountNumber;
-    boolean verifyTargetAccountNumber;
+    private int originAccountPreviousBalance;
+    private int targetAccountPreviousBalance;
+    private int transferAmount;
+    private int originAccountFinalBalance;
+    private int targetAccountFinalBalance;
+    private int originOutput;
+    private int targetOutput;
+    private String originTransactionType = "T-Dr";
+    private String targetTransactionType = "T-Cr";
+    private String targetAccountNumber;
+    private boolean verifyTargetAccountNumber;
+    private IAccountOperationDatabase accountOperationDatabase;
+
+    public Transfer() {
+        IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
 
     @Override
     public String getMenuLabel() {
@@ -39,10 +46,9 @@ public class Transfer extends Action {
         String originAccountNumber = loggedInUserContext.getAccountNumber();
 
         userInterface.displayMessage("Transfer");
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
-        originAccountPreviousBalance = accountDatabase.getBalance(originAccountNumber);
+        originAccountPreviousBalance = accountOperationDatabase.getBalance(originAccountNumber);
         userInterface.displayMessage("Current Balance:" + originAccountPreviousBalance);
         transferAmount = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Please enter Transfer amount: "));
 
@@ -54,7 +60,7 @@ public class Transfer extends Action {
         }
 
         targetAccountNumber = userInterface.getMandatoryUserInput("Enter Target Bank Account number: ");
-        verifyTargetAccountNumber = accountDatabase.verifyAccountNumber(targetAccountNumber);
+        verifyTargetAccountNumber = accountOperationDatabase.verifyAccountNumber(targetAccountNumber);
 
         if (!verifyTargetAccountNumber) {
             userInterface.displayMessage("Target account not found!");
@@ -62,15 +68,15 @@ public class Transfer extends Action {
             userInterface.insertEmptyLine();
             return;
         }
-        targetAccountPreviousBalance = accountDatabase.getBalance(targetAccountNumber);
+        targetAccountPreviousBalance = accountOperationDatabase.getBalance(targetAccountNumber);
 
         String confirm = userInterface.getConfirmation("Are you sure you want to Transfer " + transferAmount + " to Account Number " + targetAccountNumber + "?");
         if (confirm.equalsIgnoreCase("y")) {
             originAccountFinalBalance = originAccountPreviousBalance - transferAmount;
             targetAccountFinalBalance = targetAccountPreviousBalance + transferAmount;
 
-            originOutput = accountDatabase.updateBalance(originAccountFinalBalance, originAccountNumber);
-            targetOutput = accountDatabase.updateBalance(targetAccountFinalBalance, targetAccountNumber);
+            originOutput = accountOperationDatabase.updateBalance(originAccountFinalBalance, originAccountNumber);
+            targetOutput = accountOperationDatabase.updateBalance(targetAccountFinalBalance, targetAccountNumber);
 
             if (originOutput == 1 && targetOutput == 1) {
                 userInterface.displayMessage("Transfer Success!");
@@ -78,15 +84,15 @@ public class Transfer extends Action {
                 saveTransactionInModel.add(new TransactionModel(targetAccountNumber, targetTransactionType, transferAmount, null));
 //                    accountDatabase.saveTransaction(originAccountNumber, originTransactionType, transferAmount);
 //                    accountDatabase.saveTransaction(targetAccountNumber, targetTransactionType, transferAmount);
-                accountDatabase.saveTransaction(saveTransactionInModel);
+                accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
                 userInterface.displayMessage("Updated Balance in your account: " + originAccountFinalBalance);
                 userInterface.insertEmptyLine();
                 userInterface.insertEmptyLine();
             } else {
                 userInterface.displayMessage("Transfer request failed!");
-                accountDatabase.updateBalance(originAccountPreviousBalance, originAccountNumber);
-                accountDatabase.updateBalance(targetAccountPreviousBalance, targetAccountNumber);
+                accountOperationDatabase.updateBalance(originAccountPreviousBalance, originAccountNumber);
+                accountOperationDatabase.updateBalance(targetAccountPreviousBalance, targetAccountNumber);
             }
         }
 

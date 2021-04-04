@@ -2,20 +2,24 @@ package BusinessLogicLayer.BankAction.FormActionCommands;
 
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.BankEmployeeProfile;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IEmployeeDatabase;
-import DataAccessLayer.IUserDetailsDatabase;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class SaveNewEmployeeFormCommand extends FormCommand {
     private final String menuLabel;
-    private IDatabaseFactory databaseFactory;
-    private IEmployeeDatabase employeeDatabase;
+    private IUserProfileDatabase userProfileDatabase;
+    private IEmployeeProfileDatabase employeeProfileDatabase;
 
     public SaveNewEmployeeFormCommand(String menuLabel, BankEmployeeProfile bankEmployeeProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = bankEmployeeProfile;
+        IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
+        employeeProfileDatabase = profileDatabaseFactory.createEmployeeProfileDatabase();
     }
 
     @Override
@@ -31,9 +35,8 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
         String userName = profile.getUserName();
         String defaultPassword = String.valueOf(profile.generateDefaultPassword());
 
-        IUserDetailsDatabase userDatabase = null;
-        userDatabase = databaseFactory.createUserDatabase();
-        userDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
+        IUserProfileDatabase userDatabase = null;
+        userProfileDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
 
     }
 
@@ -46,8 +49,7 @@ public class SaveNewEmployeeFormCommand extends FormCommand {
 
     private int createNewEmployee() {
         databaseFactory = new DatabaseFactory();
-        employeeDatabase = databaseFactory.createNewEmployee();
-        int affectedRows = employeeDatabase.addNewBankEmployeeProfile(profile);
+        int affectedRows = employeeProfileDatabase.addNewBankEmployeeProfile(profile);
         return affectedRows;
     }
 

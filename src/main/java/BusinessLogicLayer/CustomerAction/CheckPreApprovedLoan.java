@@ -1,9 +1,10 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +14,14 @@ public class CheckPreApprovedLoan extends Action {
     private double annualInterestRate = 8;
     private static final int minimumLoanAmount = 10000;
     private static final double defaultInterestRate = 8.8;
-    int balance = 0;
-    private IDatabaseFactory databaseFactory;
+    private int balance = 0;
     private Map<Double, LoanInterestRange> loanInterestRangeMap;
+    private IAccountOperationDatabase accountOperationDatabase;
 
     public CheckPreApprovedLoan() {
-        databaseFactory = new DatabaseFactory();
+        IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+
         loanInterestRangeMap = new HashMap<>();
         loanInterestRangeMap.put(8.0, new LoanInterestRange(10000, 25000, 15000));
         loanInterestRangeMap.put(8.2, new LoanInterestRange(25000, 50000, 30000));
@@ -30,9 +33,8 @@ public class CheckPreApprovedLoan extends Action {
     public void performAction() {
         setCurrentPageInContext();
         String accountNumber = loggedInUserContext.getAccountNumber();
-        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
-        balance = accountDatabase.getBalance(accountNumber);
+        balance = accountOperationDatabase.getBalance(accountNumber);
 
         double annualInterest = getPreApprovedLoanAnnualInterest(balance);
         double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);

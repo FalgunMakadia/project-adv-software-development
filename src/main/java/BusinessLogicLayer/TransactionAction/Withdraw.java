@@ -1,19 +1,27 @@
 package BusinessLogicLayer.TransactionAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
 public class Withdraw extends Action {
     private static final String menuLabel = "Withdraw";
-    int previousBalance;
-    int withdrawAmount;
-    int finalBalance;
-    int output;
-    String transactionType = "Dr";
+    private int previousBalance;
+    private int withdrawAmount;
+    private int finalBalance;
+    private int output;
+    private String transactionType = "Dr";
+    private IOperationDatabaseFactory operationDatabaseFactory;
+    private IAccountOperationDatabase accountOperationDatabase;
+
+    public Withdraw() {
+        operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
 
     @Override
     public String getMenuLabel() {
@@ -32,10 +40,9 @@ public class Withdraw extends Action {
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         userInterface.displayMessage("Withdraw");
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
+
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
-        previousBalance = accountDatabase.getBalance(accountNumber);
+        previousBalance = accountOperationDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);
         withdrawAmount = Integer.parseInt(userInterface.getUserInputInMultipleOfTen("Please enter Withdraw amount (only in multiple of 10): "));
 
@@ -50,19 +57,19 @@ public class Withdraw extends Action {
         if (confirm.equalsIgnoreCase("y")) {
             finalBalance = previousBalance - withdrawAmount;
 
-            output = accountDatabase.updateBalance(finalBalance, accountNumber);
+            output = accountOperationDatabase.updateBalance(finalBalance, accountNumber);
             if (output == 1) {
                 userInterface.displayMessage("Withdraw Success!");
                 saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, withdrawAmount, null));
 //                    accountDatabase.saveTransaction(accountNumber, transactionType, withdrawAmount);
-                accountDatabase.saveTransaction(saveTransactionInModel);
+                accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
                 userInterface.displayMessage("Updated Balance: " + finalBalance);
                 userInterface.insertEmptyLine();
                 userInterface.insertEmptyLine();
             } else {
                 userInterface.displayMessage("Withdraw request failed!");
-                accountDatabase.updateBalance(previousBalance, accountNumber);
+                accountOperationDatabase.updateBalance(previousBalance, accountNumber);
             }
         }
 

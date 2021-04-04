@@ -1,12 +1,20 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 public class CheckBalance extends Action {
     private static final String menuLabel = "Check Balance";
+
+    private IAccountOperationDatabase accountOperationDatabase;
+
+    public CheckBalance() {
+        IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
 
     @Override
     public String getMenuLabel() {
@@ -27,11 +35,9 @@ public class CheckBalance extends Action {
         int currentBalance;
 
         userInterface.displayMessage("Check Balance");
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
 
         userInterface.displayMessage("Hello " + name);
-        currentBalance = accountDatabase.getBalance(accountNumber);
+        currentBalance = accountOperationDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance in your account number " + accountNumber + " is: " + currentBalance);
         userInterface.insertEmptyLine();
         userInterface.insertEmptyLine();

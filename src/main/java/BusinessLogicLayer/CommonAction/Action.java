@@ -2,6 +2,8 @@ package BusinessLogicLayer.CommonAction;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.MenuRouting.IMenuRoutingFactory;
 import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
@@ -18,7 +20,10 @@ public abstract class Action implements IAction{
     protected IBankCentricPagesFactory bankCentricPagesFactory;
     protected ICommonPagesFactory commonPagesFactory;
     protected ICustomerCentricPagesFactory customerCentricPagesFactory;
+    protected IDatabaseFactory databaseFactory;
+
     public Action() {
+        databaseFactory = new DatabaseFactory();
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
         userInterface = commonPagesFactory.createUserInterface();

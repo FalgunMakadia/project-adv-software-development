@@ -1,14 +1,16 @@
-package DataAccessLayer;
+package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
+import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 
 import java.sql.*;
 
-public class UserDetailsDatabase implements IUserDetailsDatabase {
+public class UserProfileDatabase implements IUserProfileDatabase {
     private static final String USERNAME_COLUMN_NAME = "userName";
     private static final String USER_ROLE_COLUMN_NAME  = "userRole";
     private static final String ACCOUNT_NUMBER_COLUMN_NAME  = "accountNumber";
@@ -19,7 +21,7 @@ public class UserDetailsDatabase implements IUserDetailsDatabase {
     private IDatabaseConnection databaseConnection;
     private ILoggedInUserContext loggedInUserContext;
 
-    public UserDetailsDatabase() {
+    public UserProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
         loggedInUserContext = LoggedInUserContext.instance();
     }

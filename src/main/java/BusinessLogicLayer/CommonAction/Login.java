@@ -1,27 +1,26 @@
 package BusinessLogicLayer.CommonAction;
 
-import DataAccessLayer.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import DataAccessLayer.IUserDetailsDatabase;
-
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class Login implements ILogin {
-    private IUserDetailsDatabase loginDatabase = null;
+    private IUserProfileDatabase userProfileDatabase;
     private LoggedInUserContext loggedInUserContext;
 
     public Login() {
-        DatabaseFactory databaseFactory = new DatabaseFactory();
         loggedInUserContext = LoggedInUserContext.instance();
 
-        loginDatabase = databaseFactory.createUserDatabase();
+        IDatabaseFactory databaseFactory = new DatabaseFactory();
+        IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
     }
 
     public void validateUser(String userName, String password) {
         int hashedPassword = password.hashCode();
-        loginDatabase.validateUser(userName, hashedPassword);
+        userProfileDatabase.validateUser(userName, hashedPassword);
     }
 
     public boolean checkStatus() {

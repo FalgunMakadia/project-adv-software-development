@@ -1,6 +1,8 @@
-package DataAccessLayer;
+package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.TransactionAction.TransactionModel;
+import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class AccountDatabase implements IAccountDatabase {
+public class AccountOperationDatabase implements IAccountOperationDatabase {
     private static final String BALANCE_COLUMN_NAME = "balance";
     private static final String ACTIVE_STATUS_COLUMN_NAME = "active_status";
     private static final String TRANSACTION_TYPE_COLUMN_NAME = "transaction_type";
@@ -22,7 +24,7 @@ public class AccountDatabase implements IAccountDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
-    public AccountDatabase() {
+    public AccountOperationDatabase() {
         databaseConnection = DatabaseConnection.instance();
     }
 

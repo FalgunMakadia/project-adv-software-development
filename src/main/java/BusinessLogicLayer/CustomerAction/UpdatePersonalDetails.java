@@ -4,7 +4,8 @@ import BusinessLogicLayer.BankAction.FormActionCommands.BackToMainMenuCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.CustomerAction.FormCommands.*;
 import BusinessLogicLayer.User.ProfileAbstract;
-import DataAccessLayer.*;
+import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
 import java.util.HashMap;
@@ -13,11 +14,13 @@ import java.util.Map;
 public class UpdatePersonalDetails extends Action {
     private static final String menuLabel = "Update Personal Details";
     private Map<Integer, IFormCommand> formFields;
-    private IDatabaseFactory databaseFactory;
+    private ICustomerProfileDatabase customerProfileDatabase;
 
     public UpdatePersonalDetails() {
-        this.databaseFactory = new DatabaseFactory();
         formFields = new HashMap<>();
+
+        IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        customerProfileDatabase = profileDatabaseFactory.createCustomerProfileDatabase();
     }
 
     @Override
@@ -31,9 +34,8 @@ public class UpdatePersonalDetails extends Action {
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         setCurrentPageInContext();
         userInterface.displayMessage("Update Personal Details");
-        ICustomerDatabase customerDatabase = databaseFactory.createCustomerDatabase();
 
-        ProfileAbstract profile = customerDatabase.getCustomerProfile(currentUserAccountNumber);
+        ProfileAbstract profile = customerProfileDatabase.getCustomerProfile(currentUserAccountNumber);
         IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profile), profile, loggedInUserContext.getCurrentPage());
         userForm.printForm();
     }

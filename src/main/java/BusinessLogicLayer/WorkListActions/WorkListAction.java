@@ -3,10 +3,12 @@ package BusinessLogicLayer.WorkListActions;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.ICustomerDatabase;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IWorklistDatabase;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
 import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
@@ -19,13 +21,15 @@ public abstract class WorkListAction implements IWorkListAction {
     protected int worklistID;
     protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
-    protected IWorklistDatabase worklistDatabase;
-    protected ICustomerDatabase customerDatabase;
+    protected IWorklistOperationDatabase worklistDatabase;
+    protected ICustomerProfileDatabase customerDatabase;
     protected IPage userDetailPage;
-    IDatabaseFactory databaseFactory;
+    protected IDatabaseFactory databaseFactory;
     protected IPresentationFactory presentationFactory;
     protected IBankCentricPagesFactory bankCentricPagesFactory;
     protected ICommonPagesFactory commonPagesFactory;
+    protected IOperationDatabaseFactory operationDatabaseFactory;
+    protected IProfileDatabaseFactory profileDatabaseFactory;
 
     public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
         this.worklistRequest = worklistRequest;
@@ -38,8 +42,10 @@ public abstract class WorkListAction implements IWorkListAction {
         this.bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
 
         this.databaseFactory = new DatabaseFactory();
-        this.worklistDatabase = databaseFactory.createWorkListDatabase();
-        this.customerDatabase = databaseFactory.createCustomerDatabase();
+        this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        this.profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        this.worklistDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
+        this.customerDatabase = profileDatabaseFactory.createCustomerProfileDatabase();
     }
 
     public void showWorkListDetail() {

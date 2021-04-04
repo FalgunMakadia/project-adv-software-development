@@ -1,18 +1,16 @@
 package BusinessLogicLayer.CustomerAction;
 
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.ICustomerDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UpdatePersonalDetailsTest {
-    private ICustomerDatabase customerDatabase = null;
+    private ICustomerProfileDatabase customerDatabase = null;
 
     private UpdatePersonalDetails updatePersonalDetails;
 

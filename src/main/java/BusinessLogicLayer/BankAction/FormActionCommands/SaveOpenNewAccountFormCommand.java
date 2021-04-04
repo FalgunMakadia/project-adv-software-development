@@ -3,15 +3,21 @@ package BusinessLogicLayer.BankAction.FormActionCommands;
 import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.IUserDetailsDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class SaveOpenNewAccountFormCommand extends FormCommand {
     private String menuLabel;
+    private IProfileDatabaseFactory profileDatabaseFactory;
+    private IUserProfileDatabase userProfileDatabase;
 
     public SaveOpenNewAccountFormCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = newCustomerProfile;
+
+        profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
     }
 
     @Override
@@ -37,16 +43,14 @@ public class SaveOpenNewAccountFormCommand extends FormCommand {
         WorklistRequest worklistRequest = new WorklistRequest();
         worklistRequest.setRequestType("Open New Account");
         worklistRequest.setUser(profile);
-        workListId = worklistDatabase.addWorkListRequest(worklistRequest);
+        workListId = worklistOperationDatabase.addWorkListRequest(worklistRequest);
         return workListId;
     }
 
     private int createNewUser() {
         String userName = profile.getUserName();
         String defaultPassword = String.valueOf(profile.generateDefaultPassword());
-        IUserDetailsDatabase userDatabase = null;
-        userDatabase = databaseFactory.createUserDatabase();
-        int affectedRows = userDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
+        int affectedRows = userProfileDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
         return affectedRows;
     }
 

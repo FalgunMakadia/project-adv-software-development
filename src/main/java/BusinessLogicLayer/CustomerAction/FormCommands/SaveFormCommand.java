@@ -3,8 +3,6 @@ package BusinessLogicLayer.CustomerAction.FormCommands;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
-import java.sql.SQLException;
-
 public class SaveFormCommand extends FormCommand {
     private final String CHANGE_REQUEST = "Change Personal Details";
     private final String COMMAND_LABEL = "Save Details";
@@ -18,7 +16,7 @@ public class SaveFormCommand extends FormCommand {
         WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
                 profile.getAccountNumber(),
                 profile);
-        int worklistId = worklistDatabase.addWorkListRequest(worklistRequest);
+        int worklistId = worklistOperationDatabase.addWorkListRequest(worklistRequest);
         if (worklistId == 0) {
             userInterface.displayMessage("There is an error in submitting request");
         } else {

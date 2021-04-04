@@ -1,23 +1,31 @@
 package BusinessLogicLayer.TransactionAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
 public class Deposit extends Action {
     private static final String menuLabel = "Deposit";
-    int previousBalance;
-    int hundredBillCount;
-    int fiftyBillCount;
-    int twentyBillCount;
-    int tenBillCount;
-    int totalDepositAmount;
-    int finalBalance;
-    int output;
-    String transactionType = "Cr";
+
+    private int previousBalance;
+    private int hundredBillCount;
+    private int fiftyBillCount;
+    private int twentyBillCount;
+    private int tenBillCount;
+    private int totalDepositAmount;
+    private int finalBalance;
+    private int output;
+    private String transactionType = "Cr";
+    private IAccountOperationDatabase accountOperationDatabase;
+
+    public Deposit() {
+        IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
 
     @Override
     public String getMenuLabel() {
@@ -31,11 +39,9 @@ public class Deposit extends Action {
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         userInterface.displayMessage("Deposit");
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        IAccountDatabase accountDatabase = databaseFactory.createAccountDatabase();
         ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
 
-        previousBalance = accountDatabase.getBalance(accountNumber);
+        previousBalance = accountOperationDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);
 
         userInterface.displayMessage("Please enter each bill count that you want to deposit-");
@@ -57,19 +63,19 @@ public class Deposit extends Action {
         if (confirm.equalsIgnoreCase("y")) {
             finalBalance = previousBalance + totalDepositAmount;
 
-            output = accountDatabase.updateBalance(finalBalance, accountNumber);
+            output = accountOperationDatabase.updateBalance(finalBalance, accountNumber);
             if (output == 1) {
                 userInterface.displayMessage("Deposit Success!");
                 saveTransactionInModel.add(new TransactionModel(accountNumber, transactionType, totalDepositAmount, null));
 //                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
-                accountDatabase.saveTransaction(saveTransactionInModel);
+                accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
                 userInterface.displayMessage("Updated Balance: " + finalBalance);
                 userInterface.insertEmptyLine();
                 userInterface.insertEmptyLine();
             } else {
                 userInterface.displayMessage("Deposit request failed!");
-                accountDatabase.updateBalance(previousBalance, accountNumber);
+                accountOperationDatabase.updateBalance(previousBalance, accountNumber);
             }
         }
     }

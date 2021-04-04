@@ -1,14 +1,16 @@
-package DataAccessLayer;
+package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorklistDatabase implements IWorklistDatabase {
+public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     private static final String REQUEST_ID_COLUMN_NAME  = "request_id";
     private static final String REQUEST_TYPE_COLUMN_NAME  = "request_type";
     private static final String PRIORITY_COLUMN_NAME  = "priority";
@@ -32,7 +34,7 @@ public class WorklistDatabase implements IWorklistDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
-    public WorklistDatabase() {
+    public WorklistOperationDatabase() {
         databaseConnection = DatabaseConnection.instance();
     }
 

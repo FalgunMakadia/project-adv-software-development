@@ -1,4 +1,4 @@
-package DataAccessLayer;
+package DataAccessLayer.DatabaseConnection;
 
 import java.sql.Connection;
 

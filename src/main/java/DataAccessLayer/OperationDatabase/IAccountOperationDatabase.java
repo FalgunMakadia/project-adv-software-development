@@ -1,10 +1,10 @@
-package DataAccessLayer;
+package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.util.ArrayList;
 
-public interface IAccountDatabase {
+public interface IAccountOperationDatabase {
     int getBalance(String accountNumber);
 
     int updateBalance(int finalBalance, String accountNumber);

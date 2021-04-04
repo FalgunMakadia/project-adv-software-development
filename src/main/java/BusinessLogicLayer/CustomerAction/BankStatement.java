@@ -2,23 +2,23 @@ package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.TransactionAction.TransactionModel;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IAccountDatabase;
-import DataAccessLayer.IDatabaseFactory;
-import PresentationLayer.Pages.CustomerCentricPages.IBankStatementTablePage;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import PresentationLayer.Pages.IPage;
 
 import java.util.ArrayList;
 
 public class BankStatement extends Action {
     private static final String menuLabel = "Bank Statement";
-    private IAccountDatabase accountDatabase;
-    private IDatabaseFactory databaseFactory;
+    private IOperationDatabaseFactory operationDatabaseFactory;
+    private IAccountOperationDatabase accountOperationDatabase;
     private IPage bankStatementTable;
 
     public BankStatement() {
-        databaseFactory = new DatabaseFactory();
-        accountDatabase = databaseFactory.createAccountDatabase();
+        operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class BankStatement extends Action {
         setCurrentPageInContext();
         userInterface.displayMessage("Bank Statement");
         String accountNumber = loggedInUserContext.getAccountNumber();
-        ArrayList<TransactionModel> transactionList = accountDatabase.getMiniStatement(accountNumber);
+        ArrayList<TransactionModel> transactionList = accountOperationDatabase.getMiniStatement(accountNumber);
         if (0 == transactionList.size()) {
             userInterface.displayMessage("No Transactions are available for this account");
         } else {

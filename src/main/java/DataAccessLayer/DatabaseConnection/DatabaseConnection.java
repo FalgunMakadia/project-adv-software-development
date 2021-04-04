@@ -1,6 +1,4 @@
-package DataAccessLayer;
-
-import BusinessLogicLayer.User.LoggedInUserContext;
+package DataAccessLayer.DatabaseConnection;
 
 import java.io.IOException;
 import java.io.InputStream;

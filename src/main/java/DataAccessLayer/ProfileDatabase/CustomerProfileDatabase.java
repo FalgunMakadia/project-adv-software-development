@@ -1,11 +1,13 @@
-package DataAccessLayer;
+package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
+import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
 import java.sql.*;
 
-public class CustomerDatabase implements ICustomerDatabase {
+public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     private static final String FIRST_NAME_COLUMN_NAME = "first_name";
     private static final String LAST_NAME_COLUMN_NAME = "last_name";
     private static final String MIDDLE_NAME_COLUMN_NAME = "middle_name";
@@ -24,7 +26,7 @@ public class CustomerDatabase implements ICustomerDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
-    public CustomerDatabase() {
+    public CustomerProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
     }
 

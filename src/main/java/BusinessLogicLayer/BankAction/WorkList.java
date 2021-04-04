@@ -5,9 +5,11 @@ import BusinessLogicLayer.WorkListActions.IWorkListAction;
 import BusinessLogicLayer.WorkListActions.WorkListChangeAction;
 import BusinessLogicLayer.WorkListActions.WorkListNewAccountRequest;
 import BusinessLogicLayer.WorklistRequest.WorklistRequest;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IWorklistDatabase;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
+import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
+import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
 import PresentationLayer.Pages.IPage;
 
 import java.util.HashMap;
@@ -17,17 +19,18 @@ public class WorkList extends Action {
     private static final int EXIT = 0;
     private static final String CHANGE_REQUEST = "Change Personal Details";
     private static final String CREATE_ACCOUNT_REQUEST = "Open New Account";
-
     private static final String menuLabel = "WorkList";
-    private IWorklistDatabase worklistDatabase;
+
+    private IOperationDatabaseFactory operationDatabaseFactory;
+    private IWorklistOperationDatabase worklistOperationDatabase;
     private Map<Integer, WorklistRequest> worklistRequestMap;
     private IPage workListPage;
     private Map<String, IWorkListAction> workListActionMap;
 
     public WorkList() {
         setCurrentPageInContext();
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        worklistDatabase = databaseFactory.createWorkListDatabase();
+        operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
+        worklistOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
         worklistRequestMap = new HashMap<>();
     }
 
@@ -43,7 +46,7 @@ public class WorkList extends Action {
 
     @Override
     public void performAction() {
-        this.worklistRequestMap = worklistDatabase.getWorkList();
+        this.worklistRequestMap = worklistOperationDatabase.getWorkList();
         if(this.worklistRequestMap.size() > 0) {
             workListPage = bankCentricPagesFactory.createWorkListTable(worklistRequestMap);
             workListPage.printPage();
@@ -52,7 +55,7 @@ public class WorkList extends Action {
             int userInput;
             do {
                 userInput = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Enter Value:"));
-                WorklistRequest worklistRequest = worklistDatabase.getWorkListRequest(userInput);
+                WorklistRequest worklistRequest = worklistOperationDatabase.getWorkListRequest(userInput);
                 workListActionMap = getWorkListActionMap(worklistRequest, userInput);
                 if(null != worklistRequest) {
                     IWorkListAction workListAction = workListActionMap.get(worklistRequest.getRequestType());

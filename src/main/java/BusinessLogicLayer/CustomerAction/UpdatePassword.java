@@ -1,13 +1,23 @@
 package BusinessLogicLayer.CustomerAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory;
-import DataAccessLayer.IDatabaseFactory;
-import DataAccessLayer.IUserDetailsDatabase;
+import DataAccessLayer.DatabaseFactory.DatabaseFactory;
+import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
+import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
+import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 
 public class UpdatePassword extends Action {
     private static final String menuLabel = "Update Password";
+
+    private IProfileDatabaseFactory profileDatabaseFactory;
+    private IUserProfileDatabase userProfileDatabase;
+
+    public UpdatePassword() {
+        profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
+        userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
+    }
 
     @Override
     public String getMenuLabel() {
@@ -19,14 +29,13 @@ public class UpdatePassword extends Action {
         setCurrentPageInContext();
         userInterface.displayMessage("Update Password");
         String userName = loggedInUserContext.getUserName();
-        IDatabaseFactory databaseFactory = new DatabaseFactory();
-        IUserDetailsDatabase userDetailsDatabase = databaseFactory.createUserDatabase();
+
         userInterface.displayMessage("Hello " + userName);
         String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
         String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
         if (newPassword.equals(confirmPassword)) {
             int changedPassword = newPassword.hashCode();
-            userDetailsDatabase.updateUserPassword(userName, changedPassword);
+            userProfileDatabase.updateUserPassword(userName, changedPassword);
             userInterface.displayMessage(userName + " your new  password is updated: ");
         } else {
             userInterface.displayMessage("Password did not match");
