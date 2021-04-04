@@ -1,16 +1,16 @@
 package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 
 import java.util.Map;
 
 public interface IWorklistOperationDatabase {
-    int addWorkListRequest(WorklistRequest worklistRequest);
+    int addWorkListRequest(IWorkListRequest workListRequest);
 
-    WorklistRequest getWorkListRequest(int id);
+    IWorkListRequest getWorkListRequest(int id);
 
-    Map<Integer, WorklistRequest> getWorkList();
+    Map<Integer, IWorkListRequest> getWorkList();
 
     ProfileAbstract getWorkListUserDetail(int id);
 

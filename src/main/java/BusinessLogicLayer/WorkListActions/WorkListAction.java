@@ -2,7 +2,6 @@ package BusinessLogicLayer.WorkListActions;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
@@ -17,11 +16,13 @@ import PresentationLayer.Pages.IPage;
 import PresentationLayer.PresentationFactory;
 
 public abstract class WorkListAction implements IWorkListAction {
-    protected WorklistRequest worklistRequest;
-    protected int worklistID;
+    protected static final String YES = "y";
+
+    protected IWorkListRequest worklistRequest;
+    protected int workListID;
     protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
-    protected IWorklistOperationDatabase worklistDatabase;
+    protected IWorklistOperationDatabase workListDatabase;
     protected ICustomerProfileDatabase customerDatabase;
     protected IPage userDetailPage;
     protected IDatabaseFactory databaseFactory;
@@ -31,9 +32,9 @@ public abstract class WorkListAction implements IWorkListAction {
     protected IOperationDatabaseFactory operationDatabaseFactory;
     protected IProfileDatabaseFactory profileDatabaseFactory;
 
-    public WorkListAction(WorklistRequest worklistRequest, int worklistID) {
-        this.worklistRequest = worklistRequest;
-        this.worklistID = worklistID;
+    public WorkListAction(IWorkListRequest workListRequest, int workListID) {
+        this.worklistRequest = workListRequest;
+        this.workListID = workListID;
         this.loggedInUserContext = LoggedInUserContext.instance();
 
         presentationFactory = new PresentationFactory();
@@ -44,28 +45,28 @@ public abstract class WorkListAction implements IWorkListAction {
         this.databaseFactory = new DatabaseFactory();
         this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         this.profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
-        this.worklistDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
+        this.workListDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
         this.customerDatabase = profileDatabaseFactory.createCustomerProfileDatabase();
     }
 
     public void showWorkListDetail() {
-        this.userInterface.displayMessage("Request ID: " + worklistID);
+        this.userInterface.displayMessage("Request ID: " + workListID);
         this.userInterface.displayMessage("Request Type: " + worklistRequest.getRequestType());
         this.userInterface.displayMessage("Account Number: " + worklistRequest.getAccountNumber());
         this.userInterface.displayMessage("Priority: " + worklistRequest.getPriority());
     }
 
-    public Boolean assignWorklist() {
+    public Boolean assignWorkList() {
         String userInput = userInterface.getConfirmation("Assign to me ?");
-        if (userInput.equalsIgnoreCase("y")) {
+        if (userInput.equalsIgnoreCase(YES)) {
             String empUserName = loggedInUserContext.getUserName();
-            boolean isUpdated = worklistDatabase.assignWorkListRequest(worklistID, empUserName);
+            boolean isUpdated = workListDatabase.assignWorkListRequest(workListID, empUserName);
             return isUpdated;
         }
         return false;
     }
 
     public void returnToMainMenu() {
-        loggedInUserContext.setCurrentPage("");
+        loggedInUserContext.clearCurrentPage();
     }
 }

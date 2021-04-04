@@ -2,7 +2,9 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
@@ -10,11 +12,12 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
     private String menuLabel;
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
-
+    private IWorkListActionFactory workListActionFactory;
     public SaveNewAccountProfileFormActionCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = newCustomerProfile;
+        workListActionFactory = new WorkListActionFactory();
 
         profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
@@ -40,10 +43,10 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
 
     private int createNewWorkListRequest() {
         int workListId = 0;
-        WorklistRequest worklistRequest = new WorklistRequest();
-        worklistRequest.setRequestType("Open New Account");
-        worklistRequest.setUser(profile);
-        workListId = worklistOperationDatabase.addWorkListRequest(worklistRequest);
+        IWorkListRequest workListRequest = workListActionFactory.createWorkListRequest();
+        workListRequest.setRequestType("Open New Account");
+        workListRequest.setUser(profile);
+        workListId = worklistOperationDatabase.addWorkListRequest(workListRequest);
         return workListId;
     }
 

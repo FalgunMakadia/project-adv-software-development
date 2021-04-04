@@ -1,18 +1,18 @@
-package BusinessLogicLayer.WorklistRequest;
+package BusinessLogicLayer.WorkListActions;
 
 import BusinessLogicLayer.User.ProfileAbstract;
 
-public class WorklistRequest {
+public class WorkListRequest implements IWorkListRequest {
     private ProfileAbstract profileAbstract;
     private String requestType;
-    private String priority = "low";
+    private static String priority = "low";
     private String accountNumber;
     private String handledBy = null;
 
-    public WorklistRequest() {
+    public WorkListRequest() {
     }
 
-    public WorklistRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract) {
+    public WorkListRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract) {
         this.requestType = requestType;
         this.accountNumber = accountNumber;
         this.profileAbstract = profileAbstract;

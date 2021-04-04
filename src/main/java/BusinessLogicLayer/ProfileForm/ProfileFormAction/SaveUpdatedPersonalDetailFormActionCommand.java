@@ -2,7 +2,9 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
 
 public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
     private final String CHANGE_REQUEST = "Change Personal Details";
@@ -14,10 +16,11 @@ public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
 
     @Override
     public void execute() {
-        WorklistRequest worklistRequest = new WorklistRequest(CHANGE_REQUEST,
+        IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+        IWorkListRequest workListRequest = workListActionFactory.createWorkListRequest(CHANGE_REQUEST,
                 profile.getAccountNumber(),
                 profile);
-        int worklistId = worklistOperationDatabase.addWorkListRequest(worklistRequest);
+        int worklistId = worklistOperationDatabase.addWorkListRequest(workListRequest);
         if (worklistId == 0) {
             userInterface.displayMessage("There is an error in submitting request");
         } else {

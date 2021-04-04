@@ -1,13 +1,14 @@
 package PresentationLayer.Pages.BankCentricPages;
 
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListActions.WorkListRequest;
 import PresentationLayer.Pages.Page;
 
 import java.util.Map;
 
 public class WorkListTablePage extends Page {
-    private Map<Integer, WorklistRequest> workListRequestMap;
-    public WorkListTablePage(Map<Integer, WorklistRequest> workListRequestMap){
+    private Map<Integer, IWorkListRequest> workListRequestMap;
+    public WorkListTablePage(Map<Integer, IWorkListRequest> workListRequestMap){
         this.workListRequestMap = workListRequestMap;
     }
     @Override
@@ -17,8 +18,8 @@ public class WorkListTablePage extends Page {
                 "RequestId", "Request Type", "Priority", "Account Number", "Handled By");
         System.out.println();
         System.out.println("=============================================================================");
-        for(Map.Entry<Integer, WorklistRequest> entry: workListRequestMap.entrySet()) {
-            WorklistRequest worklistRequest = entry.getValue();
+        for(Map.Entry<Integer, IWorkListRequest> entry: workListRequestMap.entrySet()) {
+            IWorkListRequest worklistRequest = entry.getValue();
             System.out.format("%10s %25s %10s %14s %10s",
                     entry.getKey(),
                     worklistRequest.getRequestType(),

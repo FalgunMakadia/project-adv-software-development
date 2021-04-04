@@ -1,7 +1,7 @@
 package PresentationLayer.Pages.BankCentricPages;
 
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import PresentationLayer.Pages.IPage;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ public class BankCentricPagesFactory implements IBankCentricPagesFactory{
     }
 
     @Override
-    public IPage createWorkListTable(Map<Integer, WorklistRequest> workListRequestMap) {
+    public IPage createWorkListTable(Map<Integer, IWorkListRequest> workListRequestMap) {
         return new WorkListTablePage(workListRequestMap);
     }
 }

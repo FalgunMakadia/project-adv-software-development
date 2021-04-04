@@ -2,7 +2,9 @@ package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
+import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
+import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -39,7 +41,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     }
 
     @Override
-    public int addWorkListRequest(WorklistRequest worklistRequest) {
+    public int addWorkListRequest(IWorkListRequest workListRequest) {
         connection = databaseConnection.openConnection();
         String insertWorkListQuery = "INSERT INTO worklist " +
                 "(request_type, priority, account_number) " +
@@ -53,9 +55,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
         try {
             statement = connection.prepareStatement(insertWorkListQuery, Statement.RETURN_GENERATED_KEYS);
 
-            statement.setString(1, worklistRequest.getRequestType());
-            statement.setString(2, worklistRequest.getPriority());
-            statement.setString(3, worklistRequest.getAccountNumber());
+            statement.setString(1, workListRequest.getRequestType());
+            statement.setString(2, workListRequest.getPriority());
+            statement.setString(3, workListRequest.getAccountNumber());
 
             int record_id = statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
@@ -64,10 +66,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             }
 
             if (0 != record_id) {
-                ProfileAbstract profile = worklistRequest.getUser();
+                ProfileAbstract profile = workListRequest.getUser();
                 PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
                 userInsertStatement.setInt(1, record_id);
-                userInsertStatement.setString(2, worklistRequest.getAccountNumber());
+                userInsertStatement.setString(2, workListRequest.getAccountNumber());
                 userInsertStatement.setString(3, profile.getFirstName());
                 userInsertStatement.setString(4, profile.getLastName());
                 userInsertStatement.setString(5, profile.getMiddleName());
@@ -94,10 +96,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     }
 
     @Override
-    public WorklistRequest getWorkListRequest(int id) {
+    public IWorkListRequest getWorkListRequest(int id) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * from worklist WHERE request_id=?";
-        WorklistRequest worklistRequest;
+        IWorkListRequest workListRequest;
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -105,20 +107,21 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
 
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.first()) {
-                worklistRequest = new WorklistRequest();
+                IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+                workListRequest = workListActionFactory.createWorkListRequest();
                 ProfileAbstract profileAbstract = getWorkListUserDetail(id);
                 String worklistType = resultSet.getString(REQUEST_TYPE_COLUMN_NAME);
                 String priority = resultSet.getString(PRIORITY_COLUMN_NAME);
                 String accountNumber = resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME);
                 String handledBy = resultSet.getString(HANDLED_BY_COLUMN_NAME);
 
-                worklistRequest.setRequestType(worklistType);
-                worklistRequest.setPriority(priority);
-                worklistRequest.setAccountNumber(accountNumber);
-                worklistRequest.setHandledBy(handledBy);
-                worklistRequest.setUser(profileAbstract);
+                workListRequest.setRequestType(worklistType);
+                workListRequest.setPriority(priority);
+                workListRequest.setAccountNumber(accountNumber);
+                workListRequest.setHandledBy(handledBy);
+                workListRequest.setUser(profileAbstract);
 
-                return worklistRequest;
+                return workListRequest;
             }
 
         } catch (SQLException throwables) {
@@ -131,9 +134,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     }
 
     @Override
-    public Map<Integer, WorklistRequest> getWorkList() {
+    public Map<Integer, IWorkListRequest> getWorkList() {
         connection = databaseConnection.openConnection();
-        Map<Integer, WorklistRequest> worklistRequestMap = new HashMap<>();
+        Map<Integer, IWorkListRequest> workListRequestMap = new HashMap<>();
         String query = "SELECT * FROM worklist WHERE is_processed = 0";
         PreparedStatement statement = null;
         try {
@@ -141,19 +144,20 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int requestId = resultSet.getInt(REQUEST_ID_COLUMN_NAME);
-                WorklistRequest worklistRequest = new WorklistRequest();
-                worklistRequest.setRequestType(resultSet.getString(REQUEST_TYPE_COLUMN_NAME));
-                worklistRequest.setPriority(resultSet.getString(PRIORITY_COLUMN_NAME));
-                worklistRequest.setAccountNumber(resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME));
-                worklistRequest.setHandledBy(resultSet.getString(HANDLED_BY_COLUMN_NAME));
-                worklistRequestMap.put(requestId, worklistRequest);
+                IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+                IWorkListRequest workListRequest = workListActionFactory.createWorkListRequest();
+                workListRequest.setRequestType(resultSet.getString(REQUEST_TYPE_COLUMN_NAME));
+                workListRequest.setPriority(resultSet.getString(PRIORITY_COLUMN_NAME));
+                workListRequest.setAccountNumber(resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME));
+                workListRequest.setHandledBy(resultSet.getString(HANDLED_BY_COLUMN_NAME));
+                workListRequestMap.put(requestId, workListRequest);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
-        return worklistRequestMap;
+        return workListRequestMap;
     }
 
     @Override

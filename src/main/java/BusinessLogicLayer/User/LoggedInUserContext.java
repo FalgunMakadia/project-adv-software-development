@@ -60,6 +60,11 @@ public class LoggedInUserContext implements ILoggedInUserContext {
         this.currentPage = currentPage;
     }
 
+    @Override
+    public void clearCurrentPage() {
+        this.currentPage = "";
+    }
+
     public String getCurrentPage() {
         return currentPage;
     }

@@ -1,27 +1,26 @@
 package BusinessLogicLayer.WorkListActions;
 
 import BusinessLogicLayer.User.ProfileAbstract;
-import BusinessLogicLayer.WorklistRequest.WorklistRequest;
 
 public class WorkListChangeAction extends WorkListAction {
 
-    public WorkListChangeAction(WorklistRequest worklistRequest, int worklistID) {
-        super(worklistRequest, worklistID);
+    public WorkListChangeAction(IWorkListRequest workListRequest, int workListID) {
+        super(workListRequest, workListID);
     }
 
     @Override
     public void processWorkList() {
         showWorkListDetail();
 
-        boolean isAssigned = assignWorklist();
+        boolean isAssigned = assignWorkList();
         if (isAssigned) {
             showComparisonOfUserDetails();
 
             String processInput = userInterface.getConfirmation("Do you want to process this change");
-            if (processInput.equalsIgnoreCase("y")) {
+            if (processInput.equalsIgnoreCase(YES)) {
                 boolean isDetailsUpdated = customerDatabase.
                         updateCustomerProfile(worklistRequest.getAccountNumber(), worklistRequest.getUser());
-                worklistDatabase.updateWorkListStatus(worklistID, isDetailsUpdated);
+                workListDatabase.updateWorkListStatus(workListID, isDetailsUpdated);
                 if (isDetailsUpdated) {
                     userInterface.displayMessage("ProfileAbstract details updated successfully");
                 } else {
