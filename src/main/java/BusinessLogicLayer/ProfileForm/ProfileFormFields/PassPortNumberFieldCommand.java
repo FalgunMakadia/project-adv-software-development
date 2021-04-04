@@ -1,12 +1,12 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class PassPortNumberFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Passport Number";
 
-    public PassPortNumberFieldCommand(ProfileAbstract profile) {
+    public PassPortNumberFieldCommand(AbstractProfile profile) {
         super(profile);
     }
 

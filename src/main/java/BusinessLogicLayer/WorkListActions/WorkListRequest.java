@@ -1,9 +1,9 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class WorkListRequest implements IWorkListRequest {
-    private ProfileAbstract profileAbstract;
+    private AbstractProfile profile;
     private String requestType;
     private static String priority = "low";
     private String accountNumber;
@@ -12,18 +12,18 @@ public class WorkListRequest implements IWorkListRequest {
     public WorkListRequest() {
     }
 
-    public WorkListRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract) {
+    public WorkListRequest(String requestType, String accountNumber, AbstractProfile profile) {
         this.requestType = requestType;
         this.accountNumber = accountNumber;
-        this.profileAbstract = profileAbstract;
+        this.profile = profile;
     }
 
-    public ProfileAbstract getUser() {
-        return profileAbstract;
+    public AbstractProfile getUser() {
+        return profile;
     }
 
-    public void setUser(ProfileAbstract profileAbstract) {
-        this.profileAbstract = profileAbstract;
+    public void setUser(AbstractProfile profile) {
+        this.profile = profile;
     }
 
     public String getRequestType() {

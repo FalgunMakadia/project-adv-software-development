@@ -3,7 +3,7 @@ package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
@@ -13,7 +13,7 @@ import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
 public abstract class FormCommand implements IFormCommand {
-    protected ProfileAbstract profile;
+    protected AbstractProfile profile;
     protected IUserInterfacePage userInterface;
     protected IWorklistOperationDatabase worklistOperationDatabase;
     protected DatabaseFactory databaseFactory;
@@ -22,7 +22,7 @@ public abstract class FormCommand implements IFormCommand {
     protected ICommonPagesFactory commonPagesFactory;
     protected IOperationDatabaseFactory operationDatabaseFactory;
 
-    public FormCommand(ProfileAbstract profile) {
+    public FormCommand(AbstractProfile profile) {
         this.profile = profile;
         init();
     }

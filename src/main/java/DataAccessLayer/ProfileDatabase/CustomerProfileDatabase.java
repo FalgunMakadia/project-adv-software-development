@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -31,7 +31,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     }
 
     @Override
-    public boolean addNewCustomerProfile(ProfileAbstract profile) {
+    public boolean addNewCustomerProfile(AbstractProfile profile) {
         connection = databaseConnection.openConnection();
         String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
                 "addressline_1, addressline_2, city, province, postal_code, email," +
@@ -77,14 +77,14 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     }
 
     @Override
-    public ProfileAbstract getCustomerProfile(String accountNumber) {
+    public AbstractProfile getCustomerProfile(String accountNumber) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * from customers WHERE account_no = ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, accountNumber);
-            ProfileAbstract profile = new CustomerProfile();
+            AbstractProfile profile = new CustomerProfile();
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.first()) {
@@ -113,7 +113,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     }
 
     @Override
-    public boolean updateCustomerProfile(String accountNumber, ProfileAbstract profile) {
+    public boolean updateCustomerProfile(String accountNumber, AbstractProfile profile) {
         connection = databaseConnection.openConnection();
         String query = "UPDATE customers SET " +
                 "first_name = ?, last_name = ?, middle_name = ?, addressline_1 = ?," +

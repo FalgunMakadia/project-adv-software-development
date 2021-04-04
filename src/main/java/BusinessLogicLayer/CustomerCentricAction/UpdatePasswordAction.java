@@ -1,33 +1,30 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
-import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 
-public class UpdatePassword extends Action {
-    private static final String menuLabel = "Update Password";
+public class UpdatePasswordAction extends Action {
+    private static final String ACTION_TITLE = "Update Password";
 
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
 
-    public UpdatePassword() {
+    public UpdatePasswordAction() {
         profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override
     public void performAction() {
         setCurrentPageInContext();
-        userInterface.displayMessage("Update Password");
+        userInterface.displayMessage(ACTION_TITLE);
         String userName = loggedInUserContext.getUserName();
 
         userInterface.displayMessage("Hello " + userName);
@@ -46,6 +43,6 @@ public class UpdatePassword extends Action {
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 }

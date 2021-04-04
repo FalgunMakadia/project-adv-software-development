@@ -1,11 +1,11 @@
 package DataAccessLayer.ProfileDatabase;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public interface ICustomerProfileDatabase {
-    boolean addNewCustomerProfile(ProfileAbstract profile);
+    boolean addNewCustomerProfile(AbstractProfile profile);
 
-    ProfileAbstract getCustomerProfile(String accountNumber);
+    AbstractProfile getCustomerProfile(String accountNumber);
 
-    boolean updateCustomerProfile(String accountNumber, ProfileAbstract profile);
+    boolean updateCustomerProfile(String accountNumber, AbstractProfile profile);
 }

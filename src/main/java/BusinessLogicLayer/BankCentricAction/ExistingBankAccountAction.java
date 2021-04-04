@@ -1,24 +1,22 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
-public class ExistingBankAccount extends Action {
-    private static final String menuLabel = "Existing Bank Account";
+public class ExistingBankAccountAction extends Action {
+    private static final String ACTION_TITLE = "Existing Bank Account";
     private IAccountOperationDatabase accountOperationDatabase;
 
-    public ExistingBankAccount() {
+    public ExistingBankAccountAction() {
         IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override

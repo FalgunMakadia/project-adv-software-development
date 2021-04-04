@@ -1,9 +1,7 @@
 package BusinessLogicLayer.TransactionAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class Withdraw extends Action {
     }
 
     @Override
-    public String getMenuLabel() {
+    public String getActionTitle() {
         return menuLabel;
     }
 

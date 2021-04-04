@@ -1,12 +1,12 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class EmailFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Email";
 
-    public EmailFieldCommand(ProfileAbstract profile) {
+    public EmailFieldCommand(AbstractProfile profile) {
         super(profile);
     }
 

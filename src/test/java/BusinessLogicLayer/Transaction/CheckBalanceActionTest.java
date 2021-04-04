@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.SQLException;
 
-public class CheckBalanceTest {
+public class CheckBalanceActionTest {
 
     IDatabaseFactory databaseFactory = null;
     IAccountOperationDatabase accountOperationDatabase;

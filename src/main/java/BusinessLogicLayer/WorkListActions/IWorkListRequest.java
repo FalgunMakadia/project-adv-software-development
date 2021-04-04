@@ -1,11 +1,11 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public interface IWorkListRequest {
-    ProfileAbstract getUser();
+    AbstractProfile getUser();
 
-    void setUser(ProfileAbstract profileAbstract);
+    void setUser(AbstractProfile profile);
 
     String getRequestType();
 

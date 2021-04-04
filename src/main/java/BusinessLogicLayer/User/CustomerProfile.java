@@ -1,6 +1,6 @@
 package BusinessLogicLayer.User;
 
-public class CustomerProfile extends ProfileAbstract {
+public class CustomerProfile extends AbstractProfile {
     private static final String customerUserRole = "C";
     public CustomerProfile() {
         super();

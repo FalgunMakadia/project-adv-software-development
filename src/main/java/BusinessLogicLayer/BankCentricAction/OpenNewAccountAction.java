@@ -1,70 +1,74 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankCentricAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.BackToMainMenuProfileFormActionCommand;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.EditProfileFormActionCommand;
-import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.SaveNewAccountProfileFormActionCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.User.CustomerProfile;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class OpenNewAccount extends Action {
-    private static final String menuLabel = "Open New Account";
-    Map<Integer, IFormCommand> formActionCommandMap;
-    private Map<Integer,IFormCommand> openNewAccountFormFieldMap;
-    ProfileAbstract customer;
+public class OpenNewAccountAction extends Action {
+    private static final String ACTION_TITLE = "Open New Account";
+    private static final String EDIT_LABEL = "Edit";
+    private static final String SAVE_LABEL = "Save";
+    private static final String BACK_TO_MAIN_MENU_LABEL  = "Back to main menu";
+
+    private Map<Integer, IFormCommand> formActionCommandMap;
+    private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
+    private AbstractProfile customer;
+    private IProfileFormFactory profileFormFactory;
+
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
-    IProfileFormFactory profileFormFactory;
-    public OpenNewAccount() {
+
+    public OpenNewAccountAction() {
         super();
-        profileFormFactory =new ProfileFormFactory();
+        profileFormFactory = new ProfileFormFactory();
         customer = new CustomerProfile();
+
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
-        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand("Edit", customer, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, profileFormFactory.createSaveNewAccountProfileFormActionCommand("Save", customer));
-        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand("Back to main menu"));
+        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand(EDIT_LABEL, customer, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, profileFormFactory.createSaveNewAccountProfileFormActionCommand(SAVE_LABEL, customer));
+        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand(BACK_TO_MAIN_MENU_LABEL));
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
+    @Override
     public void performAction() {
         setCurrentPageInContext();
         userInterface.displayMessage("Please enter the details of following fields:");
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
 
-        Iterator<Map.Entry<Integer,IFormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
+        Iterator<Map.Entry<Integer, IFormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Integer,IFormCommand> formQuestionEntry = iterator.next();
-           IFormCommand formCommand = formQuestionEntry.getValue();
+            Map.Entry<Integer, IFormCommand> formQuestionEntry = iterator.next();
+            IFormCommand formCommand = formQuestionEntry.getValue();
             formCommand.execute();
         }
 
 
-        while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
+        while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
-               IFormCommand formState = formActionCommandMap.get(key);
+                IFormCommand formState = formActionCommandMap.get(key);
                 System.out.println(key + ". " + formState.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-           IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+            IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
             formCommand.execute();
 
         }

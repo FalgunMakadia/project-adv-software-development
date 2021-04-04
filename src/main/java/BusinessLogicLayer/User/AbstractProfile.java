@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ProfileAbstract {
+public abstract class AbstractProfile {
     private String firstName;
     private String lastName;
     private String middleName;

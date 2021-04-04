@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CommonAction;
 
-public interface ILogin {
+public interface ISignInAction {
     void validateUser(String userName, String Password);
     boolean checkStatus();
     String getUserRole();

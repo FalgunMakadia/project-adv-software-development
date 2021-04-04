@@ -1,12 +1,12 @@
 package PresentationLayer.Pages.BankCentricPages;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import PresentationLayer.Pages.Page;
 
 public class UserDetailPage extends Page {
-    ProfileAbstract profile;
-    public UserDetailPage(ProfileAbstract profileAbstract){
-        this.profile = profileAbstract;
+    AbstractProfile profile;
+    public UserDetailPage(AbstractProfile profile){
+        this.profile = profile;
     }
     @Override
     public void printPage() {

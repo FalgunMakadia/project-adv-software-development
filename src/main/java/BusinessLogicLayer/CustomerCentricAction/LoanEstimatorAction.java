@@ -1,25 +1,24 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoanEstimator extends Action {
-    private static final String menuLabel = "Loan Estimator";
+public class LoanEstimatorAction extends Action {
+    private static final String ACTION_LABEL = "Loan Estimator";
+    private static final int MINIMUM_LOAN_AMOUNT = 10000;
+    private static final double DEFAULT_INTEREST_RATE = 8.8;
+
     private double annualInterestRate = 8;
-    private static final int minimumLoanAmount = 10000;
-    private static final double defaultInterestRate = 8.8;
     int balance = 0;
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IAccountOperationDatabase accountOperationDatabase;
     private Map<Double, LoanInterestRange> loanInterestRangeMap;
 
-    public LoanEstimator() {
+    public LoanEstimatorAction() {
         operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
 
@@ -31,8 +30,8 @@ public class LoanEstimator extends Action {
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_LABEL;
     }
 
     @Override
@@ -42,7 +41,7 @@ public class LoanEstimator extends Action {
 
         balance = accountOperationDatabase.getBalance(accountNumber);
 
-        String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Loan Amount (minimum " + minimumLoanAmount + "): ", minimumLoanAmount);
+        String userInput = userInterface.getMandatoryLongUserInputWithMinimumRange("Enter Loan Amount (minimum " + MINIMUM_LOAN_AMOUNT + "): ", MINIMUM_LOAN_AMOUNT);
         long loanAmount = convertStringToLong(userInput);
 
         userInput = userInterface.getMandatoryIntegerUserInput("Enter tenure (years): ");
@@ -66,7 +65,7 @@ public class LoanEstimator extends Action {
     }
 
     private double getAnnualInterest(int balance) {
-        double annualInterest = defaultInterestRate;
+        double annualInterest = DEFAULT_INTEREST_RATE;
         for (Map.Entry<Double, LoanInterestRange> loanInterestRangeEntry : loanInterestRangeMap.entrySet()) {
             LoanInterestRange loanInterestRange = loanInterestRangeEntry.getValue();
             if (loanInterestRange.includes(balance)) {
@@ -93,6 +92,6 @@ public class LoanEstimator extends Action {
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_LABEL);
     }
 }

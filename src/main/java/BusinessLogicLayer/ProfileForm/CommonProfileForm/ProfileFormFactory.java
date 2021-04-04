@@ -3,7 +3,7 @@ package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 import BusinessLogicLayer.ProfileForm.ProfileFormAction.*;
 import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
 import BusinessLogicLayer.User.BankEmployeeProfile;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
 
@@ -14,12 +14,12 @@ public class ProfileFormFactory implements IProfileFormFactory{
     }
 
     @Override
-    public IFormCommand createEditProfileFormActionCommand(String menuLabel, ProfileAbstract profile, Map<Integer, IFormCommand> formFieldMap) {
+    public IFormCommand createEditProfileFormActionCommand(String menuLabel, AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
         return new EditProfileFormActionCommand(menuLabel, profile, formFieldMap);
     }
 
     @Override
-    public IFormCommand createSaveNewAccountProfileFormActionCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
+    public IFormCommand createSaveNewAccountProfileFormActionCommand(String menuLabel, AbstractProfile newCustomerProfile) {
         return new SaveNewAccountProfileFormActionCommand(menuLabel, newCustomerProfile);
     }
 
@@ -29,72 +29,72 @@ public class ProfileFormFactory implements IProfileFormFactory{
     }
 
     @Override
-    public IFormCommand createSaveUpdatedPersonalDetailFormActionCommand(ProfileAbstract profile) {
+    public IFormCommand createSaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile) {
         return new SaveUpdatedPersonalDetailFormActionCommand(profile);
     }
 
     @Override
-    public IFormCommand createAddressLine1FieldCommand(ProfileAbstract profile) {
+    public IFormCommand createAddressLine1FieldCommand(AbstractProfile profile) {
         return new AddressLine1FieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createAddressLine2FieldCommand(ProfileAbstract profile) {
+    public IFormCommand createAddressLine2FieldCommand(AbstractProfile profile) {
         return new AddressLine2FieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createCityFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createCityFieldCommand(AbstractProfile profile) {
         return new CityFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createContactFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createContactFieldCommand(AbstractProfile profile) {
         return new ContactFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createDateOfBirthFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createDateOfBirthFieldCommand(AbstractProfile profile) {
         return new DateOfBirthFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createEmailFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createEmailFieldCommand(AbstractProfile profile) {
         return new EmailFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createFirstNameFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createFirstNameFieldCommand(AbstractProfile profile) {
         return new FirstNameFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createLastNameFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createLastNameFieldCommand(AbstractProfile profile) {
         return new LastNameFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createMiddleNameFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createMiddleNameFieldCommand(AbstractProfile profile) {
         return new MiddleNameFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createPassPortNumberFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createPassPortNumberFieldCommand(AbstractProfile profile) {
         return new PassPortNumberFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createPostalCodeFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createPostalCodeFieldCommand(AbstractProfile profile) {
         return new PostalCodeFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createProvinceFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createProvinceFieldCommand(AbstractProfile profile) {
         return new ProvinceFieldCommand(profile);
     }
 
     @Override
-    public IFormCommand createSsnNumberFieldCommand(ProfileAbstract profile) {
+    public IFormCommand createSsnNumberFieldCommand(AbstractProfile profile) {
         return new SsnNumberFieldCommand(profile) ;
     }
 }

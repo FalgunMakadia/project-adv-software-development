@@ -20,4 +20,6 @@ public interface ILoggedInUserContext {
     void setParentPage(String parentPage);
 
     boolean checkCurrentPageStatus(String menuLabel);
+
+    void signOut();
 }

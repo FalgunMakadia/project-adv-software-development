@@ -1,43 +1,45 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankCentricAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.BackToMainMenuProfileFormActionCommand;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.EditProfileFormActionCommand;
-import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.SaveNewEmployeeProfileFormActionCommand;
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.User.BankEmployeeProfile;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class EnrollNewEmployee extends Action {
-    private static final String menuLabel = "Enroll New Employee";
-    Map<Integer, IFormCommand> formActionCommandMap;
+public class EnrollNewEmployeeAction extends Action {
+    private static final String ACTION_TITLE = "Enroll New Employee";
+    private static final String EDIT_LABEL = "Edit";
+    private static final String SAVE_LABEL = "Save";
+    private static final String BACK_TO_MAIN_MENU_LABEL  = "Back to main menu";
+
+    private Map<Integer, IFormCommand> formActionCommandMap;
     private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
-    BankEmployeeProfile bankEmployeeProfile;
-    IProfileFormFactory profileFormFactory;
-    public EnrollNewEmployee() {
+    private BankEmployeeProfile bankEmployeeProfile;
+    private IProfileFormFactory profileFormFactory;
+
+    public EnrollNewEmployeeAction() {
         super();
         profileFormFactory = new ProfileFormFactory();
         bankEmployeeProfile = new BankEmployeeProfile();
+
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
-        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand("Edit", bankEmployeeProfile, openNewAccountFormFieldMap));
-        formActionCommandMap.put(2, profileFormFactory.createSaveNewEmployeeProfileFormActionCommand("Save", bankEmployeeProfile));
-        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand("Back to main menu"));
+        formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand(EDIT_LABEL, bankEmployeeProfile, openNewAccountFormFieldMap));
+        formActionCommandMap.put(2, profileFormFactory.createSaveNewEmployeeProfileFormActionCommand(SAVE_LABEL, bankEmployeeProfile));
+        formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand(BACK_TO_MAIN_MENU_LABEL));
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
     @Override
@@ -53,7 +55,7 @@ public class EnrollNewEmployee extends Action {
         }
 
 
-        while (loggedInUserContext.checkCurrentPageStatus(menuLabel)) {
+        while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
                 IFormCommand formState = formActionCommandMap.get(key);

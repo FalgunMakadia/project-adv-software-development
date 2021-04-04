@@ -2,7 +2,7 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
@@ -10,18 +10,18 @@ import java.util.Map;
 
 public class EditProfileFormActionCommand extends FormCommand {
     String menuLabel;
-    ProfileAbstract profileAbstract;
+    AbstractProfile profile;
     Map<Integer, IFormCommand> formFieldMap;
-    public EditProfileFormActionCommand(String menuLabel, ProfileAbstract profile, Map<Integer, IFormCommand> formFieldMap) {
+    public EditProfileFormActionCommand(String menuLabel, AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
         super();
         this.menuLabel = menuLabel;
-        this.profileAbstract = profileAbstract;
+        this.profile = profile;
         this.formFieldMap = formFieldMap;
     }
 
     @Override
     public void execute() {
-        IUserFormPage userForm = commonPagesFactory.createUserForm(formFieldMap, profileAbstract);
+        IUserFormPage userForm = commonPagesFactory.createUserForm(formFieldMap, profile);
         userForm.printForm();
 
         IUserInterfacePage userInterface = commonPagesFactory.createUserInterface();

@@ -6,11 +6,11 @@ import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class Login implements ILogin {
+public class SignInAction implements ISignInAction {
     private IUserProfileDatabase userProfileDatabase;
     private LoggedInUserContext loggedInUserContext;
 
-    public Login() {
+    public SignInAction() {
         loggedInUserContext = LoggedInUserContext.instance();
 
         IDatabaseFactory databaseFactory = new DatabaseFactory();

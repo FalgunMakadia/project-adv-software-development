@@ -1,7 +1,7 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
 import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
@@ -13,7 +13,7 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
     private IWorkListActionFactory workListActionFactory;
-    public SaveNewAccountProfileFormActionCommand(String menuLabel, ProfileAbstract newCustomerProfile) {
+    public SaveNewAccountProfileFormActionCommand(String menuLabel, AbstractProfile newCustomerProfile) {
         super();
         this.menuLabel = menuLabel;
         this.profile = newCustomerProfile;

@@ -1,13 +1,10 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.BackToMainMenuProfileFormActionCommand;
 import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.ProfileForm.ProfileFormAction.SaveUpdatedPersonalDetailFormActionCommand;
-import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import PresentationLayer.Pages.CommonPages.IUserFormPage;
@@ -15,12 +12,14 @@ import PresentationLayer.Pages.CommonPages.IUserFormPage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdatePersonalDetails extends Action {
-    private static final String menuLabel = "Update Personal Details";
+public class UpdatePersonalDetailAction extends Action {
+    private static final String ACTION_TITLE = "Update Personal Details";
+    private static final String BACK_TO_MAIN_MENU_LABEL = "Back to main menu";
+
     private Map<Integer, IFormCommand> formFields;
     private ICustomerProfileDatabase customerProfileDatabase;
 
-    public UpdatePersonalDetails() {
+    public UpdatePersonalDetailAction() {
         formFields = new HashMap<>();
 
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
@@ -28,24 +27,26 @@ public class UpdatePersonalDetails extends Action {
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override
     public void performAction() {
-        userInterface.displayMessage("============UPDATE PERSONAL DETAILS=====================");
+        userInterface.displayMessage(ACTION_TITLE);
+
         String currentUserAccountNumber = loggedInUserContext.getAccountNumber();
         setCurrentPageInContext();
-        userInterface.displayMessage("Update Personal Details");
+        userInterface.displayMessage(ACTION_TITLE);
 
-        ProfileAbstract profile = customerProfileDatabase.getCustomerProfile(currentUserAccountNumber);
-        IUserFormPage userForm = commonPagesFactory.createUserForm(getFormFields(profile), profile, loggedInUserContext.getCurrentPage());
+        AbstractProfile customerProfile = customerProfileDatabase.getCustomerProfile(currentUserAccountNumber);
+        IUserFormPage userForm = commonPagesFactory
+                .createUserForm(getFormFields(customerProfile), customerProfile, loggedInUserContext.getCurrentPage());
         userForm.printForm();
     }
 
-    private Map<Integer, IFormCommand> getFormFields(ProfileAbstract profile) {
-        IProfileFormFactory profileFormFactory =new ProfileFormFactory();
+    private Map<Integer, IFormCommand> getFormFields(AbstractProfile profile) {
+        IProfileFormFactory profileFormFactory = new ProfileFormFactory();
 
         formFields.put(1, profileFormFactory.createFirstNameFieldCommand(profile));
         formFields.put(2, profileFormFactory.createMiddleNameFieldCommand(profile));
@@ -60,13 +61,13 @@ public class UpdatePersonalDetails extends Action {
         formFields.put(11, profileFormFactory.createSsnNumberFieldCommand(profile));
         formFields.put(12, profileFormFactory.createDateOfBirthFieldCommand(profile));
         formFields.put(13, profileFormFactory.createSaveUpdatedPersonalDetailFormActionCommand(profile));
-        formFields.put(14, profileFormFactory.createBackToMainMenuProfileFormActionCommand("Back to main menu"));
+        formFields.put(14, profileFormFactory.createBackToMainMenuProfileFormActionCommand(BACK_TO_MAIN_MENU_LABEL));
 
         return formFields;
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 }

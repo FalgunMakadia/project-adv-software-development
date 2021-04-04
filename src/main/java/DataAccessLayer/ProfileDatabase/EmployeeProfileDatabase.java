@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -17,7 +17,7 @@ public class EmployeeProfileDatabase implements IEmployeeProfileDatabase {
     }
 
     @Override
-    public int addNewBankEmployeeProfile(ProfileAbstract bankEmployeeProfile) {
+    public int addNewBankEmployeeProfile(AbstractProfile bankEmployeeProfile) {
         connection = databaseConnection.openConnection();
         int affectedRows = 0;
         String createEmployee = "INSERT INTO Employees (first_name,middle_name, last_name," +

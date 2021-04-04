@@ -1,4 +1,4 @@
-package BusinessLogicLayer.BankAction;
+package BusinessLogicLayer.BankCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
 import BusinessLogicLayer.WorkListActions.*;
@@ -9,11 +9,11 @@ import PresentationLayer.Pages.IPage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorkList extends Action {
+public class WorkListAction extends Action {
     private static final int EXIT = 0;
     private static final String CHANGE_REQUEST = "Change Personal Details";
     private static final String CREATE_ACCOUNT_REQUEST = "Open New Account";
-    private static final String menuLabel = "WorkList";
+    private static final String ACTION_TITLE = "WorkList";
 
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IWorklistOperationDatabase workListOperationDatabase;
@@ -21,7 +21,7 @@ public class WorkList extends Action {
     private IPage workListPage;
     private Map<String, IWorkListAction> workListActionMap;
 
-    public WorkList() {
+    public WorkListAction() {
         setCurrentPageInContext();
         operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         workListOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
@@ -29,13 +29,13 @@ public class WorkList extends Action {
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class WorkList extends Action {
                     IWorkListAction workListAction = workListActionMap.get(workListRequest.getRequestType());
                     workListAction.processWorkList();
                 }
-            } while(loggedInUserContext.getCurrentPage().equals(menuLabel)
+            } while(loggedInUserContext.getCurrentPage().equals(ACTION_TITLE)
                     && userInput != EXIT);
         }
     }

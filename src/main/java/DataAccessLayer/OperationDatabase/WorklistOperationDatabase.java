@@ -1,7 +1,7 @@
 package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
 import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
@@ -66,7 +66,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             }
 
             if (0 != record_id) {
-                ProfileAbstract profile = workListRequest.getUser();
+                AbstractProfile profile = workListRequest.getUser();
                 PreparedStatement userInsertStatement = connection.prepareStatement(insertWorkListUserQuery);
                 userInsertStatement.setInt(1, record_id);
                 userInsertStatement.setString(2, workListRequest.getAccountNumber());
@@ -109,7 +109,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             if(resultSet.first()) {
                 IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
                 workListRequest = workListActionFactory.createWorkListRequest();
-                ProfileAbstract profileAbstract = getWorkListUserDetail(id);
+                AbstractProfile profile = getWorkListUserDetail(id);
                 String worklistType = resultSet.getString(REQUEST_TYPE_COLUMN_NAME);
                 String priority = resultSet.getString(PRIORITY_COLUMN_NAME);
                 String accountNumber = resultSet.getString(WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME);
@@ -119,7 +119,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 workListRequest.setPriority(priority);
                 workListRequest.setAccountNumber(accountNumber);
                 workListRequest.setHandledBy(handledBy);
-                workListRequest.setUser(profileAbstract);
+                workListRequest.setUser(profile);
 
                 return workListRequest;
             }
@@ -161,10 +161,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     }
 
     @Override
-    public ProfileAbstract getWorkListUserDetail(int id) {
+    public AbstractProfile getWorkListUserDetail(int id) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
-        ProfileAbstract profile = new CustomerProfile();
+        AbstractProfile profile = new CustomerProfile();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);

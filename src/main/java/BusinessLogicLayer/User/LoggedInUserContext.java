@@ -77,6 +77,15 @@ public class LoggedInUserContext implements ILoggedInUserContext {
         return currentPage.equals(menuLabel);
     }
 
+    @Override
+    public void signOut() {
+        setUserName(null);
+        setUserRole(null);
+        setAccountNumber(null);
+        setActiveStatus(false);
+        setLoginStatus(false);
+    }
+
     public Boolean getLoginStatus() {
         return loginStatus;
     }

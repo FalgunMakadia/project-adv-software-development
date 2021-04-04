@@ -1,24 +1,21 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckPreApprovedLoan extends Action {
-    private static final String menuLabel = "Check Pre-Approved Loan";
-    private double annualInterestRate = 8;
-    private static final int minimumLoanAmount = 10000;
-    private static final double defaultInterestRate = 8.8;
+public class CheckPreApprovedLoanAction extends Action {
+    private static final String ACTION_TITLE = "Check Pre-Approved Loan";
+    private static final double DEFAULT_INTEREST_RATE = 8.8;
+
     private int balance = 0;
     private Map<Double, LoanInterestRange> loanInterestRangeMap;
     private IAccountOperationDatabase accountOperationDatabase;
 
-    public CheckPreApprovedLoan() {
+    public CheckPreApprovedLoanAction() {
         IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
 
@@ -47,16 +44,16 @@ public class CheckPreApprovedLoan extends Action {
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     public double getPreApprovedLoanAnnualInterest(int balance) {
-        double annualInterest = defaultInterestRate;
+        double annualInterest = DEFAULT_INTEREST_RATE;
         LoanInterestRange loanInterestRange = getPreApprovedLoanBracket(balance);
         if (loanInterestRange.getApprovedLoanStatus()) {
             annualInterest = loanInterestRange.getApprovedLoanInterest();

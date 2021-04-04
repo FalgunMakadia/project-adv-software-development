@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.CommonAction.ILogin;
+import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.ActionFactory;
 import PresentationLayer.MenuRouting.BankEmployeeMenuRoutingCommand;
 import PresentationLayer.MenuRouting.BankManagerMenuRoutingCommand;
@@ -30,7 +30,7 @@ public class LoginPage implements ILoginPage{
             password = scanner.nextLine();
             System.out.println("Logging In...");
             ActionFactory actionFactory =  new ActionFactory();
-            ILogin login = actionFactory.createLogin();
+            ISignInAction login = actionFactory.createLogin();
             login.validateUser(username,password);
             if(login.checkStatus()){
                 System.out.println("Successfully Logged In");

@@ -1,40 +1,37 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.Action;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
-import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
-public class CheckBalance extends Action {
-    private static final String menuLabel = "Check Balance";
+public class CheckBalanceAction extends Action {
+    private static final String ACTION_TITLE = "Check Balance";
 
     private IAccountOperationDatabase accountOperationDatabase;
 
-    public CheckBalance() {
+    public CheckBalanceAction() {
         IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
     @Override
-    public String getMenuLabel() {
-        return menuLabel;
+    public String getActionTitle() {
+        return ACTION_TITLE;
     }
 
     @Override
     protected void setCurrentPageInContext() {
-        loggedInUserContext.setCurrentPage(menuLabel);
+        loggedInUserContext.setCurrentPage(ACTION_TITLE);
     }
 
     @Override
     public void performAction() {
-
         setCurrentPageInContext();
         String accountNumber = loggedInUserContext.getAccountNumber();
         String name = loggedInUserContext.getUserName();
         int currentBalance;
 
-        userInterface.displayMessage("Check Balance");
+        userInterface.displayMessage(ACTION_TITLE);
 
         userInterface.displayMessage("Hello " + name);
         currentBalance = accountOperationDatabase.getBalance(accountNumber);

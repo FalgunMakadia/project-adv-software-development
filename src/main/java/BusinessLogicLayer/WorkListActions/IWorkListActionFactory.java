@@ -1,6 +1,6 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public interface IWorkListActionFactory {
 
@@ -10,5 +10,5 @@ public interface IWorkListActionFactory {
 
     IWorkListRequest createWorkListRequest();
 
-    IWorkListRequest createWorkListRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract);
+    IWorkListRequest createWorkListRequest(String requestType, String accountNumber, AbstractProfile profile);
 }

@@ -1,7 +1,7 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
 import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
@@ -10,7 +10,7 @@ public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
     private final String CHANGE_REQUEST = "Change Personal Details";
     private final String COMMAND_LABEL = "Save Details";
 
-    public SaveUpdatedPersonalDetailFormActionCommand(ProfileAbstract profile) {
+    public SaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile) {
         super(profile);
     }
 

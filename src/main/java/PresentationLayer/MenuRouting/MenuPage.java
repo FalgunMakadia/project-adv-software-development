@@ -23,7 +23,7 @@ public class MenuPage extends Page {
             for (int i = 0; i < menu.size(); i++) {
                 int key = i + 1;
                 IAction action = menu.get(String.valueOf(key));
-                System.out.println(key + ". " + action.getMenuLabel());
+                System.out.println(key + ". " + action.getActionTitle());
             }
             System.out.print("Enter any Number between 1-" + menu.size() + " to perform appropriate action:");
             String input = scanner.next();

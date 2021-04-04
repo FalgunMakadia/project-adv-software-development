@@ -1,8 +1,8 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.CommonAction.IAction;
-import BusinessLogicLayer.CommonAction.ILogin;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.CommonAction.ISignInAction;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public interface IActionFactory {
     IAction createOpenNewAccount();
@@ -19,8 +19,8 @@ public interface IActionFactory {
     IAction createUpdatePassword();
     IAction createLoanEstimator();
     IAction createCheckPreApprovedLoan();
-    ILogin createLogin();
+    ISignInAction createLogin();
 
-    ProfileAbstract createCustomer();
+    AbstractProfile createCustomer();
 
 }

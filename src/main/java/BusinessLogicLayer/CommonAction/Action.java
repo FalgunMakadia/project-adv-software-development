@@ -13,7 +13,7 @@ import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory
 import PresentationLayer.PresentationFactory;
 
 public abstract class Action implements IAction{
-    protected IUserInterfacePage userInterface = null;
+    protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;
     protected IMenuRoutingFactory menuRoutingFactory;
@@ -43,16 +43,6 @@ public abstract class Action implements IAction{
         return choiceNumber;
     }
 
-    protected double convertStringToDouble(String input) {
-        double choiceNumber = 0;
-        try {
-            choiceNumber = Double.parseDouble(input);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid input.");
-        }
-        return choiceNumber;
-    }
-
     protected long convertStringToLong(String input) {
         long choiceNumber = 0;
         try {
@@ -61,19 +51,6 @@ public abstract class Action implements IAction{
             throw new IllegalArgumentException("Invalid input.");
         }
         return choiceNumber;
-    }
-
-    protected boolean validateIntegerInputFormat(String input) {
-        boolean validity = true;
-        int choiceNumber = 0;
-        try {
-            choiceNumber = Integer.parseInt(input);
-
-        } catch (Exception exception) {
-            validity = false;
-            throw new IllegalArgumentException("Invalid input.");
-        }
-        return validity;
     }
 
     protected boolean validateLongInputFormat(String input) {
@@ -91,7 +68,7 @@ public abstract class Action implements IAction{
 
     public abstract void performAction();
 
-    public abstract String getMenuLabel();
+    public abstract String getActionTitle();
 
     protected abstract void setCurrentPageInContext();
 }

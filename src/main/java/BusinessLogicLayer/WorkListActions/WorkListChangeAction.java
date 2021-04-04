@@ -1,6 +1,6 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class WorkListChangeAction extends WorkListAction {
 
@@ -34,7 +34,7 @@ public class WorkListChangeAction extends WorkListAction {
     }
 
     private void showComparisonOfUserDetails() {
-        ProfileAbstract oldProfileAbstractDetails = null;
+        AbstractProfile oldProfileAbstractDetails = null;
         oldProfileAbstractDetails = customerDatabase.getCustomerProfile(worklistRequest.getAccountNumber());
         userDetailPage = bankCentricPagesFactory.createUserDetailPage(oldProfileAbstractDetails);
         userInterface.displayMessage("====Old Details====");

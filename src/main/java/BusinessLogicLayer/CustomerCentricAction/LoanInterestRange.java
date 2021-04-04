@@ -1,11 +1,11 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 public class LoanInterestRange {
-    double start;
-    double end;
-    double approvedLoanAmount;
-    double approvedLoanInterest;
-    boolean approvedLoanStatus = false;
+    private double start;
+    private double end;
+    private double approvedLoanAmount;
+    private double approvedLoanInterest;
+    private boolean approvedLoanStatus = false;
 
     public LoanInterestRange(double start, double end) {
         this.start = start;

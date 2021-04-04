@@ -1,7 +1,7 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 public class DateOfBirthFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Date Of Birth";
 
-    public DateOfBirthFieldCommand(ProfileAbstract profile) {
+    public DateOfBirthFieldCommand(AbstractProfile profile) {
         super(profile);
     }
 

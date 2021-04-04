@@ -1,6 +1,6 @@
 package BusinessLogicLayer.WorkListActions;
 
-import BusinessLogicLayer.User.ProfileAbstract;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class WorkListActionFactory implements IWorkListActionFactory{
     @Override
@@ -19,7 +19,7 @@ public class WorkListActionFactory implements IWorkListActionFactory{
     }
 
     @Override
-    public IWorkListRequest createWorkListRequest(String requestType, String accountNumber, ProfileAbstract profileAbstract) {
-        return new WorkListRequest(requestType, accountNumber, profileAbstract);
+    public IWorkListRequest createWorkListRequest(String requestType, String accountNumber, AbstractProfile profile) {
+        return new WorkListRequest(requestType, accountNumber, profile);
     }
 }

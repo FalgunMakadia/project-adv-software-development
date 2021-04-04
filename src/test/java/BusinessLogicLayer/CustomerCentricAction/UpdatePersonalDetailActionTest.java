@@ -1,4 +1,4 @@
-package BusinessLogicLayer.CustomerAction;
+package BusinessLogicLayer.CustomerCentricAction;
 
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
@@ -9,21 +9,21 @@ import org.mockito.Mockito;
 
 import java.sql.SQLException;
 
-class UpdatePersonalDetailsTest {
+class UpdatePersonalDetailActionTest {
     private ICustomerProfileDatabase customerDatabase = null;
 
-    private UpdatePersonalDetails updatePersonalDetails;
+    private UpdatePersonalDetailAction updatePersonalDetailAction;
 
     @BeforeEach
     void setup() {
         IDatabaseFactory databaseFactory = new DatabaseFactory();
-        updatePersonalDetails = Mockito.mock(UpdatePersonalDetails.class);
+        updatePersonalDetailAction = Mockito.mock(UpdatePersonalDetailAction.class);
     }
 
     @Test
     void performAction() throws SQLException {
-        Mockito.doNothing().when(updatePersonalDetails).performAction();
-        updatePersonalDetails.performAction();
-        Mockito.verify(updatePersonalDetails, Mockito.times(1)).performAction();
+        Mockito.doNothing().when(updatePersonalDetailAction).performAction();
+        updatePersonalDetailAction.performAction();
+        Mockito.verify(updatePersonalDetailAction, Mockito.times(1)).performAction();
     }
 }
