@@ -7,6 +7,8 @@ import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class UpdatePasswordAction extends Action {
     private static final String ACTION_TITLE = "Update Password";
+    String newPassword;
+    String confirmPassword;
 
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
@@ -28,8 +30,8 @@ public class UpdatePasswordAction extends Action {
         String userName = loggedInUserContext.getUserName();
 
         userInterface.displayMessage("Hello " + userName);
-        String newPassword = userInterface.getMandatoryUserInput("New Password*: ");
-        String confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
+        newPassword = userInterface.getMandatoryUserInput("New Password*: ");
+        confirmPassword = userInterface.getMandatoryUserInput("Confirm New Password*: ");
         if (newPassword.equals(confirmPassword)) {
             int changedPassword = newPassword.hashCode();
             userProfileDatabase.updateUserPassword(userName, changedPassword);
