@@ -59,8 +59,8 @@ public class OpenNewAccountAction extends Action {
         while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
             int key = 1;
             for (int i = 0; i < formActionCommandMap.size(); i++) {
-                IFormCommand formState = formActionCommandMap.get(key);
-                System.out.println(key + ". " + formState.getCommandLabel());
+                IFormCommand formCommand = formActionCommandMap.get(key);
+                userInterface.displayMessage(key + ". " + formCommand.getCommandLabel());
                 key = key + 1;
             }
             String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");

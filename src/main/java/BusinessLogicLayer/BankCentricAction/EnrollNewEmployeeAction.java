@@ -22,11 +22,20 @@ public class EnrollNewEmployeeAction extends Action {
         profileFormFactory = new ProfileFormFactory();
         bankEmployeeProfile = new BankEmployeeProfile();
 
-        getOpenNewAccountFormFieldMap();
+        generateOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
         formActionCommandMap.put(1, profileFormFactory.createEditProfileFormActionCommand(bankEmployeeProfile, openNewAccountFormFieldMap));
         formActionCommandMap.put(2, profileFormFactory.createSaveNewEmployeeProfileFormActionCommand(bankEmployeeProfile));
         formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand());
+    }
+
+    public EnrollNewEmployeeAction(Map<Integer, IFormCommand> openNewAccountFormFieldMap, Map<Integer, IFormCommand> formActionCommandMap) {
+        super();
+        profileFormFactory = new ProfileFormFactory();
+        bankEmployeeProfile = new BankEmployeeProfile();
+
+        this.openNewAccountFormFieldMap = openNewAccountFormFieldMap;
+        this.formActionCommandMap = formActionCommandMap;
     }
 
     @Override
@@ -51,23 +60,24 @@ public class EnrollNewEmployeeAction extends Action {
             formCommand.execute();
         }
 
+        if (0 < formActionCommandMap.size()) {
+            while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
+                int key = 1;
+                for (int i = 0; i < formActionCommandMap.size(); i++) {
+                    IFormCommand formCommand = formActionCommandMap.get(key);
+                    userInterface.displayMessage(key + ". " + formCommand.getCommandLabel());
+                    key = key + 1;
+                }
+                String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-        while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
-            int key = 1;
-            for (int i = 0; i < formActionCommandMap.size(); i++) {
-                IFormCommand formState = formActionCommandMap.get(key);
-                System.out.println(key + ". " + formState.getCommandLabel());
-                key = key + 1;
+                IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+                formCommand.execute();
+
             }
-            String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
-
-            IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
-            formCommand.execute();
-
         }
     }
 
-    private void getOpenNewAccountFormFieldMap() {
+    private void generateOpenNewAccountFormFieldMap() {
         openNewAccountFormFieldMap = new LinkedHashMap<>();
         openNewAccountFormFieldMap.put(1, profileFormFactory.createFirstNameFieldCommand(bankEmployeeProfile));
         openNewAccountFormFieldMap.put(2, profileFormFactory.createMiddleNameFieldCommand(bankEmployeeProfile));
@@ -82,5 +92,4 @@ public class EnrollNewEmployeeAction extends Action {
         openNewAccountFormFieldMap.put(11, profileFormFactory.createSsnNumberFieldCommand(bankEmployeeProfile));
         openNewAccountFormFieldMap.put(12, profileFormFactory.createDateOfBirthFieldCommand(bankEmployeeProfile));
     }
-
 }
