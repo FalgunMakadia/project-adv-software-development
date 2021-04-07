@@ -1,5 +1,6 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
+import BusinessLogicLayer.User.CustomerProfile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,7 @@ class ProfileFormFactoryTest {
 
     @Test
     void createSaveUpdatedPersonalDetailFormActionCommand() {
-        IFormCommand formCommand = profileFormFactory.createSaveUpdatedPersonalDetailFormActionCommand(null);
+        IFormCommand formCommand = profileFormFactory.createSaveUpdatedPersonalDetailFormActionCommand(new CustomerProfile());
         assertEquals("Save",formCommand.getCommandLabel());
     }
 
