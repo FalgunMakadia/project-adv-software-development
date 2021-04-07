@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
-public class SignInTest {
+public class SignInActionTest {
 
     @Test
     public void validateUserNameTest() {
