@@ -1,6 +1,7 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.BankEmployeeProfile;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
@@ -22,6 +23,11 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
         employeeProfileDatabase = profileDatabaseFactory.createEmployeeProfileDatabase();
     }
 
+    public SaveNewEmployeeProfileFormActionCommand(AbstractProfile profile, IEmployeeProfileDatabase userProfileDatabase) {
+        this.employeeProfileDatabase = userProfileDatabase;
+        this.profile = profile;
+    }
+
     @Override
     public void execute() {
         int affectedRows = createNewEmployee();
@@ -29,6 +35,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
             createNewUser();
             userInterface.displayMessage("The employee details are saved ");
         }
+        loggedInUserContext.clearCurrentPage();
     }
 
     private void createNewUser() {
@@ -40,19 +47,15 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
 
     }
 
-
     @Override
     public String getFieldValue() {
         return COMMAND_TYPE;
     }
 
-
     private int createNewEmployee() {
-        databaseFactory = new DatabaseFactory();
         int affectedRows = employeeProfileDatabase.addNewBankEmployeeProfile(profile);
         return affectedRows;
     }
-
 
     @Override
     public String getCommandLabel() {

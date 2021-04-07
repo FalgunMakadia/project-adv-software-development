@@ -2,6 +2,7 @@ package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,11 @@ public class DateOfBirthFieldCommand extends FormCommand {
 
     public DateOfBirthFieldCommand(AbstractProfile profile) {
         super(profile);
+    }
+
+    public DateOfBirthFieldCommand(AbstractProfile profile, IUserInterfacePage userInterfacePage) {
+        super(profile);
+        this.userInterface = userInterfacePage;
     }
 
     @Override

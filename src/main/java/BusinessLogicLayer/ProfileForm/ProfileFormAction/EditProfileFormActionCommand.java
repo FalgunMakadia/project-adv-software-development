@@ -3,20 +3,21 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.CustomerProfile;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
 import java.util.Map;
 
 public class EditProfileFormActionCommand extends FormCommand {
-    private static final String COMMAND_LABEL = "EDIT";
+    private static final String COMMAND_LABEL = "Edit";
     private static final String COMMAND_TYPE = "ACTION";
 
     AbstractProfile profile;
     Map<Integer, IFormCommand> formFieldMap;
 
     public EditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
-        super();
+        super(new CustomerProfile());
         this.profile = profile;
         this.formFieldMap = formFieldMap;
     }

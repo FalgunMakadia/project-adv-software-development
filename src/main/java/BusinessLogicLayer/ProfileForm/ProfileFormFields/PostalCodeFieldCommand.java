@@ -2,12 +2,18 @@ package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
 public class PostalCodeFieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Postal Code";
 
     public PostalCodeFieldCommand(AbstractProfile profile) {
         super(profile);
+    }
+
+    public PostalCodeFieldCommand(AbstractProfile profile, IUserInterfacePage userInterfacePage) {
+        super(profile);
+        this.userInterface = userInterfacePage;
     }
 
     @Override

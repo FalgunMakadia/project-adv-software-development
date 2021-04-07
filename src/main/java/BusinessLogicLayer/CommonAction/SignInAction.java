@@ -18,6 +18,10 @@ public class SignInAction implements ISignInAction {
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
     }
 
+    public SignInAction(IUserProfileDatabase userProfileDatabase) {
+        this.userProfileDatabase = userProfileDatabase;
+    }
+
     public void validateUser(String userName, String password) {
         int hashedPassword = password.hashCode();
         userProfileDatabase.validateUser(userName, hashedPassword);

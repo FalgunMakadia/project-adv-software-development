@@ -1,9 +1,6 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
-import BusinessLogicLayer.User.CustomerProfile;
-import BusinessLogicLayer.User.ILoggedInUserContext;
-import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.*;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
@@ -15,12 +12,13 @@ import PresentationLayer.PresentationFactory;
 public abstract class FormCommand implements IFormCommand {
     protected AbstractProfile profile;
     protected IUserInterfacePage userInterface;
-    protected IWorklistOperationDatabase worklistOperationDatabase;
+    protected IWorklistOperationDatabase workListOperationDatabase;
     protected DatabaseFactory databaseFactory;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;
     protected ICommonPagesFactory commonPagesFactory;
     protected IOperationDatabaseFactory operationDatabaseFactory;
+    protected IUserFactory userFactory;
 
     public FormCommand(AbstractProfile profile) {
         this.profile = profile;
@@ -28,7 +26,6 @@ public abstract class FormCommand implements IFormCommand {
     }
 
     public FormCommand() {
-        this.profile = new CustomerProfile();
         init();
     }
 
@@ -38,7 +35,7 @@ public abstract class FormCommand implements IFormCommand {
 
         this.databaseFactory = new DatabaseFactory();
         this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
-        this.worklistOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
+        this.workListOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
 
         this.userInterface = commonPagesFactory.createUserInterface();
         this.loggedInUserContext = LoggedInUserContext.instance();
