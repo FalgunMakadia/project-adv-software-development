@@ -33,7 +33,6 @@ class OpenNewAccountActionTest {
         openNewAccountAction.performAction();
 
         assertEquals("Open New Account", loggedInUserContext.getCurrentPage());
-
     }
 
 }

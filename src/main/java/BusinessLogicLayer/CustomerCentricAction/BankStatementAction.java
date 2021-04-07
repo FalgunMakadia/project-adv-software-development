@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class BankStatementAction extends Action {
     private static final String ACTION_TITLE = "Bank Statement";
+    private ArrayList<TransactionModel> transactionList;
 
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IAccountOperationDatabase accountOperationDatabase;
@@ -18,6 +19,10 @@ public class BankStatementAction extends Action {
     public BankStatementAction() {
         operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
+
+    public BankStatementAction(IAccountOperationDatabase operationDatabase) {
+        accountOperationDatabase = operationDatabase;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class BankStatementAction extends Action {
         setCurrentPageInContext();
         userInterface.displayMessage(ACTION_TITLE);
         String accountNumber = loggedInUserContext.getAccountNumber();
-        ArrayList<TransactionModel> transactionList = accountOperationDatabase.getMiniStatement(accountNumber);
+        transactionList = accountOperationDatabase.getMiniStatement(accountNumber);
         if (0 == transactionList.size()) {
             userInterface.displayMessage("No Transactions are available for this account");
         } else {
