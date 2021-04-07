@@ -72,7 +72,6 @@ public class EnrollNewEmployeeAction extends Action {
 
                 IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
                 formCommand.execute();
-
             }
         }
     }
