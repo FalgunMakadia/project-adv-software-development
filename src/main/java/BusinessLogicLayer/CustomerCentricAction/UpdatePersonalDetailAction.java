@@ -17,12 +17,18 @@ public class UpdatePersonalDetailAction extends Action {
 
     private Map<Integer, IFormCommand> formFields;
     private ICustomerProfileDatabase customerProfileDatabase;
+    private IUserFormPage userForm;
 
     public UpdatePersonalDetailAction() {
         formFields = new HashMap<>();
 
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         customerProfileDatabase = profileDatabaseFactory.createCustomerProfileDatabase();
+    }
+
+    public UpdatePersonalDetailAction(ICustomerProfileDatabase customerProfileDatabase) {
+        formFields = new HashMap<>();
+        this.customerProfileDatabase = customerProfileDatabase;
     }
 
     @Override
@@ -38,9 +44,13 @@ public class UpdatePersonalDetailAction extends Action {
         setCurrentPageInContext();
 
         AbstractProfile customerProfile = customerProfileDatabase.getCustomerProfile(currentUserAccountNumber);
-        IUserFormPage userForm = commonPagesFactory
-                .createUserForm(getFormFields(customerProfile), customerProfile, loggedInUserContext.getCurrentPage());
-        userForm.printForm();
+        if(null == customerProfile) {
+            userInterface.displayMessage("No user found!");
+        } else {
+            userForm = commonPagesFactory
+                    .createUserForm(getFormFields(customerProfile), customerProfile, loggedInUserContext.getCurrentPage());
+            userForm.printForm();
+        }
     }
 
     private Map<Integer, IFormCommand> getFormFields(AbstractProfile profile) {
