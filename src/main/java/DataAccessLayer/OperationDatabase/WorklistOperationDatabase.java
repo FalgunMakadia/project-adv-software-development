@@ -1,7 +1,7 @@
 package DataAccessLayer.OperationDatabase;
 
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.UserFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
@@ -36,8 +36,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
+    UserFactory userFactory;
     public WorklistOperationDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -164,7 +166,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     public AbstractProfile getWorkListUserDetail(int id) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
-        AbstractProfile profile = new CustomerProfile();
+        AbstractProfile profile = userFactory.createCustomerProfile();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);

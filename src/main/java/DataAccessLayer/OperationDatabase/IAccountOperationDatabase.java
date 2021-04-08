@@ -1,7 +1,6 @@
 package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.TransactionAction.ITransactionModel;
-import BusinessLogicLayer.TransactionAction.TransactionModel;
 
 import java.util.ArrayList;
 
