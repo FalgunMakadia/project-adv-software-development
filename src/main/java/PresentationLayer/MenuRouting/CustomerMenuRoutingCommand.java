@@ -3,16 +3,19 @@ package PresentationLayer.MenuRouting;
 import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.IActionFactory;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CustomerMenuRoutingCommand extends MenuRoutingCommand {
-    private Map<String, IAbstractAction> menu;
-    public CustomerMenuRoutingCommand(){
-        IActionFactory actionFactory = new ActionFactory();
 
+    private static final String PAGE_NAME = "Customer";
+
+    private Map<String, IAbstractAction> menu;
+
+    public CustomerMenuRoutingCommand() {
+        IActionFactory actionFactory = new ActionFactory();
         menu = new LinkedHashMap<>();
         menu.put("1", actionFactory.createUpdatePersonalDetails());
         menu.put("2", actionFactory.createWithdraw());
@@ -25,9 +28,10 @@ public class CustomerMenuRoutingCommand extends MenuRoutingCommand {
         menu.put("9", actionFactory.createCheckPreApprovedLoan());
         menu.put("10", actionFactory.createSignOut());
     }
+
     @Override
     public void execute() {
-        IPage menuPage = new MenuPage(menu, "CustomerProfile");
+        IAbstractPage menuPage = new MenuPage(menu, PAGE_NAME);
         menuPage.printPage();
     }
 }

@@ -1,6 +1,6 @@
 package DataAccessLayer.OperationDatabase;
 
-public class OperationDatabaseFactory implements IOperationDatabaseFactory{
+public class OperationDatabaseFactory implements IOperationDatabaseFactory {
     @Override
     public IAccountOperationDatabase createAccountOperationDatabase() {
         return new AccountOperationDatabase();

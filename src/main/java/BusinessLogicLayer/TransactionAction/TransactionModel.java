@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TransactionModel implements ITransactionModel{
+public class TransactionModel implements ITransactionModel {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     private String accountNumber;

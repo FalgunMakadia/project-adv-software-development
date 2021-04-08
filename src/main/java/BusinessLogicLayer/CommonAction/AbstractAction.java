@@ -23,6 +23,7 @@ public abstract class AbstractAction implements IAbstractAction {
     protected ICustomerCentricPagesFactory customerCentricPagesFactory;
     protected IDatabaseFactory databaseFactory;
     protected IUserFactory userFactory;
+
     public AbstractAction() {
         databaseFactory = new DatabaseFactory();
         presentationFactory = new PresentationFactory();

@@ -12,9 +12,9 @@ import java.sql.*;
 
 public class UserProfileDatabase implements IUserProfileDatabase {
     private static final String USERNAME_COLUMN_NAME = "userName";
-    private static final String USER_ROLE_COLUMN_NAME  = "userRole";
-    private static final String ACCOUNT_NUMBER_COLUMN_NAME  = "accountNumber";
-    private static final String ACTIVE_STATUS_COLUMN_NAME  = "ActiveStatus";
+    private static final String USER_ROLE_COLUMN_NAME = "userRole";
+    private static final String ACCOUNT_NUMBER_COLUMN_NAME = "accountNumber";
+    private static final String ACTIVE_STATUS_COLUMN_NAME = "ActiveStatus";
 
     private Connection connection;
     private PreparedStatement preparedStatement = null;

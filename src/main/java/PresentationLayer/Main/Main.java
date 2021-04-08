@@ -1,7 +1,5 @@
 package PresentationLayer.Main;
 
-
-import PresentationLayer.Pages.CommonPages.CommonPagesFactory;
 import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
 import PresentationLayer.Pages.CommonPages.ILoginPage;
 import PresentationLayer.IPresentationFactory;

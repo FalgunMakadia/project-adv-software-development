@@ -6,7 +6,7 @@ import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
 
-public class ProfileFormFactory implements IProfileFormFactory{
+public class ProfileFormFactory implements IProfileFormFactory {
     @Override
     public IFormCommand createBackToMainMenuProfileFormActionCommand() {
         return new BackToMainMenuProfileFormActionCommand();
@@ -94,6 +94,6 @@ public class ProfileFormFactory implements IProfileFormFactory{
 
     @Override
     public IFormCommand createSsnNumberFieldCommand(AbstractProfile profile) {
-        return new SsnNumberFieldCommand(profile) ;
+        return new SsnNumberFieldCommand(profile);
     }
 }

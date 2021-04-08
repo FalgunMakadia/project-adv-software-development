@@ -1,6 +1,6 @@
 package BusinessLogicLayer.User;
 
-public class UserFactory implements IUserFactory{
+public class UserFactory implements IUserFactory {
     @Override
     public AbstractProfile createCustomerProfile() {
         return new CustomerProfile();

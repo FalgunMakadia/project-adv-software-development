@@ -17,18 +17,12 @@ public class CommonPagesFactory implements ICommonPagesFactory {
     }
 
     @Override
-    public IUserFormPage createUserForm(Map<Integer,IFormCommand> formFields, AbstractProfile profile, String currentPage) {
+    public IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields, AbstractProfile profile, String currentPage) {
         return new UserFormPage(formFields, profile, currentPage);
-    }
-
-    @Override
-    public IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields) {
-        return new UserFormPage(formFields);
     }
 
     @Override
     public IUserInterfacePage createUserInterface() {
         return new UserInterfacePage();
     }
-
 }

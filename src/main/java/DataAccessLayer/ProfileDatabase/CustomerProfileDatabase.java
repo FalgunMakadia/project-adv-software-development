@@ -32,6 +32,8 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
 
     @Override
     public boolean addNewCustomerProfile(AbstractProfile profile) {
+
+        int affectedRows = 0;
         connection = databaseConnection.openConnection();
         String createCustomer = "INSERT INTO customers (first_name, last_name, middle_name, " +
                 "addressline_1, addressline_2, city, province, postal_code, email," +
@@ -56,29 +58,27 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             statement.setString(11, profile.getPassport());
             statement.setString(12, profile.getSsnNo());
             statement.setString(13, profile.getDateOfBirth());
-
             statement.executeUpdate();
-
             ResultSet resultSet = statement.getGeneratedKeys();
+
             if (null != resultSet && resultSet.next()) {
-                long accontNumber = resultSet.getLong(1);
-                if (0L != accontNumber) {
+                long accountNumber = resultSet.getLong(1);
+
+                if (0L < accountNumber) {
                     PreparedStatement createAccountStatement = connection.prepareStatement(createAccount);
-                    createAccountStatement.setLong(1,accontNumber);
+                    createAccountStatement.setLong(1, accountNumber);
                     createAccountStatement.setBoolean(2, true);
                     createAccountStatement.executeUpdate();
-
                     PreparedStatement activeUserCredentialsStatement = connection.prepareStatement(activateUserCredentials);
-                    activeUserCredentialsStatement.setLong(1, accontNumber);
+                    activeUserCredentialsStatement.setLong(1, accountNumber);
                     activeUserCredentialsStatement.setBoolean(2, true);
                     activeUserCredentialsStatement.setString(3, profile.getUserName());
 
-                    int affectedRows = activeUserCredentialsStatement.executeUpdate();
+                    affectedRows = activeUserCredentialsStatement.executeUpdate();
 
                     if (affectedRows == 1) {
                         return true;
                     }
-
                     return false;
                 }
             }
@@ -100,7 +100,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             statement.setString(1, accountNumber);
             AbstractProfile profile = new CustomerProfile();
             ResultSet resultSet = statement.executeQuery();
-            
+
             if (resultSet.first()) {
                 profile.setFirstName(resultSet.getString(FIRST_NAME_COLUMN_NAME));
                 profile.setLastName(resultSet.getString(LAST_NAME_COLUMN_NAME));
@@ -128,6 +128,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
 
     @Override
     public boolean updateCustomerProfile(String accountNumber, AbstractProfile profile) {
+        int affectedRows = 0;
         connection = databaseConnection.openConnection();
         String query = "UPDATE customers SET " +
                 "first_name = ?, last_name = ?, middle_name = ?, addressline_1 = ?," +
@@ -151,9 +152,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             statement.setString(12, profile.getSsnNo());
             statement.setString(13, profile.getDateOfBirth());
             statement.setString(14, accountNumber);
-
-            int affectedRows = statement.executeUpdate();
-
+            affectedRows = statement.executeUpdate();
             return affectedRows == 1 ? true : false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

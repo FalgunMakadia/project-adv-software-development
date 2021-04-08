@@ -1,29 +1,26 @@
 package PresentationLayer.Pages.CommonPages;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.Map;
 
 public class UserFormPage implements IUserFormPage {
+
+    private static final String EMPTY_STRING = "";
+
     private Map<Integer, IFormCommand> formFields;
     private AbstractProfile profile;
-    private IPage formPage;
+    private IAbstractPage formPage;
 
-    public UserFormPage(Map<Integer,IFormCommand> formFields) {
-        this.formFields = formFields;
-        this.profile = new CustomerProfile();
-    }
-
-    public UserFormPage(Map<Integer,IFormCommand> formFields, AbstractProfile profile) {
+    public UserFormPage(Map<Integer, IFormCommand> formFields, AbstractProfile profile) {
         this.profile = profile;
         this.formFields = formFields;
-        formPage = new FormPage(formFields, "");
+        formPage = new FormPage(formFields, EMPTY_STRING);
     }
 
-    public UserFormPage(Map<Integer,IFormCommand> formFields, AbstractProfile profile, String currentPage) {
+    public UserFormPage(Map<Integer, IFormCommand> formFields, AbstractProfile profile, String currentPage) {
         this.profile = profile;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);
@@ -41,5 +38,4 @@ public class UserFormPage implements IUserFormPage {
     public void printForm() {
         formPage.printPage();
     }
-
 }

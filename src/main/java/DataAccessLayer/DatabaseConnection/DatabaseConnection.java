@@ -10,10 +10,10 @@ import java.util.Properties;
 public class DatabaseConnection implements IDatabaseConnection {
     private static final String CONFIG_FILE_NAME = "config.properties";
     private static final String DRIVER_CLASS_NAME = "db.driverClassName";
-    private static final String DATABASE_URL  = "db.url";
-    private static final String DATABASE_USERNAME  = "db.username";
+    private static final String DATABASE_URL = "db.url";
+    private static final String DATABASE_USERNAME = "db.username";
     private static final String DATABASE_PASSWORD = "db.password";
-    private static final String DATABASE_OPTIONAL_PARAMETERS  = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DATABASE_OPTIONAL_PARAMETERS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     private static DatabaseConnection uniqueInstance;
     private static Connection connection;

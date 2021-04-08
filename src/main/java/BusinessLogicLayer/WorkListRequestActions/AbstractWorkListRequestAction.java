@@ -13,7 +13,7 @@ import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
 import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 import PresentationLayer.PresentationFactory;
 
 public abstract class AbstractWorkListRequestAction implements IWorkListRequestAction {
@@ -25,7 +25,7 @@ public abstract class AbstractWorkListRequestAction implements IWorkListRequestA
     protected ILoggedInUserContext loggedInUserContext;
     protected IWorklistOperationDatabase workListDatabase;
     protected ICustomerProfileDatabase customerDatabase;
-    protected IPage userDetailPage;
+    protected IAbstractPage userDetailPage;
     protected IDatabaseFactory databaseFactory;
     protected IPresentationFactory presentationFactory;
     protected IBankCentricPagesFactory bankCentricPagesFactory;
@@ -33,6 +33,7 @@ public abstract class AbstractWorkListRequestAction implements IWorkListRequestA
     protected IOperationDatabaseFactory operationDatabaseFactory;
     protected IProfileDatabaseFactory profileDatabaseFactory;
     protected IUserFactory userFactory;
+
     public AbstractWorkListRequestAction(IWorkListRequest workListRequest, int workListID) {
         this.workListRequest = workListRequest;
         this.workListID = workListID;

@@ -1,11 +1,10 @@
 package PresentationLayer.Pages.CustomerCentricPages;
 
 import BusinessLogicLayer.TransactionAction.ITransactionModel;
-import BusinessLogicLayer.TransactionAction.TransactionModel;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.ArrayList;
 
 public interface ICustomerCentricPagesFactory {
-    IPage createBankStatementTable(ArrayList<ITransactionModel> transactionList);
+    IAbstractPage createBankStatementTable(ArrayList<ITransactionModel> transactionList);
 }

@@ -10,7 +10,6 @@ public class WithdrawAction extends AbstractAction {
     private static final String ACTION_TITLE = "Withdraw";
     private static final String TRANSACTION_TYPE = "Dr";
     private static final String YES = "y";
-
     private int previousBalance;
     private int withdrawAmount;
     private int finalBalance;
@@ -75,6 +74,5 @@ public class WithdrawAction extends AbstractAction {
                 accountOperationDatabase.updateBalance(previousBalance, accountNumber);
             }
         }
-
     }
 }

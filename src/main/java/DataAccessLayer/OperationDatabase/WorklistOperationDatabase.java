@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WorklistOperationDatabase implements IWorklistOperationDatabase {
-    private static final String REQUEST_ID_COLUMN_NAME  = "request_id";
-    private static final String REQUEST_TYPE_COLUMN_NAME  = "request_type";
-    private static final String PRIORITY_COLUMN_NAME  = "priority";
-    private static final String WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME  = "account_number";
-    private static final String HANDLED_BY_COLUMN_NAME  = "handled_by";
+    private static final String REQUEST_ID_COLUMN_NAME = "request_id";
+    private static final String REQUEST_TYPE_COLUMN_NAME = "request_type";
+    private static final String PRIORITY_COLUMN_NAME = "priority";
+    private static final String WORKLIST_ACCOUNT_NUMBER_COLUMN_NAME = "account_number";
+    private static final String HANDLED_BY_COLUMN_NAME = "handled_by";
     private static final String FIRST_NAME_COLUMN_NAME = "first_name";
     private static final String LAST_NAME_COLUMN_NAME = "last_name";
     private static final String MIDDLE_NAME_COLUMN_NAME = "middle_name";
@@ -106,7 +106,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.first()) {
+            if (resultSet.first()) {
                 IWorkListRequestActionFactory workListActionFactory = new WorkListRequestActionFactory();
                 workListRequest = workListActionFactory.createWorkListRequest();
                 AbstractProfile profile = getWorkListUserDetail(id);
@@ -184,7 +184,6 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 profile.setSsnNo(resultSet.getString(SSN_NUMBER_COLUMN_NAME));
                 profile.setAccountNumber(resultSet.getString(ACCOUNT_NUMBER_COLUMN_NAME));
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
-
                 return profile;
             }
         } catch (SQLException throwables) {
@@ -222,7 +221,6 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setBoolean(1, isProcessed);
             statement.setInt(2, worklistId);
-
             return statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -12,7 +12,5 @@ public interface ICommonPagesFactory {
 
     IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields, AbstractProfile profile, String currentPage);
 
-    IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields);
-
     IUserInterfacePage createUserInterface();
 }

@@ -41,12 +41,11 @@ public class UserInterfacePage implements IUserInterfacePage {
     @Override
     public String getMandatoryIntegerUserInput(String message) {
         String input = "";
-        int choiceNumber = 0;
         while (input.length() < 1) {
             System.out.print(message);
             try {
                 input = scanner.nextLine();
-                choiceNumber = Integer.parseInt(input);
+                Integer.parseInt(input);
             } catch (Exception exception) {
                 input = "";
                 System.out.println("Incorrect Input Format.");
@@ -59,12 +58,11 @@ public class UserInterfacePage implements IUserInterfacePage {
     @Override
     public String getMandatoryLongUserInputWithMinimumRange(String message, long minimumRange) {
         String input = "";
-        long userNumber = 0;
         do {
             System.out.print(message + "("+minimumRange+" digits)");
             try {
                 input = scanner.nextLine();
-                userNumber = Long.parseLong(input);
+                Long.parseLong(input);
             } catch (Exception exception) {
                 input = "";
                 System.out.println("Incorrect Input Format.");
@@ -124,14 +122,4 @@ public class UserInterfacePage implements IUserInterfacePage {
         }
         return input;
     }
-
-    @Override
-    public void addDelay() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }

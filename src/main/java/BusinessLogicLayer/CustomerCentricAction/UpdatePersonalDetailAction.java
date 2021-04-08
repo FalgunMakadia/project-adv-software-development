@@ -44,7 +44,7 @@ public class UpdatePersonalDetailAction extends AbstractAction {
         setCurrentPageInContext();
 
         AbstractProfile customerProfile = customerProfileDatabase.getCustomerProfile(currentUserAccountNumber);
-        if(null == customerProfile) {
+        if (null == customerProfile) {
             userInterface.displayMessage("No user found!");
         } else {
             userForm = commonPagesFactory

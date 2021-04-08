@@ -3,10 +3,10 @@ package PresentationLayer.Pages;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 
-public abstract class Page implements IPage {
+public abstract class AbstractPage implements IAbstractPage {
     protected ILoggedInUserContext loggedInUserContext;
 
-    public Page() {
+    public AbstractPage() {
         loggedInUserContext = LoggedInUserContext.instance();
     }
 

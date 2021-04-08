@@ -29,12 +29,10 @@ public class EditProfileFormActionCommand extends AbstractFormCommand {
 
         IUserInterfacePage userInterface = commonPagesFactory.createUserInterface();
         for (int fieldIndex = 1; fieldIndex <= formFieldMap.size(); fieldIndex++) {
-           IFormCommand command = formFieldMap.get(fieldIndex);
+            IFormCommand command = formFieldMap.get(fieldIndex);
 
             userInterface.displayMessage(command.getCommandLabel() + ": " + command.getFieldValue());
-
         }
-
     }
 
     @Override
