@@ -1,11 +1,10 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
-import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -21,7 +20,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
+        IAbstractFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
         formCommand.execute();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
 
@@ -37,7 +36,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
+        IAbstractFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
         assertEquals("ACTION",formCommand.getFieldValue());
     }
 
@@ -49,7 +48,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
+        IAbstractFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
         assertEquals("ACTION",formCommand.getFieldValue());
 
     }

@@ -1,6 +1,6 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
 import BusinessLogicLayer.CommonAction.AbstractAction;
@@ -13,8 +13,8 @@ import java.util.Map;
 public class OpenNewAccountAction extends AbstractAction {
     private static final String ACTION_TITLE = "Open New Account";
 
-    private Map<Integer, IFormCommand> formActionCommandMap;
-    private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
+    private Map<Integer, IAbstractFormCommand> formActionCommandMap;
+    private Map<Integer, IAbstractFormCommand> openNewAccountFormFieldMap;
     private AbstractProfile customer;
     private IProfileFormFactory profileFormFactory;
 
@@ -35,7 +35,7 @@ public class OpenNewAccountAction extends AbstractAction {
         formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand());
     }
 
-    public OpenNewAccountAction(Map<Integer, IFormCommand> openNewAccountFormFieldMap, Map<Integer, IFormCommand> formActionCommandMap) {
+    public OpenNewAccountAction(Map<Integer, IAbstractFormCommand> openNewAccountFormFieldMap, Map<Integer, IAbstractFormCommand> formActionCommandMap) {
         this.openNewAccountFormFieldMap = openNewAccountFormFieldMap;
         this.formActionCommandMap = formActionCommandMap;
     }
@@ -52,10 +52,10 @@ public class OpenNewAccountAction extends AbstractAction {
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
 
-        Iterator<Map.Entry<Integer, IFormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
+        Iterator<Map.Entry<Integer, IAbstractFormCommand>> iterator = openNewAccountFormFieldMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<Integer, IFormCommand> formQuestionEntry = iterator.next();
-            IFormCommand formCommand = formQuestionEntry.getValue();
+            Map.Entry<Integer, IAbstractFormCommand> formQuestionEntry = iterator.next();
+            IAbstractFormCommand formCommand = formQuestionEntry.getValue();
             formCommand.execute();
         }
 
@@ -63,13 +63,13 @@ public class OpenNewAccountAction extends AbstractAction {
             while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
                 int key = 1;
                 for (int i = 0; i < formActionCommandMap.size(); i++) {
-                    IFormCommand formCommand = formActionCommandMap.get(key);
+                    IAbstractFormCommand formCommand = formActionCommandMap.get(key);
                     userInterface.displayMessage(key + ". " + formCommand.getCommandLabel());
                     key = key + 1;
                 }
                 String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-                IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+                IAbstractFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
                 formCommand.execute();
             }
         }

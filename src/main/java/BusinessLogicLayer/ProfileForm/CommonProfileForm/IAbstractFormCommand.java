@@ -1,6 +1,6 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
-public interface IFormCommand {
+public interface IAbstractFormCommand {
     void execute();
 
     String getFieldValue();

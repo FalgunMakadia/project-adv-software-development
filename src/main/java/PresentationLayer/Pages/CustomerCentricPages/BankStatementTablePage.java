@@ -1,7 +1,6 @@
 package PresentationLayer.Pages.CustomerCentricPages;
 
 import BusinessLogicLayer.TransactionAction.ITransactionModel;
-import BusinessLogicLayer.TransactionAction.TransactionModel;
 import PresentationLayer.Pages.Page;
 
 import java.util.ArrayList;

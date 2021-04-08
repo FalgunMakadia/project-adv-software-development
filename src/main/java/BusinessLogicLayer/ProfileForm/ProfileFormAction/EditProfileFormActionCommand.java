@@ -1,7 +1,7 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.CustomerProfile;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
@@ -14,9 +14,9 @@ public class EditProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_TYPE = "ACTION";
 
     AbstractProfile profile;
-    Map<Integer, IFormCommand> formFieldMap;
+    Map<Integer, IAbstractFormCommand> formFieldMap;
 
-    public EditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap) {
+    public EditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IAbstractFormCommand> formFieldMap) {
         super(new CustomerProfile());
         this.profile = profile;
         this.formFieldMap = formFieldMap;
@@ -29,7 +29,7 @@ public class EditProfileFormActionCommand extends AbstractFormCommand {
 
         IUserInterfacePage userInterface = commonPagesFactory.createUserInterface();
         for (int fieldIndex = 1; fieldIndex <= formFieldMap.size(); fieldIndex++) {
-           IFormCommand command = formFieldMap.get(fieldIndex);
+           IAbstractFormCommand command = formFieldMap.get(fieldIndex);
 
             userInterface.displayMessage(command.getCommandLabel() + ": " + command.getFieldValue());
 
