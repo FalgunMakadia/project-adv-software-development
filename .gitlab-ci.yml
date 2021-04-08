@@ -76,7 +76,7 @@ DevelopDeploy:
     - echo "Start Connecting"
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
-    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEV_DEPLOY_DIR}"
+    - scp -r -o StrictHostKeyChecking=no "target/BankApp-jar-with-dependencies.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${DEV_DEPLOY_DIR}"
 
 ProductionDeploy:
   stage: deploy
@@ -92,7 +92,7 @@ ProductionDeploy:
     - echo "Start Connecting"
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
-    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${MASTER_DEPLOY_DIR}"
+    - scp -r -o StrictHostKeyChecking=no "target/BankApp-jar-with-dependencies.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${MASTER_DEPLOY_DIR}"
 
 TestDeploy:
   stage: deploy
@@ -108,4 +108,4 @@ TestDeploy:
     - echo "Start Connecting"
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
-    - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${RELEASE_DEPLOY_DIR}"
+    - scp -r -o StrictHostKeyChecking=no "target/BankApp-jar-with-dependencies.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${RELEASE_DEPLOY_DIR}"
