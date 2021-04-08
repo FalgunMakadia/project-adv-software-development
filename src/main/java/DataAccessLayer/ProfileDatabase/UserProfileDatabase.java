@@ -50,9 +50,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             }
 
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -73,9 +73,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             affectedRow = preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -94,9 +94,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
