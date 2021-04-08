@@ -19,8 +19,8 @@ public class BankEmployeeMenuRoutingCommand extends MenuRoutingCommand {
         menu.put("2", actionFactory.createExistingBankAccount());
         menu.put("3", actionFactory.createWorkList());
         menu.put("4", actionFactory.createSignOut());
-
     }
+
     @Override
     public void execute() {
         IPage menuPage = new MenuPage(menu, pageName);
