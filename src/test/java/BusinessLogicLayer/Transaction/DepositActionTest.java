@@ -12,12 +12,10 @@ import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.TransactionAction.DepositAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
+
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.sql.SQLException;
 
 public class DepositActionTest {
     private DepositAction depositAction;
@@ -27,22 +25,20 @@ public class DepositActionTest {
         depositAction = Mockito.mock(DepositAction.class);
     }
 
-
-
     @Test
     void getActionTitleTest() {
         DepositAction depositActionTest = new DepositAction();
-        assertEquals("Deposit",depositActionTest.getActionTitle());
+        assertEquals("Deposit", depositActionTest.getActionTitle());
     }
 
     @Test
     void getActionTitleFailTest() {
         DepositAction depositActionTest = new DepositAction();
-        assertNotEquals("Withdraw",depositActionTest.getActionTitle());
+        assertNotEquals("Withdraw", depositActionTest.getActionTitle());
     }
 
     @Test
-    void performActionTest(){
+    void performActionTest() {
         IAbstractAction depositAction = Mockito.mock(DepositAction.class);
         Mockito.doNothing().when(depositAction).performAction();
         depositAction.performAction();
@@ -103,10 +99,7 @@ public class DepositActionTest {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("9800001003");
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
-        Mockito.when(accountOperationDatabase.updateBalance(finalBalance,loggedInUserContext.getAccountNumber())).thenReturn(finalBalance);
-        assertEquals(finalBalance, accountOperationDatabase.updateBalance(finalBalance,loggedInUserContext.getAccountNumber()));
+        Mockito.when(accountOperationDatabase.updateBalance(finalBalance, loggedInUserContext.getAccountNumber())).thenReturn(finalBalance);
+        assertEquals(finalBalance, accountOperationDatabase.updateBalance(finalBalance, loggedInUserContext.getAccountNumber()));
     }
-
-
 }
-
