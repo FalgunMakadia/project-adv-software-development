@@ -20,7 +20,6 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     private static final String TRANSACTION_AMOUNT_COLUMN_NAME = "transaction_amount";
     private static final String TRANSACTION_DATE_COLUMN_NAME = "transaction_date";
 
-
     Connection connection = null;
     IDatabaseConnection databaseConnection;
     ITransactionActionFactory transactionActionFactory;
@@ -64,7 +63,6 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
-
             statement.setInt(1, finalBalance);
             statement.setString(2, accountNumber);
             int output = statement.executeUpdate();
@@ -118,7 +116,6 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 statement.setString(3, transaction.getTransactionType());
                 statement.setInt(4, transaction.getAmount());
                 statement.setString(5, transaction.getCurrentDate());
-
                 statement.executeUpdate();
             }
         } catch (SQLException exception) {
@@ -156,5 +153,4 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
         }
         return transactionList;
     }
-
 }

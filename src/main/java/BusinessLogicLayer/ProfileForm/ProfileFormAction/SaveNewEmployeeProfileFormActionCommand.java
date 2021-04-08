@@ -42,7 +42,6 @@ public class SaveNewEmployeeProfileFormActionCommand extends AbstractFormCommand
 
         IUserProfileDatabase userDatabase = null;
         userProfileDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
-
     }
 
     @Override

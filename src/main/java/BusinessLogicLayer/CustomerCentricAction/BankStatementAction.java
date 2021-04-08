@@ -4,7 +4,7 @@ import BusinessLogicLayer.CommonAction.AbstractAction;
 import BusinessLogicLayer.TransactionAction.ITransactionModel;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class BankStatementAction extends AbstractAction {
 
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IAccountOperationDatabase accountOperationDatabase;
-    private IPage bankStatementTable;
+    private IAbstractPage bankStatementTable;
 
     public BankStatementAction() {
         operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();

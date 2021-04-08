@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DateOfBirthFieldCommandTest {
     AbstractFormCommand formCommand;
+
     @BeforeEach
     void executeTest() {
         IUserInterfacePage userInterface = Mockito.mock(IUserInterfacePage.class);
@@ -21,12 +22,12 @@ class DateOfBirthFieldCommandTest {
 
     @Test
     void getFieldValueTest() {
-        assertEquals("1311-12-12",formCommand.getFieldValue());
+        assertEquals("1311-12-12", formCommand.getFieldValue());
     }
 
     @Test
     void getCommandLabelTest() {
-        assertEquals("Date Of Birth",formCommand.getCommandLabel());
+        assertEquals("Date Of Birth", formCommand.getCommandLabel());
     }
 
 }

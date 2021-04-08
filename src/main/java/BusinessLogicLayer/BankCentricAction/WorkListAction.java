@@ -1,10 +1,13 @@
 package BusinessLogicLayer.BankCentricAction;
 
 import BusinessLogicLayer.CommonAction.AbstractAction;
-import BusinessLogicLayer.WorkListRequestActions.*;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestAction;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +21,7 @@ public class WorkListAction extends AbstractAction {
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IWorklistOperationDatabase workListOperationDatabase;
     private Map<Integer, IWorkListRequest> workListRequestMap;
-    private IPage workListPage;
+    private IAbstractPage workListPage;
     private Map<String, IWorkListRequestAction> workListActionMap;
 
     public WorkListAction() {

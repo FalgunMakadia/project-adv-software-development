@@ -2,12 +2,12 @@ package PresentationLayer.Pages.BankCentricPages;
 
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.Map;
 
 public interface IBankCentricPagesFactory {
-    IPage createUserDetailPage(AbstractProfile profile);
+    IAbstractPage createUserDetailPage(AbstractProfile profile);
 
-    IPage createWorkListTable(Map<Integer, IWorkListRequest> workListRequestMap);
+    IAbstractPage createWorkListTable(Map<Integer, IWorkListRequest> workListRequestMap);
 }

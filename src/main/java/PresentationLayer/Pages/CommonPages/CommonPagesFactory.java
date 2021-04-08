@@ -22,13 +22,7 @@ public class CommonPagesFactory implements ICommonPagesFactory {
     }
 
     @Override
-    public IUserFormPage createUserForm(Map<Integer, IAbstractFormCommand> formFields) {
-        return new UserFormPage(formFields);
-    }
-
-    @Override
     public IUserInterfacePage createUserInterface() {
         return new UserInterfacePage();
     }
-
 }

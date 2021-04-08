@@ -4,7 +4,6 @@ import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkListActionTest {
@@ -28,6 +27,5 @@ class WorkListActionTest {
         IAbstractAction workListAction = new WorkListAction();
         LoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         assertEquals("WorkList", loggedInUserContext.getCurrentPage());
-
     }
 }

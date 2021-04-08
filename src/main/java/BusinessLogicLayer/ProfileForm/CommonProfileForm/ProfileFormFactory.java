@@ -6,7 +6,7 @@ import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
 
-public class ProfileFormFactory implements IProfileFormFactory{
+public class ProfileFormFactory implements IProfileFormFactory {
     @Override
     public IAbstractFormCommand createBackToMainMenuProfileFormActionCommand() {
         return new BackToMainMenuProfileFormActionCommand();

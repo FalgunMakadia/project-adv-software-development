@@ -3,13 +3,11 @@ package BusinessLogicLayer.CommonAction;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 import DataAccessLayer.ProfileDatabase.UserProfileDatabase;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
 
 public class SignInActionTest {
 
@@ -156,6 +154,4 @@ public class SignInActionTest {
 
         assertEquals("111", loggedInUserContext.getAccountNumber());
     }
-
-
 }

@@ -33,5 +33,4 @@ class EnrollNewEmployeeActionTest {
 
         assertEquals("Enroll New Employee", loggedInUserContext.getCurrentPage());
     }
-
 }
