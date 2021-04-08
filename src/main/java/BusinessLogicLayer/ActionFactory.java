@@ -3,22 +3,26 @@ package BusinessLogicLayer;
 import BusinessLogicLayer.BankCentricAction.*;
 import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.CustomerCentricAction.*;
-import BusinessLogicLayer.TransactionAction.DepositAction;
-import BusinessLogicLayer.TransactionAction.TransferAction;
-import BusinessLogicLayer.TransactionAction.WithdrawAction;
-import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.TransactionAction.ITransactionActionFactory;
+import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.IUserFactory;
+import BusinessLogicLayer.User.UserFactory;
 
 public class ActionFactory implements IActionFactory {
 
     IBankCentricActionFactory bankCentricActionFactory;
     ICustomerCentricActionFactory customerCentricActionFactory;
     ICommonActionFactory commonActionFactory;
+    ITransactionActionFactory transactionActionFactory;
+    IUserFactory userFactory;
 
     public ActionFactory() {
         bankCentricActionFactory = new BankCentricActionFactory();
         customerCentricActionFactory = new CustomerCentricActionFactory();
         commonActionFactory = new CommonActionFactory();
+        transactionActionFactory = new TransactionActionFactory();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -53,17 +57,17 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAbstractAction createWithdraw() {
-        return new WithdrawAction();
+        return transactionActionFactory.createWithdrawAction();
     }
 
     @Override
     public IAbstractAction createDeposit() {
-        return new DepositAction();
+        return transactionActionFactory.createDepositAction();
     }
 
     @Override
     public IAbstractAction createTransfer() {
-        return new TransferAction();
+        return transactionActionFactory.createTransferAction();
     }
 
     @Override
@@ -96,8 +100,5 @@ public class ActionFactory implements IActionFactory {
         return commonActionFactory.createSignInAction();
     }
 
-    @Override
-    public AbstractProfile createCustomer() {
-        return new CustomerProfile();
-    }
+
 }

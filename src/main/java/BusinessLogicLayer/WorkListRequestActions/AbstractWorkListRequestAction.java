@@ -1,7 +1,8 @@
 package BusinessLogicLayer.WorkListRequestActions;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
-import BusinessLogicLayer.User.LoggedInUserContext;
+import BusinessLogicLayer.User.IUserFactory;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
@@ -31,16 +32,17 @@ public abstract class AbstractWorkListRequestAction implements IWorkListRequestA
     protected ICommonPagesFactory commonPagesFactory;
     protected IOperationDatabaseFactory operationDatabaseFactory;
     protected IProfileDatabaseFactory profileDatabaseFactory;
-
+    protected IUserFactory userFactory;
     public AbstractWorkListRequestAction(IWorkListRequest workListRequest, int workListID) {
         this.workListRequest = workListRequest;
         this.workListID = workListID;
-        this.loggedInUserContext = LoggedInUserContext.instance();
 
+        userFactory = new UserFactory();
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
         this.userInterface = commonPagesFactory.createUserInterface();
         this.bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
+        this.loggedInUserContext = userFactory.getLoggedInUserContext();
 
         this.databaseFactory = new DatabaseFactory();
         this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();

@@ -21,6 +21,5 @@ public interface IActionFactory {
     IAbstractAction createCheckPreApprovedLoan();
     ISignInAction createLogin();
 
-    AbstractProfile createCustomer();
 
 }

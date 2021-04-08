@@ -2,7 +2,6 @@ package BusinessLogicLayer.CommonAction;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.IUserFactory;
-import BusinessLogicLayer.User.LoggedInUserContext;
 import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
@@ -29,11 +28,11 @@ public abstract class AbstractAction implements IAbstractAction {
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
         userInterface = commonPagesFactory.createUserInterface();
-        loggedInUserContext = LoggedInUserContext.instance();
         menuRoutingFactory = presentationFactory.createMenuRoutingFactory();
         bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
         customerCentricPagesFactory = presentationFactory.createCustomerCentricPagesFactory();
         userFactory = new UserFactory();
+        loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 
     protected int convertStringToInteger(String input) {

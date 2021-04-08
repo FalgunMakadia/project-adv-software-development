@@ -1,6 +1,6 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
@@ -8,7 +8,7 @@ import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveNewAccountProfileFormActionCommand extends FormCommand {
+public class SaveNewAccountProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Save";
     private static final String COMMAND_TYPE = "ACTION";
     private static final String PRIORITY = "medium";

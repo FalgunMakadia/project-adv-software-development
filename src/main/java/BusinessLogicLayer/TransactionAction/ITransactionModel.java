@@ -1,7 +1,5 @@
 package BusinessLogicLayer.TransactionAction;
 
-import java.security.SecureRandom;
-
 public interface ITransactionModel {
 
     public String getAccountNumber();

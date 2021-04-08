@@ -10,4 +10,9 @@ public class UserFactory implements IUserFactory{
     public AbstractProfile createBankEmployeeProfile() {
         return new BankEmployeeProfile();
     }
+
+    @Override
+    public ILoggedInUserContext getLoggedInUserContext() {
+        return LoggedInUserContext.instance();
+    }
 }

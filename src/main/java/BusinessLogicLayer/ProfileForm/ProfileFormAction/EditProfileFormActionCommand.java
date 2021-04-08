@@ -1,6 +1,6 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.CustomerProfile;
@@ -9,7 +9,7 @@ import PresentationLayer.Pages.CommonPages.IUserFormPage;
 
 import java.util.Map;
 
-public class EditProfileFormActionCommand extends FormCommand {
+public class EditProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Edit";
     private static final String COMMAND_TYPE = "ACTION";
 
