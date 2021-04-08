@@ -20,6 +20,4 @@ public interface IActionFactory {
     IAbstractAction createLoanEstimator();
     IAbstractAction createCheckPreApprovedLoan();
     ISignInAction createLogin();
-
-
 }
