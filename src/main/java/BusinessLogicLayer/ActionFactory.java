@@ -53,17 +53,17 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAbstractAction createWithdraw() {
-        return new WithdrawAction();
+        return transactionActionFactory.createWithdrawAction();
     }
 
     @Override
     public IAbstractAction createDeposit() {
-        return new DepositAction();
+        return transactionActionFactory.createDepositAction();
     }
 
     @Override
     public IAbstractAction createTransfer() {
-        return new TransferAction();
+        return transactionActionFactory.createTransferAction();
     }
 
     @Override
