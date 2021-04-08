@@ -14,9 +14,6 @@ build:
   script:
     - mvn clean compile
     - mvn package
-  except:
-    - release
-    - master
   artifacts:
     when: on_success
     paths:
