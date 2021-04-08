@@ -10,6 +10,7 @@ public class BackToMainMenuProfileFormActionCommand extends AbstractFormCommand 
     ILoggedInUserContext loggedInUserContext;
 
     public BackToMainMenuProfileFormActionCommand() {
+        super();
         loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 

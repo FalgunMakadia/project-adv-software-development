@@ -32,7 +32,7 @@ public abstract class AbstractFormCommand implements IFormCommand {
     private void init() {
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
-
+        userFactory = new UserFactory();
         this.databaseFactory = new DatabaseFactory();
         this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         this.workListOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
