@@ -1,6 +1,8 @@
 package DataAccessLayer.OperationDatabase;
 
-import BusinessLogicLayer.TransactionAction.TransactionModel;
+import BusinessLogicLayer.TransactionAction.ITransactionActionFactory;
+import BusinessLogicLayer.TransactionAction.ITransactionModel;
+import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -8,9 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.security.SecureRandom;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AccountOperationDatabase implements IAccountOperationDatabase {
@@ -19,13 +18,14 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     private static final String TRANSACTION_TYPE_COLUMN_NAME = "transaction_type";
     private static final String TRANSACTION_AMOUNT_COLUMN_NAME = "transaction_amount";
     private static final String TRANSACTION_DATE_COLUMN_NAME = "transaction_date";
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
 
     Connection connection = null;
     IDatabaseConnection databaseConnection;
-
+    ITransactionActionFactory transactionActionFactory;
     public AccountOperationDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        transactionActionFactory =  new TransactionActionFactory();
     }
 
     @Override
@@ -95,24 +95,19 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     }
 
     @Override
-    public void saveTransaction(ArrayList<TransactionModel> saveTransactionInModel){
+    public void saveTransaction(ArrayList<ITransactionModel> saveTransactionInModel){
         connection = databaseConnection.openConnection();
-        String transactionId;
-        String date;
-
-        date = getCurrentDate();
 
         String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
-            for (TransactionModel transaction : saveTransactionInModel) {
-                transactionId = generateRandomTransactionId();
-                statement.setString(1, transactionId);
+            for (ITransactionModel transaction : saveTransactionInModel) {
+                statement.setString(1, transaction.generateRandomTransactionId());
                 statement.setString(2, transaction.getAccountNumber());
                 statement.setString(3, transaction.getTransactionType());
                 statement.setInt(4, transaction.getAmount());
-                statement.setString(5, date);
+                statement.setString(5, transaction.getCurrentDate());
 
                 statement.executeUpdate();
             }
@@ -124,10 +119,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     }
 
     @Override
-    public ArrayList<TransactionModel> getMiniStatement(String accountNumber) {
+    public ArrayList<ITransactionModel> getMiniStatement(String accountNumber) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * FROM transactions WHERE account_no = ? ORDER BY transaction_date DESC LIMIT 5";
-        ArrayList<TransactionModel> transactionList = new ArrayList<>();
+        ArrayList<ITransactionModel> transactionList = new ArrayList<>();
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
@@ -138,7 +133,7 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 String transactionType = resultSet.getString(TRANSACTION_TYPE_COLUMN_NAME);
                 int amount = resultSet.getInt(TRANSACTION_AMOUNT_COLUMN_NAME);
                 String date = resultSet.getString(TRANSACTION_DATE_COLUMN_NAME);
-                transactionList.add(new TransactionModel(accountNumber, transactionType, amount, date));
+                transactionList.add(transactionActionFactory.createTransactionModel(accountNumber, transactionType, amount, date));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -148,25 +143,4 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
         return transactionList;
     }
 
-    private String generateRandomTransactionId() {
-        final String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
-        final int GENERATED_STRING_LENGTH = 10;
-
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(GENERATED_STRING_LENGTH);
-        for (int i = 0; i < GENERATED_STRING_LENGTH; i++) {
-            sb.append(STR.charAt(random.nextInt(STR.length())));
-        }
-        return sb.toString();
-    }
-
-    private String getCurrentDate() {
-        String date;
-
-        DateTimeFormatter x = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        LocalDateTime now = LocalDateTime.now();
-        date = x.format(now);
-
-        return date;
-    }
 }

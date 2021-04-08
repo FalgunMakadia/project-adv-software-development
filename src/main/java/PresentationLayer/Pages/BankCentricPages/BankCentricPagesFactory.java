@@ -1,7 +1,7 @@
 package PresentationLayer.Pages.BankCentricPages;
 
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
 import PresentationLayer.Pages.IPage;
 
 import java.util.Map;

@@ -3,24 +3,24 @@ package BusinessLogicLayer.BankCentricAction;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.User.BankEmployeeProfile;
+import BusinessLogicLayer.CommonAction.AbstractAction;
+import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class EnrollNewEmployeeAction extends Action {
+public class EnrollNewEmployeeAction extends AbstractAction {
     private static final String ACTION_TITLE = "Enroll New Employee";
 
     private Map<Integer, IFormCommand> formActionCommandMap;
     private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
-    private BankEmployeeProfile bankEmployeeProfile;
+    private AbstractProfile bankEmployeeProfile;
     private IProfileFormFactory profileFormFactory;
 
     public EnrollNewEmployeeAction() {
         super();
         profileFormFactory = new ProfileFormFactory();
-        bankEmployeeProfile = new BankEmployeeProfile();
+        bankEmployeeProfile = userFactory.createBankEmployeeProfile();
 
         generateOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
@@ -32,7 +32,7 @@ public class EnrollNewEmployeeAction extends Action {
     public EnrollNewEmployeeAction(Map<Integer, IFormCommand> openNewAccountFormFieldMap, Map<Integer, IFormCommand> formActionCommandMap) {
         super();
         profileFormFactory = new ProfileFormFactory();
-        bankEmployeeProfile = new BankEmployeeProfile();
+        bankEmployeeProfile = userFactory.createBankEmployeeProfile();
 
         this.openNewAccountFormFieldMap = openNewAccountFormFieldMap;
         this.formActionCommandMap = formActionCommandMap;

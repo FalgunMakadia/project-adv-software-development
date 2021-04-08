@@ -1,13 +1,13 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public interface IBankCentricActionFactory {
-    IAction createEnrollNewEmployeeAction();
+    IAbstractAction createEnrollNewEmployeeAction();
 
-    IAction createExistingBankAccountAction();
+    IAbstractAction createExistingBankAccountAction();
 
-    IAction createOpenNewAccountAction();
+    IAbstractAction createOpenNewAccountAction();
 
-    IAction createWorkListAction();
+    IAbstractAction createWorkListAction();
 }

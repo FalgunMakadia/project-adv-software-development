@@ -1,12 +1,12 @@
 package BusinessLogicLayer.TransactionAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
-public class WithdrawAction extends Action {
+public class WithdrawAction extends AbstractAction {
     private static final String ACTION_TITLE = "Withdraw";
     private static final String TRANSACTION_TYPE = "Dr";
     private static final String YES = "y";
@@ -41,7 +41,7 @@ public class WithdrawAction extends Action {
 
         userInterface.displayMessage(ACTION_TITLE);
 
-        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
+        ArrayList<ITransactionModel> saveTransactionInModel = new ArrayList<>();
         previousBalance = accountOperationDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);
         withdrawAmount = Integer.parseInt(userInterface.getUserInputInMultipleOfTen("Please enter Withdraw amount (only in multiple of 10): "));

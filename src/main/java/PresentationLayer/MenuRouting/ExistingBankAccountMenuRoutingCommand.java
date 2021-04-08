@@ -1,7 +1,7 @@
 package PresentationLayer.MenuRouting;
 
 import BusinessLogicLayer.ActionFactory;
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.IActionFactory;
 import PresentationLayer.Pages.IPage;
 
@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ExistingBankAccountMenuRoutingCommand extends MenuRoutingCommand {
-    private Map<String, IAction> menu;
+    private Map<String, IAbstractAction> menu;
 
     public ExistingBankAccountMenuRoutingCommand() {
         IActionFactory actionFactory = new ActionFactory();

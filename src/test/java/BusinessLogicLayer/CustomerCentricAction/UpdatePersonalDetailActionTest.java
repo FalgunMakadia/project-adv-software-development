@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
@@ -15,7 +15,7 @@ class UpdatePersonalDetailActionTest {
 
     @Test
     void performAction() {
-        IAction updatePersonalDetailAction = Mockito.mock(UpdatePersonalDetailAction.class);
+        IAbstractAction updatePersonalDetailAction = Mockito.mock(UpdatePersonalDetailAction.class);
         Mockito.doNothing().when(updatePersonalDetailAction).performAction();
         updatePersonalDetailAction.performAction();
         Mockito.verify(updatePersonalDetailAction, Mockito.times(1)).performAction();
@@ -23,7 +23,7 @@ class UpdatePersonalDetailActionTest {
 
     @Test
     void getActionTitleTest() {
-        IAction updatePersonalDetailAction = new UpdatePersonalDetailAction();
+        IAbstractAction updatePersonalDetailAction = new UpdatePersonalDetailAction();
         assertEquals("Update Personal Details", updatePersonalDetailAction.getActionTitle());
     }
 
@@ -41,7 +41,7 @@ class UpdatePersonalDetailActionTest {
             }
         }).when(customerProfileDatabase).getCustomerProfile(Mockito.anyString());
 
-        IAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
+        IAbstractAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
 
         updatePersonalDetailAction.performAction();
 
@@ -59,7 +59,7 @@ class UpdatePersonalDetailActionTest {
             return null;
         }).when(customerProfileDatabase).getCustomerProfile(Mockito.anyString());
 
-        IAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
+        IAbstractAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
 
         updatePersonalDetailAction.performAction();
     }

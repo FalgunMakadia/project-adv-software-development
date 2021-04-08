@@ -1,11 +1,13 @@
 package BusinessLogicLayer.TransactionAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public interface ITransactionActionFactory {
-    IAction createDepositAction();
+    IAbstractAction createDepositAction();
 
-    IAction createTransferAction();
+    IAbstractAction createTransferAction();
 
-    IAction createWithdrawAction();
+    IAbstractAction createWithdrawAction();
+
+    TransactionModel createTransactionModel(String accountNumber, String transactionType, int amount, String date);
 }

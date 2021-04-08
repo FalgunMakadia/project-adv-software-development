@@ -79,7 +79,7 @@ public class UserInterfacePage implements IUserInterfacePage {
         String input = "";
         long userNumber = 0;
         do {
-            System.out.print(message + "("+minimumValue+" amount)");
+            System.out.print(message + "( minimum "+minimumValue+"):");
             try {
                 input = scanner.nextLine();
                 userNumber = Long.parseLong(input);

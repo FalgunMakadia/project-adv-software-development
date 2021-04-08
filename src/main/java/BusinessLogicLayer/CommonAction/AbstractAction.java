@@ -1,7 +1,9 @@
 package BusinessLogicLayer.CommonAction;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
+import BusinessLogicLayer.User.IUserFactory;
 import BusinessLogicLayer.User.LoggedInUserContext;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import PresentationLayer.IPresentationFactory;
@@ -12,7 +14,7 @@ import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 import PresentationLayer.PresentationFactory;
 
-public abstract class Action implements IAction{
+public abstract class AbstractAction implements IAbstractAction {
     protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
     protected IPresentationFactory presentationFactory;
@@ -21,8 +23,8 @@ public abstract class Action implements IAction{
     protected ICommonPagesFactory commonPagesFactory;
     protected ICustomerCentricPagesFactory customerCentricPagesFactory;
     protected IDatabaseFactory databaseFactory;
-
-    public Action() {
+    protected IUserFactory userFactory;
+    public AbstractAction() {
         databaseFactory = new DatabaseFactory();
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
@@ -31,6 +33,7 @@ public abstract class Action implements IAction{
         menuRoutingFactory = presentationFactory.createMenuRoutingFactory();
         bankCentricPagesFactory = presentationFactory.createBankCentricPagesFactory();
         customerCentricPagesFactory = presentationFactory.createCustomerCentricPagesFactory();
+        userFactory = new UserFactory();
     }
 
     protected int convertStringToInteger(String input) {

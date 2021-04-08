@@ -1,24 +1,24 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.User.AbstractProfile;
 
 public interface IActionFactory {
-    IAction createOpenNewAccount();
-    IAction createExistingBankAccount();
-    IAction createWorkList();
-    IAction createSignOut();
-    IAction createEnrollNewEmployee();
-    IAction createUpdatePersonalDetails();
-    IAction createWithdraw();
-    IAction createDeposit();
-    IAction createTransfer();
-    IAction createBankStatement();
-    IAction createCheckBalance();
-    IAction createUpdatePassword();
-    IAction createLoanEstimator();
-    IAction createCheckPreApprovedLoan();
+    IAbstractAction createOpenNewAccount();
+    IAbstractAction createExistingBankAccount();
+    IAbstractAction createWorkList();
+    IAbstractAction createSignOut();
+    IAbstractAction createEnrollNewEmployee();
+    IAbstractAction createUpdatePersonalDetails();
+    IAbstractAction createWithdraw();
+    IAbstractAction createDeposit();
+    IAbstractAction createTransfer();
+    IAbstractAction createBankStatement();
+    IAbstractAction createCheckBalance();
+    IAbstractAction createUpdatePassword();
+    IAbstractAction createLoanEstimator();
+    IAbstractAction createCheckPreApprovedLoan();
     ISignInAction createLogin();
 
     AbstractProfile createCustomer();

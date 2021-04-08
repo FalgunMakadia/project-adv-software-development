@@ -1,11 +1,11 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 
-public class UpdatePasswordAction extends Action {
+public class UpdatePasswordAction extends AbstractAction {
     private static final String ACTION_TITLE = "Update Password";
     String newPassword;
     String confirmPassword;

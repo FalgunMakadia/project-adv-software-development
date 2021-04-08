@@ -1,14 +1,15 @@
 package PresentationLayer.Pages.CustomerCentricPages;
 
+import BusinessLogicLayer.TransactionAction.ITransactionModel;
 import BusinessLogicLayer.TransactionAction.TransactionModel;
 import PresentationLayer.Pages.Page;
 
 import java.util.ArrayList;
 
 public class BankStatementTablePage extends Page {
-    private ArrayList<TransactionModel> transactionList;
+    private ArrayList<ITransactionModel> transactionList;
 
-    public BankStatementTablePage(ArrayList<TransactionModel> transactionList) {
+    public BankStatementTablePage(ArrayList<ITransactionModel> transactionList) {
         this.transactionList = transactionList;
     }
 
@@ -18,7 +19,7 @@ public class BankStatementTablePage extends Page {
         System.out.printf("%10s %10s %10s", "Type", "Amount", "Date");
         System.out.println();
         System.out.println("===================================");
-        for(TransactionModel transaction: transactionList) {
+        for(ITransactionModel transaction: transactionList) {
             System.out.format("%10s %10s %10s",
                     transaction.getTransactionType(),
                     transaction.getAmount(),

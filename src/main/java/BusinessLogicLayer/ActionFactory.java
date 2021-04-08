@@ -4,7 +4,7 @@ import BusinessLogicLayer.BankCentricAction.EnrollNewEmployeeAction;
 import BusinessLogicLayer.BankCentricAction.ExistingBankAccountAction;
 import BusinessLogicLayer.BankCentricAction.OpenNewAccountAction;
 import BusinessLogicLayer.BankCentricAction.WorkListAction;
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.CommonAction.SignOutAction;
@@ -17,72 +17,72 @@ import BusinessLogicLayer.User.AbstractProfile;
 
 public class ActionFactory implements IActionFactory {
     @Override
-    public IAction createOpenNewAccount() {
+    public IAbstractAction createOpenNewAccount() {
         return new OpenNewAccountAction();
     }
 
     @Override
-    public IAction createExistingBankAccount() {
+    public IAbstractAction createExistingBankAccount() {
         return new ExistingBankAccountAction();
     }
 
     @Override
-    public IAction createWorkList() {
+    public IAbstractAction createWorkList() {
         return new WorkListAction();
     }
 
     @Override
-    public IAction createSignOut() {
+    public IAbstractAction createSignOut() {
         return new SignOutAction();
     }
 
     @Override
-    public IAction createEnrollNewEmployee() {
+    public IAbstractAction createEnrollNewEmployee() {
         return new EnrollNewEmployeeAction();
     }
 
     @Override
-    public IAction createUpdatePersonalDetails() {
+    public IAbstractAction createUpdatePersonalDetails() {
         return new UpdatePersonalDetailAction();
     }
 
     @Override
-    public IAction createWithdraw() {
+    public IAbstractAction createWithdraw() {
         return new WithdrawAction();
     }
 
     @Override
-    public IAction createDeposit() {
+    public IAbstractAction createDeposit() {
         return new DepositAction();
     }
 
     @Override
-    public IAction createTransfer() {
+    public IAbstractAction createTransfer() {
         return new TransferAction();
     }
 
     @Override
-    public IAction createBankStatement() {
+    public IAbstractAction createBankStatement() {
         return new BankStatementAction();
     }
 
     @Override
-    public IAction createCheckBalance() {
+    public IAbstractAction createCheckBalance() {
         return new CheckBalanceAction();
     }
 
     @Override
-    public IAction createUpdatePassword() {
+    public IAbstractAction createUpdatePassword() {
         return new UpdatePasswordAction();
     }
 
     @Override
-    public IAction createLoanEstimator() {
+    public IAbstractAction createLoanEstimator() {
         return new LoanEstimatorAction();
     }
 
     @Override
-    public IAction createCheckPreApprovedLoan() {
+    public IAbstractAction createCheckPreApprovedLoan() {
         return new CheckPreApprovedLoanAction();
     }
 

@@ -2,9 +2,9 @@ package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
-import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -107,7 +107,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
 
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.first()) {
-                IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+                IWorkListRequestActionFactory workListActionFactory = new WorkListRequestActionFactory();
                 workListRequest = workListActionFactory.createWorkListRequest();
                 AbstractProfile profile = getWorkListUserDetail(id);
                 String worklistType = resultSet.getString(REQUEST_TYPE_COLUMN_NAME);
@@ -144,7 +144,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int requestId = resultSet.getInt(REQUEST_ID_COLUMN_NAME);
-                IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+                IWorkListRequestActionFactory workListActionFactory = new WorkListRequestActionFactory();
                 IWorkListRequest workListRequest = workListActionFactory.createWorkListRequest();
                 workListRequest.setRequestType(resultSet.getString(REQUEST_TYPE_COLUMN_NAME));
                 workListRequest.setPriority(resultSet.getString(PRIORITY_COLUMN_NAME));

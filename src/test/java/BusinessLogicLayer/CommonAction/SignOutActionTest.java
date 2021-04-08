@@ -2,7 +2,6 @@ package BusinessLogicLayer.CommonAction;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +13,13 @@ class SignOutActionTest {
     @BeforeEach
     void performSignOut() {
         loggedInUserContext = LoggedInUserContext.instance();
-        IAction signOutAction = new SignOutAction();
+        IAbstractAction signOutAction = new SignOutAction();
         signOutAction.performAction();
     }
 
     @Test
     void getActionTitle() {
-        IAction signOutAction = new SignOutAction();
+        IAbstractAction signOutAction = new SignOutAction();
         assertEquals("Sign Out", signOutAction.getActionTitle());
     }
 

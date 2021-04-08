@@ -2,9 +2,9 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
-import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
 
 public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
@@ -15,7 +15,7 @@ public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
 
     public SaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile) {
         super(profile);
-        IWorkListActionFactory workListActionFactory = new WorkListActionFactory();
+        IWorkListRequestActionFactory workListActionFactory = new WorkListRequestActionFactory();
         workListRequest = workListActionFactory.createWorkListRequest(CHANGE_REQUEST,
                 profile.getAccountNumber(),
                 profile);

@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CommonAction;
 
-public class SignOutAction extends Action {
+public class SignOutAction extends AbstractAction {
     private static final String ACTION_TITLE = "Sign Out";
 
     public SignOutAction() {
