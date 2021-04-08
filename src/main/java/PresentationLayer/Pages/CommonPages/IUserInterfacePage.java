@@ -18,6 +18,4 @@ public interface IUserInterfacePage {
     String getConfirmation(String message);
 
     String getUserInputInMultipleOfTen(String message);
-
-    void addDelay();
 }

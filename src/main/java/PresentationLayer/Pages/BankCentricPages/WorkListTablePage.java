@@ -27,5 +27,6 @@ public class WorkListTablePage extends Page {
                     worklistRequest.getHandledBy());
             System.out.println();
         }
+        System.out.println();
     }
 }

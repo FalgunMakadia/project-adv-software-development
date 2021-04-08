@@ -34,7 +34,7 @@ public class UpdatePasswordAction extends AbstractAction {
         if (newPassword.equals(confirmPassword)) {
             int changedPassword = newPassword.hashCode();
             userProfileDatabase.updateUserPassword(userName, changedPassword);
-            userInterface.displayMessage(userName + " your new  password is updated: ");
+            userInterface.displayMessage(userName + " your new password is updated");
         } else {
             userInterface.displayMessage("Password did not match");
         }

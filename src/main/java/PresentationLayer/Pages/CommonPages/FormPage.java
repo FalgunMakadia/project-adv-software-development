@@ -31,7 +31,7 @@ public class FormPage extends Page {
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
-            System.out.println("Enter 14 to go back to main menu");
+            System.out.print("Enter 14 to go back to main menu: ");
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
                IAbstractFormCommand command = formFields.get(userInput);
