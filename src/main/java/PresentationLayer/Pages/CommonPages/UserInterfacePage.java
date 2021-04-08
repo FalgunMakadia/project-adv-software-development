@@ -125,13 +125,4 @@ public class UserInterfacePage implements IUserInterfacePage {
         return input;
     }
 
-    @Override
-    public void addDelay() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 }
