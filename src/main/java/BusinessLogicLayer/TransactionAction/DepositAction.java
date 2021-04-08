@@ -1,12 +1,12 @@
 package BusinessLogicLayer.TransactionAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
-public class DepositAction extends Action {
+public class DepositAction extends AbstractAction {
     private static final String ACTION_TITLE = "Deposit";
     private static final String TRANSACTION_TYPE = "Cr";
     private static final String YES = "y";
@@ -38,7 +38,7 @@ public class DepositAction extends Action {
         String accountNumber = loggedInUserContext.getAccountNumber();
 
         userInterface.displayMessage(ACTION_TITLE);
-        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
+        ArrayList<ITransactionModel> saveTransactionInModel = new ArrayList<>();
 
         previousBalance = accountOperationDatabase.getBalance(accountNumber);
         userInterface.displayMessage("Current Balance:" + previousBalance);

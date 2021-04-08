@@ -1,10 +1,10 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
-public class CheckBalanceAction extends Action {
+public class CheckBalanceAction extends AbstractAction {
     private static final String ACTION_TITLE = "Check Balance";
 
     private IAccountOperationDatabase accountOperationDatabase;
@@ -12,6 +12,10 @@ public class CheckBalanceAction extends Action {
     public CheckBalanceAction() {
         IOperationDatabaseFactory operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
+    }
+
+    public CheckBalanceAction(IAccountOperationDatabase operationDatabase) {
+        accountOperationDatabase = operationDatabase;
     }
 
     @Override

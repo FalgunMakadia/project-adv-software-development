@@ -1,6 +1,6 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ class BackToMainMenuProfileFormActionCommandTest {
 
     @Test
     void executeTest() {
-        IFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
+        IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         formCommand.execute();
         assertEquals("",loggedInUserContext.getCurrentPage());
@@ -19,13 +19,13 @@ class BackToMainMenuProfileFormActionCommandTest {
 
     @Test
     void getFieldValueTest() {
-        IFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
+        IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
         assertEquals("ACTION",formCommand.getFieldValue());
     }
 
     @Test
     void getCommandLabelTest() {
-        IFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
+        IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
         assertEquals("Back to Main Menu",formCommand.getCommandLabel());
     }
 }

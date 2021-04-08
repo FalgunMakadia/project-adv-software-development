@@ -1,16 +1,16 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.TransactionAction.TransactionModel;
+import BusinessLogicLayer.CommonAction.AbstractAction;
+import BusinessLogicLayer.TransactionAction.ITransactionModel;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import PresentationLayer.Pages.IPage;
 
 import java.util.ArrayList;
 
-public class BankStatementAction extends Action {
+public class BankStatementAction extends AbstractAction {
     private static final String ACTION_TITLE = "Bank Statement";
-    private ArrayList<TransactionModel> transactionList;
+    private ArrayList<ITransactionModel> transactionList;
 
     private IOperationDatabaseFactory operationDatabaseFactory;
     private IAccountOperationDatabase accountOperationDatabase;

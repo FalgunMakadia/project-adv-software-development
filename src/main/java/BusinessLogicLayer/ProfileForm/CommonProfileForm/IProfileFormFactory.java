@@ -1,44 +1,43 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
-import BusinessLogicLayer.User.BankEmployeeProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
 
 public interface IProfileFormFactory {
-    IFormCommand createBackToMainMenuProfileFormActionCommand();
+    IAbstractFormCommand createBackToMainMenuProfileFormActionCommand();
 
-    IFormCommand createEditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IFormCommand> formFieldMap);
+    IAbstractFormCommand createEditProfileFormActionCommand(AbstractProfile profile, Map<Integer, IAbstractFormCommand> formFieldMap);
 
-    IFormCommand createSaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile);
+    IAbstractFormCommand createSaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile);
 
-    IFormCommand createSaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile);
+    IAbstractFormCommand createSaveNewEmployeeProfileFormActionCommand(AbstractProfile bankEmployeeProfile);
 
-    IFormCommand createSaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile);
+    IAbstractFormCommand createSaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile);
 
-    IFormCommand createAddressLine1FieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createAddressLine1FieldCommand(AbstractProfile profile);
 
-    IFormCommand createAddressLine2FieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createAddressLine2FieldCommand(AbstractProfile profile);
 
-    IFormCommand createCityFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createCityFieldCommand(AbstractProfile profile);
 
-    IFormCommand createContactFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createContactFieldCommand(AbstractProfile profile);
 
-    IFormCommand createDateOfBirthFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createDateOfBirthFieldCommand(AbstractProfile profile);
 
-    IFormCommand createEmailFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createEmailFieldCommand(AbstractProfile profile);
 
-    IFormCommand createFirstNameFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createFirstNameFieldCommand(AbstractProfile profile);
 
-    IFormCommand createLastNameFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createLastNameFieldCommand(AbstractProfile profile);
 
-    IFormCommand createMiddleNameFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createMiddleNameFieldCommand(AbstractProfile profile);
 
-    IFormCommand createPassPortNumberFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createPassPortNumberFieldCommand(AbstractProfile profile);
 
-    IFormCommand createPostalCodeFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createPostalCodeFieldCommand(AbstractProfile profile);
 
-    IFormCommand createProvinceFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createProvinceFieldCommand(AbstractProfile profile);
 
-    IFormCommand createSsnNumberFieldCommand(AbstractProfile profile);
+    IAbstractFormCommand createSsnNumberFieldCommand(AbstractProfile profile);
 }

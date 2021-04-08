@@ -1,13 +1,13 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckPreApprovedLoanAction extends Action {
+public class CheckPreApprovedLoanAction extends AbstractAction {
     private static final String ACTION_TITLE = "Check Pre-Approved Loan";
     private static final double DEFAULT_INTEREST_RATE = 8.8;
 

@@ -1,7 +1,8 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
-import BusinessLogicLayer.TransactionAction.TransactionModel;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
+import BusinessLogicLayer.TransactionAction.ITransactionModel;
+import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import DataAccessLayer.OperationDatabase.AccountOperationDatabase;
@@ -25,7 +26,7 @@ class BankStatementActionTest {
 
     @Test
     void getActionTitleTest() {
-        IAction bankStatementAction = new BankStatementAction();
+        IAbstractAction bankStatementAction = new BankStatementAction();
         assertEquals("Bank Statement", bankStatementAction.getActionTitle());
     }
 
@@ -40,10 +41,10 @@ class BankStatementActionTest {
     void currentPageContextTest() {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
-        ArrayList<TransactionModel> transactionList = new ArrayList<>();
+        ArrayList<ITransactionModel> transactionList = new ArrayList<>();
         Mockito.when(accountOperationDatabase.getMiniStatement(Mockito.anyString())).thenReturn(transactionList);
 
-        IAction bankStatementAction = new BankStatementAction(accountOperationDatabase);
+        IAbstractAction bankStatementAction = new BankStatementAction(accountOperationDatabase);
 
         bankStatementAction.performAction();
 
@@ -55,11 +56,11 @@ class BankStatementActionTest {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("111111");
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
-
-        ArrayList<TransactionModel> transactionList = new ArrayList<TransactionModel>(){
+        TransactionActionFactory transactionActionFactory = new TransactionActionFactory();
+        ArrayList<ITransactionModel> transactionList = new ArrayList<ITransactionModel>(){
             {
-                add(new TransactionModel("111111", "Dr", 999, "2021-02-02"));
-                add(new TransactionModel("111111", "Cr", 9999, "2021-03-02"));
+                add(transactionActionFactory.createTransactionModel("111111", "Dr", 999, "2021-02-02"));
+                add(transactionActionFactory.createTransactionModel("111111", "Cr", 9999, "2021-03-02"));
             }
         };
 
@@ -72,7 +73,7 @@ class BankStatementActionTest {
 
         assertEquals(0, transactionList.size());
 
-        IAction bankStatementAction = new BankStatementAction(accountOperationDatabase);
+        IAbstractAction bankStatementAction = new BankStatementAction(accountOperationDatabase);
 
         bankStatementAction.performAction();
     }

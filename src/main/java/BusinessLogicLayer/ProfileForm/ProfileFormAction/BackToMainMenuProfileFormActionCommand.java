@@ -1,17 +1,17 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.ILoggedInUserContext;
-import BusinessLogicLayer.User.LoggedInUserContext;
 
-public class BackToMainMenuProfileFormActionCommand extends FormCommand {
+public class BackToMainMenuProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Back to Main Menu";
     private static final String COMMAND_TYPE = "ACTION";
 
     ILoggedInUserContext loggedInUserContext;
 
     public BackToMainMenuProfileFormActionCommand() {
-        loggedInUserContext = LoggedInUserContext.instance();
+        super();
+        loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 
     @Override

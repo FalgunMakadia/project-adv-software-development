@@ -1,25 +1,25 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public class BankCentricActionFactory implements IBankCentricActionFactory{
     @Override
-    public IAction createEnrollNewEmployeeAction() {
+    public IAbstractAction createEnrollNewEmployeeAction() {
         return new EnrollNewEmployeeAction();
     }
 
     @Override
-    public IAction createExistingBankAccountAction() {
+    public IAbstractAction createExistingBankAccountAction() {
         return new ExistingBankAccountAction();
     }
 
     @Override
-    public IAction createOpenNewAccountAction() {
+    public IAbstractAction createOpenNewAccountAction() {
         return new OpenNewAccountAction();
     }
 
     @Override
-    public IAction createWorkListAction() {
+    public IAbstractAction createWorkListAction() {
         return new WorkListAction();
     }
 }

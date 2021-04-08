@@ -1,6 +1,6 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +19,7 @@ class EnrollNewEmployeeActionTest {
 
     @Test
     void performActionTest(){
-        IAction enrollNewEmployeeAction = Mockito.mock(EnrollNewEmployeeAction.class);
+        IAbstractAction enrollNewEmployeeAction = Mockito.mock(EnrollNewEmployeeAction.class);
         Mockito.doNothing().when(enrollNewEmployeeAction).performAction();
         enrollNewEmployeeAction.performAction();
         Mockito.verify(enrollNewEmployeeAction, Mockito.times(1)).performAction();

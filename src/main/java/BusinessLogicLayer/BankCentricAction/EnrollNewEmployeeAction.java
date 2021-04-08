@@ -1,26 +1,26 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.User.BankEmployeeProfile;
+import BusinessLogicLayer.CommonAction.AbstractAction;
+import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class EnrollNewEmployeeAction extends Action {
+public class EnrollNewEmployeeAction extends AbstractAction {
     private static final String ACTION_TITLE = "Enroll New Employee";
 
-    private Map<Integer, IFormCommand> formActionCommandMap;
-    private Map<Integer, IFormCommand> openNewAccountFormFieldMap;
-    private BankEmployeeProfile bankEmployeeProfile;
+    private Map<Integer, IAbstractFormCommand> formActionCommandMap;
+    private Map<Integer, IAbstractFormCommand> openNewAccountFormFieldMap;
+    private AbstractProfile bankEmployeeProfile;
     private IProfileFormFactory profileFormFactory;
 
     public EnrollNewEmployeeAction() {
         super();
         profileFormFactory = new ProfileFormFactory();
-        bankEmployeeProfile = new BankEmployeeProfile();
+        bankEmployeeProfile = userFactory.createBankEmployeeProfile();
 
         generateOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
@@ -29,10 +29,10 @@ public class EnrollNewEmployeeAction extends Action {
         formActionCommandMap.put(3, profileFormFactory.createBackToMainMenuProfileFormActionCommand());
     }
 
-    public EnrollNewEmployeeAction(Map<Integer, IFormCommand> openNewAccountFormFieldMap, Map<Integer, IFormCommand> formActionCommandMap) {
+    public EnrollNewEmployeeAction(Map<Integer, IAbstractFormCommand> openNewAccountFormFieldMap, Map<Integer, IAbstractFormCommand> formActionCommandMap) {
         super();
         profileFormFactory = new ProfileFormFactory();
-        bankEmployeeProfile = new BankEmployeeProfile();
+        bankEmployeeProfile = userFactory.createBankEmployeeProfile();
 
         this.openNewAccountFormFieldMap = openNewAccountFormFieldMap;
         this.formActionCommandMap = formActionCommandMap;
@@ -55,8 +55,8 @@ public class EnrollNewEmployeeAction extends Action {
         userInterface.displayMessage("Note: (*) are mandatory fields.");
         userInterface.insertEmptyLine();
 
-        for (Map.Entry<Integer, IFormCommand> formQuestionEntry : openNewAccountFormFieldMap.entrySet()) {
-            IFormCommand formCommand = formQuestionEntry.getValue();
+        for (Map.Entry<Integer, IAbstractFormCommand> formQuestionEntry : openNewAccountFormFieldMap.entrySet()) {
+            IAbstractFormCommand formCommand = formQuestionEntry.getValue();
             formCommand.execute();
         }
 
@@ -64,13 +64,13 @@ public class EnrollNewEmployeeAction extends Action {
             while (loggedInUserContext.checkCurrentPageStatus(ACTION_TITLE)) {
                 int key = 1;
                 for (int i = 0; i < formActionCommandMap.size(); i++) {
-                    IFormCommand formCommand = formActionCommandMap.get(key);
+                    IAbstractFormCommand formCommand = formActionCommandMap.get(key);
                     userInterface.displayMessage(key + ". " + formCommand.getCommandLabel());
                     key = key + 1;
                 }
                 String action = userInterface.getMandatoryIntegerUserInput("Enter any Number between 1-" + formActionCommandMap.size() + " to perform appropriate action:");
 
-                IFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
+                IAbstractFormCommand formCommand = formActionCommandMap.get(Integer.parseInt(action));
                 formCommand.execute();
             }
         }

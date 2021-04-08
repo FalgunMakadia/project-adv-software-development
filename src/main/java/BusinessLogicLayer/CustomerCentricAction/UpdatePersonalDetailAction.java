@@ -1,9 +1,9 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import BusinessLogicLayer.User.AbstractProfile;
 import DataAccessLayer.ProfileDatabase.ICustomerProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
@@ -12,10 +12,10 @@ import PresentationLayer.Pages.CommonPages.IUserFormPage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdatePersonalDetailAction extends Action {
+public class UpdatePersonalDetailAction extends AbstractAction {
     private static final String ACTION_TITLE = "Update Personal Details";
 
-    private Map<Integer, IFormCommand> formFields;
+    private Map<Integer, IAbstractFormCommand> formFields;
     private ICustomerProfileDatabase customerProfileDatabase;
     private IUserFormPage userForm;
 
@@ -53,7 +53,7 @@ public class UpdatePersonalDetailAction extends Action {
         }
     }
 
-    private Map<Integer, IFormCommand> getFormFields(AbstractProfile profile) {
+    private Map<Integer, IAbstractFormCommand> getFormFields(AbstractProfile profile) {
         IProfileFormFactory profileFormFactory = new ProfileFormFactory();
 
         formFields.put(1, profileFormFactory.createFirstNameFieldCommand(profile));

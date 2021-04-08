@@ -1,20 +1,25 @@
 package BusinessLogicLayer.TransactionAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public class TransactionActionFactory implements ITransactionActionFactory {
     @Override
-    public IAction createDepositAction() {
+    public IAbstractAction createDepositAction() {
         return new DepositAction();
     }
 
     @Override
-    public IAction createTransferAction() {
+    public IAbstractAction createTransferAction() {
         return new TransferAction();
     }
 
     @Override
-    public IAction createWithdrawAction() {
+    public IAbstractAction createWithdrawAction() {
         return new WithdrawAction();
+    }
+
+    @Override
+    public TransactionModel createTransactionModel(String accountNumber, String transactionType, int amount, String date) {
+        return new TransactionModel(accountNumber, transactionType, amount, date);
     }
 }

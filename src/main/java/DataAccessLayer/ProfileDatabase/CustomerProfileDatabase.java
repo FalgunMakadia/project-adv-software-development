@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -26,8 +26,11 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
+    UserFactory userFactory;
+
     public CustomerProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String createAccount = "INSERT INTO accounts (account_no, active_status) VALUES " +
                 "(?, ?)";
-        String activateUserCredentials = "UPDATE INTO login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
+        String activateUserCredentials = "UPDATE login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
@@ -64,7 +67,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 long accontNumber = resultSet.getLong(1);
                 if (0L != accontNumber) {
                     PreparedStatement createAccountStatement = connection.prepareStatement(createAccount);
-                    createAccountStatement.setLong(1,accontNumber);
+                    createAccountStatement.setLong(1, accontNumber);
                     createAccountStatement.setBoolean(2, true);
                     createAccountStatement.executeUpdate();
 
@@ -82,8 +85,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                     return false;
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -98,9 +103,9 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, accountNumber);
-            AbstractProfile profile = new CustomerProfile();
+            AbstractProfile profile = userFactory.createCustomerProfile();
             ResultSet resultSet = statement.executeQuery();
-            
+
             if (resultSet.first()) {
                 profile.setFirstName(resultSet.getString(FIRST_NAME_COLUMN_NAME));
                 profile.setLastName(resultSet.getString(LAST_NAME_COLUMN_NAME));
@@ -118,8 +123,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
                 return profile;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -155,8 +162,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             int affectedRows = statement.executeUpdate();
 
             return affectedRows == 1 ? true : false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }

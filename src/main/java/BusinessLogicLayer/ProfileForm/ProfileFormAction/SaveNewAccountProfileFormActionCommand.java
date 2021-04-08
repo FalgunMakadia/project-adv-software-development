@@ -1,14 +1,14 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
-import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveNewAccountProfileFormActionCommand extends FormCommand {
+public class SaveNewAccountProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Save";
     private static final String COMMAND_TYPE = "ACTION";
     private static final String PRIORITY = "medium";
@@ -16,12 +16,12 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
 
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
-    private IWorkListActionFactory workListActionFactory;
+    private IWorkListRequestActionFactory workListActionFactory;
 
     public SaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile) {
         super();
         this.profile = newCustomerProfile;
-        workListActionFactory = new WorkListActionFactory();
+        workListActionFactory = new WorkListRequestActionFactory();
 
         profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
@@ -39,7 +39,7 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
         if (affectedRows > 0) {
             int workListID = createNewWorkListRequest();
             userInterface.displayMessage("Account Creation Request has been raised");
-            userInterface.displayMessage("Your request Id is: " + String.valueOf(workListID));
+            userInterface.displayMessage("Your request Id is: " + String.valueOf(workListID) + "\n");
         }
         loggedInUserContext.clearCurrentPage();
 

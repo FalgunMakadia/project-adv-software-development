@@ -1,98 +1,104 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.BankCentricAction.EnrollNewEmployeeAction;
-import BusinessLogicLayer.BankCentricAction.ExistingBankAccountAction;
-import BusinessLogicLayer.BankCentricAction.OpenNewAccountAction;
-import BusinessLogicLayer.BankCentricAction.WorkListAction;
-import BusinessLogicLayer.CommonAction.IAction;
-import BusinessLogicLayer.CommonAction.ISignInAction;
-import BusinessLogicLayer.CommonAction.SignInAction;
-import BusinessLogicLayer.CommonAction.SignOutAction;
+import BusinessLogicLayer.BankCentricAction.*;
+import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.CustomerCentricAction.*;
-import BusinessLogicLayer.TransactionAction.DepositAction;
-import BusinessLogicLayer.TransactionAction.TransferAction;
-import BusinessLogicLayer.TransactionAction.WithdrawAction;
-import BusinessLogicLayer.User.CustomerProfile;
-import BusinessLogicLayer.User.AbstractProfile;
+
+import BusinessLogicLayer.TransactionAction.ITransactionActionFactory;
+import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
+
+import BusinessLogicLayer.User.IUserFactory;
+import BusinessLogicLayer.User.UserFactory;
 
 public class ActionFactory implements IActionFactory {
-    @Override
-    public IAction createOpenNewAccount() {
-        return new OpenNewAccountAction();
+
+    IBankCentricActionFactory bankCentricActionFactory;
+    ICustomerCentricActionFactory customerCentricActionFactory;
+    ICommonActionFactory commonActionFactory;
+    ITransactionActionFactory transactionActionFactory;
+    IUserFactory userFactory;
+
+    public ActionFactory() {
+        bankCentricActionFactory = new BankCentricActionFactory();
+        customerCentricActionFactory = new CustomerCentricActionFactory();
+        commonActionFactory = new CommonActionFactory();
+        transactionActionFactory = new TransactionActionFactory();
+        userFactory = new UserFactory();
     }
 
     @Override
-    public IAction createExistingBankAccount() {
-        return new ExistingBankAccountAction();
+    public IAbstractAction createOpenNewAccount() {
+        return bankCentricActionFactory.createOpenNewAccountAction();
     }
 
     @Override
-    public IAction createWorkList() {
-        return new WorkListAction();
+    public IAbstractAction createExistingBankAccount() {
+        return bankCentricActionFactory.createExistingBankAccountAction();
     }
 
     @Override
-    public IAction createSignOut() {
-        return new SignOutAction();
+    public IAbstractAction createWorkList() {
+        return bankCentricActionFactory.createWorkListAction();
     }
 
     @Override
-    public IAction createEnrollNewEmployee() {
-        return new EnrollNewEmployeeAction();
+    public IAbstractAction createSignOut() {
+        return commonActionFactory.createSignOutAction();
     }
 
     @Override
-    public IAction createUpdatePersonalDetails() {
-        return new UpdatePersonalDetailAction();
+    public IAbstractAction createEnrollNewEmployee() {
+        return bankCentricActionFactory.createEnrollNewEmployeeAction();
     }
 
     @Override
-    public IAction createWithdraw() {
-        return new WithdrawAction();
+    public IAbstractAction createUpdatePersonalDetails() {
+        return customerCentricActionFactory.createUpdatePersonalDetailAction();
     }
 
     @Override
-    public IAction createDeposit() {
-        return new DepositAction();
+    public IAbstractAction createWithdraw() {
+        return transactionActionFactory.createWithdrawAction();
     }
 
     @Override
-    public IAction createTransfer() {
-        return new TransferAction();
+    public IAbstractAction createDeposit() {
+        return transactionActionFactory.createDepositAction();
     }
 
     @Override
-    public IAction createBankStatement() {
-        return new BankStatementAction();
+    public IAbstractAction createTransfer() {
+        return transactionActionFactory.createTransferAction();
     }
 
     @Override
-    public IAction createCheckBalance() {
-        return new CheckBalanceAction();
+    public IAbstractAction createBankStatement() {
+        return customerCentricActionFactory.createBankStatementAction();
     }
 
     @Override
-    public IAction createUpdatePassword() {
-        return new UpdatePasswordAction();
+    public IAbstractAction createCheckBalance() {
+        return customerCentricActionFactory.createCheckBalanceAction();
     }
 
     @Override
-    public IAction createLoanEstimator() {
-        return new LoanEstimatorAction();
+    public IAbstractAction createUpdatePassword() {
+        return customerCentricActionFactory.createUpdatePasswordAction();
     }
 
     @Override
-    public IAction createCheckPreApprovedLoan() {
-        return new CheckPreApprovedLoanAction();
+    public IAbstractAction createLoanEstimator() {
+        return customerCentricActionFactory.createLoanEstimatorAction();
+    }
+
+    @Override
+    public IAbstractAction createCheckPreApprovedLoan() {
+        return customerCentricActionFactory.createCheckPreApprovedLoanAction();
     }
 
     @Override
     public ISignInAction createLogin() {
-        return new SignInAction();
+        return commonActionFactory.createSignInAction();
     }
 
-    @Override
-    public AbstractProfile createCustomer() {
-        return new CustomerProfile();
-    }
 }

@@ -1,21 +1,19 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.User.BankEmployeeProfile;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
+public class SaveNewEmployeeProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Save";
     private static final String COMMAND_TYPE = "ACTION";
 
     private IUserProfileDatabase userProfileDatabase;
     private IEmployeeProfileDatabase employeeProfileDatabase;
 
-    public SaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile) {
+    public SaveNewEmployeeProfileFormActionCommand(AbstractProfile bankEmployeeProfile) {
         super();
         this.profile = bankEmployeeProfile;
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
@@ -33,7 +31,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
         int affectedRows = createNewEmployee();
         if (affectedRows > 0) {
             createNewUser();
-            userInterface.displayMessage("The employee details are saved ");
+            userInterface.displayMessage("The employee details are saved \n");
         }
         loggedInUserContext.clearCurrentPage();
     }

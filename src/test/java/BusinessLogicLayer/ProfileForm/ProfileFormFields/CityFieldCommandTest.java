@@ -1,6 +1,6 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.CustomerProfile;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,11 +10,11 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CityFieldCommandTest {
-    FormCommand formCommand;
+    AbstractFormCommand formCommand;
     @BeforeEach
     void executeTest() {
         IUserInterfacePage userInterface = Mockito.mock(IUserInterfacePage.class);
-        Mockito.when(userInterface.getMandatoryUserInput("Enter New City*: ")).thenReturn("test");
+        Mockito.when(userInterface.getMandatoryUserInput("Enter City*: ")).thenReturn("test");
         formCommand = new CityFieldCommand(new CustomerProfile(), userInterface);
         formCommand.execute();
     }

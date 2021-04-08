@@ -1,12 +1,10 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
-import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -22,7 +20,7 @@ class SaveUpdatedPersonalDetailFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
+        IAbstractFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
         formCommand.execute();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
 
@@ -38,7 +36,7 @@ class SaveUpdatedPersonalDetailFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
+        IAbstractFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
 
         assertEquals("ACTION",formCommand.getFieldValue());
 
@@ -52,7 +50,7 @@ class SaveUpdatedPersonalDetailFormActionCommandTest {
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
-        IFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
+        IAbstractFormCommand formCommand = new SaveUpdatedPersonalDetailFormActionCommand(null, workListOperationDatabase);
 
         assertEquals("Save",formCommand.getCommandLabel());
     }
