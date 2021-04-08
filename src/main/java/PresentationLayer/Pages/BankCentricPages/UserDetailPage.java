@@ -1,13 +1,15 @@
 package PresentationLayer.Pages.BankCentricPages;
 
 import BusinessLogicLayer.User.AbstractProfile;
-import PresentationLayer.Pages.Page;
+import PresentationLayer.Pages.AbstractPage;
 
-public class UserDetailPage extends Page {
+public class UserDetailPage extends AbstractPage {
     AbstractProfile profile;
-    public UserDetailPage(AbstractProfile profile){
+
+    public UserDetailPage(AbstractProfile profile) {
         this.profile = profile;
     }
+
     @Override
     public void printPage() {
         System.out.println("First Name: " + profile.getFirstName());

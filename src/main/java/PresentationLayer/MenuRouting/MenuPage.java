@@ -1,12 +1,15 @@
 package PresentationLayer.MenuRouting;
 
 import BusinessLogicLayer.CommonAction.IAbstractAction;
-import PresentationLayer.Pages.Page;
+import PresentationLayer.Pages.AbstractPage;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class MenuPage extends Page {
+public class MenuPage extends AbstractPage {
+
+    private static final String INVALID_INPUT_ERROR_MESSAGE = "Invalid Input";
+
     private Map<String, IAbstractAction> menu;
 
     public MenuPage(Map<String, IAbstractAction> menu, String parentPage) {
@@ -42,7 +45,7 @@ public class MenuPage extends Page {
             choiceNumber = Integer.parseInt(input);
 
             if (choiceNumber < 1 && choiceNumber > menu.size()) {
-                throw new IllegalArgumentException("Invalid input.");
+                throw new IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE);
             }
             validity = true;
         } catch (Exception e) {

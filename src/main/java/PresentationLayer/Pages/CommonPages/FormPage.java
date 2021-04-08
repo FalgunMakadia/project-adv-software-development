@@ -1,12 +1,12 @@
 package PresentationLayer.Pages.CommonPages;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
-import PresentationLayer.Pages.Page;
+import PresentationLayer.Pages.AbstractPage;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class FormPage extends Page {
+public class FormPage extends AbstractPage {
     private static final String COMMAND_TYPE = "ACTION";
 
     private Map<Integer, IAbstractFormCommand> formFields;

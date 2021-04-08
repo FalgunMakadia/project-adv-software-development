@@ -76,17 +76,12 @@ public class LoanEstimatorAction extends AbstractAction {
         return annualInterest;
     }
 
-
     public double calculateEmi(long loanAmount, int tenure) {
         double emiAmount = 0.0;
-        //R = monthlyInterestRate
         double monthlyInterestRate = annualInterestRate / 12;
-        //N = numberOfMonths
         int numberOfMonths = tenure * 12;
-        //EMI = [P x R x (1+R)^N]/[(1+R)^N-1]
         emiAmount = (loanAmount * (monthlyInterestRate / 100) * (Math.pow(1 + (monthlyInterestRate / 100), numberOfMonths))) /
                 ((Math.pow(1 + (monthlyInterestRate / 100), numberOfMonths)) - 1);
-
         return emiAmount;
     }
 

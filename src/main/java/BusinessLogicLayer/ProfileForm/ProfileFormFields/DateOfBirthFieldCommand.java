@@ -25,7 +25,7 @@ public class DateOfBirthFieldCommand extends AbstractFormCommand {
         do {
             userInput = userInterface.getMandatoryUserInput("Enter DOB(YYYY-MM-DD)*: ");
 
-        }while(validateBirthDate(userInput));
+        } while (validateBirthDate(userInput));
         profile.setDateOfBirth(userInput);
     }
 

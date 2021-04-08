@@ -93,6 +93,5 @@ public class TransferAction extends AbstractAction {
                 accountOperationDatabase.updateBalance(targetAccountPreviousBalance, targetAccountNumber);
             }
         }
-
     }
 }

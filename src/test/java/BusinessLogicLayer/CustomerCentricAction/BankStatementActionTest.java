@@ -10,9 +10,7 @@ import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BankStatementActionTest {
@@ -52,7 +50,7 @@ class BankStatementActionTest {
     }
 
     @Test
-    void printTrasactionTest() {
+    void printTransactionTest() {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("111111");
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
@@ -63,7 +61,6 @@ class BankStatementActionTest {
                 add(transactionActionFactory.createTransactionModel("111111", "Cr", 9999, "2021-03-02"));
             }
         };
-
 
         Mockito.when(accountOperationDatabase.getMiniStatement("111111")).thenReturn(transactionList);
 

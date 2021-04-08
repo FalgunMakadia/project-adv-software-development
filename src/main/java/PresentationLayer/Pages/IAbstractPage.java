@@ -1,5 +1,5 @@
 package PresentationLayer.Pages;
 
-public interface IPage {
+public interface IAbstractPage {
     void printPage();
 }

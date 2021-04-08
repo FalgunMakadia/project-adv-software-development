@@ -12,6 +12,7 @@ import DataAccessLayer.ProfileDatabase.UserProfileDatabase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import static org.mockito.Mockito.doAnswer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -70,9 +71,9 @@ public class WithdrawActionTest {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("9800001003");
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
-        Mockito.when(accountOperationDatabase.updateBalance(finalBalance,loggedInUserContext.getAccountNumber())).thenReturn(finalBalance);
+        Mockito.when(accountOperationDatabase.updateBalance(finalBalance, loggedInUserContext.getAccountNumber())).thenReturn(finalBalance);
 
-        assertEquals(finalBalance, accountOperationDatabase.updateBalance(finalBalance,loggedInUserContext.getAccountNumber()));
+        assertEquals(finalBalance, accountOperationDatabase.updateBalance(finalBalance, loggedInUserContext.getAccountNumber()));
     }
 
     @Test

@@ -24,7 +24,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         formCommand.execute();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
 
-        assertEquals("",loggedInUserContext.getCurrentPage());
+        assertEquals("", loggedInUserContext.getCurrentPage());
 
     }
 
@@ -37,7 +37,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
         IAbstractFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
-        assertEquals("ACTION",formCommand.getFieldValue());
+        assertEquals("ACTION", formCommand.getFieldValue());
     }
 
     @Test
@@ -49,7 +49,7 @@ class SaveNewEmployeeProfileFormActionCommandTest {
         Mockito.when(profile.getUserName()).thenReturn("sam");
         Mockito.when(profile.getProfileRole()).thenReturn("C");
         IAbstractFormCommand formCommand = new SaveNewEmployeeProfileFormActionCommand(profile, userProfileDatabase);
-        assertEquals("ACTION",formCommand.getFieldValue());
+        assertEquals("ACTION", formCommand.getFieldValue());
 
     }
 }

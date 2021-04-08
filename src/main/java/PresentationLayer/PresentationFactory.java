@@ -4,7 +4,8 @@ import PresentationLayer.MenuRouting.IMenuRoutingFactory;
 import PresentationLayer.MenuRouting.MenuRoutingFactory;
 import PresentationLayer.Pages.BankCentricPages.BankCentricPagesFactory;
 import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
-import PresentationLayer.Pages.CommonPages.*;
+import PresentationLayer.Pages.CommonPages.CommonPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
 import PresentationLayer.Pages.CustomerCentricPages.CustomerCentricPagesFactory;
 import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 

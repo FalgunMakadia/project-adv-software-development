@@ -32,9 +32,7 @@ public class EditProfileFormActionCommand extends AbstractFormCommand {
            IAbstractFormCommand command = formFieldMap.get(fieldIndex);
 
             userInterface.displayMessage(command.getCommandLabel() + ": " + command.getFieldValue());
-
         }
-
     }
 
     @Override

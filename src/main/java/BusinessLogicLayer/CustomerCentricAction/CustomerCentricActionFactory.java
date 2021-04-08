@@ -2,7 +2,7 @@ package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 
-public class CustomerCentricActionFactory implements ICustomerCentricActionFactory{
+public class CustomerCentricActionFactory implements ICustomerCentricActionFactory {
     @Override
     public IAbstractAction createBankStatementAction() {
         return new BankStatementAction();

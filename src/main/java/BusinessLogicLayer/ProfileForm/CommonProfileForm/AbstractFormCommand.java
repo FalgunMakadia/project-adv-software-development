@@ -1,6 +1,9 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
-import BusinessLogicLayer.User.*;
+import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.ILoggedInUserContext;
+import BusinessLogicLayer.User.IUserFactory;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
@@ -22,14 +25,14 @@ public abstract class AbstractFormCommand implements IAbstractFormCommand {
 
     public AbstractFormCommand(AbstractProfile profile) {
         this.profile = profile;
-        init();
+        initiateClasses();
     }
 
     public AbstractFormCommand() {
-        init();
+        initiateClasses();
     }
 
-    private void init() {
+    private void initiateClasses() {
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
         userFactory = new UserFactory();
@@ -38,6 +41,6 @@ public abstract class AbstractFormCommand implements IAbstractFormCommand {
         this.workListOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();
 
         this.userInterface = commonPagesFactory.createUserInterface();
-        this.loggedInUserContext = LoggedInUserContext.instance();
+        this.loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 }
