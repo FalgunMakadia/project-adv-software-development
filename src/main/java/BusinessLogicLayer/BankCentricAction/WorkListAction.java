@@ -41,7 +41,9 @@ public class WorkListAction extends AbstractAction {
     @Override
     public void performAction() {
         this.workListRequestMap = workListOperationDatabase.getWorkList();
-        if(this.workListRequestMap.size() > 0) {
+        if (this.workListRequestMap.size() == 0) {
+            userInterface.displayMessage("No Active WorkList is available");
+        } else {
             workListPage = bankCentricPagesFactory.createWorkListTable(workListRequestMap);
             workListPage.printPage();
             userInterface.displayMessage("Please Enter Number Worklist ID to " +
@@ -51,11 +53,11 @@ public class WorkListAction extends AbstractAction {
                 userInput = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Enter Value:"));
                 IWorkListRequest workListRequest = workListOperationDatabase.getWorkListRequest(userInput);
                 workListActionMap = getWorkListActionMap(workListRequest, userInput);
-                if(null != workListRequest) {
+                if (null != workListRequest) {
                     IWorkListRequestAction workListAction = workListActionMap.get(workListRequest.getRequestType());
                     workListAction.processWorkList();
                 }
-            } while(loggedInUserContext.getCurrentPage().equals(ACTION_TITLE)
+            } while (loggedInUserContext.getCurrentPage().equals(ACTION_TITLE)
                     && userInput != EXIT);
         }
     }

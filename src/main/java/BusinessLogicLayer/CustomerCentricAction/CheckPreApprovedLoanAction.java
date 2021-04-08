@@ -36,10 +36,12 @@ public class CheckPreApprovedLoanAction extends AbstractAction {
         double annualInterest = getPreApprovedLoanAnnualInterest(balance);
         double preApprovedLoanAmount = getPreApprovedLoanAmount(balance);
 
-        userInterface.displayMessage("You have a pre-approved loan of " + preApprovedLoanAmount + "CAD with " + annualInterest + "% annual interest.");
-        userInterface.addDelay();
+        if (preApprovedLoanAmount == 0) {
+            userInterface.displayMessage("You are not eligible for Pre-Approved loan(Minimum 10000 CAD is required)");
+        } else {
+            userInterface.displayMessage("You have a pre-approved loan of " + preApprovedLoanAmount + "CAD with " + annualInterest + "% annual interest.");
+        }
         userInterface.insertEmptyLine();
-
     }
 
     @Override
