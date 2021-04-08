@@ -1,6 +1,12 @@
 package BusinessLogicLayer.TransactionAction;
 
-public class TransactionModel {
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class TransactionModel implements ITransactionModel{
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     private String accountNumber;
     private String transactionType;
     private int amount;
@@ -25,23 +31,34 @@ public class TransactionModel {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
-    }
-
     public int getAmount() {
         return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String generateRandomTransactionId() {
+        final String STR = "0123456789abcdefghijklmnopqrstuvwxyz";
+        final int GENERATED_STRING_LENGTH = 10;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(GENERATED_STRING_LENGTH);
+        for (int i = 0; i < GENERATED_STRING_LENGTH; i++) {
+            sb.append(STR.charAt(random.nextInt(STR.length())));
+        }
+        return sb.toString();
     }
+
+    public String getCurrentDate() {
+        String date;
+
+        DateTimeFormatter x = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        LocalDateTime now = LocalDateTime.now();
+        date = x.format(now);
+
+        return date;
+    }
+
 }

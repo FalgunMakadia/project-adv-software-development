@@ -1,21 +1,19 @@
 package PresentationLayer;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.User.User;
-import PresentationLayer.CommonPages.IUserInterface;
-import PresentationLayer.MenuPages.Command;
-import PresentationLayer.MenuPages.IUserForm;
 
-import java.util.Map;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.ICommonPagesFactory;
+
+import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 
 public interface IPresentationFactory {
-    IUserInterface createUserInterface();
 
-    Command createExistingBankAccountCommand();
+    IMenuRoutingFactory createMenuRoutingFactory();
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user);
+    IBankCentricPagesFactory createBankCentricPagesFactory();
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user, String currentPage);
+    ICommonPagesFactory createCommonPagesFactory();
 
-    IUserForm createUserForm(Map<Integer, FormCommand> formFields);
+    ICustomerCentricPagesFactory createCustomerCentricPagesFactory();
 }

@@ -1,38 +1,31 @@
 package PresentationLayer;
 
-import BusinessLogicLayer.CustomerAction.FormCommands.FormCommand;
-import BusinessLogicLayer.User.User;
-import PresentationLayer.CommonPages.IUserInterface;
-import PresentationLayer.CommonPages.UserInterface;
-import PresentationLayer.MenuPages.Command;
-import PresentationLayer.MenuPages.ExistingBankAccountCommand;
-import PresentationLayer.MenuPages.IUserForm;
-import PresentationLayer.MenuPages.UserForm;
-
-import java.util.Map;
+import PresentationLayer.MenuRouting.IMenuRoutingFactory;
+import PresentationLayer.MenuRouting.MenuRoutingFactory;
+import PresentationLayer.Pages.BankCentricPages.BankCentricPagesFactory;
+import PresentationLayer.Pages.BankCentricPages.IBankCentricPagesFactory;
+import PresentationLayer.Pages.CommonPages.*;
+import PresentationLayer.Pages.CustomerCentricPages.CustomerCentricPagesFactory;
+import PresentationLayer.Pages.CustomerCentricPages.ICustomerCentricPagesFactory;
 
 public class PresentationFactory implements IPresentationFactory {
     @Override
-    public IUserInterface createUserInterface() {
-        return new UserInterface();
+    public IMenuRoutingFactory createMenuRoutingFactory() {
+        return new MenuRoutingFactory();
     }
 
     @Override
-    public Command createExistingBankAccountCommand() {
-        return new ExistingBankAccountCommand();
+    public IBankCentricPagesFactory createBankCentricPagesFactory() {
+        return new BankCentricPagesFactory();
     }
 
     @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user) {
-        return new UserForm(formFields, user);
-    }
-    @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields, User user, String currentPage) {
-        return new UserForm(formFields, user, currentPage);
+    public ICommonPagesFactory createCommonPagesFactory() {
+        return new CommonPagesFactory();
     }
 
     @Override
-    public IUserForm createUserForm(Map<Integer, FormCommand> formFields) {
-        return new UserForm(formFields);
+    public ICustomerCentricPagesFactory createCustomerCentricPagesFactory() {
+        return new CustomerCentricPagesFactory();
     }
 }
