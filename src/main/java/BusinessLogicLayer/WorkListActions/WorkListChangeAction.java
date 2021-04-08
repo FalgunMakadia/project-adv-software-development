@@ -23,7 +23,7 @@ public class WorkListChangeAction extends WorkListAction {
                         updateCustomerProfile(worklistRequest.getAccountNumber(), worklistRequest.getUser());
                 workListDatabase.updateWorkListStatus(workListID, isDetailsUpdated);
                 if (isDetailsUpdated) {
-                    userInterface.displayMessage("ProfileAbstract details updated successfully");
+                    userInterface.displayMessage("Profile details updated successfully");
                 } else {
                     userInterface.displayMessage("Error in updating profile details");
                 }
