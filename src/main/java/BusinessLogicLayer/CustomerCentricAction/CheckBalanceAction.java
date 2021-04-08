@@ -14,6 +14,10 @@ public class CheckBalanceAction extends AbstractAction {
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
+    public CheckBalanceAction(IAccountOperationDatabase operationDatabase) {
+        accountOperationDatabase = operationDatabase;
+    }
+
     @Override
     public String getActionTitle() {
         return ACTION_TITLE;

@@ -1,9 +1,6 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.BankCentricAction.EnrollNewEmployeeAction;
-import BusinessLogicLayer.BankCentricAction.ExistingBankAccountAction;
-import BusinessLogicLayer.BankCentricAction.OpenNewAccountAction;
-import BusinessLogicLayer.BankCentricAction.WorkListAction;
+import BusinessLogicLayer.BankCentricAction.*;
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
@@ -16,19 +13,28 @@ import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
 public class ActionFactory implements IActionFactory {
+
+    IBankCentricActionFactory bankCentricActionFactory;
+    ICustomerCentricActionFactory customerCentricActionFactory;
+
+    public ActionFactory() {
+        bankCentricActionFactory = new BankCentricActionFactory();
+        customerCentricActionFactory = new CustomerCentricActionFactory();
+    }
+
     @Override
     public IAbstractAction createOpenNewAccount() {
-        return new OpenNewAccountAction();
+        return bankCentricActionFactory.createOpenNewAccountAction();
     }
 
     @Override
     public IAbstractAction createExistingBankAccount() {
-        return new ExistingBankAccountAction();
+        return bankCentricActionFactory.createExistingBankAccountAction();
     }
 
     @Override
     public IAbstractAction createWorkList() {
-        return new WorkListAction();
+        return bankCentricActionFactory.createWorkListAction();
     }
 
     @Override
@@ -38,12 +44,12 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAbstractAction createEnrollNewEmployee() {
-        return new EnrollNewEmployeeAction();
+        return bankCentricActionFactory.createEnrollNewEmployeeAction();
     }
 
     @Override
     public IAbstractAction createUpdatePersonalDetails() {
-        return new UpdatePersonalDetailAction();
+        return customerCentricActionFactory.createUpdatePersonalDetailAction();
     }
 
     @Override
@@ -63,27 +69,27 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAbstractAction createBankStatement() {
-        return new BankStatementAction();
+        return customerCentricActionFactory.createBankStatementAction();
     }
 
     @Override
     public IAbstractAction createCheckBalance() {
-        return new CheckBalanceAction();
+        return customerCentricActionFactory.createCheckBalanceAction();
     }
 
     @Override
     public IAbstractAction createUpdatePassword() {
-        return new UpdatePasswordAction();
+        return customerCentricActionFactory.createUpdatePasswordAction();
     }
 
     @Override
     public IAbstractAction createLoanEstimator() {
-        return new LoanEstimatorAction();
+        return customerCentricActionFactory.createLoanEstimatorAction();
     }
 
     @Override
     public IAbstractAction createCheckPreApprovedLoan() {
-        return new CheckPreApprovedLoanAction();
+        return customerCentricActionFactory.createCheckPreApprovedLoanAction();
     }
 
     @Override
