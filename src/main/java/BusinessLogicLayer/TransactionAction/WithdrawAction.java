@@ -23,6 +23,10 @@ public class WithdrawAction extends Action {
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
     }
 
+    public WithdrawAction(IAccountOperationDatabase operationDatabase) {
+        accountOperationDatabase = operationDatabase;
+    }
+
     @Override
     public String getActionTitle() {
         return ACTION_TITLE;
