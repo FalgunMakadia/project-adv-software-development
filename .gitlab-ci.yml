@@ -21,6 +21,20 @@ build:
     paths:
       - target/*.jar
 
+release_build:
+  stage: build
+  tags:
+    - ugrad
+  only:
+    - release
+  script:
+    - mvn clean compile
+    - mvn package -P test
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
+
 test:
   stage: test
   tags:
