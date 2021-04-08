@@ -3,8 +3,9 @@ package DataAccessLayer.OperationDatabase;
 import BusinessLogicLayer.TransactionAction.ITransactionActionFactory;
 import BusinessLogicLayer.TransactionAction.ITransactionModel;
 import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
-import DataAccessLayer.DatabaseConnection.DatabaseConnection;
+import DataAccessLayer.DatabaseConnection.DatabaseConnectionFactory;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
+import DataAccessLayer.DatabaseConnection.IDatabaseConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,8 +24,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
     ITransactionActionFactory transactionActionFactory;
+    IDatabaseConnectionFactory databaseConnectionFactory;
     public AccountOperationDatabase() {
-        databaseConnection = DatabaseConnection.instance();
+        databaseConnectionFactory = new DatabaseConnectionFactory();
+        databaseConnection = databaseConnectionFactory.getDatabaseConnection();
         transactionActionFactory =  new TransactionActionFactory();
     }
 

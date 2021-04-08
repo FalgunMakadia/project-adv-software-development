@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -26,8 +26,11 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
+    UserFactory userFactory;
+
     public CustomerProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -98,7 +101,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, accountNumber);
-            AbstractProfile profile = new CustomerProfile();
+            AbstractProfile profile = userFactory.createCustomerProfile();
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.first()) {

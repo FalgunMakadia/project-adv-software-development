@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
-import BusinessLogicLayer.User.LoggedInUserContext;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -21,9 +21,12 @@ public class UserProfileDatabase implements IUserProfileDatabase {
     private IDatabaseConnection databaseConnection;
     private ILoggedInUserContext loggedInUserContext;
 
+    private UserFactory userFactory;
     public UserProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
-        loggedInUserContext = LoggedInUserContext.instance();
+        userFactory =  new UserFactory();
+
+        loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 
     @Override

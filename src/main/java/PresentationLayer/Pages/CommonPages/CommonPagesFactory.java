@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
@@ -12,17 +12,17 @@ public class CommonPagesFactory implements ICommonPagesFactory {
     }
 
     @Override
-    public IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields, AbstractProfile profile) {
+    public IUserFormPage createUserForm(Map<Integer, IAbstractFormCommand> formFields, AbstractProfile profile) {
         return new UserFormPage(formFields, profile);
     }
 
     @Override
-    public IUserFormPage createUserForm(Map<Integer,IFormCommand> formFields, AbstractProfile profile, String currentPage) {
+    public IUserFormPage createUserForm(Map<Integer, IAbstractFormCommand> formFields, AbstractProfile profile, String currentPage) {
         return new UserFormPage(formFields, profile, currentPage);
     }
 
     @Override
-    public IUserFormPage createUserForm(Map<Integer, IFormCommand> formFields) {
+    public IUserFormPage createUserForm(Map<Integer, IAbstractFormCommand> formFields) {
         return new UserFormPage(formFields);
     }
 
