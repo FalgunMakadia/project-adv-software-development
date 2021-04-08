@@ -2,12 +2,18 @@ package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
 public class AddressLine2FieldCommand extends FormCommand {
     private final String COMMAND_LABEL = "Address Line 2";
 
     public AddressLine2FieldCommand(AbstractProfile profile) {
         super(profile);
+    }
+
+    public AddressLine2FieldCommand(AbstractProfile profile, IUserInterfacePage userInterfacePage) {
+        super(profile);
+        this.userInterface = userInterfacePage;
     }
 
     @Override

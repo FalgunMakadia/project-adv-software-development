@@ -27,6 +27,11 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();
     }
 
+    public SaveNewAccountProfileFormActionCommand(AbstractProfile profile, IUserProfileDatabase userProfileDatabase) {
+        this.userProfileDatabase = userProfileDatabase;
+        this.profile = profile;
+    }
+
     @Override
     public void execute() {
 
@@ -36,7 +41,7 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
             userInterface.displayMessage("Account Creation Request has been raised");
             userInterface.displayMessage("Your request Id is: " + String.valueOf(workListID));
         }
-        loggedInUserContext.setCurrentPage("");
+        loggedInUserContext.clearCurrentPage();
 
     }
 
@@ -51,14 +56,15 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
         workListRequest.setPriority(PRIORITY);
         workListRequest.setRequestType(WORKLIST_REQUEST_TYPE);
         workListRequest.setUser(profile);
-        workListId = worklistOperationDatabase.addWorkListRequest(workListRequest);
+        workListId = workListOperationDatabase.addWorkListRequest(workListRequest);
         return workListId;
     }
 
     private int createNewUser() {
         String userName = profile.getUserName();
         String defaultPassword = String.valueOf(profile.generateDefaultPassword());
-        int affectedRows = userProfileDatabase.addNewUser(userName, defaultPassword, profile.getProfileRole());
+        String profileRole = profile.getProfileRole();
+        int affectedRows = userProfileDatabase.addNewUser(userName, defaultPassword, profileRole);
         return affectedRows;
     }
 
