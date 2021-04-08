@@ -7,6 +7,7 @@ import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
 public class ExistingBankAccountAction extends AbstractAction {
     private static final String ACTION_TITLE = "Existing Bank Account";
+
     private IAccountOperationDatabase accountOperationDatabase;
 
     public ExistingBankAccountAction() {

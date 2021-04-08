@@ -29,6 +29,8 @@ public class DatabaseConnection implements IDatabaseConnection {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
 
         driverClassname = properties.getProperty(DRIVER_CLASS_NAME);
@@ -40,6 +42,8 @@ public class DatabaseConnection implements IDatabaseConnection {
             Class.forName(driverClassname);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
     }
 
@@ -56,17 +60,25 @@ public class DatabaseConnection implements IDatabaseConnection {
                     url + DATABASE_OPTIONAL_PARAMETERS,
                     dbUsername,
                     dbPassword);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return connection;
     }
 
     public void closeConnection() {
         try {
-            connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            if (null == connection) {
+                return;
+            } else {
+                connection.close();
+            }
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
     }
 }

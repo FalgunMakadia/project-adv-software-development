@@ -29,5 +29,6 @@ public class WorkListTablePage extends AbstractPage {
                     worklistRequest.getHandledBy());
             System.out.println();
         }
+        System.out.println();
     }
 }

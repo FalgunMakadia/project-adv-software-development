@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import PresentationLayer.Pages.AbstractPage;
 
 import java.util.Map;
@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class FormPage extends AbstractPage {
     private static final String COMMAND_TYPE = "ACTION";
 
-    private Map<Integer, IFormCommand> formFields;
+    private Map<Integer, IAbstractFormCommand> formFields;
     String currentPage;
 
-    public FormPage(Map<Integer,IFormCommand> formFields, String currentPage) {
+    public FormPage(Map<Integer, IAbstractFormCommand> formFields, String currentPage) {
         this.formFields = formFields;
         this.currentPage = currentPage;
     }
@@ -23,7 +23,7 @@ public class FormPage extends AbstractPage {
         do {
             Scanner scanner = new Scanner(System.in);
             for (int fieldIndex = 1; fieldIndex <= formFields.size(); fieldIndex++) {
-               IFormCommand command = formFields.get(fieldIndex);
+               IAbstractFormCommand command = formFields.get(fieldIndex);
                 if (null == command.getFieldValue() || COMMAND_TYPE == command.getFieldValue()) {
                     System.out.println(fieldIndex + ". " + command.getCommandLabel());
                 } else {
@@ -31,10 +31,10 @@ public class FormPage extends AbstractPage {
                 }
             }
             System.out.println("Enter Number between 1 to " + formFields.size() + " to edit the Form Fields");
-            System.out.println("Enter 14 to go back to main menu");
+            System.out.print("Enter 14 to go back to main menu: ");
             int userInput = scanner.nextInt();
             if (validateIntegerInputFormat(userInput)) {
-               IFormCommand command = formFields.get(userInput);
+               IAbstractFormCommand command = formFields.get(userInput);
                 command.execute();
             }
         } while (loggedInUserContext.checkCurrentPageStatus(currentPage));

@@ -1,6 +1,7 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
+import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 import PresentationLayer.Pages.IAbstractPage;
 
@@ -20,7 +21,7 @@ public class UserFormPage implements IUserFormPage {
         formPage = new FormPage(formFields, EMPTY_STRING);
     }
 
-    public UserFormPage(Map<Integer, IFormCommand> formFields, AbstractProfile profile, String currentPage) {
+    public UserFormPage(Map<Integer, IAbstractFormCommand> formFields, AbstractProfile profile, String currentPage) {
         this.profile = profile;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);

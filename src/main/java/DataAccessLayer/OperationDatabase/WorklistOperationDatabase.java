@@ -1,7 +1,7 @@
 package DataAccessLayer.OperationDatabase;
 
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.UserFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
@@ -36,8 +36,11 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
+    UserFactory userFactory;
+
     public WorklistOperationDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -87,8 +90,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 userInsertStatement.executeUpdate();
             }
             return record_id;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -124,8 +129,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 return workListRequest;
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -152,8 +159,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 workListRequest.setHandledBy(resultSet.getString(HANDLED_BY_COLUMN_NAME));
                 workListRequestMap.put(requestId, workListRequest);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -164,7 +173,7 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
     public AbstractProfile getWorkListUserDetail(int id) {
         connection = databaseConnection.openConnection();
         String query = "SELECT * FROM worklist_user_details WHERE worklist_id=?";
-        AbstractProfile profile = new CustomerProfile();
+        AbstractProfile profile = userFactory.createCustomerProfile();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
@@ -186,8 +195,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
                 return profile;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -205,8 +216,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
 
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1 ? true : false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -222,8 +235,10 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             statement.setBoolean(1, isProcessed);
             statement.setInt(2, worklistId);
             return statement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }

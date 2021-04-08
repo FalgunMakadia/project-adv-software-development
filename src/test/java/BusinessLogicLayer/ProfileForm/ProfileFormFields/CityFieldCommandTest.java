@@ -14,7 +14,7 @@ class CityFieldCommandTest {
     @BeforeEach
     void executeTest() {
         IUserInterfacePage userInterface = Mockito.mock(IUserInterfacePage.class);
-        Mockito.when(userInterface.getMandatoryUserInput("Enter New City*: ")).thenReturn("test");
+        Mockito.when(userInterface.getMandatoryUserInput("Enter City*: ")).thenReturn("test");
         formCommand = new CityFieldCommand(new CustomerProfile(), userInterface);
         formCommand.execute();
     }

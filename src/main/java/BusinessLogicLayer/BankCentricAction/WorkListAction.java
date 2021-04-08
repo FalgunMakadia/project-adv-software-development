@@ -41,7 +41,9 @@ public class WorkListAction extends AbstractAction {
     @Override
     public void performAction() {
         this.workListRequestMap = workListOperationDatabase.getWorkList();
-        if (this.workListRequestMap.size() > 0) {
+        if (this.workListRequestMap.size() == 0) {
+            userInterface.displayMessage("No Active WorkList is available");
+        } else {
             workListPage = bankCentricPagesFactory.createWorkListTable(workListRequestMap);
             workListPage.printPage();
             userInterface.displayMessage("Please Enter Number Worklist ID to " +

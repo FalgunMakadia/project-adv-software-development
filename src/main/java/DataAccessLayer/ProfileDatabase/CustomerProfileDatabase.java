@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
-import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -26,8 +26,11 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
     Connection connection = null;
     IDatabaseConnection databaseConnection;
 
+    UserFactory userFactory;
+
     public CustomerProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
+        userFactory = new UserFactory();
     }
 
     @Override
@@ -41,7 +44,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String createAccount = "INSERT INTO accounts (account_no, active_status) VALUES " +
                 "(?, ?)";
-        String activateUserCredentials = "UPDATE INTO login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
+        String activateUserCredentials = "UPDATE login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
@@ -82,8 +85,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                     return false;
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -98,7 +103,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, accountNumber);
-            AbstractProfile profile = new CustomerProfile();
+            AbstractProfile profile = userFactory.createCustomerProfile();
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.first()) {
@@ -118,8 +123,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
                 return profile;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -154,8 +161,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             statement.setString(14, accountNumber);
             affectedRows = statement.executeUpdate();
             return affectedRows == 1 ? true : false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }

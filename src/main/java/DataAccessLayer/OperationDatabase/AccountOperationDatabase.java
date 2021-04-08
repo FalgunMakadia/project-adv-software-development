@@ -46,8 +46,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 balance = rs.getInt(BALANCE_COLUMN_NAME);
             }
             return balance;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -65,8 +67,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
             statement.setString(2, accountNumber);
             int output = statement.executeUpdate();
             return output;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -88,8 +92,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 accountStatus = rs.getBoolean(ACTIVE_STATUS_COLUMN_NAME);
             }
             return accountStatus;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -112,8 +118,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 statement.setString(5, transaction.getCurrentDate());
                 statement.executeUpdate();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -136,8 +144,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 String date = resultSet.getString(TRANSACTION_DATE_COLUMN_NAME);
                 transactionList.add(transactionActionFactory.createTransactionModel(accountNumber, transactionType, amount, date));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }

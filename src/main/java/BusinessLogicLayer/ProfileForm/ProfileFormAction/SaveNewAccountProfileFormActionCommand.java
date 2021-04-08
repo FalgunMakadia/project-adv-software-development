@@ -39,7 +39,7 @@ public class SaveNewAccountProfileFormActionCommand extends AbstractFormCommand 
         if (affectedRows > 0) {
             int workListID = createNewWorkListRequest();
             userInterface.displayMessage("Account Creation Request has been raised");
-            userInterface.displayMessage("Your request Id is: " + String.valueOf(workListID));
+            userInterface.displayMessage("Your request Id is: " + String.valueOf(workListID) + "\n");
         }
         loggedInUserContext.clearCurrentPage();
 

@@ -25,5 +25,6 @@ public class BankStatementTablePage extends AbstractPage {
                     transaction.getDate());
             System.out.println();
         }
+        System.out.println();
     }
 }

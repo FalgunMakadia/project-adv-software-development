@@ -1,7 +1,7 @@
 package DataAccessLayer.ProfileDatabase;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
-import BusinessLogicLayer.User.LoggedInUserContext;
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseConnection.DatabaseConnection;
 import DataAccessLayer.DatabaseConnection.IDatabaseConnection;
 
@@ -15,15 +15,20 @@ public class UserProfileDatabase implements IUserProfileDatabase {
     private static final String USER_ROLE_COLUMN_NAME = "userRole";
     private static final String ACCOUNT_NUMBER_COLUMN_NAME = "accountNumber";
     private static final String ACTIVE_STATUS_COLUMN_NAME = "ActiveStatus";
+    private static final String EMPLOYEE_ROLE = "E";
 
     private Connection connection;
     private PreparedStatement preparedStatement = null;
     private IDatabaseConnection databaseConnection;
     private ILoggedInUserContext loggedInUserContext;
 
+    private UserFactory userFactory;
+
     public UserProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
-        loggedInUserContext = LoggedInUserContext.instance();
+        userFactory = new UserFactory();
+
+        loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 
     @Override
@@ -47,6 +52,8 @@ public class UserProfileDatabase implements IUserProfileDatabase {
 
         } catch (SQLException exception) {
             exception.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -58,15 +65,21 @@ public class UserProfileDatabase implements IUserProfileDatabase {
         int affectedRow = 0;
         String query = "INSERT INTO login VALUES (?,?,?,?,?)";
         try {
+            boolean isActive = false;
+            if(userRole == EMPLOYEE_ROLE) {
+                isActive = true;
+            }
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, defaultPassword);
             preparedStatement.setString(3, null);
             preparedStatement.setString(4, userRole);
-            preparedStatement.setBoolean(5, false);
+            preparedStatement.setBoolean(5, isActive);
             affectedRow = preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
@@ -86,6 +99,8 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
+            exception.printStackTrace();
+        } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();

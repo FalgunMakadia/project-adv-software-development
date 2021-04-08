@@ -9,7 +9,7 @@ import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
-public abstract class AbstractFormCommand implements IFormCommand {
+public abstract class AbstractFormCommand implements IAbstractFormCommand {
     protected AbstractProfile profile;
     protected IUserInterfacePage userInterface;
     protected IWorklistOperationDatabase workListOperationDatabase;
