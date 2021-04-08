@@ -17,7 +17,7 @@ class SaveNewAccountProfileFormActionCommandTest {
     @Test
     void execute() {
         IUserProfileDatabase userProfileDatabase = Mockito.mock(IUserProfileDatabase.class);
-        Mockito.when(userProfileDatabase.addNewUser("sam","123","C")).thenReturn(0);
+        Mockito.when(userProfileDatabase.addNewUser("sam", "123", "C")).thenReturn(0);
         AbstractProfile profile = Mockito.mock(AbstractProfile.class);
         Mockito.when(profile.generateDefaultPassword()).thenReturn(123);
         Mockito.when(profile.getUserName()).thenReturn("sam");
@@ -26,7 +26,7 @@ class SaveNewAccountProfileFormActionCommandTest {
         formCommand.execute();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
 
-        assertEquals("",loggedInUserContext.getCurrentPage());
+        assertEquals("", loggedInUserContext.getCurrentPage());
     }
 
     @Test
@@ -34,7 +34,7 @@ class SaveNewAccountProfileFormActionCommandTest {
         AbstractProfile profile = new CustomerProfile();
         IUserProfileDatabase userProfileDatabase = new UserProfileDatabase();
         IAbstractFormCommand formCommand = new SaveNewAccountProfileFormActionCommand(profile, userProfileDatabase);
-        assertEquals("ACTION",formCommand.getFieldValue());
+        assertEquals("ACTION", formCommand.getFieldValue());
     }
 
     @Test
@@ -42,6 +42,6 @@ class SaveNewAccountProfileFormActionCommandTest {
         AbstractProfile profile = new CustomerProfile();
         IUserProfileDatabase userProfileDatabase = new UserProfileDatabase();
         IAbstractFormCommand formCommand = new SaveNewAccountProfileFormActionCommand(profile, userProfileDatabase);
-        assertEquals("Save",formCommand.getCommandLabel());
+        assertEquals("Save", formCommand.getCommandLabel());
     }
 }

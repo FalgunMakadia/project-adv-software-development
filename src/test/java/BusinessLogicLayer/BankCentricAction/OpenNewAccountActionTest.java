@@ -4,9 +4,7 @@ import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.util.LinkedHashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class OpenNewAccountActionTest {
@@ -34,5 +32,4 @@ class OpenNewAccountActionTest {
 
         assertEquals("Open New Account", loggedInUserContext.getCurrentPage());
     }
-
 }

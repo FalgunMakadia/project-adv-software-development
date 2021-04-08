@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PassPortNumberFieldCommandTest {
     AbstractFormCommand formCommand;
+
     @BeforeEach
     void executeTest() {
         IUserInterfacePage userInterface = Mockito.mock(IUserInterfacePage.class);
@@ -21,12 +22,12 @@ class PassPortNumberFieldCommandTest {
 
     @Test
     void getFieldValueTest() {
-        assertEquals("test",formCommand.getFieldValue());
+        assertEquals("test", formCommand.getFieldValue());
     }
 
     @Test
     void getCommandLabelTest() {
-        assertEquals("Passport Number",formCommand.getCommandLabel());
+        assertEquals("Passport Number", formCommand.getCommandLabel());
     }
 
 }

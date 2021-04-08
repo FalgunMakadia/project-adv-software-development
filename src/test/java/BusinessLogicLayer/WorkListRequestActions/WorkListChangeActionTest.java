@@ -3,7 +3,6 @@ package BusinessLogicLayer.WorkListRequestActions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
 class WorkListChangeActionTest {
     @Test
     void processWorkListTest() {

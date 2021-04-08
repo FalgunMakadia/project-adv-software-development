@@ -32,19 +32,15 @@ class UpdatePersonalDetailActionTest {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber(null);
         ICustomerProfileDatabase customerProfileDatabase = Mockito.mock(CustomerProfileDatabase.class);
-
-        Mockito.doAnswer((arguments)->{
-            if(arguments.getArgument(0).equals("111222333")) {
+        Mockito.doAnswer((arguments) -> {
+            if (arguments.getArgument(0).equals("111222333")) {
                 return Mockito.mock(AbstractProfile.class);
             } else {
                 return null;
             }
         }).when(customerProfileDatabase).getCustomerProfile(Mockito.anyString());
-
         IAbstractAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
-
         updatePersonalDetailAction.performAction();
-
         assertEquals("Update Personal Details", loggedInUserContext.getCurrentPage());
     }
 
@@ -53,14 +49,11 @@ class UpdatePersonalDetailActionTest {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("123456653");
         ICustomerProfileDatabase customerProfileDatabase = Mockito.mock(CustomerProfileDatabase.class);
-
-        Mockito.doAnswer((arguments)->{
+        Mockito.doAnswer((arguments) -> {
             assertEquals(arguments.getArgument(0), "123456653");
             return null;
         }).when(customerProfileDatabase).getCustomerProfile(Mockito.anyString());
-
         IAbstractAction updatePersonalDetailAction = new UpdatePersonalDetailAction(customerProfileDatabase);
-
         updatePersonalDetailAction.performAction();
     }
 }
