@@ -2,7 +2,6 @@ package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
 import BusinessLogicLayer.ProfileForm.ProfileFormAction.*;
 import BusinessLogicLayer.ProfileForm.ProfileFormFields.*;
-import BusinessLogicLayer.User.BankEmployeeProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
@@ -24,7 +23,7 @@ public class ProfileFormFactory implements IProfileFormFactory{
     }
 
     @Override
-    public IFormCommand createSaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile) {
+    public IFormCommand createSaveNewEmployeeProfileFormActionCommand(AbstractProfile bankEmployeeProfile) {
         return new SaveNewEmployeeProfileFormActionCommand(bankEmployeeProfile);
     }
 

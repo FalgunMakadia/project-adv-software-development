@@ -1,6 +1,5 @@
 package BusinessLogicLayer.ProfileForm.CommonProfileForm;
 
-import BusinessLogicLayer.User.BankEmployeeProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Map;
@@ -12,7 +11,7 @@ public interface IProfileFormFactory {
 
     IFormCommand createSaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile);
 
-    IFormCommand createSaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile);
+    IFormCommand createSaveNewEmployeeProfileFormActionCommand(AbstractProfile bankEmployeeProfile);
 
     IFormCommand createSaveUpdatedPersonalDetailFormActionCommand(AbstractProfile profile);
 

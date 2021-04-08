@@ -22,72 +22,72 @@ public class ActionFactory implements IActionFactory {
     }
 
     @Override
-    public IAction createOpenNewAccount() {
+    public IAbstractAction createOpenNewAccount() {
         return bankCentricActionFactory.createOpenNewAccountAction();
     }
 
     @Override
-    public IAction createExistingBankAccount() {
+    public IAbstractAction createExistingBankAccount() {
         return bankCentricActionFactory.createExistingBankAccountAction();
     }
 
     @Override
-    public IAction createWorkList() {
+    public IAbstractAction createWorkList() {
         return bankCentricActionFactory.createWorkListAction();
     }
 
     @Override
-    public IAction createSignOut() {
+    public IAbstractAction createSignOut() {
         return commonActionFactory.createSignOutAction();
     }
 
     @Override
-    public IAction createEnrollNewEmployee() {
+    public IAbstractAction createEnrollNewEmployee() {
         return bankCentricActionFactory.createEnrollNewEmployeeAction();
     }
 
     @Override
-    public IAction createUpdatePersonalDetails() {
+    public IAbstractAction createUpdatePersonalDetails() {
         return customerCentricActionFactory.createUpdatePersonalDetailAction();
     }
 
     @Override
-    public IAction createWithdraw() {
-        return transactionActionFactory.createWithdrawAction();
+    public IAbstractAction createWithdraw() {
+        return new WithdrawAction();
     }
 
     @Override
-    public IAction createDeposit() {
-        return transactionActionFactory.createDepositAction();
+    public IAbstractAction createDeposit() {
+        return new DepositAction();
     }
 
     @Override
-    public IAction createTransfer() {
-        return transactionActionFactory.createTransferAction();
+    public IAbstractAction createTransfer() {
+        return new TransferAction();
     }
 
     @Override
-    public IAction createBankStatement() {
+    public IAbstractAction createBankStatement() {
         return customerCentricActionFactory.createBankStatementAction();
     }
 
     @Override
-    public IAction createCheckBalance() {
+    public IAbstractAction createCheckBalance() {
         return customerCentricActionFactory.createCheckBalanceAction();
     }
 
     @Override
-    public IAction createUpdatePassword() {
+    public IAbstractAction createUpdatePassword() {
         return customerCentricActionFactory.createUpdatePasswordAction();
     }
 
     @Override
-    public IAction createLoanEstimator() {
+    public IAbstractAction createLoanEstimator() {
         return customerCentricActionFactory.createLoanEstimatorAction();
     }
 
     @Override
-    public IAction createCheckPreApprovedLoan() {
+    public IAbstractAction createCheckPreApprovedLoan() {
         return customerCentricActionFactory.createCheckPreApprovedLoanAction();
     }
 

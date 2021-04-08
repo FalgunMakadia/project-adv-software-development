@@ -9,7 +9,7 @@ class CommonActionFactoryTest {
     @Test
     void createSignOutAction() {
         CommonActionFactory  commonActionFactory = new CommonActionFactory();
-        IAction signOut = commonActionFactory.createSignOutAction();
+        IAbstractAction signOut = commonActionFactory.createSignOutAction();
         assertEquals("Sign Out",signOut.getActionTitle());
     }
 }

@@ -15,7 +15,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
     private IUserProfileDatabase userProfileDatabase;
     private IEmployeeProfileDatabase employeeProfileDatabase;
 
-    public SaveNewEmployeeProfileFormActionCommand(BankEmployeeProfile bankEmployeeProfile) {
+    public SaveNewEmployeeProfileFormActionCommand(AbstractProfile bankEmployeeProfile) {
         super();
         this.profile = bankEmployeeProfile;
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();

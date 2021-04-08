@@ -4,9 +4,7 @@ import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
-import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

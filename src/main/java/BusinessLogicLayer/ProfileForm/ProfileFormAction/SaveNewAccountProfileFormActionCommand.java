@@ -2,9 +2,9 @@ package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListActionFactory;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
-import BusinessLogicLayer.WorkListActions.WorkListActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
@@ -16,12 +16,12 @@ public class SaveNewAccountProfileFormActionCommand extends FormCommand {
 
     private IProfileDatabaseFactory profileDatabaseFactory;
     private IUserProfileDatabase userProfileDatabase;
-    private IWorkListActionFactory workListActionFactory;
+    private IWorkListRequestActionFactory workListActionFactory;
 
     public SaveNewAccountProfileFormActionCommand(AbstractProfile newCustomerProfile) {
         super();
         this.profile = newCustomerProfile;
-        workListActionFactory = new WorkListActionFactory();
+        workListActionFactory = new WorkListRequestActionFactory();
 
         profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();
         userProfileDatabase = profileDatabaseFactory.createUserProfileDatabase();

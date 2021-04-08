@@ -1,7 +1,7 @@
 package DataAccessLayer.OperationDatabase;
 
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.WorkListActions.IWorkListRequest;
+import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
 
 import java.util.Map;
 

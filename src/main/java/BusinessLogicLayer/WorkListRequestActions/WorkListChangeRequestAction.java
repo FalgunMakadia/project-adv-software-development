@@ -1,11 +1,10 @@
-package BusinessLogicLayer.WorkListActions;
+package BusinessLogicLayer.WorkListRequestActions;
 
 import BusinessLogicLayer.User.AbstractProfile;
-import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
-public class WorkListChangeAction extends WorkListAction {
+public class WorkListChangeRequestAction extends AbstractWorkListRequestAction {
 
-    public WorkListChangeAction(IWorkListRequest workListRequest, int workListID) {
+    public WorkListChangeRequestAction(IWorkListRequest workListRequest, int workListID) {
         super(workListRequest, workListID);
     }
 
@@ -20,7 +19,7 @@ public class WorkListChangeAction extends WorkListAction {
             String processInput = userInterface.getConfirmation("Do you want to process this change");
             if (processInput.equalsIgnoreCase(YES)) {
                 boolean isDetailsUpdated = customerDatabase.
-                        updateCustomerProfile(worklistRequest.getAccountNumber(), worklistRequest.getUser());
+                        updateCustomerProfile(workListRequest.getAccountNumber(), workListRequest.getUser());
                 workListDatabase.updateWorkListStatus(workListID, isDetailsUpdated);
                 if (isDetailsUpdated) {
                     userInterface.displayMessage("ProfileAbstract details updated successfully");
@@ -36,14 +35,14 @@ public class WorkListChangeAction extends WorkListAction {
 
     private void showComparisonOfUserDetails() {
         AbstractProfile oldProfileAbstractDetails = null;
-        oldProfileAbstractDetails = customerDatabase.getCustomerProfile(worklistRequest.getAccountNumber());
+        oldProfileAbstractDetails = customerDatabase.getCustomerProfile(workListRequest.getAccountNumber());
         userDetailPage = bankCentricPagesFactory.createUserDetailPage(oldProfileAbstractDetails);
         userInterface.displayMessage("====Old Details====");
         userDetailPage.printPage();
         userInterface.insertEmptyLine();
 
         userInterface.displayMessage("=====New ProfileAbstract Details====");
-        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(workListRequest.getUser());
         userDetailPage.printPage();
         userInterface.insertEmptyLine();
     }

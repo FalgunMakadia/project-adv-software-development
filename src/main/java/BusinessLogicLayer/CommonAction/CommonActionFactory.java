@@ -7,7 +7,7 @@ public class CommonActionFactory implements ICommonActionFactory {
     }
 
     @Override
-    public IAction createSignOutAction() {
+    public IAbstractAction createSignOutAction() {
         return new SignOutAction();
     }
 }

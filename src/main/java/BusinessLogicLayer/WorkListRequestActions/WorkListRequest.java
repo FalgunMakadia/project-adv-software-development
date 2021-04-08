@@ -1,4 +1,4 @@
-package BusinessLogicLayer.WorkListActions;
+package BusinessLogicLayer.WorkListRequestActions;
 
 import BusinessLogicLayer.User.AbstractProfile;
 

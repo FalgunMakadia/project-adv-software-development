@@ -1,6 +1,6 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +19,7 @@ class OpenNewAccountActionTest {
 
     @Test
     void performActionTest() {
-        IAction openNewAccountAction = Mockito.mock(OpenNewAccountAction.class);
+        IAbstractAction openNewAccountAction = Mockito.mock(OpenNewAccountAction.class);
         Mockito.doNothing().when(openNewAccountAction).performAction();
         openNewAccountAction.performAction();
 

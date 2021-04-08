@@ -1,6 +1,6 @@
 package BusinessLogicLayer.Transaction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.TransactionAction.WithdrawAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
@@ -26,7 +26,7 @@ public class WithdrawActionTest {
 
     @Test
     void getActionTitleTest() {
-        IAction withdrawAction = new WithdrawAction();
+        IAbstractAction withdrawAction = new WithdrawAction();
         assertEquals("Withdraw", withdrawAction.getActionTitle());
     }
 

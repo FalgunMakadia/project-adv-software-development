@@ -1,4 +1,4 @@
-package BusinessLogicLayer.WorkListActions;
+package BusinessLogicLayer.WorkListRequestActions;
 
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
@@ -15,10 +15,10 @@ import PresentationLayer.IPresentationFactory;
 import PresentationLayer.Pages.IPage;
 import PresentationLayer.PresentationFactory;
 
-public abstract class WorkListAction implements IWorkListAction {
+public abstract class AbstractWorkListRequestAction implements IWorkListRequestAction {
     protected static final String YES = "y";
 
-    protected IWorkListRequest worklistRequest;
+    protected IWorkListRequest workListRequest;
     protected int workListID;
     protected IUserInterfacePage userInterface;
     protected ILoggedInUserContext loggedInUserContext;
@@ -32,8 +32,8 @@ public abstract class WorkListAction implements IWorkListAction {
     protected IOperationDatabaseFactory operationDatabaseFactory;
     protected IProfileDatabaseFactory profileDatabaseFactory;
 
-    public WorkListAction(IWorkListRequest workListRequest, int workListID) {
-        this.worklistRequest = workListRequest;
+    public AbstractWorkListRequestAction(IWorkListRequest workListRequest, int workListID) {
+        this.workListRequest = workListRequest;
         this.workListID = workListID;
         this.loggedInUserContext = LoggedInUserContext.instance();
 
@@ -51,9 +51,9 @@ public abstract class WorkListAction implements IWorkListAction {
 
     public void showWorkListDetail() {
         this.userInterface.displayMessage("Request ID: " + workListID);
-        this.userInterface.displayMessage("Request Type: " + worklistRequest.getRequestType());
-        this.userInterface.displayMessage("Account Number: " + worklistRequest.getAccountNumber());
-        this.userInterface.displayMessage("Priority: " + worklistRequest.getPriority());
+        this.userInterface.displayMessage("Request Type: " + workListRequest.getRequestType());
+        this.userInterface.displayMessage("Account Number: " + workListRequest.getAccountNumber());
+        this.userInterface.displayMessage("Priority: " + workListRequest.getPriority());
     }
 
     public Boolean assignWorkList() {

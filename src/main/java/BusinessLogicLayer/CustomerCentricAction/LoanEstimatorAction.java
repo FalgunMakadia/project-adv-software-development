@@ -1,13 +1,13 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoanEstimatorAction extends Action {
+public class LoanEstimatorAction extends AbstractAction {
     private static final String ACTION_LABEL = "Loan Estimator";
     private static final int MINIMUM_LOAN_AMOUNT = 10000;
     private static final double DEFAULT_INTEREST_RATE = 8.8;
@@ -41,7 +41,7 @@ public class LoanEstimatorAction extends Action {
 
         balance = accountOperationDatabase.getBalance(accountNumber);
 
-        String userInput = userInterface.getMandatoryLongUserInputWithMinimumValue("Enter Loan Amount (minimum " + MINIMUM_LOAN_AMOUNT + "): ", MINIMUM_LOAN_AMOUNT);
+        String userInput = userInterface.getMandatoryLongUserInputWithMinimumValue("Enter Loan Amount ", MINIMUM_LOAN_AMOUNT);
         long loanAmount = convertStringToLong(userInput);
 
         userInput = userInterface.getMandatoryIntegerUserInput("Enter tenure (years): ");

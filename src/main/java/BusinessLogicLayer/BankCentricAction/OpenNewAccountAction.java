@@ -3,15 +3,14 @@ package BusinessLogicLayer.BankCentricAction;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.IProfileFormFactory;
 import BusinessLogicLayer.ProfileForm.CommonProfileForm.ProfileFormFactory;
-import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import BusinessLogicLayer.User.AbstractProfile;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class OpenNewAccountAction extends Action {
+public class OpenNewAccountAction extends AbstractAction {
     private static final String ACTION_TITLE = "Open New Account";
 
     private Map<Integer, IFormCommand> formActionCommandMap;
@@ -27,7 +26,7 @@ public class OpenNewAccountAction extends Action {
     public OpenNewAccountAction() {
         super();
         profileFormFactory = new ProfileFormFactory();
-        customer = new CustomerProfile();
+        customer = userFactory.createCustomerProfile();
 
         getOpenNewAccountFormFieldMap();
         formActionCommandMap = new LinkedHashMap<>();
