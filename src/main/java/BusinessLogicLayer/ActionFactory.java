@@ -1,98 +1,98 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.BankAction.EnrollNewEmployee;
-import BusinessLogicLayer.BankAction.ExistingBankAccount;
-import BusinessLogicLayer.BankAction.OpenNewAccount;
-import BusinessLogicLayer.BankAction.WorkList;
-import BusinessLogicLayer.CommonAction.Action;
-import BusinessLogicLayer.CommonAction.ILogin;
-import BusinessLogicLayer.CommonAction.Login;
-import BusinessLogicLayer.CommonAction.SignOut;
-import BusinessLogicLayer.CustomerAction.*;
-import BusinessLogicLayer.TransactionAction.Deposit;
-import BusinessLogicLayer.TransactionAction.Transfer;
-import BusinessLogicLayer.TransactionAction.Withdraw;
-import BusinessLogicLayer.User.Customer;
-import BusinessLogicLayer.User.User;
+import BusinessLogicLayer.BankCentricAction.EnrollNewEmployeeAction;
+import BusinessLogicLayer.BankCentricAction.ExistingBankAccountAction;
+import BusinessLogicLayer.BankCentricAction.OpenNewAccountAction;
+import BusinessLogicLayer.BankCentricAction.WorkListAction;
+import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.ISignInAction;
+import BusinessLogicLayer.CommonAction.SignInAction;
+import BusinessLogicLayer.CommonAction.SignOutAction;
+import BusinessLogicLayer.CustomerCentricAction.*;
+import BusinessLogicLayer.TransactionAction.DepositAction;
+import BusinessLogicLayer.TransactionAction.TransferAction;
+import BusinessLogicLayer.TransactionAction.WithdrawAction;
+import BusinessLogicLayer.User.CustomerProfile;
+import BusinessLogicLayer.User.AbstractProfile;
 
 public class ActionFactory implements IActionFactory {
     @Override
-    public Action createOpenNewAccount() {
-        return new OpenNewAccount();
+    public IAction createOpenNewAccount() {
+        return new OpenNewAccountAction();
     }
 
     @Override
-    public Action createExistingBankAccount() {
-        return new ExistingBankAccount();
+    public IAction createExistingBankAccount() {
+        return new ExistingBankAccountAction();
     }
 
     @Override
-    public Action createWorkList() {
-        return new WorkList();
+    public IAction createWorkList() {
+        return new WorkListAction();
     }
 
     @Override
-    public Action createSignOut() {
-        return new SignOut();
+    public IAction createSignOut() {
+        return new SignOutAction();
     }
 
     @Override
-    public Action createEnrollNewEmployee() {
-        return new EnrollNewEmployee();
+    public IAction createEnrollNewEmployee() {
+        return new EnrollNewEmployeeAction();
     }
 
     @Override
-    public Action createUpdatePersonalDetails() {
-        return new UpdatePersonalDetails();
+    public IAction createUpdatePersonalDetails() {
+        return new UpdatePersonalDetailAction();
     }
 
     @Override
-    public Action createWithdraw() {
-        return new Withdraw();
+    public IAction createWithdraw() {
+        return new WithdrawAction();
     }
 
     @Override
-    public Action createDeposit() {
-        return new Deposit();
+    public IAction createDeposit() {
+        return new DepositAction();
     }
 
     @Override
-    public Action createTransfer() {
-        return new Transfer();
+    public IAction createTransfer() {
+        return new TransferAction();
     }
 
     @Override
-    public Action createBankStatement() {
-        return new BankStatement();
+    public IAction createBankStatement() {
+        return new BankStatementAction();
     }
 
     @Override
-    public Action createCheckBalance() {
-        return new CheckBalance();
+    public IAction createCheckBalance() {
+        return new CheckBalanceAction();
     }
 
     @Override
-    public Action createUpdatePassword() {
-        return new UpdatePassword();
+    public IAction createUpdatePassword() {
+        return new UpdatePasswordAction();
     }
 
     @Override
-    public Action createLoanEstimator() {
-        return new LoanEstimator();
+    public IAction createLoanEstimator() {
+        return new LoanEstimatorAction();
     }
 
     @Override
-    public Action createCheckPreApprovedLoan() {
-        return new CheckPreApprovedLoan();
+    public IAction createCheckPreApprovedLoan() {
+        return new CheckPreApprovedLoanAction();
     }
 
     @Override
-    public ILogin createLogin() {
-        return new Login();
+    public ISignInAction createLogin() {
+        return new SignInAction();
     }
 
     @Override
-    public User createCustomer() {
-        return new Customer();
+    public AbstractProfile createCustomer() {
+        return new CustomerProfile();
     }
 }

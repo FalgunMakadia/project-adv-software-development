@@ -6,11 +6,13 @@ stages:
 variables:
   DeploymentFileName: buildFiles
 
-
 build:
   stage: build
   tags:
     - ugrad
+  except:
+    - release
+    - master
   script:
     - mvn clean compile
     - mvn package
@@ -19,7 +21,19 @@ build:
     paths:
       - target/*.jar
 
-
+release_build:
+  stage: build
+  tags:
+    - ugrad
+  only:
+    - release
+  script:
+    - mvn clean compile
+    - mvn package -P test
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
 
 test:
   stage: test
@@ -41,7 +55,7 @@ DevelopDeploy:
   only:
     - Develop
   before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
@@ -57,7 +71,7 @@ ProductionDeploy:
   only:
     - master
   before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
@@ -73,7 +87,7 @@ TestDeploy:
   only:
     - release
   before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
     - echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
   script:
@@ -81,4 +95,3 @@ TestDeploy:
     - echo "$DEPLOY_SSH_KEY" >> ~/.ssh/gitlab-ci-delivery
     - chmod og-rwx ~/.ssh/gitlab-ci-delivery
     - scp -r -o StrictHostKeyChecking=no "target/running-unit-tests.jar" "${DEPLOY_USER}@${DEPLOY_HOST}:${RELEASE_DEPLOY_DIR}"
-

@@ -60,6 +60,11 @@ public class LoggedInUserContext implements ILoggedInUserContext {
         this.currentPage = currentPage;
     }
 
+    @Override
+    public void clearCurrentPage() {
+        this.currentPage = "";
+    }
+
     public String getCurrentPage() {
         return currentPage;
     }
@@ -70,6 +75,15 @@ public class LoggedInUserContext implements ILoggedInUserContext {
 
     public boolean checkCurrentPageStatus(String menuLabel) {
         return currentPage.equals(menuLabel);
+    }
+
+    @Override
+    public void signOut() {
+        setUserName(null);
+        setUserRole(null);
+        setAccountNumber(null);
+        setActiveStatus(false);
+        setLoginStatus(false);
     }
 
     public Boolean getLoginStatus() {
