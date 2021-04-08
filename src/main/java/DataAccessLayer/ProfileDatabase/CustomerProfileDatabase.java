@@ -86,9 +86,9 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 }
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -124,9 +124,9 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 return profile;
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -163,9 +163,9 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
 
             return affectedRows == 1 ? true : false;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }

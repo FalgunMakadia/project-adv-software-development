@@ -48,9 +48,9 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
             }
             return balance;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -70,9 +70,9 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
             int output = statement.executeUpdate();
             return output;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -95,9 +95,9 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
             }
             return accountStatus;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -122,9 +122,9 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 statement.executeUpdate();
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -148,9 +148,9 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 transactionList.add(transactionActionFactory.createTransactionModel(accountNumber, transactionType, amount, date));
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }

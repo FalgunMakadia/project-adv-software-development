@@ -57,13 +57,13 @@ public class DatabaseConnection implements IDatabaseConnection {
     public Connection openConnection() {
         try {
             connection = DriverManager.getConnection(
-                    DATABASE_URL + DATABASE_OPTIONAL_PARAMETERS,
+                    url + DATABASE_OPTIONAL_PARAMETERS,
                     dbUsername,
                     dbPassword);
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         }
         return connection;
     }

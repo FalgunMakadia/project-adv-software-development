@@ -91,9 +91,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             }
             return record_id;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -130,9 +130,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             }
 
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -160,9 +160,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 workListRequestMap.put(requestId, workListRequest);
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -197,9 +197,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 return profile;
             }
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -218,9 +218,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             int affectedRows = statement.executeUpdate();
             return affectedRows == 1 ? true : false;
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -238,9 +238,9 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
 
             return statement.execute();
         } catch (SQLException exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } catch (Exception exception) {
-            exception.getMessage();
+            exception.printStackTrace();
         } finally {
             databaseConnection.closeConnection();
         }
