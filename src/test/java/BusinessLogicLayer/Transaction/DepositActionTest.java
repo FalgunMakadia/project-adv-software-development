@@ -7,7 +7,7 @@ import DataAccessLayer.ProfileDatabase.UserProfileDatabase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.TransactionAction.DepositAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
@@ -43,7 +43,7 @@ public class DepositActionTest {
 
     @Test
     void performActionTest(){
-        IAction depositAction = Mockito.mock(DepositAction.class);
+        IAbstractAction depositAction = Mockito.mock(DepositAction.class);
         Mockito.doNothing().when(depositAction).performAction();
         depositAction.performAction();
         Mockito.verify(depositAction, Mockito.times(1)).performAction();

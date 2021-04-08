@@ -18,7 +18,7 @@ public class CityFieldCommand extends AbstractFormCommand {
 
     @Override
     public void execute() {
-        String userInput = userInterface.getMandatoryUserInput("Enter New City*: ");
+        String userInput = userInterface.getMandatoryUserInput("Enter City*: ");
         profile.setCity(userInput);
     }
 

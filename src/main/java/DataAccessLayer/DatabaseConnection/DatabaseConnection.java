@@ -10,10 +10,10 @@ import java.util.Properties;
 public class DatabaseConnection implements IDatabaseConnection {
     private static final String CONFIG_FILE_NAME = "config.properties";
     private static final String DRIVER_CLASS_NAME = "db.driverClassName";
-    private static final String DATABASE_URL  = "db.url";
-    private static final String DATABASE_USERNAME  = "db.username";
+    private static final String DATABASE_URL = "db.url";
+    private static final String DATABASE_USERNAME = "db.username";
     private static final String DATABASE_PASSWORD = "db.password";
-    private static final String DATABASE_OPTIONAL_PARAMETERS  = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DATABASE_OPTIONAL_PARAMETERS = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     private static DatabaseConnection uniqueInstance;
     private static Connection connection;
@@ -29,6 +29,8 @@ public class DatabaseConnection implements IDatabaseConnection {
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
 
         driverClassname = properties.getProperty(DRIVER_CLASS_NAME);
@@ -40,6 +42,8 @@ public class DatabaseConnection implements IDatabaseConnection {
             Class.forName(driverClassname);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
     }
 
@@ -53,20 +57,28 @@ public class DatabaseConnection implements IDatabaseConnection {
     public Connection openConnection() {
         try {
             connection = DriverManager.getConnection(
-                    url + DATABASE_OPTIONAL_PARAMETERS,
+                    DATABASE_URL + DATABASE_OPTIONAL_PARAMETERS,
                     dbUsername,
                     dbPassword);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
         return connection;
     }
 
     public void closeConnection() {
         try {
-            connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            if (null == connection) {
+                return;
+            } else {
+                connection.close();
+            }
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         }
     }
 }

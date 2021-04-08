@@ -25,10 +25,11 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     IDatabaseConnection databaseConnection;
     ITransactionActionFactory transactionActionFactory;
     IDatabaseConnectionFactory databaseConnectionFactory;
+
     public AccountOperationDatabase() {
         databaseConnectionFactory = new DatabaseConnectionFactory();
         databaseConnection = databaseConnectionFactory.getDatabaseConnection();
-        transactionActionFactory =  new TransactionActionFactory();
+        transactionActionFactory = new TransactionActionFactory();
     }
 
     @Override
@@ -46,8 +47,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 balance = rs.getInt(BALANCE_COLUMN_NAME);
             }
             return balance;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -66,8 +69,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
             statement.setString(2, accountNumber);
             int output = statement.executeUpdate();
             return output;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -89,8 +94,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 accountStatus = rs.getBoolean(ACTIVE_STATUS_COLUMN_NAME);
             }
             return accountStatus;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -98,7 +105,7 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
     }
 
     @Override
-    public void saveTransaction(ArrayList<ITransactionModel> saveTransactionInModel){
+    public void saveTransaction(ArrayList<ITransactionModel> saveTransactionInModel) {
         connection = databaseConnection.openConnection();
 
         String query = "INSERT INTO transactions VALUES (?, ?, ?, ?, ?)";
@@ -114,8 +121,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
 
                 statement.executeUpdate();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -138,8 +147,10 @@ public class AccountOperationDatabase implements IAccountOperationDatabase {
                 String date = resultSet.getString(TRANSACTION_DATE_COLUMN_NAME);
                 transactionList.add(transactionActionFactory.createTransactionModel(accountNumber, transactionType, amount, date));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }

@@ -67,7 +67,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 long accontNumber = resultSet.getLong(1);
                 if (0L != accontNumber) {
                     PreparedStatement createAccountStatement = connection.prepareStatement(createAccount);
-                    createAccountStatement.setLong(1,accontNumber);
+                    createAccountStatement.setLong(1, accontNumber);
                     createAccountStatement.setBoolean(2, true);
                     createAccountStatement.executeUpdate();
 
@@ -85,8 +85,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                     return false;
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -103,7 +105,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             statement.setString(1, accountNumber);
             AbstractProfile profile = userFactory.createCustomerProfile();
             ResultSet resultSet = statement.executeQuery();
-            
+
             if (resultSet.first()) {
                 profile.setFirstName(resultSet.getString(FIRST_NAME_COLUMN_NAME));
                 profile.setLastName(resultSet.getString(LAST_NAME_COLUMN_NAME));
@@ -121,8 +123,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
                 return profile;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -158,8 +162,10 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
             int affectedRows = statement.executeUpdate();
 
             return affectedRows == 1 ? true : false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }

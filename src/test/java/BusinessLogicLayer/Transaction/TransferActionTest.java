@@ -6,7 +6,7 @@ import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 import DataAccessLayer.ProfileDatabase.UserProfileDatabase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.TransactionAction.TransferAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
@@ -36,7 +36,7 @@ public class TransferActionTest {
 
     @Test
     void performActionTest(){
-        IAction transferAction = Mockito.mock(TransferAction.class);
+        IAbstractAction transferAction = Mockito.mock(TransferAction.class);
         Mockito.doNothing().when(transferAction).performAction();
         transferAction.performAction();
         Mockito.verify(transferAction, Mockito.times(1)).performAction();

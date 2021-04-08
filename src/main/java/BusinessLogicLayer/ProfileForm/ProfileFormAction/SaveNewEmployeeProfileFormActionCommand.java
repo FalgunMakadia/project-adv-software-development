@@ -31,7 +31,7 @@ public class SaveNewEmployeeProfileFormActionCommand extends AbstractFormCommand
         int affectedRows = createNewEmployee();
         if (affectedRows > 0) {
             createNewUser();
-            userInterface.displayMessage("The employee details are saved ");
+            userInterface.displayMessage("The employee details are saved \n");
         }
         loggedInUserContext.clearCurrentPage();
     }

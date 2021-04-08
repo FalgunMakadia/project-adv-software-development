@@ -12,9 +12,9 @@ import java.sql.*;
 
 public class UserProfileDatabase implements IUserProfileDatabase {
     private static final String USERNAME_COLUMN_NAME = "userName";
-    private static final String USER_ROLE_COLUMN_NAME  = "userRole";
-    private static final String ACCOUNT_NUMBER_COLUMN_NAME  = "accountNumber";
-    private static final String ACTIVE_STATUS_COLUMN_NAME  = "ActiveStatus";
+    private static final String USER_ROLE_COLUMN_NAME = "userRole";
+    private static final String ACCOUNT_NUMBER_COLUMN_NAME = "accountNumber";
+    private static final String ACTIVE_STATUS_COLUMN_NAME = "ActiveStatus";
 
     private Connection connection;
     private PreparedStatement preparedStatement = null;
@@ -22,9 +22,10 @@ public class UserProfileDatabase implements IUserProfileDatabase {
     private ILoggedInUserContext loggedInUserContext;
 
     private UserFactory userFactory;
+
     public UserProfileDatabase() {
         databaseConnection = DatabaseConnection.instance();
-        userFactory =  new UserFactory();
+        userFactory = new UserFactory();
 
         loggedInUserContext = userFactory.getLoggedInUserContext();
     }
@@ -49,7 +50,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             }
 
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -70,7 +73,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             affectedRow = preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
@@ -89,7 +94,9 @@ public class UserProfileDatabase implements IUserProfileDatabase {
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }
