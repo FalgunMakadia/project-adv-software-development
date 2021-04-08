@@ -1,6 +1,7 @@
 package BusinessLogicLayer.WorkListActions;
 
 import BusinessLogicLayer.User.AbstractProfile;
+import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
 public class WorkListChangeAction extends WorkListAction {
 
