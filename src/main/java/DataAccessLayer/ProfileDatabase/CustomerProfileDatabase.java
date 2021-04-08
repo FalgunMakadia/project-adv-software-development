@@ -39,7 +39,7 @@ public class CustomerProfileDatabase implements ICustomerProfileDatabase {
                 "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String createAccount = "INSERT INTO accounts (account_no, active_status) VALUES " +
                 "(?, ?)";
-        String activateUserCredentials = "UPDATE INTO login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
+        String activateUserCredentials = "UPDATE login SET accountNumber = ?, ActiveStatus = ? WHERE userName = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(createCustomer, Statement.RETURN_GENERATED_KEYS);
