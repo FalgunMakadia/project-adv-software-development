@@ -10,9 +10,26 @@ build:
   stage: build
   tags:
     - ugrad
+  except:
+    - release
+    - master
   script:
     - mvn clean compile
     - mvn package
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
+
+release_build:
+  stage: build
+  tags:
+    - ugrad
+  only:
+    - release
+  script:
+    - mvn clean compile
+    - mvn package -P test
   artifacts:
     when: on_success
     paths:
