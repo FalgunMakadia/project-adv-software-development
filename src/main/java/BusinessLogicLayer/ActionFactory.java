@@ -3,9 +3,16 @@ package BusinessLogicLayer;
 import BusinessLogicLayer.BankCentricAction.*;
 import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.CustomerCentricAction.*;
+<<<<<<< HEAD
+import BusinessLogicLayer.TransactionAction.ITransactionActionFactory;
+import BusinessLogicLayer.TransactionAction.TransactionActionFactory;
+=======
 import BusinessLogicLayer.TransactionAction.*;
 import BusinessLogicLayer.User.CustomerProfile;
+>>>>>>> 8e146f89722cf88184001f41bf0d5a5c892f3e7f
 import BusinessLogicLayer.User.AbstractProfile;
+import BusinessLogicLayer.User.IUserFactory;
+import BusinessLogicLayer.User.UserFactory;
 
 public class ActionFactory implements IActionFactory {
 
@@ -13,12 +20,14 @@ public class ActionFactory implements IActionFactory {
     ICustomerCentricActionFactory customerCentricActionFactory;
     ICommonActionFactory commonActionFactory;
     ITransactionActionFactory transactionActionFactory;
+    IUserFactory userFactory;
 
     public ActionFactory() {
         bankCentricActionFactory = new BankCentricActionFactory();
         customerCentricActionFactory = new CustomerCentricActionFactory();
         commonActionFactory = new CommonActionFactory();
         transactionActionFactory = new TransactionActionFactory();
+        userFactory = new UserFactory();
     }
 
     @Override

@@ -1,14 +1,12 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
-import BusinessLogicLayer.User.BankEmployeeProfile;
-import DataAccessLayer.DatabaseFactory.DatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IEmployeeProfileDatabase;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-public class SaveNewEmployeeProfileFormActionCommand extends FormCommand {
+public class SaveNewEmployeeProfileFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_LABEL = "Save";
     private static final String COMMAND_TYPE = "ACTION";
 

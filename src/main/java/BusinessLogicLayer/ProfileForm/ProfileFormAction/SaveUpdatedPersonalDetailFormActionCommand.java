@@ -1,13 +1,13 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormAction;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequestActionFactory;
 import BusinessLogicLayer.WorkListRequestActions.IWorkListRequest;
 import BusinessLogicLayer.WorkListRequestActions.WorkListRequestActionFactory;
 import DataAccessLayer.OperationDatabase.IWorklistOperationDatabase;
 
-public class SaveUpdatedPersonalDetailFormActionCommand extends FormCommand {
+public class SaveUpdatedPersonalDetailFormActionCommand extends AbstractFormCommand {
     private static final String COMMAND_TYPE = "ACTION";
     private final String CHANGE_REQUEST = "Change Personal Details";
     private final String COMMAND_LABEL = "Save";

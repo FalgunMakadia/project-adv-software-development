@@ -4,7 +4,6 @@ import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
-
 public class UpdatePasswordAction extends AbstractAction {
     private static final String ACTION_TITLE = "Update Password";
     String newPassword;
