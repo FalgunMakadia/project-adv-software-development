@@ -52,7 +52,7 @@ class BankStatementActionTest {
     }
 
     @Test
-    void printTrasactionTest() {
+    void printTransactionTest() {
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         loggedInUserContext.setAccountNumber("111111");
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);

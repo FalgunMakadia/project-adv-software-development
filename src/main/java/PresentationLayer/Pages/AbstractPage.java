@@ -9,6 +9,7 @@ public abstract class AbstractPage implements IAbstractPage {
     protected UserFactory userFactory;
 
     public AbstractPage() {
+        userFactory =  new UserFactory();
         loggedInUserContext = userFactory.getLoggedInUserContext();
     }
 
