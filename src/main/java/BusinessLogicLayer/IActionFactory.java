@@ -2,7 +2,6 @@ package BusinessLogicLayer;
 
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.ISignInAction;
-import BusinessLogicLayer.User.AbstractProfile;
 
 public interface IActionFactory {
     IAbstractAction createOpenNewAccount();
