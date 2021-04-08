@@ -1,10 +1,7 @@
 package BusinessLogicLayer;
 
 import BusinessLogicLayer.BankCentricAction.*;
-import BusinessLogicLayer.CommonAction.IAction;
-import BusinessLogicLayer.CommonAction.ISignInAction;
-import BusinessLogicLayer.CommonAction.SignInAction;
-import BusinessLogicLayer.CommonAction.SignOutAction;
+import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.CustomerCentricAction.*;
 import BusinessLogicLayer.TransactionAction.DepositAction;
 import BusinessLogicLayer.TransactionAction.TransferAction;
@@ -16,10 +13,12 @@ public class ActionFactory implements IActionFactory {
 
     IBankCentricActionFactory bankCentricActionFactory;
     ICustomerCentricActionFactory customerCentricActionFactory;
+    ICommonActionFactory commonActionFactory;
 
     public ActionFactory() {
         bankCentricActionFactory = new BankCentricActionFactory();
         customerCentricActionFactory = new CustomerCentricActionFactory();
+        commonActionFactory = new CommonActionFactory();
     }
 
     @Override
@@ -39,7 +38,7 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createSignOut() {
-        return new SignOutAction();
+        return commonActionFactory.createSignOutAction();
     }
 
     @Override
@@ -94,7 +93,7 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public ISignInAction createLogin() {
-        return new SignInAction();
+        return commonActionFactory.createSignInAction();
     }
 
     @Override
