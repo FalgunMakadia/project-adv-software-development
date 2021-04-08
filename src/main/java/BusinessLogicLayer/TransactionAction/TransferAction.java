@@ -1,12 +1,12 @@
 package BusinessLogicLayer.TransactionAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 
 import java.util.ArrayList;
 
-public class TransferAction extends Action {
+public class TransferAction extends AbstractAction {
     private static final String ACTION_TITLE = "Transfer";
     private static final String ORIGIN_TRANSACTION_TYPE = "T-Dr";
     private static final String TARGET_TRANSACTION_TYPE = "T-Cr";
@@ -47,7 +47,7 @@ public class TransferAction extends Action {
 
         userInterface.displayMessage(ACTION_TITLE);
 
-        ArrayList<TransactionModel> saveTransactionInModel = new ArrayList<>();
+        ArrayList<ITransactionModel> saveTransactionInModel = new ArrayList<>();
         originAccountPreviousBalance = accountOperationDatabase.getBalance(originAccountNumber);
         userInterface.displayMessage("Current Balance:" + originAccountPreviousBalance);
         transferAmount = Integer.parseInt(userInterface.getMandatoryIntegerUserInput("Please enter Transfer amount: "));

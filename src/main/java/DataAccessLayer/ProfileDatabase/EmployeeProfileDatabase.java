@@ -42,8 +42,10 @@ public class EmployeeProfileDatabase implements IEmployeeProfileDatabase {
 
             affectedRows = statement.executeUpdate();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.getMessage();
+        } catch (Exception exception) {
+            exception.getMessage();
         } finally {
             databaseConnection.closeConnection();
         }

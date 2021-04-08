@@ -1,6 +1,6 @@
 package PresentationLayer.Pages.CommonPages;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.IFormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.IAbstractFormCommand;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 import PresentationLayer.Pages.IPage;
@@ -8,22 +8,22 @@ import PresentationLayer.Pages.IPage;
 import java.util.Map;
 
 public class UserFormPage implements IUserFormPage {
-    private Map<Integer, IFormCommand> formFields;
+    private Map<Integer, IAbstractFormCommand> formFields;
     private AbstractProfile profile;
     private IPage formPage;
 
-    public UserFormPage(Map<Integer,IFormCommand> formFields) {
+    public UserFormPage(Map<Integer, IAbstractFormCommand> formFields) {
         this.formFields = formFields;
         this.profile = new CustomerProfile();
     }
 
-    public UserFormPage(Map<Integer,IFormCommand> formFields, AbstractProfile profile) {
+    public UserFormPage(Map<Integer, IAbstractFormCommand> formFields, AbstractProfile profile) {
         this.profile = profile;
         this.formFields = formFields;
         formPage = new FormPage(formFields, "");
     }
 
-    public UserFormPage(Map<Integer,IFormCommand> formFields, AbstractProfile profile, String currentPage) {
+    public UserFormPage(Map<Integer, IAbstractFormCommand> formFields, AbstractProfile profile, String currentPage) {
         this.profile = profile;
         this.formFields = formFields;
         formPage = new FormPage(formFields, currentPage);

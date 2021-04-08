@@ -1,35 +1,35 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public class CustomerCentricActionFactory implements ICustomerCentricActionFactory{
     @Override
-    public IAction createBankStatementAction() {
+    public IAbstractAction createBankStatementAction() {
         return new BankStatementAction();
     }
 
     @Override
-    public IAction createCheckBalanceAction() {
+    public IAbstractAction createCheckBalanceAction() {
         return new CheckBalanceAction();
     }
 
     @Override
-    public IAction createCheckPreApprovedLoanAction() {
+    public IAbstractAction createCheckPreApprovedLoanAction() {
         return new CheckPreApprovedLoanAction();
     }
 
     @Override
-    public IAction createLoanEstimatorAction() {
+    public IAbstractAction createLoanEstimatorAction() {
         return new LoanEstimatorAction();
     }
 
     @Override
-    public IAction createUpdatePasswordAction() {
+    public IAbstractAction createUpdatePasswordAction() {
         return new UpdatePasswordAction();
     }
 
     @Override
-    public IAction createUpdatePersonalDetailAction() {
+    public IAbstractAction createUpdatePersonalDetailAction() {
         return new UpdatePersonalDetailAction();
     }
 }

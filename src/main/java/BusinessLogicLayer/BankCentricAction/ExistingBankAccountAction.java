@@ -1,11 +1,11 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.Action;
+import BusinessLogicLayer.CommonAction.AbstractAction;
 import DataAccessLayer.OperationDatabase.IAccountOperationDatabase;
 import DataAccessLayer.OperationDatabase.IOperationDatabaseFactory;
 import PresentationLayer.MenuRouting.IMenuRoutingCommand;
 
-public class ExistingBankAccountAction extends Action {
+public class ExistingBankAccountAction extends AbstractAction {
     private static final String ACTION_TITLE = "Existing Bank Account";
     private IAccountOperationDatabase accountOperationDatabase;
 

@@ -1,6 +1,6 @@
 package BusinessLogicLayer.CommonAction;
 
-public interface IAction {
+public interface IAbstractAction {
     void performAction();
 
     String getActionTitle();

@@ -1,6 +1,6 @@
 package BusinessLogicLayer.BankCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -16,7 +16,7 @@ class ExistingBankAccountActionTest {
 
     @Test
     void performActionTest() {
-        IAction existingBankAccountAction = Mockito.mock(ExistingBankAccountAction.class);
+        IAbstractAction existingBankAccountAction = Mockito.mock(ExistingBankAccountAction.class);
         Mockito.doNothing().when(existingBankAccountAction).performAction();
         existingBankAccountAction.performAction();
         Mockito.verify(existingBankAccountAction, Mockito.times(1)).performAction();

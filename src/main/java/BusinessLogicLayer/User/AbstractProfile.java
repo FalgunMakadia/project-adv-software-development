@@ -1,9 +1,5 @@
 package BusinessLogicLayer.User;
 
-import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class AbstractProfile {
     private String firstName;
     private String lastName;

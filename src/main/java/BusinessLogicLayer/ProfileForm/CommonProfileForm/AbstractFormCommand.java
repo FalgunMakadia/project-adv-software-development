@@ -9,7 +9,7 @@ import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 import PresentationLayer.IPresentationFactory;
 import PresentationLayer.PresentationFactory;
 
-public abstract class FormCommand implements IFormCommand {
+public abstract class AbstractFormCommand implements IAbstractFormCommand {
     protected AbstractProfile profile;
     protected IUserInterfacePage userInterface;
     protected IWorklistOperationDatabase workListOperationDatabase;
@@ -20,19 +20,19 @@ public abstract class FormCommand implements IFormCommand {
     protected IOperationDatabaseFactory operationDatabaseFactory;
     protected IUserFactory userFactory;
 
-    public FormCommand(AbstractProfile profile) {
+    public AbstractFormCommand(AbstractProfile profile) {
         this.profile = profile;
         init();
     }
 
-    public FormCommand() {
+    public AbstractFormCommand() {
         init();
     }
 
     private void init() {
         presentationFactory = new PresentationFactory();
         commonPagesFactory = presentationFactory.createCommonPagesFactory();
-
+        userFactory = new UserFactory();
         this.databaseFactory = new DatabaseFactory();
         this.operationDatabaseFactory = databaseFactory.createOperationDatabaseFactory();
         this.workListOperationDatabase = operationDatabaseFactory.createWorkListOperationDatabase();

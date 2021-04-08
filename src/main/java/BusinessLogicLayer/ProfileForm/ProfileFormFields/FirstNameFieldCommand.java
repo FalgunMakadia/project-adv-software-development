@@ -1,10 +1,10 @@
 package BusinessLogicLayer.ProfileForm.ProfileFormFields;
 
-import BusinessLogicLayer.ProfileForm.CommonProfileForm.FormCommand;
+import BusinessLogicLayer.ProfileForm.CommonProfileForm.AbstractFormCommand;
 import BusinessLogicLayer.User.AbstractProfile;
 import PresentationLayer.Pages.CommonPages.IUserInterfacePage;
 
-public class FirstNameFieldCommand extends FormCommand {
+public class FirstNameFieldCommand extends AbstractFormCommand {
     private final String COMMAND_LABEL = "First Name";
 
     public FirstNameFieldCommand(AbstractProfile profile) {

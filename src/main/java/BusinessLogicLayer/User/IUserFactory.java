@@ -4,4 +4,6 @@ public interface IUserFactory {
     AbstractProfile createCustomerProfile();
 
     AbstractProfile createBankEmployeeProfile();
+
+    ILoggedInUserContext getLoggedInUserContext();
 }

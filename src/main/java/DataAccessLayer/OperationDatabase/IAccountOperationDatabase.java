@@ -1,6 +1,6 @@
 package DataAccessLayer.OperationDatabase;
 
-import BusinessLogicLayer.TransactionAction.TransactionModel;
+import BusinessLogicLayer.TransactionAction.ITransactionModel;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public interface IAccountOperationDatabase {
 
     boolean verifyAccountNumber(String accountNumber);
 
-    void saveTransaction(ArrayList<TransactionModel> transactionList);
+    void saveTransaction(ArrayList<ITransactionModel> transactionList);
 
-    ArrayList<TransactionModel> getMiniStatement(String accountNumber);
+    ArrayList<ITransactionModel> getMiniStatement(String accountNumber);
 }

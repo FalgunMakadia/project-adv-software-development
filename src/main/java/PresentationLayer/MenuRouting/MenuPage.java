@@ -1,15 +1,15 @@
 package PresentationLayer.MenuRouting;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import PresentationLayer.Pages.Page;
 
 import java.util.Map;
 import java.util.Scanner;
 
 public class MenuPage extends Page {
-    private Map<String, IAction> menu;
+    private Map<String, IAbstractAction> menu;
 
-    public MenuPage(Map<String, IAction> menu, String parentPage) {
+    public MenuPage(Map<String, IAbstractAction> menu, String parentPage) {
         super();
         this.menu = menu;
         loggedInUserContext.setParentPage(parentPage);
@@ -22,14 +22,14 @@ public class MenuPage extends Page {
             Scanner scanner = new Scanner(System.in);
             for (int i = 0; i < menu.size(); i++) {
                 int key = i + 1;
-                IAction action = menu.get(String.valueOf(key));
+                IAbstractAction action = menu.get(String.valueOf(key));
                 System.out.println(key + ". " + action.getActionTitle());
             }
             System.out.print("Enter any Number between 1-" + menu.size() + " to perform appropriate action:");
             String input = scanner.next();
             System.out.println("");
             if (validateIntegerInputFormat(input)) {
-                IAction action = menu.get(input);
+                IAbstractAction action = menu.get(input);
                 action.performAction();
             }
         }

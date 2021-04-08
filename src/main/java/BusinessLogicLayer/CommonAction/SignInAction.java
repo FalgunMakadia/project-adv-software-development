@@ -1,17 +1,20 @@
 package BusinessLogicLayer.CommonAction;
 
+import BusinessLogicLayer.User.UserFactory;
 import DataAccessLayer.DatabaseFactory.DatabaseFactory;
-import BusinessLogicLayer.User.LoggedInUserContext;
+import BusinessLogicLayer.User.ILoggedInUserContext;
 import DataAccessLayer.DatabaseFactory.IDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IProfileDatabaseFactory;
 import DataAccessLayer.ProfileDatabase.IUserProfileDatabase;
 
 public class SignInAction implements ISignInAction {
     private IUserProfileDatabase userProfileDatabase;
-    private LoggedInUserContext loggedInUserContext;
+    private ILoggedInUserContext loggedInUserContext;
+    private UserFactory userFactory;
 
     public SignInAction() {
-        loggedInUserContext = LoggedInUserContext.instance();
+        userFactory = new UserFactory();
+        loggedInUserContext = userFactory.getLoggedInUserContext();
 
         IDatabaseFactory databaseFactory = new DatabaseFactory();
         IProfileDatabaseFactory profileDatabaseFactory = databaseFactory.createProfileDatabaseFactory();

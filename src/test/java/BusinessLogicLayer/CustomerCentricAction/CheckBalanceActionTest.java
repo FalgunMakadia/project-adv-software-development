@@ -1,6 +1,6 @@
-package BusinessLogicLayer.Transaction;
+package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
 import BusinessLogicLayer.CustomerCentricAction.CheckBalanceAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
@@ -26,7 +26,7 @@ public class CheckBalanceActionTest {
 
     @Test
     void getActionTitleTest() {
-        IAction checkBalanceAction = new CheckBalanceAction();
+        IAbstractAction checkBalanceAction = new CheckBalanceAction();
         assertEquals("Check Balance", checkBalanceAction.getActionTitle());
     }
 
@@ -81,7 +81,7 @@ public class CheckBalanceActionTest {
         IAccountOperationDatabase accountOperationDatabase = Mockito.mock(AccountOperationDatabase.class);
         Mockito.when(accountOperationDatabase.getBalance(loggedInUserContext.getAccountNumber())).thenReturn(balance);
 
-        IAction checkBalanceAction = new CheckBalanceAction(accountOperationDatabase);
+        IAbstractAction checkBalanceAction = new CheckBalanceAction(accountOperationDatabase);
         checkBalanceAction.performAction();
         assertEquals("Check Balance", loggedInUserContext.getCurrentPage());
     }

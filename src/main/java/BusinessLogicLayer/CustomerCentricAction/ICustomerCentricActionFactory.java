@@ -1,17 +1,17 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
-import BusinessLogicLayer.CommonAction.IAction;
+import BusinessLogicLayer.CommonAction.IAbstractAction;
 
 public interface ICustomerCentricActionFactory {
-    IAction createBankStatementAction();
+    IAbstractAction createBankStatementAction();
 
-    IAction createCheckBalanceAction();
+    IAbstractAction createCheckBalanceAction();
 
-    IAction createCheckPreApprovedLoanAction();
+    IAbstractAction createCheckPreApprovedLoanAction();
 
-    IAction createLoanEstimatorAction();
+    IAbstractAction createLoanEstimatorAction();
 
-    IAction createUpdatePasswordAction();
+    IAbstractAction createUpdatePasswordAction();
 
-    IAction createUpdatePersonalDetailAction();
+    IAbstractAction createUpdatePersonalDetailAction();
 }

@@ -1,8 +1,8 @@
-package BusinessLogicLayer.WorkListActions;
+package BusinessLogicLayer.WorkListRequestActions;
 
-public class WorkListNewAccountRequest extends WorkListAction {
+public class WorkListNewAccountRequestAction extends AbstractWorkListRequestAction {
 
-    public WorkListNewAccountRequest(IWorkListRequest workListRequest, int workListID) {
+    public WorkListNewAccountRequestAction(IWorkListRequest workListRequest, int workListID) {
         super(workListRequest, workListID);
     }
 
@@ -17,7 +17,7 @@ public class WorkListNewAccountRequest extends WorkListAction {
             String processInput = userInterface
                     .getConfirmation("Do you want to process with this New Account Request ?");
             if (processInput.equalsIgnoreCase(YES)) {
-                boolean isUserCreated = customerDatabase.addNewCustomerProfile(worklistRequest.getUser());
+                boolean isUserCreated = customerDatabase.addNewCustomerProfile(workListRequest.getUser());
                 workListDatabase.updateWorkListStatus(workListID, isUserCreated);
                 if (isUserCreated) {
                     userInterface.displayMessage("New Account is Created");
@@ -32,7 +32,7 @@ public class WorkListNewAccountRequest extends WorkListAction {
     }
 
     private void showUserDetails() {
-        userDetailPage = bankCentricPagesFactory.createUserDetailPage(worklistRequest.getUser());
+        userDetailPage = bankCentricPagesFactory.createUserDetailPage(workListRequest.getUser());
         userInterface.displayMessage("=====New Customer Profile Details====");
         userDetailPage.printPage();
         userInterface.insertEmptyLine();
