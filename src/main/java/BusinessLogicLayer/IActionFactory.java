@@ -20,7 +20,4 @@ public interface IActionFactory {
     IAction createLoanEstimator();
     IAction createCheckPreApprovedLoan();
     ISignInAction createLogin();
-
-    AbstractProfile createCustomer();
-
 }

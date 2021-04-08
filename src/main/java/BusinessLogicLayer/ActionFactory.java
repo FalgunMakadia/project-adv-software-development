@@ -3,9 +3,7 @@ package BusinessLogicLayer;
 import BusinessLogicLayer.BankCentricAction.*;
 import BusinessLogicLayer.CommonAction.*;
 import BusinessLogicLayer.CustomerCentricAction.*;
-import BusinessLogicLayer.TransactionAction.DepositAction;
-import BusinessLogicLayer.TransactionAction.TransferAction;
-import BusinessLogicLayer.TransactionAction.WithdrawAction;
+import BusinessLogicLayer.TransactionAction.*;
 import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
@@ -14,11 +12,13 @@ public class ActionFactory implements IActionFactory {
     IBankCentricActionFactory bankCentricActionFactory;
     ICustomerCentricActionFactory customerCentricActionFactory;
     ICommonActionFactory commonActionFactory;
+    ITransactionActionFactory transactionActionFactory;
 
     public ActionFactory() {
         bankCentricActionFactory = new BankCentricActionFactory();
         customerCentricActionFactory = new CustomerCentricActionFactory();
         commonActionFactory = new CommonActionFactory();
+        transactionActionFactory = new TransactionActionFactory();
     }
 
     @Override
@@ -53,17 +53,17 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createWithdraw() {
-        return new WithdrawAction();
+        return transactionActionFactory.createWithdrawAction();
     }
 
     @Override
     public IAction createDeposit() {
-        return new DepositAction();
+        return transactionActionFactory.createDepositAction();
     }
 
     @Override
     public IAction createTransfer() {
-        return new TransferAction();
+        return transactionActionFactory.createTransferAction();
     }
 
     @Override
@@ -96,8 +96,4 @@ public class ActionFactory implements IActionFactory {
         return commonActionFactory.createSignInAction();
     }
 
-    @Override
-    public AbstractProfile createCustomer() {
-        return new CustomerProfile();
-    }
 }
