@@ -14,11 +14,41 @@ build:
   script:
     - mvn clean compile
     - mvn package
+  except:
+    - release
+    - master
   artifacts:
     when: on_success
     paths:
       - target/*.jar
 
+build:
+  stage: build
+  tags:
+    - ugrad
+  only:
+    - release
+  script:
+    - mvn clean compile
+    - mvn package -P test
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
+
+build:
+  stage: build
+  tags:
+    - ugrad
+  only:
+    - master
+  script:
+    - mvn clean compile
+    - mvn package -P prod
+  artifacts:
+    when: on_success
+    paths:
+      - target/*.jar
 
 
 test:
