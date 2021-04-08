@@ -58,9 +58,8 @@ public abstract class AbstractAction implements IAbstractAction {
 
     protected boolean validateLongInputFormat(String input) {
         boolean validity = true;
-        long choiceNumber = 0;
         try {
-            choiceNumber = Long.parseLong(input);
+            Long.parseLong(input);
 
         } catch (Exception exception) {
             validity = false;
