@@ -2,7 +2,6 @@ package BusinessLogicLayer.CustomerCentricAction;
 
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
-import BusinessLogicLayer.CustomerCentricAction.CheckBalanceAction;
 import BusinessLogicLayer.User.ILoggedInUserContext;
 import BusinessLogicLayer.User.LoggedInUserContext;
 import DataAccessLayer.OperationDatabase.AccountOperationDatabase;
@@ -85,5 +84,4 @@ public class CheckBalanceActionTest {
         checkBalanceAction.performAction();
         assertEquals("Check Balance", loggedInUserContext.getCurrentPage());
     }
-
 }

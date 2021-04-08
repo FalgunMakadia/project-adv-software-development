@@ -193,7 +193,6 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
                 profile.setSsnNo(resultSet.getString(SSN_NUMBER_COLUMN_NAME));
                 profile.setAccountNumber(resultSet.getString(ACCOUNT_NUMBER_COLUMN_NAME));
                 profile.setDateOfBirth(resultSet.getString(BIRTH_DATE_COLUMN_NAME));
-
                 return profile;
             }
         } catch (SQLException exception) {
@@ -235,7 +234,6 @@ public class WorklistOperationDatabase implements IWorklistOperationDatabase {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setBoolean(1, isProcessed);
             statement.setInt(2, worklistId);
-
             return statement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();

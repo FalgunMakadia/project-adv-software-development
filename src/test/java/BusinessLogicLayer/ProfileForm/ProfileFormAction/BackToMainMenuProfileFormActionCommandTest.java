@@ -14,18 +14,18 @@ class BackToMainMenuProfileFormActionCommandTest {
         IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
         ILoggedInUserContext loggedInUserContext = LoggedInUserContext.instance();
         formCommand.execute();
-        assertEquals("",loggedInUserContext.getCurrentPage());
+        assertEquals("", loggedInUserContext.getCurrentPage());
     }
 
     @Test
     void getFieldValueTest() {
         IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
-        assertEquals("ACTION",formCommand.getFieldValue());
+        assertEquals("ACTION", formCommand.getFieldValue());
     }
 
     @Test
     void getCommandLabelTest() {
         IAbstractFormCommand formCommand = new BackToMainMenuProfileFormActionCommand();
-        assertEquals("Back to Main Menu",formCommand.getCommandLabel());
+        assertEquals("Back to Main Menu", formCommand.getCommandLabel());
     }
 }

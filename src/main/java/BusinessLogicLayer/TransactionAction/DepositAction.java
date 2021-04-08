@@ -66,7 +66,6 @@ public class DepositAction extends AbstractAction {
             if (output == 1) {
                 userInterface.displayMessage("Deposit Success!");
                 saveTransactionInModel.add(new TransactionModel(accountNumber, TRANSACTION_TYPE, totalDepositAmount, null));
-//                    accountDatabase.saveTransaction(accountNumber, transactionType, totalDepositAmount);
                 accountOperationDatabase.saveTransaction(saveTransactionInModel);
                 userInterface.displayMessage("Transaction Successfully registered!");
                 userInterface.displayMessage("Updated Balance: " + finalBalance);

@@ -1,6 +1,6 @@
 package DataAccessLayer.ProfileDatabase;
 
-public class ProfileDatabaseFactory implements IProfileDatabaseFactory{
+public class ProfileDatabaseFactory implements IProfileDatabaseFactory {
     @Override
     public ICustomerProfileDatabase createCustomerProfileDatabase() {
         return new CustomerProfileDatabase();

@@ -1,10 +1,10 @@
 package BusinessLogicLayer.CustomerCentricAction;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CheckPreApprovedLoanActionTest {
+
     @Test
     public void getPreApprovedLoanAmountTest() {
         CheckPreApprovedLoanAction checkPreApprovedLoanAction = new CheckPreApprovedLoanAction();
@@ -74,5 +74,4 @@ public class CheckPreApprovedLoanActionTest {
         double approvedLoanAmount = checkPreApprovedLoanAction.getPreApprovedLoanAnnualInterest(100000);
         assertEquals(8.8, approvedLoanAmount);
     }
-
 }

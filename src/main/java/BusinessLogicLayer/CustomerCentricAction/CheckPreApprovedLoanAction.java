@@ -9,6 +9,17 @@ import java.util.Map;
 
 public class CheckPreApprovedLoanAction extends AbstractAction {
     private static final String ACTION_TITLE = "Check Pre-Approved Loan";
+    private static final int LOAN_BRACKET_ONE_LOWER_LIMIT = 10000;
+    private static final int LOAN_BRACKET_TWO_LOWER_LIMIT = 25000;
+    private static final int LOAN_BRACKET_THREE_LOWER_LIMIT = 50000;
+    private static final int LOAN_BRACKET_FOUR_LOWER_LIMIT = 100000;
+    private static final int LOAN_BRACKET_ONE_APPROVED_AMOUNT = 15000;
+    private static final int LOAN_BRACKET_TWO_APPROVED_AMOUNT = 30000;
+    private static final int LOAN_BRACKET_THREE_APPROVED_AMOUNT = 75000;
+    private static final int LOAN_BRACKET_FOUR_APPROVED_AMOUNT = 100000;
+    private static final double LOAN_BRACKET_ONE_INTEREST_RATE = 8.0;
+    private static final double LOAN_BRACKET_TWO_INTEREST_RATE = 8.2;
+    private static final double LOAN_BRACKET_THREE_INTEREST_RATE = 8.5;
     private static final double DEFAULT_INTEREST_RATE = 8.8;
 
     private int balance = 0;
@@ -20,10 +31,10 @@ public class CheckPreApprovedLoanAction extends AbstractAction {
         accountOperationDatabase = operationDatabaseFactory.createAccountOperationDatabase();
 
         loanInterestRangeMap = new HashMap<>();
-        loanInterestRangeMap.put(8.0, new LoanInterestRange(10000, 25000, 15000));
-        loanInterestRangeMap.put(8.2, new LoanInterestRange(25000, 50000, 30000));
-        loanInterestRangeMap.put(8.5, new LoanInterestRange(50000, 100000, 75000));
-        loanInterestRangeMap.put(8.8, new LoanInterestRange(100000, Double.POSITIVE_INFINITY, 100000));
+        loanInterestRangeMap.put(LOAN_BRACKET_ONE_INTEREST_RATE, new LoanInterestRange(LOAN_BRACKET_ONE_LOWER_LIMIT, LOAN_BRACKET_TWO_LOWER_LIMIT, LOAN_BRACKET_ONE_APPROVED_AMOUNT));
+        loanInterestRangeMap.put(LOAN_BRACKET_TWO_INTEREST_RATE, new LoanInterestRange(LOAN_BRACKET_TWO_LOWER_LIMIT, LOAN_BRACKET_THREE_LOWER_LIMIT, LOAN_BRACKET_TWO_APPROVED_AMOUNT));
+        loanInterestRangeMap.put(LOAN_BRACKET_THREE_INTEREST_RATE, new LoanInterestRange(LOAN_BRACKET_THREE_LOWER_LIMIT, LOAN_BRACKET_FOUR_LOWER_LIMIT, LOAN_BRACKET_THREE_APPROVED_AMOUNT));
+        loanInterestRangeMap.put(DEFAULT_INTEREST_RATE, new LoanInterestRange(LOAN_BRACKET_FOUR_LOWER_LIMIT, Double.POSITIVE_INFINITY, LOAN_BRACKET_FOUR_APPROVED_AMOUNT));
     }
 
     @Override
@@ -81,7 +92,6 @@ public class CheckPreApprovedLoanAction extends AbstractAction {
                 loanInterestRange.setApprovedLoanStatus(true);
                 break;
             }
-
         }
         return loanInterestRange;
     }

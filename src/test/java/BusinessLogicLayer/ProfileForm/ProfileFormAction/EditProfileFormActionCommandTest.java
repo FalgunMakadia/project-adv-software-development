@@ -9,14 +9,14 @@ class EditProfileFormActionCommandTest {
 
     @Test
     void getFieldValueTest() {
-        IAbstractFormCommand formCommand = new EditProfileFormActionCommand(null,null);
-        assertEquals("ACTION",formCommand.getFieldValue());
+        IAbstractFormCommand formCommand = new EditProfileFormActionCommand(null, null);
+        assertEquals("ACTION", formCommand.getFieldValue());
     }
 
     @Test
     void getCommandLabelTest() {
-        IAbstractFormCommand formCommand = new EditProfileFormActionCommand(null,null);
-        assertEquals("Edit",formCommand.getCommandLabel());
+        IAbstractFormCommand formCommand = new EditProfileFormActionCommand(null, null);
+        assertEquals("Edit", formCommand.getCommandLabel());
     }
 
 }

@@ -3,18 +3,18 @@ package PresentationLayer.MenuRouting;
 import BusinessLogicLayer.ActionFactory;
 import BusinessLogicLayer.CommonAction.IAbstractAction;
 import BusinessLogicLayer.IActionFactory;
-import PresentationLayer.Pages.IPage;
+import PresentationLayer.Pages.IAbstractPage;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BankManagerMenuRoutingCommand extends MenuRoutingCommand {
+    private static final String PAGE_NAME = "BankManager";
+
     private Map<String, IAbstractAction> menu;
-    private static final String pageName = "BankManager";
 
     public BankManagerMenuRoutingCommand() {
         IActionFactory actionFactory = new ActionFactory();
-
         menu = new LinkedHashMap<>();
         menu.put("1", actionFactory.createOpenNewAccount());
         menu.put("2", actionFactory.createExistingBankAccount());
@@ -25,7 +25,7 @@ public class BankManagerMenuRoutingCommand extends MenuRoutingCommand {
 
     @Override
     public void execute() {
-        IPage menuPage = new MenuPage(menu, "BankManager");
+        IAbstractPage menuPage = new MenuPage(menu, PAGE_NAME);
         menuPage.printPage();
     }
 }
