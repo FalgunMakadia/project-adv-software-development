@@ -87,6 +87,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
+            <type>jar</type>
             <scope>compile</scope>
         </dependency>
 
@@ -107,7 +108,7 @@
                 </includes>
             </resource>
         </resources>
-        <finalName>running-unit-tests</finalName>
+        <finalName>BankApp</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -125,6 +126,27 @@
                 <version>2.22.2</version>
                 <configuration>
                     <forkCount>0</forkCount>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>PresentationLayer.Main.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
