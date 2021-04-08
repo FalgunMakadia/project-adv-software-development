@@ -1,9 +1,6 @@
 package BusinessLogicLayer;
 
-import BusinessLogicLayer.BankCentricAction.EnrollNewEmployeeAction;
-import BusinessLogicLayer.BankCentricAction.ExistingBankAccountAction;
-import BusinessLogicLayer.BankCentricAction.OpenNewAccountAction;
-import BusinessLogicLayer.BankCentricAction.WorkListAction;
+import BusinessLogicLayer.BankCentricAction.*;
 import BusinessLogicLayer.CommonAction.IAction;
 import BusinessLogicLayer.CommonAction.ISignInAction;
 import BusinessLogicLayer.CommonAction.SignInAction;
@@ -16,19 +13,26 @@ import BusinessLogicLayer.User.CustomerProfile;
 import BusinessLogicLayer.User.AbstractProfile;
 
 public class ActionFactory implements IActionFactory {
+
+    IBankCentricActionFactory bankCentricActionFactory;
+
+    public ActionFactory() {
+        bankCentricActionFactory = new BankCentricActionFactory();
+    }
+
     @Override
     public IAction createOpenNewAccount() {
-        return new OpenNewAccountAction();
+        return bankCentricActionFactory.createOpenNewAccountAction();
     }
 
     @Override
     public IAction createExistingBankAccount() {
-        return new ExistingBankAccountAction();
+        return bankCentricActionFactory.createExistingBankAccountAction();
     }
 
     @Override
     public IAction createWorkList() {
-        return new WorkListAction();
+        return bankCentricActionFactory.createWorkListAction();
     }
 
     @Override
@@ -38,7 +42,7 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createEnrollNewEmployee() {
-        return new EnrollNewEmployeeAction();
+        return bankCentricActionFactory.createEnrollNewEmployeeAction();
     }
 
     @Override
