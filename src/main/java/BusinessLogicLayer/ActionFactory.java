@@ -15,9 +15,11 @@ import BusinessLogicLayer.User.AbstractProfile;
 public class ActionFactory implements IActionFactory {
 
     IBankCentricActionFactory bankCentricActionFactory;
+    ICustomerCentricActionFactory customerCentricActionFactory;
 
     public ActionFactory() {
         bankCentricActionFactory = new BankCentricActionFactory();
+        customerCentricActionFactory = new CustomerCentricActionFactory();
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createUpdatePersonalDetails() {
-        return new UpdatePersonalDetailAction();
+        return customerCentricActionFactory.createUpdatePersonalDetailAction();
     }
 
     @Override
@@ -67,27 +69,27 @@ public class ActionFactory implements IActionFactory {
 
     @Override
     public IAction createBankStatement() {
-        return new BankStatementAction();
+        return customerCentricActionFactory.createBankStatementAction();
     }
 
     @Override
     public IAction createCheckBalance() {
-        return new CheckBalanceAction();
+        return customerCentricActionFactory.createCheckBalanceAction();
     }
 
     @Override
     public IAction createUpdatePassword() {
-        return new UpdatePasswordAction();
+        return customerCentricActionFactory.createUpdatePasswordAction();
     }
 
     @Override
     public IAction createLoanEstimator() {
-        return new LoanEstimatorAction();
+        return customerCentricActionFactory.createLoanEstimatorAction();
     }
 
     @Override
     public IAction createCheckPreApprovedLoan() {
-        return new CheckPreApprovedLoanAction();
+        return customerCentricActionFactory.createCheckPreApprovedLoanAction();
     }
 
     @Override
